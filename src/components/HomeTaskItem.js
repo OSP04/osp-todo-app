@@ -39,7 +39,6 @@ const TaskText = styled.Text``;
 
 const DueDate = styled.Text`
   color: ${theme.secondary};
-
   font-size: 12px;
 `;
 

@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { Dimensions, Pressable, Text } from "react-native";
 
 import styled from "styled-components/native";
 import { theme } from "../theme";
@@ -18,13 +17,11 @@ const CategoryBar = ({ onPressOut }) => {
   );
 };
 
-const window = Dimensions.get("window");
-
 const StyledView = styled.View`
-  width: ${window.width - 20};
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
+  margin-bottom: 10px;
 `;
 
 const Category = styled.View`
@@ -33,7 +30,14 @@ const Category = styled.View`
 `;
 
 const Title = styled.Text`
+  text-align: center;
+  padding: 5px 10px 5px 10px;
+  margin-right: 5px;
+  min-width: 80px;
   font-size: 20px;
+  background-color: ${theme.primary};
+  border-radius: 12px;
+  color: white;
 `;
 
 const Dropdown = styled.Text``;

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Dimensions } from "react-native";
 
 import styled from "styled-components/native";
 
@@ -59,7 +60,7 @@ const Home = () => {
           id: "4",
           text: "Submit report",
           date: "Thu Nov 17 2021",
-          due: "2021.12.31",
+          due: null,
           category: "School",
           image: null,
           complete: false,
@@ -108,7 +109,7 @@ const Home = () => {
       id: "4",
       text: "Submit report",
       date: "Thu Nov 17 2021",
-      due: "2021.12.31",
+      due: null,
       category: "School",
       image: null,
       complete: false,
@@ -127,16 +128,21 @@ const Home = () => {
   );
 };
 
+const window = Dimensions.get("window");
+
 const Wrapper = styled.SafeAreaView`
   flex: 1;
   justify-content: flex-start;
   align-items: center;
+  padding: 10px;
 `;
 
 const StyledBar = styled.StatusBar`
   background-color: ${theme.background};
 `;
 
-const StyledScroll = styled.ScrollView``;
+const StyledScroll = styled.ScrollView`
+  width: ${window.width - 20};
+`;
 
 export default Home;
