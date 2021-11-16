@@ -5,11 +5,11 @@ import { theme } from "../theme";
 import { images } from "../images";
 import IconButton from "./IconButton";
 
-const CategoryBar = ({ onPressOut }) => {
+const CategoryBar = ({ onPressOut, title }) => {
   return (
     <StyledView>
       <Category>
-        <Title>Food</Title>
+        <Title>{title}</Title>
         <IconButton onPressOut={onPressOut} type={images.add} />
       </Category>
       <Dropdown>Dropdown</Dropdown>

@@ -2,13 +2,12 @@ import React, { useState } from "react";
 
 import styled from "styled-components/native";
 
+import { theme } from "../theme";
 import HomeTaskItem from "./HomeTaskItem";
 import CategoryBar from "../components/CategoryBar";
-import { theme } from "../theme";
-import { images } from "../images";
-import IconButton from "./IconButton";
+import Input from "./Input";
 
-const HomeTasks = ({ tasks, setTasks }) => {
+const HomeTasks = ({ tasks, setTasks, categories, setCategories }) => {
   const [isAdding, setIsAdding] = useState(false);
   const [newTask, setNewTask] = useState("");
 
@@ -34,35 +33,30 @@ const HomeTasks = ({ tasks, setTasks }) => {
 
   return (
     <>
-      <CategoryBar onPressOut={onPressOut} />
-      {tasks.map((item) => (
-        <HomeTaskItem key={item.id} item={item} />
-      ))}
-      {isAdding && (
+      {categories.map((category) => (
         <StyledView>
-          <IconButton type={images.uncomplete} />
-          <StyledInput
-            value={newTask}
-            placeholder="Add a task"
-            autoFocus={true}
-            onBlur={() => setIsAdding(false)}
-            onSubmitEditing={addTask}
-            onChangeText={setNewTask}
+          <CategoryBar
+            key={category.id}
+            onPressOut={onPressOut}
+            title={category.title}
           />
+          {category.tasks.map((item) => (
+            <HomeTaskItem key={item.id} item={item} />
+          ))}
         </StyledView>
-      )}
+      ))}
+      <Input
+        isAdding={isAdding}
+        setIsAdding={setIsAdding}
+        onSubmitEditing={addTask}
+        onChangeText={setNewTask}
+      />
     </>
   );
 };
 
-const StyledInput = styled.TextInput`
-  margin-left: 5px;
-`;
-
 const StyledView = styled.View`
-  flex-direction: row;
-  padding: 5px;
-  color: ${theme.secondary};
+  margin-bottom: 10px;
 `;
 
 export default HomeTasks;

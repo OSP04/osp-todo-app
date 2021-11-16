@@ -122,7 +122,12 @@ const Home = () => {
     <Wrapper>
       <StyledBar barStyle="default" />
       <StyledScroll>
-        <HomeTasks tasks={tasks} setTasks={setTasks} />
+        <HomeTasks
+          tasks={tasks}
+          setTasks={setTasks}
+          categories={categories}
+          setCategories={setCategories}
+        />
       </StyledScroll>
     </Wrapper>
   );
