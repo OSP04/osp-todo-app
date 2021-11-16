@@ -2,8 +2,6 @@ import React, { useState } from "react";
 
 import styled from "styled-components/native";
 
-import { View } from "react-native";
-
 import HomeTaskItem from "./HomeTaskItem";
 import CategoryBar from "../components/CategoryBar";
 import { theme } from "../theme";
