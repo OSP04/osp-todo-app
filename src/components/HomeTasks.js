@@ -31,6 +31,11 @@ const HomeTasks = ({ tasks, setTasks, categories, setCategories }) => {
     setTasks([...tasks, newTaskObj]);
   };
 
+  const onBlur = (category) => {
+    category.isAdding = false;
+    doRefresh();
+  };
+
   return (
     <>
       {categories.map((category) => (
@@ -54,6 +59,7 @@ const HomeTasks = ({ tasks, setTasks, categories, setCategories }) => {
               addTask(category);
             }}
             onChangeText={setNewTask}
+            onBlur={() => onBlur(category)}
           />
         </StyledView>
       ))}
