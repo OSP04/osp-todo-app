@@ -16,19 +16,23 @@ const HomeTasks = ({ tasks, setTasks, categories, setCategories }) => {
   };
 
   const addTask = (category) => {
-    setNewTask("");
-    const ID = Date.now().toString();
-    const newTaskObj = {
-      id: ID,
-      text: newTask,
-      date: null,
-      due: null,
-      category: category.title,
-      image: null,
-      complete: false,
-      created: Date.now(),
-    };
-    setTasks([...tasks, newTaskObj]);
+    if (newTask) {
+      setNewTask("");
+      const ID = Date.now().toString();
+      const newTaskObj = {
+        id: ID,
+        text: newTask,
+        date: null,
+        due: null,
+        category: category.title,
+        image: null,
+        complete: false,
+        created: Date.now(),
+      };
+      setTasks([...tasks, newTaskObj]);
+      const updatedTask = category.tasks.concat(newTaskObj);
+      category.tasks = updatedTask;
+    }
   };
 
   const onBlur = (category) => {
