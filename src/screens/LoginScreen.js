@@ -11,7 +11,7 @@ import BackButton from '../components/BackButton'
 export default function LoginScreen({ navigation }) {
   const [id, setId] = useState({ value: '', error: '' })
   const [password, setPassword] = useState({ value: '', error: '' })
-
+  
   const onLoginPressed = () => {
     const idError = idValidator(id.value)
     const passwordError = passwordValidator(password.value)
@@ -21,14 +21,29 @@ export default function LoginScreen({ navigation }) {
       return
     }
   }
-
+  
   return (
     <Background>
         <BackButton goBack={navigation.goBack} />
         <Logo />
         <Header>Todo App</Header>
-        <TextInput/>
-        <TextInput/>
+        <TextInput
+          label="id"
+          returnKeyType="next"
+          value={id.value}
+          onChangeText={(text) => setId({ value: text, error: '' })}
+          error={!!id.error}
+          errorText={id.error}
+        />
+        <TextInput
+           label="Password"
+           returnKeyType="done"
+           value={password.value}
+           onChangeText={(text) => setPassword({ value: text, error: '' })}
+           error={!!password.error}
+           errorText={password.error}
+           secureTextEntry
+        />
         <Button>
             Login
         </Button>
