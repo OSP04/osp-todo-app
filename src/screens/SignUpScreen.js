@@ -13,6 +13,18 @@ export default function RegisterScreen({ navigation }) {
   const [password, setPassword] = useState({ value: '', error: '' })
   const [email, setEmail] = useState({ value: '', error: '' })
 
+  const onSignUpPressed = () => {
+    const idError = idValidator(id.value)
+    const passwordError = passwordValidator(password.value)
+    const emailError = emailValidator(email.value)
+    if (emailError || passwordError || idError) {
+      setName({ ...id, error: idError })
+      setEmail({ ...email, error: emailError })
+      setPassword({ ...password, error: passwordError })
+      return
+    }
+  }
+
   return (
     <Background>
       <BackButton goBack={navigation.goBack} />
