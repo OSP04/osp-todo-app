@@ -51,6 +51,10 @@ const HomeTasks = ({ tasks, setTasks, categories, setCategories }) => {
               doRefresh();
             }}
             title={category.title}
+            zIndex={
+              categories.length -
+              categories.findIndex((element) => element.id === category.id)
+            }
           />
           {category.tasks.map((item) => (
             <HomeTaskItem key={item.id} item={item} />

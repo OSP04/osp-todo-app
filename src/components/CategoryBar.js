@@ -4,15 +4,16 @@ import styled from "styled-components/native";
 import { theme } from "../theme";
 import { images } from "../images";
 import IconButton from "./IconButton";
+import Dropdown from "./Dropdown";
 
-const CategoryBar = ({ onPressOut, title }) => {
+const CategoryBar = ({ onPressOut, title, zIndex }) => {
   return (
     <StyledView>
       <Category>
         <Title>{title}</Title>
         <IconButton onPressOut={onPressOut} type={images.add} />
       </Category>
-      <Dropdown>Dropdown</Dropdown>
+      <Dropdown zIndex={zIndex} />
     </StyledView>
   );
 };
@@ -34,12 +35,10 @@ const Title = styled.Text`
   padding: 5px 10px 5px 10px;
   margin-right: 5px;
   min-width: 80px;
-  font-size: 20px;
+  font-size: 15px;
   background-color: ${theme.primary};
-  border-radius: 12px;
+  border-radius: 10px;
   color: white;
 `;
-
-const Dropdown = styled.Text``;
 
 export default CategoryBar;
