@@ -13,6 +13,7 @@ const Home = () => {
       title: "Food",
       color: theme.primary,
       owner: null,
+      isAdding: false,
       tasks: [
         {
           id: "1",
@@ -44,6 +45,7 @@ const Home = () => {
       title: "School",
       color: theme.secondary,
       owner: null,
+      isAdding: false,
       tasks: [
         {
           id: "2",

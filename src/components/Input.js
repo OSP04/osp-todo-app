@@ -6,7 +6,7 @@ import { theme } from "../theme";
 import { images } from "../images";
 import IconButton from "./IconButton";
 
-const Input = ({ isAdding, setIsAdding, onSubmitEditing, onChangeText }) => {
+const Input = ({ newTask, isAdding, onSubmitEditing, onChangeText }) => {
   return (
     isAdding && (
       <StyledView>
@@ -15,8 +15,8 @@ const Input = ({ isAdding, setIsAdding, onSubmitEditing, onChangeText }) => {
           value={newTask}
           placeholder="Add a task"
           autoFocus={true}
-          onBlur={() => setIsAdding(false)}
           onSubmitEditing={onSubmitEditing}
+          blurOnSubmit={false}
           onChangeText={onChangeText}
         />
       </StyledView>

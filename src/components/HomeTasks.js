@@ -8,11 +8,11 @@ import CategoryBar from "../components/CategoryBar";
 import Input from "./Input";
 
 const HomeTasks = ({ tasks, setTasks, categories, setCategories }) => {
-  const [isAdding, setIsAdding] = useState(false);
+  const [refresh, setRefresh] = useState(true);
   const [newTask, setNewTask] = useState("");
 
-  const onPressOut = () => {
-    setIsAdding(true);
+  const doRefresh = () => {
+    setRefresh((current) => setRefresh(!current));
   };
 
   const addTask = (category) => {
@@ -23,7 +23,7 @@ const HomeTasks = ({ tasks, setTasks, categories, setCategories }) => {
       text: newTask,
       date: null,
       due: null,
-      category,
+      category: category.title,
       image: null,
       complete: false,
       created: Date.now(),
@@ -37,20 +37,26 @@ const HomeTasks = ({ tasks, setTasks, categories, setCategories }) => {
         <StyledView>
           <CategoryBar
             key={category.id}
-            onPressOut={onPressOut}
+            onPressOut={() => {
+              category.isAdding = true;
+              doRefresh();
+            }}
             title={category.title}
           />
           {category.tasks.map((item) => (
             <HomeTaskItem key={item.id} item={item} />
           ))}
+          <Input
+            key={category.id + "Input"}
+            newTask={newTask}
+            isAdding={category.isAdding}
+            onSubmitEditing={() => {
+              addTask(category);
+            }}
+            onChangeText={setNewTask}
+          />
         </StyledView>
       ))}
-      <Input
-        isAdding={isAdding}
-        setIsAdding={setIsAdding}
-        onSubmitEditing={addTask}
-        onChangeText={setNewTask}
-      />
     </>
   );
 };
