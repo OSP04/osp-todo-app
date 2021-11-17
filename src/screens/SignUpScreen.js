@@ -76,3 +76,13 @@ export default function RegisterScreen({ navigation }) {
     </Background>
   )
 }
+
+const styles = StyleSheet.create({
+    row: {
+      flexDirection: 'row',
+      marginTop: 5,
+    },
+    link: {
+      fontWeight: 'bold',
+    },
+  })
