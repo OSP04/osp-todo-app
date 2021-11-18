@@ -36,7 +36,7 @@ export default function RegisterScreen({ navigation }) {
       <Header>Welcome!</Header>
       <Text>Create a new account</Text>
       <TextInput
-        label="Name"
+        label="ID"
         returnKeyType="next"
         value={id.value}
         onChangeText={(text) => setId({ value: text, error: '' })}

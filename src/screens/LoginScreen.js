@@ -28,7 +28,7 @@ export default function LoginScreen({ navigation }) {
         <Logo />
         <Header>Todo App</Header>
         <TextInput
-          label="id"
+          label="ID"
           returnKeyType="next"
           value={id.value}
           onChangeText={(text) => setId({ value: text, error: '' })}
