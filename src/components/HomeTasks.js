@@ -30,8 +30,8 @@ const HomeTasks = ({ tasks, setTasks, categories, setCategories }) => {
         created: Date.now(),
       };
       setTasks([...tasks, newTaskObj]);
-      const updatedTask = category.tasks.concat(newTaskObj);
-      category.tasks = updatedTask;
+      const updatedTasks = category.tasks.concat(newTaskObj);
+      category.tasks = updatedTasks;
     }
   };
 
@@ -57,7 +57,7 @@ const HomeTasks = ({ tasks, setTasks, categories, setCategories }) => {
             }
           />
           {category.tasks.map((item) => (
-            <HomeTaskItem key={item.id} item={item} />
+            <HomeTaskItem key={item.id} item={item} doRefresh={doRefresh} />
           ))}
           <Input
             key={category.id + "Input"}

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import DropDownPicker from "react-native-dropdown-picker";
-import { FlatList, StyleSheet } from "react-native";
+import { StyleSheet } from "react-native";
 
 import styled from "styled-components/native";
 import { theme } from "../theme";
@@ -24,6 +24,7 @@ const Dropdown = ({ zIndex }) => {
         setOpen={setOpen}
         setValue={setValue}
         zIndex={zIndex}
+        // onChangeValue={(value) => console.log(value)}
         style={styles.container}
         labelStyle={styles.label}
         textStyle={styles.text}

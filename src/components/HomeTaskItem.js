@@ -5,11 +5,18 @@ import { theme } from "../theme";
 import { images } from "../images";
 import IconButton from "./IconButton";
 
-const HomeTaskItem = ({ item }) => {
+const HomeTaskItem = ({ item, doRefresh }) => {
+  const toggleItem = () => {
+    item.complete = !item.complete;
+    doRefresh();
+  };
+  const returnIcon = (item) => {
+    return item.complete ? images.complete : images.uncomplete;
+  };
   return (
     <StyledView>
       <LeftItems>
-        <IconButton type={images.uncomplete} />
+        <IconButton type={returnIcon(item)} onPressOut={toggleItem} />
         <StyledText>
           <TaskText>{item.text}</TaskText>
           {item.due && <DueDate>{item.due}</DueDate>}
