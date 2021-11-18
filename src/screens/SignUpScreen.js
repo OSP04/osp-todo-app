@@ -1,11 +1,12 @@
-import React, { useState } from 'react'
-import { View, StyleSheet, TouchableOpacity, ViewPagerAndroidBase } from 'react-native'
-import { Text } from 'react-native-paper'
-import Logo from '../components/Logo'
-import Header from '../components/Header'
-import Button from '../components/Button'
-import TextInput from '../components/TextInput'
-import BackButton from '../components/BackButton'
+import React, { useState } from 'react';
+import { View, StyleSheet, TouchableOpacity, ViewPagerAndroidBase } from 'react-native';
+import { Text } from 'react-native-paper';
+import Logo from '../components/Logo';
+import Header from '../components/Header';
+import Button from '../components/Button';
+import TextInput from '../components/TextInput';
+import BackButton from '../components/BackButton';
+import * as Validator from "../Validator";
 
 export default function RegisterScreen({ navigation }) {
   const [id, setId] = useState({ value: '', error: '' })
@@ -13,11 +14,11 @@ export default function RegisterScreen({ navigation }) {
   const [email, setEmail] = useState({ value: '', error: '' })
 
   const onSignUpPressed = () => {
-    const idError = idValidator(id.value)
-    const passwordError = passwordValidator(password.value)
-    const emailError = emailValidator(email.value)
+    const idError = Validator.idValidator(id.value)
+    const passwordError = Validator.passwordValidator(password.value)
+    const emailError = Validator.emailValidator(email.value)
     if (emailError || passwordError || idError) {
-      setName({ ...id, error: idError })
+      setId({ ...id, error: idError })
       setEmail({ ...email, error: emailError })
       setPassword({ ...password, error: passwordError })
       return

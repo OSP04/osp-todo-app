@@ -1,19 +1,20 @@
-import React, { useState } from 'react'
-import { TouchableOpacity, StyleSheet, View } from 'react-native'
-import { Text } from 'react-native-paper'
-import Logo from '../components/Logo'
-import Header from '../components/Header'
-import Button from '../components/Button'
-import TextInput from '../components/TextInput'
-import BackButton from '../components/BackButton'
+import React, { useState } from 'react';
+import { TouchableOpacity, StyleSheet, View } from 'react-native';
+import { Text } from 'react-native-paper';
+import Logo from '../components/Logo';
+import Header from '../components/Header';
+import Button from '../components/Button';
+import TextInput from '../components/TextInput';
+import BackButton from '../components/BackButton';
+import * as Validator from "../Validator";
 
 export default function LoginScreen({ navigation }) {
   const [id, setId] = useState({ value: '', error: '' })
   const [password, setPassword] = useState({ value: '', error: '' })
   
   const onLoginPressed = () => {
-    const idError = idValidator(id.value)
-    const passwordError = passwordValidator(password.value)
+    const idError = Validator.idValidator(id.value)
+    const passwordError = Validator.passwordValidator(password.value)
     if (idError || passwordError) {
       setId({ ...id, error: idError })
       setPassword({ ...password, error: passwordError })
