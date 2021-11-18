@@ -12,7 +12,7 @@ const Dropdown = ({ zIndex }) => {
     { label: "Added", value: "added" },
     { label: "Done", value: "done" },
     { label: "Not", value: "not" },
-    { label: "due", value: "due" },
+    { label: "Due", value: "due" },
   ]);
 
   return (
