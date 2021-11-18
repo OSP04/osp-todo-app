@@ -1,12 +1,12 @@
 import React, { useState } from 'react'
-import { View, StyleSheet, TouchableOpacity } from 'react-native'
+import { View, StyleSheet, TouchableOpacity, ViewPagerAndroidBase } from 'react-native'
 import { Text } from 'react-native-paper'
-import Background from '../components/Background'
-import Logo from '../components/Logo'
-import Header from '../components/Header'
-import Button from '../components/Button'
-import TextInput from '../components/TextInput'
-import BackButton from '../components/BackButton'
+import Background from './components/Background'
+import Logo from './components/Logo'
+import Header from './components/Header'
+import Button from './components/Button'
+import TextInput from './components/TextInput'
+import BackButton from './components/BackButton'
 
 export default function RegisterScreen({ navigation }) {
   const [id, setId] = useState({ value: '', error: '' })
@@ -30,7 +30,7 @@ export default function RegisterScreen({ navigation }) {
   }
 
   return (
-    <Background>
+    <View>
       <BackButton goBack={navigation.goBack} />
       <Logo />
       <Header>Welcome!</Header>
@@ -77,7 +77,7 @@ export default function RegisterScreen({ navigation }) {
           <Text style={styles.link}>Login</Text>
         </TouchableOpacity>
       </View>
-    </Background>
+    </View>
   )
 }
 

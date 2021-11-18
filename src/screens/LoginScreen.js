@@ -1,12 +1,11 @@
 import React, { useState } from 'react'
 import { TouchableOpacity, StyleSheet, View } from 'react-native'
 import { Text } from 'react-native-paper'
-import Background from '../components/Background'
-import Logo from '../components/Logo'
-import Header from '../components/Header'
-import Button from '../components/Button'
-import TextInput from '../components/TextInput'
-import BackButton from '../components/BackButton'
+import Logo from './components/Logo'
+import Header from './components/Header'
+import Button from './components/Button'
+import TextInput from './components/TextInput'
+import BackButton from './components/BackButton'
 
 export default function LoginScreen({ navigation }) {
   const [id, setId] = useState({ value: '', error: '' })
@@ -23,7 +22,7 @@ export default function LoginScreen({ navigation }) {
   }
   
   return (
-    <Background>
+    <View>
         <BackButton goBack={navigation.goBack} />
         <Logo />
         <Header>Todo App</Header>
@@ -57,7 +56,7 @@ export default function LoginScreen({ navigation }) {
         <TouchableOpacity onPress={() => navigation.replace('SignUpScreen')}>
           <Text style={styles.link}>Skip for Now</Text>
         </TouchableOpacity>
-    </Background>
+    </View>
   )
 }
 
