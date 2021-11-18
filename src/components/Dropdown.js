@@ -3,9 +3,8 @@ import DropDownPicker from "react-native-dropdown-picker";
 import { StyleSheet } from "react-native";
 
 import styled from "styled-components/native";
-import { theme } from "../theme";
 
-const Dropdown = ({ zIndex }) => {
+const Dropdown = ({ zIndex, category, doRefresh }) => {
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState("added");
   const [items, setItems] = useState([
@@ -24,7 +23,10 @@ const Dropdown = ({ zIndex }) => {
         setOpen={setOpen}
         setValue={setValue}
         zIndex={zIndex}
-        // onChangeValue={(value) => console.log(value)}
+        onChangeValue={(value) => {
+          category.sorting = value;
+          doRefresh();
+        }}
         style={styles.container}
         labelStyle={styles.label}
         textStyle={styles.text}

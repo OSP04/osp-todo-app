@@ -7,7 +7,7 @@ import HomeTaskItem from "./HomeTaskItem";
 import CategoryBar from "../components/CategoryBar";
 import Input from "./Input";
 
-const HomeTasks = ({ tasks, setTasks, categories, setCategories }) => {
+const HomeTasks = ({ tasks, setTasks, categories }) => {
   const [refresh, setRefresh] = useState(true);
   const [newTask, setNewTask] = useState("");
 
@@ -50,13 +50,15 @@ const HomeTasks = ({ tasks, setTasks, categories, setCategories }) => {
               category.isAdding = true;
               doRefresh();
             }}
+            category={category}
             title={category.title}
             zIndex={
               categories.length -
               categories.findIndex((element) => element.id === category.id)
             }
+            doRefresh={doRefresh}
           />
-          {category.tasks.map((item) => (
+          {sortTasks(category).map((item) => (
             <HomeTaskItem key={item.id} item={item} doRefresh={doRefresh} />
           ))}
           <Input

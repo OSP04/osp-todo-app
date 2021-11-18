@@ -14,6 +14,7 @@ const Home = () => {
       color: theme.primary,
       owner: null,
       isAdding: false,
+      sorting: "added",
       tasks: [
         {
           id: "1",
@@ -46,12 +47,13 @@ const Home = () => {
       color: theme.secondary,
       owner: null,
       isAdding: false,
+      sorting: "added",
       tasks: [
         {
           id: "2",
           text: "OpenSW Assignment",
           date: "Thu Nov 16 2021",
-          due: "2021. 12. 15",
+          due: "2021.12.15",
           category: "School",
           image: null,
           complete: true,
