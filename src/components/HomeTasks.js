@@ -77,6 +77,7 @@ const HomeTasks = ({ tasks, setTasks, categories, setCategories }) => {
 
 const StyledView = styled.View`
   margin-bottom: 10px;
+  min-height: 200px;
 `;
 
 export default HomeTasks;
