@@ -1,11 +1,11 @@
 import React, { useState } from 'react'
 import { TouchableOpacity, StyleSheet, View } from 'react-native'
 import { Text } from 'react-native-paper'
-import Logo from './components/Logo'
-import Header from './components/Header'
-import Button from './components/Button'
-import TextInput from './components/TextInput'
-import BackButton from './components/BackButton'
+import Logo from '../components/Logo'
+import Header from '../components/Header'
+import Button from '../components/Button'
+import TextInput from '../components/TextInput'
+import BackButton from '../components/BackButton'
 
 export default function LoginScreen({ navigation }) {
   const [id, setId] = useState({ value: '', error: '' })
@@ -52,7 +52,7 @@ export default function LoginScreen({ navigation }) {
                 <Text style={styles.link}>Sign up</Text>
             </TouchableOpacity>
         </View>
-        //추후 메인화면으로 연결
+        {/* 추후 메인화면으로 연결 */}
         <TouchableOpacity onPress={() => navigation.replace('SignUpScreen')}>
           <Text style={styles.link}>Skip for Now</Text>
         </TouchableOpacity>
