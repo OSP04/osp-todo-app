@@ -16,23 +16,43 @@ const Categories = ({ item }) => {
                 <StyledText>{item.text}</StyledText>
 
                 {item.task1 != null && <TaskView width={width}>
-                    <IconButton type={images.uncomplete} />
-                    <TaskText>{item.task1}</TaskText>
+                    <LeftView>
+                        <IconButton type={images.uncomplete} />
+                        <TaskText>{item.task1}</TaskText>
+                    </LeftView>
+                    <RightView>
+                        <DueDate>{item.task1Due}</DueDate>
+                    </RightView>
                 </TaskView>}
 
                 {item.task2 != null && <TaskView width={width}>
-                    <IconButton type={images.uncomplete} />
-                    <TaskText>{item.task2}</TaskText>
+                    <LeftView>
+                        <IconButton type={images.uncomplete} />
+                        <TaskText>{item.task2}</TaskText>
+                    </LeftView>
+                    <RightView>
+                        <DueDate>{item.task2Due}</DueDate>
+                    </RightView>
                 </TaskView>}
 
                 {item.task3 != null && <TaskView width={width}>
-                    <IconButton type={images.uncomplete} />
-                    <TaskText>{item.task3}</TaskText>
+                    <LeftView>
+                        <IconButton type={images.uncomplete} />
+                        <TaskText>{item.task3}</TaskText>
+                    </LeftView>
+                    <RightView>
+                        <DueDate>{item.task3Due}</DueDate>
+                    </RightView>
                 </TaskView>}
 
                 {item.task4 != null && <TaskView width={width}>
-                    <IconButton type={images.uncomplete} />
-                    <TaskText>{item.task4}</TaskText>
+                    <LeftView>
+                        <IconButton type={images.uncomplete} />
+                        <TaskText>{item.task4}</TaskText>
+                    </LeftView>
+                    <RightView>
+                        <DueDate>{item.task4Due}</DueDate>
+                    </RightView>
                 </TaskView>}
 
                 <MoreView width={width}>
@@ -53,18 +73,36 @@ const StyledView = styled.View`
 flex-direction: column;
 align-items: flex-start;
 justify-content: flex-start;
-margin-left: 5px;
+margin-left: 10px;
+`;
+
+const LeftView = styled.View`
+flex-direction: row;
+padding-top:2px;
+align-items: flex-end;
+`;
+
+const RightView = styled.View`
+flex-direction: row;
+padding-right: 24px;
+`;
+
+const DueDate = styled.Text`
+font-size: 18px;
+color: ${theme.light};
 `;
 
 const TaskView = styled.View`
 flex-direction: row;
-align-items: flex-end;
-justify-content: flex-start;
+justify-content: space-between;
+align-items: center;
 `;
 
 const MoreView = styled.View`
 align-items: flex-end;
-padding-right: 30px;
+padding-right: 20px;
+padding-top: 10px;
+padding-bottom: 10px;
 `;
 
 const StyledText = styled.Text`
