@@ -12,7 +12,14 @@ const AddCategory = ({ state, setState }) => {
             <ModalView>
                 <ModalInnerView>
                     <Text style={{ fontSize: 16, fontWeight: 'bold', paddingBottom: 10 }}>Add category</Text>
-                    <Input />
+                    <StyledInput
+                        placeholder="Enter text..."
+                        placeholderTextColor={theme.light}
+                        maxLength={20}
+                        autoFocus={true}
+                        value={value}
+                        onChangeText={onChangeText}>
+                    </StyledInput>
                     <View style={{ flexDirection: 'row', justifyContent: 'flex-end', paddingTop: 30 }}>
                         <Button title="Cancel" onPress={() => setState(false)} />
                         <View style={{ padding: 5 }} />
@@ -37,5 +44,9 @@ marginTop: 80px;
 padding: 20px;
 `;
 
+const StyledInput = styled.TextInput`
+border-width:1px;
+padding: 5px;
+`;
 
 export default AddCategory;
