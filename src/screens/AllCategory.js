@@ -4,7 +4,6 @@ import { Dimensions } from "react-native";
 import styled from "styled-components/native";
 import Categories from "../components/Categories";
 import IconButton from "../components/IconButton";
-import Tasks from "../components/Tasks";
 import { images } from "../images";
 import { theme } from "../theme";
 import AddCategory from "./AddCategory";
