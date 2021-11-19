@@ -1,17 +1,17 @@
 import React from "react";
-import { Button, Modal, Text, View } from "react-native";
+import { Button, Modal, View } from "react-native";
 
 import styled from "styled-components/native";
-import Input from "../components/Input";
+import { theme } from "../theme";
 
-const AddCategory = ({ state, setState }) => {
+const AddCategory = ({ state, value, onChangeText, onConfirm, onCancel }) => {
 
     return (
         <Modal
             transparent={true} visible={state}>
             <ModalView>
                 <ModalInnerView>
-                    <Text style={{ fontSize: 16, fontWeight: 'bold', paddingBottom: 10 }}>Add category</Text>
+                    <StyledText>Add category</StyledText>
                     <StyledInput
                         placeholder="Enter text..."
                         placeholderTextColor={theme.light}
@@ -20,11 +20,11 @@ const AddCategory = ({ state, setState }) => {
                         value={value}
                         onChangeText={onChangeText}>
                     </StyledInput>
-                    <View style={{ flexDirection: 'row', justifyContent: 'flex-end', paddingTop: 30 }}>
+                    <ButtonView>
                         <Button title="Cancel" onPress={onCancel} />
                         <View style={{ padding: 5 }} />
                         <Button title="Confirm" onPress={onConfirm} />
-                    </View>
+                    </ButtonView>
                 </ModalInnerView>
             </ModalView>
         </Modal>
@@ -44,9 +44,21 @@ marginTop: 80px;
 padding: 20px;
 `;
 
+const StyledText = styled.Text`
+font-size: 18px;
+font-weight: bold;
+padding-bottom: 10px;
+`;
+
 const StyledInput = styled.TextInput`
 border-width:1px;
 padding: 5px;
+`;
+
+const ButtonView = styled.View`
+flex-direction: row;
+justify-content: flex-end;
+padding-top: 30px;
 `;
 
 export default AddCategory;
