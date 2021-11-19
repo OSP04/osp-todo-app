@@ -86,7 +86,7 @@ const AllCategory = () => {
                     <Wrapper>
                         <Categories key={item.id} item={item} />
                         <MoreView width={width}>
-                            <MoreButton title="See more tasks...">See more tasks...</MoreButton>
+                            <MoreButton>+ See more tasks...</MoreButton>
                         </MoreView>
                     </Wrapper>
                 ))}
