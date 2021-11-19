@@ -83,7 +83,12 @@ const AllCategory = () => {
             </StyledView >
             <StyledScroll>
                 {Object.values(categories).map(item => (
-                    <Categories key={item.id} item={item} />
+                    <Wrapper>
+                        <Categories key={item.id} item={item} />
+                        <MoreView width={width}>
+                            <MoreButton title="See more tasks...">See more tasks...</MoreButton>
+                        </MoreView>
+                    </Wrapper>
                 ))}
             </StyledScroll>
         </Wrapper>
@@ -111,6 +116,17 @@ align-items: center;
 const StyledText = styled.Text`
 font-weight: bold;
 font-size: 24px;
+`;
+
+const MoreView = styled.View`
+align-items: flex-end;
+padding-right: 20px;
+padding-top: 10px;
+padding-bottom: 10px;
+`;
+
+const MoreButton = styled.Text`
+color: ${theme.light};
 `;
 
 const StyledScroll = styled.ScrollView``;

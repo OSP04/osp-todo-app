@@ -55,9 +55,6 @@ const Categories = ({ item }) => {
                     </RightView>
                 </TaskView>}
 
-                <MoreView width={width}>
-                    <MoreButton title="See more tasks...">See more tasks...</MoreButton>
-                </MoreView>
             </StyledView>
         </Wrapper>
     );
@@ -98,13 +95,6 @@ justify-content: space-between;
 align-items: center;
 `;
 
-const MoreView = styled.View`
-align-items: flex-end;
-padding-right: 20px;
-padding-top: 10px;
-padding-bottom: 10px;
-`;
-
 const StyledText = styled.Text`
 font-weight: bold;
 font-size: 22px;
@@ -116,11 +106,6 @@ const TaskText = styled.Text`
 font-size: 18px;
 padding-top: 2px;
 padding-bottom: 2px;
-`;
-
-const MoreButton = styled.Button`
-background-color: ${theme.background};
-color: ${theme.primary};
 `;
 
 export default Categories;
