@@ -15,25 +15,25 @@ const Categories = ({ item }) => {
             <StyledView width={width}>
                 <StyledText>{item.text}</StyledText>
 
-                <TaskView width={width}>
+                {item.task1 != null && <TaskView width={width}>
                     <IconButton type={images.uncomplete} />
                     <TaskText>{item.task1}</TaskText>
-                </TaskView>
+                </TaskView>}
 
-                <TaskView width={width}>
+                {item.task2 != null && <TaskView width={width}>
                     <IconButton type={images.uncomplete} />
                     <TaskText>{item.task2}</TaskText>
-                </TaskView>
+                </TaskView>}
 
-                <TaskView width={width}>
+                {item.task3 != null && <TaskView width={width}>
                     <IconButton type={images.uncomplete} />
                     <TaskText>{item.task3}</TaskText>
-                </TaskView>
+                </TaskView>}
 
-                <TaskView width={width}>
+                {item.task4 != null && <TaskView width={width}>
                     <IconButton type={images.uncomplete} />
                     <TaskText>{item.task4}</TaskText>
-                </TaskView>
+                </TaskView>}
 
                 <MoreView width={width}>
                     <MoreButton title="See more tasks...">See more tasks...</MoreButton>
