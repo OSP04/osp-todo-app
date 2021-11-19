@@ -21,9 +21,9 @@ const AddCategory = ({ state, setState }) => {
                         onChangeText={onChangeText}>
                     </StyledInput>
                     <View style={{ flexDirection: 'row', justifyContent: 'flex-end', paddingTop: 30 }}>
-                        <Button title="Cancel" onPress={() => setState(false)} />
+                        <Button title="Cancel" onPress={onCancel} />
                         <View style={{ padding: 5 }} />
-                        <Button title="Confirm" />
+                        <Button title="Confirm" onPress={onConfirm} />
                     </View>
                 </ModalInnerView>
             </ModalView>
