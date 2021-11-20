@@ -1,10 +1,10 @@
 import React from "react";
-import { Button, Modal, View } from "react-native";
+import { Modal, View } from "react-native";
 
 import styled from "styled-components/native";
 import { theme } from "../theme";
 
-const AddCategory = ({ state, value, onChangeText, onConfirm, onCancel }) => {
+const AddCategory = ({ state, value, onChangeText, setColor, onConfirm, onCancel }) => {
 
     return (
         <Modal
@@ -20,10 +20,15 @@ const AddCategory = ({ state, value, onChangeText, onConfirm, onCancel }) => {
                         value={value}
                         onChangeText={onChangeText}>
                     </StyledInput>
+                    <ColorView>
+                        <ColorBox style={{ backgroundColor: "black" }} onPress={() => { setColor("black") }} />
+                        <ColorBox style={{ backgroundColor: "red" }} onPress={() => { setColor("red") }} />
+                        <ColorBox style={{ backgroundColor: "blue" }} onPress={() => { setColor("blue") }} />
+                    </ColorView>
                     <ButtonView>
-                        <Button title="Cancel" onPress={onCancel} />
-                        <View style={{ padding: 5 }} />
-                        <Button title="Confirm" onPress={onConfirm} />
+                        <ButtonText style={{ color: theme.light }} onPress={onCancel}>Cancel</ButtonText>
+                        <View style={{ padding: 8 }} />
+                        <ButtonText onPress={onConfirm}>Confirm</ButtonText>
                     </ButtonView>
                 </ModalInnerView>
             </ModalView>
@@ -39,13 +44,13 @@ flex: 1;
 
 const ModalInnerView = styled.View`
 background-color: #ffffff;
-margin: 50px;
+margin: 40px;
 marginTop: 80px;
 padding: 20px;
 `;
 
 const StyledText = styled.Text`
-font-size: 18px;
+font-size: 20px;
 font-weight: bold;
 padding-bottom: 10px;
 `;
@@ -55,10 +60,27 @@ border-width:1px;
 padding: 5px;
 `;
 
+const ColorView = styled.View`
+flex-direction: row;
+padding-top: 10px;
+`;
+
+const ColorBox = styled.TouchableOpacity`
+width:22px;
+height:22px;
+margin-right: 12px;
+`;
+
 const ButtonView = styled.View`
 flex-direction: row;
 justify-content: flex-end;
-padding-top: 30px;
+padding-top: 20px;
+`;
+
+const ButtonText = styled.Text`
+font-size: 16px;
+font-weight: bold;
+padding-right: 4px;
 `;
 
 export default AddCategory;

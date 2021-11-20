@@ -13,7 +13,7 @@ const Categories = ({ item }) => {
     return (
         <Wrapper>
             <StyledView width={width}>
-                <StyledText>{item.text}</StyledText>
+                <StyledText style={{ color: item.color }}>{item.text}</StyledText>
 
                 {item.task1 != null && <TaskView width={width}>
                     <LeftView>
@@ -98,7 +98,7 @@ align-items: center;
 const StyledText = styled.Text`
 font-weight: bold;
 font-size: 22px;
-margin-top: 20px;
+margin-top: 6px;
 margin-bottom: 6px;
 `;
 

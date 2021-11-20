@@ -12,6 +12,7 @@ const AllCategory = () => {
 
     const width = Dimensions.get('window').width;
     const [state, setState] = useState(false);
+    const [color, setColor] = useState("black");
 
     const [newCategory, setNewCategory] = useState("");
 
@@ -19,6 +20,7 @@ const AllCategory = () => {
         {
             id: "1",
             text: "Study",
+            color: "black",
             task1: "Report Assignment",
             task1Due: "2021.11.19",
             task2: "Study for JAVA quiz",
@@ -33,6 +35,7 @@ const AllCategory = () => {
         {
             id: "2",
             text: "Personal",
+            color: "black",
             task1: "Book a hairdresser",
             task1Due: "2021.11.19",
             task2: "Write diary",
@@ -51,6 +54,7 @@ const AllCategory = () => {
         const newCategoryObj = {
             id: ID,
             text: newCategory,
+            color: color,
             task1: null,
             task2: null,
             task3: null,
@@ -78,13 +82,13 @@ const AllCategory = () => {
                 <StyledText>Category</StyledText>
                 <IconButton type={images.add}
                     onPressOut={() => { setState(true) }} />
-                <AddCategory state={state} value={newCategory} onCancel={_onPressCancel}
+                <AddCategory state={state} value={newCategory} onCancel={_onPressCancel} setColor={setColor}
                     onChangeText={_handleTextChange} onConfirm={addCategory} />
             </StyledView >
             <StyledScroll>
                 {Object.values(categories).map(item => (
                     <Wrapper>
-                        <Categories key={item.id} item={item} />
+                        <Categories key={item.id} item={item} color={color} />
                         <MoreView width={width}>
                             <MoreButton>+ See more tasks...</MoreButton>
                         </MoreView>
@@ -106,8 +110,8 @@ background-color: ${theme.background};
 `;
 
 const StyledView = styled.View`
-margin-top: 5px;
-margin-bottom: 5px;
+margin-top: 10px;
+margin-bottom: 10px;
 flex-direction: row;
 justify-content: space-between;
 align-items: center;
