@@ -74,13 +74,13 @@ margin-right: 12px;
 const ButtonView = styled.View`
 flex-direction: row;
 justify-content: flex-end;
-padding-top: 20px;
+padding-top: 16px;
 `;
 
 const ButtonText = styled.Text`
 font-size: 16px;
 font-weight: bold;
-padding-right: 4px;
+padding-right: 6px;
 `;
 
 export default AddCategory;
