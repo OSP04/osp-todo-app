@@ -1,8 +1,8 @@
 import { Calendar } from "react-native-calendars";
 import { View } from "react-native";
 import React from "react";
-
-export default class Example extends React.Component {
+import { AntDesign } from "@expo/vector-icons";
+export default class calendar extends React.Component {
   render() {
     const unformattedCurrent = new Date();
     const year = unformattedCurrent.getFullYear();
@@ -11,16 +11,15 @@ export default class Example extends React.Component {
     const current = `${year}-${month >= 10 ? month : "0" + month}-${
       date >= 10 ? date : "0" + date
     }`;
-
     return (
       <View style={{ paddingTop: 50, flex: 1 }}>
         <Calendar
           // Initially visible month. Default = Date()
           current={current}
           // Minimum date that can be selected, dates before minDate will be grayed out. Default = undefined
-          minDate={"2021-01-01"}
+          minDate={"2018-01-01"}
           // Maximum date that can be selected, dates after maxDate will be grayed out. Default = undefined
-          maxDate={"2022-12-31"}
+          maxDate={"2025-12-31"}
           // Handler which gets executed on day press. Default = undefined
           onDayPress={(day) => {
             console.log("selected day", day);
@@ -32,9 +31,15 @@ export default class Example extends React.Component {
             console.log("month changed", month);
           }}
           // Hide month navigation arrows. Default = false
-          hideArrows={true}
+          hideArrows={false}
           // Replace default arrows with custom ones (direction can be 'left' or 'right')
-          renderArrow={(direction) => <Arrow />}
+          renderArrow={(direction) =>
+            direction === "left" ? (
+              <AntDesign name="left" size={20} color="black" />
+            ) : (
+              <AntDesign name="right" size={20} color="black" />
+            )
+          }
           // Do not show days of other months in month page. Default = false
           hideExtraDays={false}
           // If hideArrows = false and hideExtraDays = false do not switch month when tapping on greyed out
