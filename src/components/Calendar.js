@@ -4,15 +4,23 @@ import React from "react";
 
 export default class Example extends React.Component {
   render() {
+    const unformattedCurrent = new Date();
+    const year = unformattedCurrent.getFullYear();
+    const month = unformattedCurrent.getMonth() + 1;
+    const date = unformattedCurrent.getDate();
+    const current = `${year}-${month >= 10 ? month : "0" + month}-${
+      date >= 10 ? date : "0" + date
+    }`;
+
     return (
       <View style={{ paddingTop: 50, flex: 1 }}>
         <Calendar
           // Initially visible month. Default = Date()
-          current={"2012-03-01"}
+          current={current}
           // Minimum date that can be selected, dates before minDate will be grayed out. Default = undefined
-          minDate={"2012-05-10"}
+          minDate={"2021-01-01"}
           // Maximum date that can be selected, dates after maxDate will be grayed out. Default = undefined
-          maxDate={"2012-05-30"}
+          maxDate={"2022-12-31"}
           // Handler which gets executed on day press. Default = undefined
           onDayPress={(day) => {
             console.log("selected day", day);
