@@ -81,6 +81,7 @@ align-items: flex-end;
 
 const RightView = styled.View`
 flex-direction: row;
+padding-top:2px;
 padding-right: 24px;
 `;
 
@@ -104,8 +105,7 @@ margin-bottom: 6px;
 
 const TaskText = styled.Text`
 font-size: 18px;
-padding-top: 2px;
-padding-bottom: 2px;
+padding: 2px;
 `;
 
 export default Categories;
