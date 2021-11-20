@@ -61,6 +61,7 @@ const AllCategory = () => {
             task4: null,
         };
         setNewCategory("");
+        setColor("black");
         setCategories([...categories, newCategoryObj]);
         setState(false);
     };
