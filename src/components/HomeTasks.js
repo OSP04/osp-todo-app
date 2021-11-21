@@ -7,7 +7,7 @@ import HomeTaskItem from "./HomeTaskItem";
 import CategoryBar from "../components/CategoryBar";
 import Input from "./Input";
 
-const HomeTasks = ({ tasks, setTasks, categories }) => {
+const HomeTasks = ({ tasks, setTasks, categories, selectedDate }) => {
   const [refresh, setRefresh] = useState(true);
   const [newTask, setNewTask] = useState("");
 
@@ -22,7 +22,7 @@ const HomeTasks = ({ tasks, setTasks, categories }) => {
       const newTaskObj = {
         id: ID,
         text: newTask,
-        date: null,
+        date: selectedDate,
         due: null,
         category: category.title,
         image: null,
@@ -95,6 +95,10 @@ const HomeTasks = ({ tasks, setTasks, categories }) => {
     }
   };
 
+  const compareDate = (date1, date2) => {
+    return date1.getTime() === date2.getTime();
+  };
+
   return (
     <>
       {categories.map((category) => (
@@ -113,9 +117,13 @@ const HomeTasks = ({ tasks, setTasks, categories }) => {
             }
             doRefresh={doRefresh}
           />
-          {sortTasks(category).map((item) => (
-            <HomeTaskItem key={item.id} item={item} doRefresh={doRefresh} />
-          ))}
+          {sortTasks(category).map((item) => {
+            return (
+              compareDate(item.date, selectedDate) && (
+                <HomeTaskItem key={item.id} item={item} doRefresh={doRefresh} />
+              )
+            );
+          })}
           <Input
             key={category.id + "Input"}
             newTask={newTask}

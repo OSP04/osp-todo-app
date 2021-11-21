@@ -5,10 +5,11 @@ import styled from "styled-components/native";
 import CalendarStrip from "react-native-calendar-strip";
 
 import { theme } from "../theme";
+import HomeTasks from "./HomeTasks";
 
-const WeekStrip = () => {
+const WeekStrip = ({ tasks, setTasks, categories }) => {
   const [year, setYear] = useState(new Date().getFullYear());
-  const [selected, setSelected] = useState(new Date());
+  const [selectedDate, setSelectedDate] = useState(new Date());
 
   const getYear = (date) => {
     const selectedYear = date.getFullYear();
@@ -16,9 +17,9 @@ const WeekStrip = () => {
   };
 
   const selectDate = (date) => {
-    const selectedDate = new Date(date);
-    getYear(selectedDate);
-    setSelected(selectedDate);
+    const selected = new Date(date);
+    getYear(selected);
+    setSelectedDate(selected);
   };
 
   return (
@@ -26,7 +27,7 @@ const WeekStrip = () => {
       <Year>{year}</Year>
       <CalendarStrip
         scrollable
-        selectedDate={selected}
+        selectedDate={selectedDate}
         style={styles.container}
         calendarHeaderStyle={styles.header}
         dateNumberStyle={styles.dateNumber}
@@ -46,6 +47,14 @@ const WeekStrip = () => {
         onHeaderSelected={() => console.log("Navigate to calender page")}
         onDateSelected={(date) => selectDate(date)}
       />
+      <StyledScroll>
+        <HomeTasks
+          tasks={tasks}
+          setTasks={setTasks}
+          categories={categories}
+          selectedDate={selectedDate}
+        />
+      </StyledScroll>
     </StyledView>
   );
 };
@@ -88,5 +97,9 @@ const styles = StyleSheet.create({
     color: "tomato",
   },
 });
+
+const StyledScroll = styled.ScrollView`
+  width: 98%;
+`;
 
 export default WeekStrip;
