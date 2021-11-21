@@ -40,10 +40,65 @@ const HomeTasks = ({ tasks, setTasks, categories }) => {
     doRefresh();
   };
 
+  const swap = (x, y) => {
+    const temp = x;
+    x = y;
+    y = temp;
+  };
+
+  const sortTasks = (category) => {
+    const sorting = category.sorting;
+    console.log(sorting);
+    const _tasks = category.tasks;
+    if (sorting === "added") {
+      return _tasks;
+    } else if (sorting === "done") {
+      return _tasks.filter((task) => task.complete === true);
+    } else if (sorting === "not") {
+      return _tasks.filter((task) => task.complete === false);
+    } else {
+      // sort tasks by due date (not work yet)
+
+      // const notDue = _tasks.filter((task) => task.due === null);
+      // const dueTasks = _tasks.filter((task) => task.due !== null);
+      // let dueDates = [];
+
+      // for (let i = 0; i < dueTasks.length; i++) {
+      //   dueDates[i] = new Date(dueTasks[i].due);
+      // }
+
+      // for (let i = 0; i < dueTasks.length - 1; i++) {
+      //   const key = dueDates[i].getDate();
+      //   if (key > dueDates[i + 1].getDate()) {
+      //     swap(dueDates[i], dueDates[i + 1]);
+      //     swap(dueTasks[i], dueTasks[i + 1]);
+      //   }
+      // }
+
+      // for (let i = 0; i < dueTasks.length - 1; i++) {
+      //   const key = dueDates[i].getMonth();
+      //   if (key > dueDates[i + 1].getMonth()) {
+      //     swap(dueDates[i], dueDates[i + 1]);
+      //     swap(dueTasks[i], dueTasks[i + 1]);
+      //   }
+      // }
+      // for (let i = 0; i < dueTasks.length - 1; i++) {
+      //   const key = dueDates[i].getFullYear();
+      //   if (key > dueDates[i + 1].getFullYear()) {
+      //     swap(dueDates[i], dueDates[i + 1]);
+      //     swap(dueTasks[i], dueTasks[i + 1]);
+      //   }
+      // }
+      // return dueTasks.concat(notDue);
+
+      return _tasks;
+    }
+  };
+
   return (
     <>
       {categories.map((category) => (
-        <StyledView>
+        <StyledView key={Date.now() + category.id}>
           <CategoryBar
             key={category.id}
             onPressOut={() => {
