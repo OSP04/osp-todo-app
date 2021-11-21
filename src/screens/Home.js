@@ -4,6 +4,7 @@ import { Dimensions } from "react-native";
 import styled from "styled-components/native";
 
 import HomeTasks from "../components/HomeTasks";
+import WeekStrip from "../components/WeekStrip";
 import { theme } from "../theme";
 
 const Home = () => {
@@ -125,6 +126,7 @@ const Home = () => {
   return (
     <Wrapper>
       <StyledBar barStyle="default" />
+      <WeekStrip />
       <StyledScroll>
         <HomeTasks
           tasks={tasks}
@@ -151,7 +153,7 @@ const StyledBar = styled.StatusBar`
 `;
 
 const StyledScroll = styled.ScrollView`
-  width: ${window.width - 20};
+  width: 98%;
 `;
 
 export default Home;
