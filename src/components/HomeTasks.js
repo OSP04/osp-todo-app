@@ -38,6 +38,7 @@ const HomeTasks = ({ tasks, setTasks, categories }) => {
   const onBlur = (category) => {
     category.isAdding = false;
     doRefresh();
+    setNewTask("");
   };
 
   const swap = (x, y) => {
