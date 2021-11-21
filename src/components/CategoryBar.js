@@ -6,14 +6,14 @@ import { images } from "../images";
 import IconButton from "./IconButton";
 import Dropdown from "./Dropdown";
 
-const CategoryBar = ({ onPressOut, title, zIndex }) => {
+const CategoryBar = ({ onPressOut, zIndex, category, doRefresh }) => {
   return (
     <StyledView>
       <Category>
-        <Title>{title}</Title>
+        <Title>{category.title}</Title>
         <IconButton onPressOut={onPressOut} type={images.add} />
       </Category>
-      <Dropdown zIndex={zIndex} />
+      <Dropdown zIndex={zIndex} category={category} doRefresh={doRefresh} />
     </StyledView>
   );
 };

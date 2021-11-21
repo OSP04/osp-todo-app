@@ -1,18 +1,17 @@
 import React, { useState } from "react";
 import DropDownPicker from "react-native-dropdown-picker";
-import { FlatList, StyleSheet } from "react-native";
+import { StyleSheet } from "react-native";
 
 import styled from "styled-components/native";
-import { theme } from "../theme";
 
-const Dropdown = ({ zIndex }) => {
+const Dropdown = ({ zIndex, category, doRefresh }) => {
   const [open, setOpen] = useState(false);
-  const [value, setValue] = useState("added");
+  const [value, setValue] = useState(category.sorting);
   const [items, setItems] = useState([
     { label: "Added", value: "added" },
     { label: "Done", value: "done" },
     { label: "Not", value: "not" },
-    { label: "due", value: "due" },
+    { label: "Due", value: "due" },
   ]);
 
   return (
@@ -24,6 +23,10 @@ const Dropdown = ({ zIndex }) => {
         setOpen={setOpen}
         setValue={setValue}
         zIndex={zIndex}
+        onChangeValue={(value) => {
+          category.sorting = value;
+          doRefresh();
+        }}
         style={styles.container}
         labelStyle={styles.label}
         textStyle={styles.text}
