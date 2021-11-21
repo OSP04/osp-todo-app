@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { StyleSheet } from "react-native";
+import React, { useState, useRef } from "react";
+import { StyleSheet, Text, View } from "react-native";
 
 import styled from "styled-components/native";
 import CalendarStrip from "react-native-calendar-strip";
@@ -7,12 +7,22 @@ import CalendarStrip from "react-native-calendar-strip";
 import { theme } from "../theme";
 
 const WeekStrip = () => {
+  const [year, setYear] = useState(new Date().getFullYear());
+
+  const getYear = (date) => {
+    const selectedYear = new Date(date).getFullYear();
+    setYear(selectedYear);
+  };
+
   return (
     <StyledView>
+      <Year>{year}</Year>
       <CalendarStrip
+        ref={strip}
         scrollable
         style={styles.weekStrip}
         calendarHeaderStyle={styles.header}
+        calendarHeaderContainerStyle={styles.headerContainer}
         dateNumberStyle={styles.dateNumber}
         dateNameStyle={styles.dateName}
         daySelectionAnimation={{
@@ -21,11 +31,13 @@ const WeekStrip = () => {
           borderWidth: 1,
           borderHighlightColor: "black",
         }}
+        weekendDateNameStyle={styles.weekendDate}
         highlightDateNumberStyle={styles.dateNumber}
         highlightDateNameStyle={styles.dateName}
         iconContainer={{ flex: 0.1 }}
-        onDateSelected={(date) => console.log(date)}
+        calendarHeaderFormat={`MMMM`}
         onHeaderSelected={() => console.log("Navigate to calender page")}
+        onDateSelected={(date) => getYear(date)}
       />
     </StyledView>
   );
@@ -36,10 +48,15 @@ const StyledView = styled.View`
   width: 100%;
 `;
 
+const Year = styled.Text`
+  color: ${theme.secondary};
+  text-align: center;
+`;
+
 const styles = StyleSheet.create({
   weekStrip: {
     height: 130,
-    paddingTop: 20,
+    paddingTop: 5,
     paddingBottom: 10,
   },
 
@@ -48,6 +65,8 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: "bold",
   },
+
+  headerContainer: {},
 
   dateNumber: {
     color: theme.primary,
@@ -58,6 +77,10 @@ const styles = StyleSheet.create({
   dateName: {
     color: theme.secondary,
     fontSize: 9,
+  },
+
+  weekendDate: {
+    color: "tomato",
   },
 });
 
