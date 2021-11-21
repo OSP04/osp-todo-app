@@ -60,7 +60,7 @@ export default class calendar extends React.Component {
           // Disable right arrow. Default = false
           disableArrowRight={false}
           // Disable all touch events for disabled days. can be override with disableTouchEvent in markedDates
-          disableAllTouchEventsForDisabledDays={true}
+          disableAllTouchEventsForDisabledDays={false}
           // Enable the option to swipe between months. Default = false
           enableSwipeMonths={true}
         />
