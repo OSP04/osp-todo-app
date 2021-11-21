@@ -19,9 +19,8 @@ const WeekStrip = () => {
       <Year>{year}</Year>
       <CalendarStrip
         scrollable
-        style={styles.weekStrip}
+        style={styles.container}
         calendarHeaderStyle={styles.header}
-        calendarHeaderContainerStyle={styles.headerContainer}
         dateNumberStyle={styles.dateNumber}
         dateNameStyle={styles.dateName}
         daySelectionAnimation={{
@@ -30,7 +29,6 @@ const WeekStrip = () => {
           borderWidth: 1,
           borderHighlightColor: "black",
         }}
-        weekendDateNameStyle={styles.weekendDate}
         highlightDateNumberStyle={styles.dateNumber}
         highlightDateNameStyle={styles.dateName}
         iconContainer={{ flex: 0.1 }}
@@ -53,8 +51,8 @@ const Year = styled.Text`
 `;
 
 const styles = StyleSheet.create({
-  weekStrip: {
-    height: 130,
+  container: {
+    height: 100,
     paddingTop: 5,
     paddingBottom: 10,
   },
@@ -65,8 +63,6 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
 
-  headerContainer: {},
-
   dateNumber: {
     color: theme.primary,
     fontWeight: "bold",
@@ -76,10 +72,6 @@ const styles = StyleSheet.create({
   dateName: {
     color: theme.secondary,
     fontSize: 9,
-  },
-
-  weekendDate: {
-    color: "tomato",
   },
 });
 
