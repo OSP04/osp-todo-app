@@ -2,18 +2,26 @@ import React, { useState } from "react";
 import { Dimensions } from "react-native";
 
 import styled from "styled-components/native";
-import DoneDay from "./DoneDay";
+import DoneCategory from "./DoneCategory";
 
-const AchievementDay = () => {
+const AchievementCategory = () => {
 
     const width = Dimensions.get('window').width;
 
-    const [tasks, setTasks] = useState([
+    const [categories, setCategories] = useState([
         {
             id: "1",
-            date: "2021.11.21",
+            text: "Study",
+            color: "black",
             total: "25",
-            complete: "10",
+            complete: "11",
+        },
+        {
+            id: "2",
+            text: "Personal",
+            color: "blue",
+            total: "50",
+            complete: "30",
         },
     ])
 
@@ -21,8 +29,8 @@ const AchievementDay = () => {
         <Wrapper>
             <StyledScroll>
                 <AchievementView width={width}>
-                    {Object.values(tasks).map(item => (
-                        <DoneDay key={item.id} item={item} />
+                    {Object.values(categories).map(item => (
+                        <DoneCategory key={item.id} item={item} />
                     ))}
                 </AchievementView>
             </StyledScroll>
@@ -44,4 +52,4 @@ align-items: center;
 
 const StyledScroll = styled.ScrollView``;
 
-export default AchievementDay;
+export default AchievementCategory;

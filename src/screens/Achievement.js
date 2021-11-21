@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Dimensions, View } from "react-native";
 
 import styled from "styled-components/native";
-import AchievementCate from "../components/AchievementCate";
+import AchievementCategory from "../components/AchievementCategory";
 import AchievementDay from "../components/AchievementDay";
 import IconButton from "../components/IconButton";
 import MenuBar from "../components/MenuBar";
@@ -27,8 +27,8 @@ const Achievement = () => {
             <MenuBar stateCategory={stateCategory} setStateCategory={setStateCategory}
                 stateDay={stateDay} setStateDay={setStateDay} />
 
-            {stateCategory == true ? (<AchievementCate stateCategory={stateCategory} />)
-                : <AchievementDay stateDay={stateDay} />}
+            {stateCategory == true ? (<AchievementCategory />)
+                : <AchievementDay />}
         </Wrapper>
     );
 };
