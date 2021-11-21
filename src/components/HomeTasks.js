@@ -12,7 +12,7 @@ const HomeTasks = ({ tasks, setTasks, categories, setCategories }) => {
   const [newTask, setNewTask] = useState("");
 
   const doRefresh = () => {
-    setRefresh((current) => setRefresh(!current));
+    setRefresh((current) => !current);
   };
 
   const addTask = (category) => {
