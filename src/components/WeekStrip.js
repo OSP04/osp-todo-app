@@ -8,10 +8,17 @@ import { theme } from "../theme";
 
 const WeekStrip = () => {
   const [year, setYear] = useState(new Date().getFullYear());
+  const [selected, setSelected] = useState(new Date());
 
   const getYear = (date) => {
-    const selectedYear = new Date(date).getFullYear();
+    const selectedYear = date.getFullYear();
     setYear(selectedYear);
+  };
+
+  const selectDate = (date) => {
+    const selectedDate = new Date(date);
+    getYear(selectedDate);
+    setSelected(selectedDate);
   };
 
   return (
@@ -19,6 +26,7 @@ const WeekStrip = () => {
       <Year>{year}</Year>
       <CalendarStrip
         scrollable
+        selectedDate={selected}
         style={styles.container}
         calendarHeaderStyle={styles.header}
         dateNumberStyle={styles.dateNumber}
@@ -29,12 +37,14 @@ const WeekStrip = () => {
           borderWidth: 1,
           borderHighlightColor: "black",
         }}
+        // weekendDateNameStyle={styles.weekend}
+        // weekendDateNumberStyle={styles.weekend}
         highlightDateNumberStyle={styles.dateNumber}
         highlightDateNameStyle={styles.dateName}
         iconContainer={{ flex: 0.1 }}
         calendarHeaderFormat={`MMMM`}
         onHeaderSelected={() => console.log("Navigate to calender page")}
-        onDateSelected={(date) => getYear(date)}
+        onDateSelected={(date) => selectDate(date)}
       />
     </StyledView>
   );
@@ -72,6 +82,10 @@ const styles = StyleSheet.create({
   dateName: {
     color: theme.secondary,
     fontSize: 9,
+  },
+
+  weekend: {
+    color: "tomato",
   },
 });
 
