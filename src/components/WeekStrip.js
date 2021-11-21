@@ -18,7 +18,6 @@ const WeekStrip = () => {
     <StyledView>
       <Year>{year}</Year>
       <CalendarStrip
-        ref={strip}
         scrollable
         style={styles.weekStrip}
         calendarHeaderStyle={styles.header}
