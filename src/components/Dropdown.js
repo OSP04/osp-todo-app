@@ -6,7 +6,7 @@ import styled from "styled-components/native";
 
 const Dropdown = ({ zIndex, category, doRefresh }) => {
   const [open, setOpen] = useState(false);
-  const [value, setValue] = useState("added");
+  const [value, setValue] = useState(category.sorting);
   const [items, setItems] = useState([
     { label: "Added", value: "added" },
     { label: "Done", value: "done" },
