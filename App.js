@@ -1,5 +1,4 @@
-import React from "react";
+import Achievement from "./src/screens/Achievement";
 
-export default function App() {
-  return <></>;
-}
+
+export default Achievement;

@@ -1,14 +1,19 @@
-import React from "react";
+import React, { useState } from "react";
 import { Dimensions, View } from "react-native";
 
 import styled from "styled-components/native";
+import AchievementCate from "../components/AchievementCate";
+import AchievementDay from "../components/AchievementDay";
 import IconButton from "../components/IconButton";
+import MenuBar from "../components/MenuBar";
 import { images } from "../images";
 import { theme } from "../theme";
 
 const Achievement = () => {
 
     const width = Dimensions.get('window').width;
+    const [stateCategory, setStateCategory] = useState(true);
+    const [stateDay, setStateDay] = useState(false);
 
     return (
         <Wrapper>
@@ -18,8 +23,12 @@ const Achievement = () => {
                 <StyledText>Achievement</StyledText>
                 <View width={25} />
             </StyledView >
-            <StyledScroll>
-            </StyledScroll>
+
+            <MenuBar stateCategory={stateCategory} setStateCategory={setStateCategory}
+                stateDay={stateDay} setStateDay={setStateDay} />
+
+            {stateCategory == true ? (<AchievementCate stateCategory={stateCategory} />)
+                : <AchievementDay stateDay={stateDay} />}
         </Wrapper>
     );
 };
@@ -29,7 +38,6 @@ flex: 1;
 justify-content: flex-start;
 align-items: center;
 `;
-
 
 const StyledBar = styled.StatusBar`
 background-color: ${theme.background};
@@ -47,7 +55,5 @@ const StyledText = styled.Text`
 font-weight: bold;
 font-size: 24px;
 `;
-
-const StyledScroll = styled.ScrollView``;
 
 export default Achievement;
