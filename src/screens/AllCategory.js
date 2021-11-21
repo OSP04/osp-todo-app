@@ -8,6 +8,7 @@ import ShowCateTask from "../components/ShowCateTask";
 import { images } from "../images";
 import { theme } from "../theme";
 import AddCategory from "./AddCategory";
+import OneCategory from "./OneCategory";
 
 const AllCategory = () => {
 
@@ -15,6 +16,7 @@ const AllCategory = () => {
     const [state, setState] = useState(false);
     const [color, setColor] = useState("black");
     const [refresh, setRefresh] = useState(true);
+    const [visible, setVisible] = useState(false);
 
     const [newCategory, setNewCategory] = useState("");
 
@@ -150,7 +152,8 @@ const AllCategory = () => {
                             <ShowCateTask key={item.id} item={item} doRefresh={doRefresh} />
                         ))}
                         <MoreView width={width}>
-                            <MoreButton>+ See more tasks...</MoreButton>
+                            <MoreButton onPress={() => { setVisible(true) }}>+ See more tasks...</MoreButton>
+                            <OneCategory key={item.id} item={item} visible={visible} setVisible={setVisible} doRefresh={doRefresh} />
                         </MoreView>
                     </Wrapper>
                 ))}
