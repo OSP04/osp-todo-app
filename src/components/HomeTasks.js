@@ -48,7 +48,6 @@ const HomeTasks = ({ tasks, setTasks, categories }) => {
 
   const sortTasks = (category) => {
     const sorting = category.sorting;
-    console.log(sorting);
     const _tasks = category.tasks;
     if (sorting === "added") {
       return _tasks;
