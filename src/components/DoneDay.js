@@ -11,7 +11,7 @@ const DoneDay = ({ item }) => {
         <Wrapper width={width}>
             <Text style={{ fontSize: 24, fontWeight: "bold", paddingBottom: 10 }}>{item.date}</Text>
             <AchievementView width={width - 80}>
-                <Text style={{ borderWidth: 2, padding: 20, fontSize: 30, fontWeight: "bold" }}>{item.complete / item.total * 100}%</Text>
+                <Text style={{ borderWidth: 2, padding: 20, fontSize: 30, fontWeight: "bold" }}>{(item.complete / item.total).toFixed(2) * 100}%</Text>
                 <DoneView>
                     <View style={{ flexDirection: "row", alignItems: "baseline" }}>
                         <DoneText>Completed</DoneText>
