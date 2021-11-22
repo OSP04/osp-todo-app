@@ -2,6 +2,7 @@ import { View } from "react-native";
 import React from "react";
 import { Calendar, CalendarList, Agenda } from "react-native-calendars";
 import CalendarBox from "../components/CalendarBox";
+import BackButton from "../components/BackButton";
 export default CalendarScreen = () => {
   const unformattedCurrent = new Date();
   const year = unformattedCurrent.getFullYear();
@@ -11,7 +12,8 @@ export default CalendarScreen = () => {
     date >= 10 ? date : "0" + date
   }`;
   return (
-    <View style={{ flex: 1 }}>
+    <View style={{ paddingtop: 50, flex: 1 }}>
+      <BackButton />
       <CalendarList
         current={current}
         // Callback which gets executed when visible months change in scroll view. Default = undefined
@@ -27,6 +29,7 @@ export default CalendarScreen = () => {
         // Enable or disable vertical scroll indicator. Default = false
         showScrollIndicator={true}
         onDayPress={(day) => {
+          //해당 날짜의 메인으로 이동
           console.log("selected day", day);
         }}
       />
