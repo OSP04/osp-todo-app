@@ -13,7 +13,7 @@ export default CalendarScreen = () => {
   }`;
   return (
     <View style={{ paddingtop: 50, flex: 1 }}>
-      <BackButton />
+      <BackButton onPressOut={() => navigation.goBack()} />
       <CalendarList
         current={current}
         // Callback which gets executed when visible months change in scroll view. Default = undefined
