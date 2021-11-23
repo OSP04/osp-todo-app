@@ -15,4 +15,10 @@ export const theme = {
   secondary: "#818181",
   light: "#BDBDBD",
   background: "#FFFFFF",
+
+  category: {
+    red: "#FFB1B1",
+    yellow: "#FEDE95",
+    blue: "#9BEBFF",
+  },
 };
