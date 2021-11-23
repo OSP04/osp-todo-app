@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 
 import styled from "styled-components/native";
 import { theme } from "../theme";
@@ -10,7 +10,7 @@ const CategoryBar = ({ onPressOut, zIndex, category, doRefresh }) => {
   return (
     <StyledView>
       <Category>
-        <Title>{category.title}</Title>
+        <Title category={category}>{category.title}</Title>
         <IconButton onPressOut={onPressOut} type={images.add} />
       </Category>
       <Dropdown zIndex={zIndex} category={category} doRefresh={doRefresh} />
@@ -36,9 +36,10 @@ const Title = styled.Text`
   margin-right: 5px;
   min-width: 80px;
   font-size: 15px;
-  background-color: ${theme.primary};
+  background-color: ${(props) => props.category.color};
   border-radius: 10px;
-  color: white;
+  color: ${theme.text};
+  font-weight: bold;
 `;
 
 export default CategoryBar;

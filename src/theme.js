@@ -10,7 +10,7 @@ export const theme = {
     light: "#BDBDBD",
     error: "#f13a59",
   },
-  text: "#FFFFFF",
+  text: "#24292F",
   primary: "#24292F",
   secondary: "#818181",
   light: "#BDBDBD",
