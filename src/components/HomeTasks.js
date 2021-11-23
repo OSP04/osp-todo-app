@@ -37,19 +37,14 @@ const HomeTasks = ({ tasks, setTasks, categories, selectedDate }) => {
 
   const onBlur = (category) => {
     category.isAdding = false;
-    doRefresh();
     setNewTask("");
-  };
-
-  const swap = (x, y) => {
-    const temp = x;
-    x = y;
-    y = temp;
+    doRefresh();
   };
 
   const sortTasks = (category) => {
     const sorting = category.sorting;
     const _tasks = category.tasks;
+
     if (sorting === "added") {
       return _tasks;
     } else if (sorting === "done") {
@@ -57,41 +52,33 @@ const HomeTasks = ({ tasks, setTasks, categories, selectedDate }) => {
     } else if (sorting === "not") {
       return _tasks.filter((task) => task.complete === false);
     } else {
-      // sort tasks by due date (not work yet)
+      const notDueTasks = _tasks.filter((task) => task.due === null); // Tasks not having due date
+      const dueTasks = _tasks.filter((task) => task.due !== null); // Tasks having due date
+      let dueDates = []; // Due dates
 
-      // const notDue = _tasks.filter((task) => task.due === null);
-      // const dueTasks = _tasks.filter((task) => task.due !== null);
-      // let dueDates = [];
+      // Get due dates
+      for (let i = 0; i < dueTasks.length; i++) {
+        dueDates[i] = dueTasks[i].due.getTime();
+      }
+      // Sort dueTasks in the order of the deadline
+      for (let i = 0; i < dueDates.length - 1; i++) {
+        let recentIndex = i;
+        for (let j = i + 1; j < dueDates.length; j++) {
+          if (dueDates[recentIndex] > dueDates[j]) {
+            console.log(true);
+            recentIndex = j;
+          }
+        }
+        const temp = dueDates[i];
+        dueDates[i] = dueDates[recentIndex];
+        dueDates[recentIndex] = temp;
 
-      // for (let i = 0; i < dueTasks.length; i++) {
-      //   dueDates[i] = new Date(dueTasks[i].due);
-      // }
+        temp = dueTasks[i];
+        dueTasks[i] = dueTasks[recentIndex];
+        dueTasks[recentIndex] = temp;
+      }
 
-      // for (let i = 0; i < dueTasks.length - 1; i++) {
-      //   const key = dueDates[i].getDate();
-      //   if (key > dueDates[i + 1].getDate()) {
-      //     swap(dueDates[i], dueDates[i + 1]);
-      //     swap(dueTasks[i], dueTasks[i + 1]);
-      //   }
-      // }
-
-      // for (let i = 0; i < dueTasks.length - 1; i++) {
-      //   const key = dueDates[i].getMonth();
-      //   if (key > dueDates[i + 1].getMonth()) {
-      //     swap(dueDates[i], dueDates[i + 1]);
-      //     swap(dueTasks[i], dueTasks[i + 1]);
-      //   }
-      // }
-      // for (let i = 0; i < dueTasks.length - 1; i++) {
-      //   const key = dueDates[i].getFullYear();
-      //   if (key > dueDates[i + 1].getFullYear()) {
-      //     swap(dueDates[i], dueDates[i + 1]);
-      //     swap(dueTasks[i], dueTasks[i + 1]);
-      //   }
-      // }
-      // return dueTasks.concat(notDue);
-
-      return _tasks;
+      return dueTasks.concat(notDueTasks);
     }
   };
 
@@ -118,10 +105,6 @@ const HomeTasks = ({ tasks, setTasks, categories, selectedDate }) => {
             doRefresh={doRefresh}
           />
           {sortTasks(category).map((item) => {
-            // console.log(item.date.toDateString(), selectedDate.toDateString());
-            // console.log(
-            //   item.date.toDateString() === selectedDate.toDateString()
-            // );
             return (
               compareDate(item.date, selectedDate) && (
                 <HomeTaskItem key={item.id} item={item} doRefresh={doRefresh} />

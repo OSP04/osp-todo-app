@@ -19,7 +19,7 @@ const HomeTaskItem = ({ item, doRefresh }) => {
         <IconButton type={returnIcon(item)} onPressOut={toggleItem} />
         <StyledText>
           <TaskText>{item.text}</TaskText>
-          {item.due && <DueDate>{item.due}</DueDate>}
+          {item.due && <DueDate>{item.due.toLocaleDateString()}</DueDate>}
         </StyledText>
       </LeftItems>
       <RightItems>
