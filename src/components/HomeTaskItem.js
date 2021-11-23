@@ -10,9 +10,11 @@ const HomeTaskItem = ({ item, doRefresh }) => {
     item.complete = !item.complete;
     doRefresh();
   };
+
   const returnIcon = (item) => {
     return item.complete ? images.complete : images.uncomplete;
   };
+
   return (
     <StyledView>
       <LeftItems>

@@ -2,7 +2,6 @@ import React, { useState } from "react";
 
 import styled from "styled-components/native";
 
-import { theme } from "../theme";
 import HomeTaskItem from "./HomeTaskItem";
 import CategoryBar from "../components/CategoryBar";
 import Input from "./Input";
@@ -36,7 +35,7 @@ const HomeTasks = ({ tasks, setTasks, categories, selectedDate }) => {
   };
 
   const onBlur = (category) => {
-    category.isAdding = false;
+    category.isAdding = false; // Hide text input
     setNewTask("");
     doRefresh();
   };
@@ -106,6 +105,7 @@ const HomeTasks = ({ tasks, setTasks, categories, selectedDate }) => {
           />
           {sortTasks(category).map((item) => {
             return (
+              // if dates are the same, return task item
               compareDate(item.date, selectedDate) && (
                 <HomeTaskItem key={item.id} item={item} doRefresh={doRefresh} />
               )
