@@ -2,14 +2,17 @@ import React, { useState } from "react";
 
 import styled from "styled-components/native";
 
+import Footer from "../components/Footer";
 import WeekStrip from "../components/WeekStrip";
+
 import { theme } from "../theme";
 import { db } from "../db";
 
-const Home = () => {
+const Home = ({ navigation }) => {
   const [categories, setCategories] = useState(db.categories);
-
   const [tasks, setTasks] = useState(db.tasks);
+  const [users, setUsers] = useState(db.users);
+  const [comments, setComments] = useState(db.comments);
 
   return (
     <Wrapper>
@@ -20,6 +23,7 @@ const Home = () => {
         categories={categories}
         setCategories={setCategories}
       />
+      <Footer navigation={navigation} />
     </Wrapper>
   );
 };
@@ -29,6 +33,7 @@ const Wrapper = styled.SafeAreaView`
   justify-content: flex-start;
   align-items: center;
   padding: 10px;
+  position: relative;
 `;
 
 const StyledBar = styled.StatusBar`
