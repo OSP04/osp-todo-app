@@ -1,9 +1,9 @@
 import { View } from "react-native";
 import React from "react";
-import { Calendar, CalendarList, Agenda } from "react-native-calendars";
-import CalendarBox from "../components/CalendarBox";
+import { CalendarList } from "react-native-calendars";
 import BackButton from "../components/BackButton";
-export default CalendarScreen = () => {
+
+export default CalendarScreen = (navigation) => {
   const unformattedCurrent = new Date();
   const year = unformattedCurrent.getFullYear();
   const month = unformattedCurrent.getMonth() + 1;
