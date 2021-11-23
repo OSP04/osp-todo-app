@@ -96,7 +96,7 @@ const HomeTasks = ({ tasks, setTasks, categories, selectedDate }) => {
   };
 
   const compareDate = (date1, date2) => {
-    return date1.getTime() === date2.getTime();
+    return date1.toDateString() === date2.toDateString();
   };
 
   return (
@@ -118,6 +118,10 @@ const HomeTasks = ({ tasks, setTasks, categories, selectedDate }) => {
             doRefresh={doRefresh}
           />
           {sortTasks(category).map((item) => {
+            // console.log(item.date.toDateString(), selectedDate.toDateString());
+            // console.log(
+            //   item.date.toDateString() === selectedDate.toDateString()
+            // );
             return (
               compareDate(item.date, selectedDate) && (
                 <HomeTaskItem key={item.id} item={item} doRefresh={doRefresh} />
