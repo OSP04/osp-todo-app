@@ -6,6 +6,7 @@ import Header from "../components/Header";
 import Button from "../components/Button";
 import TextInput from "../components/TextInput";
 import BackButton from "../components/BackButton";
+import Background from "../components/Background";
 import * as Validator from "../Validator";
 
 export default function LoginScreen({ navigation }) {
@@ -23,8 +24,8 @@ export default function LoginScreen({ navigation }) {
   };
 
   return (
-    <View>
-      <BackButton goBack={navigation.goBack} />
+    <Background>
+      <BackButton onPress={() => navigation.goBack()} />
       <Logo />
       <Header>Todo App</Header>
       <TextInput
@@ -57,7 +58,7 @@ export default function LoginScreen({ navigation }) {
       <TouchableOpacity onPress={() => navigation.replace("SignUpScreen")}>
         <Text style={styles.link}>Skip for Now</Text>
       </TouchableOpacity>
-    </View>
+    </Background>
   );
 }
 

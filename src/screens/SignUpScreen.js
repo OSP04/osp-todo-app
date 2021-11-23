@@ -1,16 +1,12 @@
 import React, { useState } from "react";
-import {
-  View,
-  StyleSheet,
-  TouchableOpacity,
-  ViewPagerAndroidBase,
-} from "react-native";
+import { View, StyleSheet, TouchableOpacity } from "react-native";
 import { Text } from "react-native-paper";
 import Logo from "../components/Logo";
 import Header from "../components/Header";
 import Button from "../components/Button";
 import TextInput from "../components/TextInput";
 import BackButton from "../components/BackButton";
+import Background from "../components/Background";
 import * as Validator from "../Validator";
 
 export default function RegisterScreen({ navigation }) {
@@ -22,6 +18,7 @@ export default function RegisterScreen({ navigation }) {
     const idError = Validator.idValidator(id.value);
     const passwordError = Validator.passwordValidator(password.value);
     const emailError = Validator.emailValidator(email.value);
+
     if (emailError || passwordError || idError) {
       setId({ ...id, error: idError });
       setEmail({ ...email, error: emailError });
@@ -35,8 +32,8 @@ export default function RegisterScreen({ navigation }) {
   };
 
   return (
-    <View>
-      <BackButton goBack={navigation.goBack} />
+    <Background>
+      <BackButton onPress={() => navigation.goBack()} />
       <Logo />
       <Header>Welcome!</Header>
       <Text>Create a new account</Text>
@@ -82,7 +79,7 @@ export default function RegisterScreen({ navigation }) {
           <Text style={styles.link}>Log in</Text>
         </TouchableOpacity>
       </View>
-    </View>
+    </Background>
   );
 }
 
