@@ -1,6 +1,12 @@
+import React, { useState } from "react";
 import { View } from "react-native";
-import React from "react";
-
+import SearchField from "../components/SearchField";
+import BackButton from "../components/BackButton";
 export default SearchScreen = () => {
-  return <View></View>;
+  return (
+    <View>
+      <BackButton />
+      <SearchField />
+    </View>
+  );
 };
