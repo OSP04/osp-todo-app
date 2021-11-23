@@ -25,7 +25,7 @@ export default function LoginScreen({ navigation }) {
 
   return (
     <Background>
-      <BackButton onPress={() => navigation.goBack()} />
+      <BackButton onPressOut={() => navigation.goBack()} />
       <Logo />
       <Header>Todo App</Header>
       <TextInput
@@ -50,12 +50,12 @@ export default function LoginScreen({ navigation }) {
       </Button>
       <View style={styles.row}>
         <Text>Don’t have an account? </Text>
-        <TouchableOpacity onPress={() => navigation.replace("SignUpScreen")}>
+        <TouchableOpacity onPress={() => navigation.navigate("SignUpScreen")}>
           <Text style={styles.link}>Sign up</Text>
         </TouchableOpacity>
       </View>
       {/* 추후 메인화면으로 연결 */}
-      <TouchableOpacity onPress={() => navigation.replace("SignUpScreen")}>
+      <TouchableOpacity onPress={() => navigation.navigate("EditScreen")}>
         <Text style={styles.link}>Skip for Now</Text>
       </TouchableOpacity>
     </Background>

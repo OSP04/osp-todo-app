@@ -33,7 +33,7 @@ export default function RegisterScreen({ navigation }) {
 
   return (
     <Background>
-      <BackButton onPress={() => navigation.goBack()} />
+      <BackButton onPressOut={() => navigation.goBack()} />
       <Logo />
       <Header>Welcome!</Header>
       <Text>Create a new account</Text>
@@ -75,7 +75,7 @@ export default function RegisterScreen({ navigation }) {
       </Button>
       <View style={styles.row}>
         <Text>Already have an account? </Text>
-        <TouchableOpacity onPress={() => navigation.replace("LoginScreen")}>
+        <TouchableOpacity onPress={() => navigation.navigate("LoginScreen")}>
           <Text style={styles.link}>Log in</Text>
         </TouchableOpacity>
       </View>
