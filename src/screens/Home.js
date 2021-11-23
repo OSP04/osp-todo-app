@@ -17,12 +17,7 @@ const Home = ({ navigation }) => {
   return (
     <Wrapper>
       <StyledBar barStyle="default" />
-      <WeekStrip
-        tasks={tasks}
-        setTasks={setTasks}
-        categories={categories}
-        setCategories={setCategories}
-      />
+      <WeekStrip tasks={tasks} setTasks={setTasks} categories={categories} />
       <Footer navigation={navigation} />
     </Wrapper>
   );
@@ -32,8 +27,9 @@ const Wrapper = styled.SafeAreaView`
   flex: 1;
   justify-content: flex-start;
   align-items: center;
-  padding: 10px;
+  padding: 5%;
   position: relative;
+  background-color: ${theme.background};
 `;
 
 const StyledBar = styled.StatusBar`
