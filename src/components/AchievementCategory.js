@@ -14,7 +14,7 @@ const AchievementCategory = () => {
             text: "Study",
             color: "black",
             total: "23",
-            complete: "11",
+            complete: "23",
         },
         {
             id: "2",

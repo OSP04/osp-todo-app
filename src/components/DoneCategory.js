@@ -6,13 +6,17 @@ import styled from "styled-components/native";
 const DoneCategory = ({ item }) => {
 
     const width = Dimensions.get('window').width;
+    const box =
+        <View style={{ borderWidth: 2, borderColor: item.color, width: 124, height: 90, alignItems: "center", justifyContent: "center" }}>
+            <Text style={{ padding: 20, fontSize: 32, fontWeight: "bold", color: item.color }}>{(item.complete / item.total).toFixed(2) * 100}%</Text>
+        </View>
 
     return (
 
         <Wrapper width={width}>
             <Text style={{ fontSize: 24, fontWeight: "bold", color: item.color, paddingBottom: 10 }}>{item.text}</Text>
             <AchievementView width={width - 80}>
-                <Text style={{ borderWidth: 2, borderColor: item.color, padding: 20, fontSize: 30, fontWeight: "bold", color: item.color }}>{(item.complete / item.total).toFixed(2) * 100}%</Text>
+                <View>{box}</View>
                 <DoneView>
                     <View style={{ flexDirection: "row", alignItems: "baseline" }}>
                         <DoneText>Completed</DoneText>
