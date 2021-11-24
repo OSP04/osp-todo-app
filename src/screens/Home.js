@@ -5,7 +5,7 @@ import styled from "styled-components/native";
 import WeekStrip from "../components/WeekStrip";
 import { theme } from "../theme";
 
-const Home = () => {
+const Home = ({ navigation }) => {
   const [categories, setCategories] = useState([
     {
       id: "5",
