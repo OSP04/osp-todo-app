@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { StyleSheet, Text, Pressable, View } from "react-native";
-import { FontAwesome5, FontAwesome } from "@expo/vector-icons";
+import { Entypo } from "@expo/vector-icons";
 import { theme } from "../theme";
 import CommonModal from "../components/CommonModal";
 
@@ -13,7 +13,7 @@ const EditDueDate = ({}) => {
   };
 
   return (
-    <View style={styles.listItem}>
+    <Pressable style={styles.listItem} onPress={openModal}>
       <CommonModal showModal={showModal} setShowModal={setShowModal}>
         <Text style={styles.modalText}>calendar</Text>
         <Pressable
@@ -23,24 +23,14 @@ const EditDueDate = ({}) => {
           <Text style={styles.textStyle}>Hide Modal</Text>
         </Pressable>
       </CommonModal>
-      <FontAwesome5
-        name="calendar-check"
-        style={styles.icon}
-        size={24}
-        color="black"
-      />
-      <Pressable onPress={openModal}>
+      <View style={styles.leftItem}>
+        <Entypo name="calendar" style={styles.icon} size={24} color="black" />
         <Text style={styles.dueDate}>{date}</Text>
-      </Pressable>
+      </View>
       <Pressable onPress={() => setDate("Please set your Due Date")}>
-        <FontAwesome
-          name="remove"
-          style={styles.icon}
-          size={24}
-          color="black"
-        />
+        <Entypo name="cross" style={styles.icon} size={24} color="black" />
       </Pressable>
-    </View>
+    </Pressable>
   );
 };
 
@@ -51,9 +41,14 @@ const styles = StyleSheet.create({
     height: 60,
     borderBottomWidth: 1,
     borderBottomColor: "#E5E5E5",
+    justifyContent: "space-between",
   },
   icon: {
     padding: 10,
+  },
+  leftItem: {
+    flexDirection: "row",
+    alignItems: "center",
   },
   dueDate: {
     fontWeight: "bold",
