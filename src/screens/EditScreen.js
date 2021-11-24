@@ -1,10 +1,9 @@
 import React, { useState } from "react";
-import { StyleSheet, View, Alert } from "react-native";
-import { Button } from "react-native-paper";
+import { StyleSheet, View, Alert, Pressable, Text } from "react-native";
 import BackButton from "../components/BackButton";
 import { theme } from "../theme";
 import Background from "../components/Background";
-import { getStatusBarHeight } from "react-native-status-bar-height";
+import TopHeader from "../components/TopHeader";
 import EditMemo from "../components/EditMemo";
 import EditDueDate from "../components/EditDueDate";
 import EditRepeat from "../components/EditRepeat";
@@ -30,19 +29,23 @@ const EditScreen = ({ navigation }) => {
 
   return (
     <Background type="main">
-      <BackButton onPressOut={() => navigation.goBack()} />
-      <View style={styles.topbuttons}>
-        <Button mode="outlined" onPress={onDeletePressed} color={theme.primary}>
-          Delete
-        </Button>
-        <Button
-          mode="contained"
-          onPress={onConfirmPressed}
-          color={theme.primary}
-        >
-          Confirm
-        </Button>
-      </View>
+      <TopHeader>
+        <BackButton onPressOut={() => navigation.goBack()} />
+        <View style={styles.row}>
+          <Pressable style={styles.button} onPress={onDeletePressed}>
+            <Text style={styles.buttonText}>Delete</Text>
+          </Pressable>
+          <Pressable
+            style={{ ...styles.button, backgroundColor: theme.colors.primary }}
+            onPress={onConfirmPressed}
+          >
+            <Text style={{ ...styles.buttonText, color: "white" }}>
+              Confirm
+            </Text>
+          </Pressable>
+        </View>
+      </TopHeader>
+
       <View style={styles.list}>
         <EditTodoTitle></EditTodoTitle>
         <EditDueDate></EditDueDate>
@@ -64,15 +67,26 @@ const styles = StyleSheet.create({
   link: {
     fontWeight: "bold",
   },
-  topbuttons: {
+  row: {
     flexDirection: "row",
-    position: "absolute",
-    top: 10 + getStatusBarHeight(),
-    right: 4,
   },
   icon: {
     alignItems: "center",
     padding: 12,
+  },
+  button: {
+    alignItems: "center",
+    justifyContent: "center",
+    marginLeft: 5,
+    padding: 7,
+    borderRadius: 50,
+    width: 80,
+    borderColor: theme.colors.primary,
+    borderWidth: 1,
+  },
+  buttonText: {
+    fontWeight: "bold",
+    color: theme.colors.primary,
   },
 });
 
