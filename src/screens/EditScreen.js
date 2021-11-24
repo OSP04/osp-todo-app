@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { StyleSheet, View, Text } from "react-native";
+import { StyleSheet, View, Alert } from "react-native";
 import { Button } from "react-native-paper";
 import BackButton from "../components/BackButton";
 import { theme } from "../theme";
@@ -13,32 +13,15 @@ import EditTodoTitle from "../components/EditTodoTitle";
 
 const EditScreen = ({ navigation }) => {
   const onDeletePressed = () => {
-    const [visible, setVisible] = useState(false);
-    const hideDialog = () => setVisible(false);
-
-    return (
-      <Portal>
-        <Dialog visible={visible} onDismiss={hideDialog}>
-          <Dialog.Actions>
-            <Dialog.Title>Do you really want to delete this todo?</Dialog.Title>
-            <Button
-              onPress={() => {
-                navigation.replace("Home");
-              }}
-            >
-              Cancel
-            </Button>
-            <Button
-              onPress={() => {
-                navigation.replace("Home");
-              }}
-            >
-              Ok
-            </Button>
-          </Dialog.Actions>
-        </Dialog>
-      </Portal>
-    );
+    Alert.alert("Delete", "Do you really want to delete this todo?", [
+      {
+        text: "Cancel",
+        onPress: () => null,
+        style: "cancel",
+      },
+      { text: "OK", onPress: () => navigation.navigate("Home") },
+      { cancelable: true },
+    ]);
   };
 
   const onConfirmPressed = () => {
