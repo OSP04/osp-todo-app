@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { StyleSheet, View, Text } from "react-native";
 import { Button } from "react-native-paper";
 import BackButton from "../components/BackButton";
-import { FontAwesome } from "@expo/vector-icons";
 import { theme } from "../theme";
 import Background from "../components/Background";
 import { getStatusBarHeight } from "react-native-status-bar-height";
@@ -14,7 +13,7 @@ import EditPicture from "../components/EditPicture";
 
 const EditScreen = ({ navigation }) => {
   const onDeletePressed = () => {
-    const [visible, setVisible] = React.useState(false);
+    const [visible, setVisible] = useState(false);
     const hideDialog = () => setVisible(false);
 
     return (
@@ -61,15 +60,15 @@ const EditScreen = ({ navigation }) => {
           Confirm
         </Button>
       </View>
-      <View style={styles.row}>
+      <View style={styles.header}>
         <Text style={styles.title}>todo.text</Text>
         <EditPicture></EditPicture>
       </View>
       <View style={styles.list}>
         <EditDueDate></EditDueDate>
-        <EditMemo></EditMemo>
         <EditRepeat></EditRepeat>
         <EditLocation></EditLocation>
+        <EditMemo></EditMemo>
       </View>
     </Background>
   );
@@ -91,7 +90,7 @@ const styles = StyleSheet.create({
     top: 10 + getStatusBarHeight(),
     right: 4,
   },
-  row: {
+  header: {
     flexDirection: "row",
     marginTop: 5,
     height: 60,
