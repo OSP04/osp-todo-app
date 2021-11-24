@@ -8,6 +8,7 @@ export const theme = {
     primary: "#560CCE",
     secondary: "#414757",
     error: "#f13a59",
+    background: "#FFFFFF",
   },
   background: "#FFFFFF",
   text: "#24292F",
