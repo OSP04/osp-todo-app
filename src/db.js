@@ -193,7 +193,7 @@ export const db = {
         {
           id: "1",
           text: "Awesome! you are very deligent.",
-          created: Date.now(),
+          created: new Date().setDate(23),
           owner: {
             id: "10",
             email: "byron.fields@reqres.in",
@@ -214,7 +214,7 @@ export const db = {
         {
           id: "2",
           text: "Thanks :)",
-          created: Date.now(),
+          created: new Date().setDate(23),
           owner: {
             id: "7",
             email: "michael.lawson@reqres.in",
@@ -235,7 +235,7 @@ export const db = {
         {
           id: "3",
           text: "How was your day today?",
-          created: Date.now(),
+          created: new Date().setDate(25),
           owner: {
             id: "9",
             email: "tobias.funke@reqres.in",
@@ -258,11 +258,11 @@ export const db = {
           text: "If you don't have a schedule today, let's have dinner later with me.",
           created: Date.now(),
           owner: {
-            id: "9",
-            email: "tobias.funke@reqres.in",
-            first_name: "Tobias",
-            last_name: "Funke",
-            avatar: "https://reqres.in/img/faces/9-image.jpg",
+            id: "8",
+            email: "lindsay.ferguson@reqres.in",
+            first_name: "Lindsay",
+            last_name: "Ferguson",
+            avatar: "https://reqres.in/img/faces/8-image.jpg",
             comments: null,
           },
           recipient: {
@@ -306,7 +306,7 @@ export const db = {
     {
       id: "1",
       text: "Awesome! you are very deligent.",
-      created: Date.now(),
+      created: new Date().setDate(23),
       owner: {
         id: "10",
         email: "byron.fields@reqres.in",
@@ -327,7 +327,7 @@ export const db = {
     {
       id: "2",
       text: "Thanks :)",
-      created: Date.now(),
+      created: new Date().setDate(23),
       owner: {
         id: "7",
         email: "michael.lawson@reqres.in",
@@ -348,7 +348,7 @@ export const db = {
     {
       id: "3",
       text: "How was your day today?",
-      created: Date.now(),
+      created: new Date().setDate(25),
       owner: {
         id: "9",
         email: "tobias.funke@reqres.in",
@@ -371,11 +371,11 @@ export const db = {
       text: "If you don't have a schedule today, let's have dinner later with me.",
       created: Date.now(),
       owner: {
-        id: "9",
-        email: "tobias.funke@reqres.in",
-        first_name: "Tobias",
-        last_name: "Funke",
-        avatar: "https://reqres.in/img/faces/9-image.jpg",
+        id: "8",
+        email: "lindsay.ferguson@reqres.in",
+        first_name: "Lindsay",
+        last_name: "Ferguson",
+        avatar: "https://reqres.in/img/faces/8-image.jpg",
         comments: null,
       },
       recipient: {

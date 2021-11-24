@@ -11,8 +11,6 @@ import { db } from "../db";
 const Home = ({ navigation }) => {
   const [categories, setCategories] = useState(db.categories);
   const [tasks, setTasks] = useState(db.tasks);
-  const [users, setUsers] = useState(db.users);
-  const [comments, setComments] = useState(db.comments);
 
   return (
     <Wrapper>
