@@ -7,7 +7,7 @@ const EditMemo = ({}) => {
   const [memo, setMemo] = useState("");
   const [height, setHeight] = useState(60);
   const [show, setShow] = useState(false);
-  const [submit, setSubmit] = useState(false);
+  const [submit, setSubmit] = useState(true);
 
   const updateSize = (height) => {
     setHeight(height);
