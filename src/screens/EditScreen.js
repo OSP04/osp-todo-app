@@ -9,7 +9,7 @@ import EditMemo from "../components/EditMemo";
 import EditDueDate from "../components/EditDueDate";
 import EditRepeat from "../components/EditRepeat";
 import EditLocation from "../components/EditLocation";
-import EditPicture from "../components/EditPicture";
+import EditTodoTitle from "../components/EditTodoTitle";
 
 const EditScreen = ({ navigation }) => {
   const onDeletePressed = () => {
@@ -60,11 +60,8 @@ const EditScreen = ({ navigation }) => {
           Confirm
         </Button>
       </View>
-      <View style={styles.header}>
-        <Text style={styles.title}>todo.text</Text>
-        <EditPicture></EditPicture>
-      </View>
       <View style={styles.list}>
+        <EditTodoTitle></EditTodoTitle>
         <EditDueDate></EditDueDate>
         <EditRepeat></EditRepeat>
         <EditLocation></EditLocation>
@@ -89,19 +86,6 @@ const styles = StyleSheet.create({
     position: "absolute",
     top: 10 + getStatusBarHeight(),
     right: 4,
-  },
-  header: {
-    flexDirection: "row",
-    marginTop: 5,
-    height: 60,
-    justifyContent: "space-between",
-  },
-  title: {
-    fontSize: 25,
-    color: theme.colors.primary,
-    fontWeight: "bold",
-    justifyContent: "space-between",
-    padding: 10,
   },
   icon: {
     alignItems: "center",
