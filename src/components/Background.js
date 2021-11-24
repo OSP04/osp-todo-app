@@ -25,7 +25,6 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 20,
     width: "100%",
-    maxWidth: 340,
     alignSelf: "center",
     alignItems: "center",
     justifyContent: "center",
@@ -34,9 +33,8 @@ const styles = StyleSheet.create({
   main: {
     flex: 1,
     width: "100%",
-    maxWidth: 340,
+    paddingHorizontal: 15,
     alignSelf: "center",
-    justifyContent: "space-around",
     backgroundColor: theme.background,
   },
 });
