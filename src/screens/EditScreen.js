@@ -9,6 +9,7 @@ import EditDueDate from "../components/EditDueDate";
 import EditRepeat from "../components/EditRepeat";
 import EditLocation from "../components/EditLocation";
 import EditTodoTitle from "../components/EditTodoTitle";
+import EditCategory from "../components/EditCategory";
 
 const EditScreen = ({ navigation }) => {
   const onDeletePressed = () => {
@@ -50,6 +51,7 @@ const EditScreen = ({ navigation }) => {
         <EditTodoTitle></EditTodoTitle>
         <EditDueDate></EditDueDate>
         <EditRepeat></EditRepeat>
+        <EditCategory></EditCategory>
         <EditLocation></EditLocation>
         <EditMemo></EditMemo>
       </View>
