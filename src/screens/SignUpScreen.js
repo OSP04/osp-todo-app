@@ -2,9 +2,9 @@ import React, { useState } from "react";
 import { View, StyleSheet, TouchableOpacity } from "react-native";
 import { Text } from "react-native-paper";
 import Logo from "../components/Logo";
-import Header from "../components/Header";
-import Button from "../components/Button";
-import TextInput from "../components/TextInput";
+import PreText from "../components/PreText";
+import PreButton from "../components/PreButton";
+import PreTextInput from "../components/PreTextInput";
 import BackButton from "../components/BackButton";
 import Background from "../components/Background";
 import * as Validator from "../Validator";
@@ -33,11 +33,11 @@ export default function RegisterScreen({ navigation }) {
 
   return (
     <Background type="pre">
-      <BackButton onPressOut={() => navigation.goBack()} />
+      <BackButton type="pre" onPressOut={() => navigation.goBack()} />
       <Logo />
-      <Header>Welcome!</Header>
-      <Text>Create a new account</Text>
-      <TextInput
+      <PreText>Welcome!</PreText>
+      <Text style={styles.description}>Create a new account</Text>
+      <PreTextInput
         label="ID"
         returnKeyType="next"
         value={id.value}
@@ -45,7 +45,7 @@ export default function RegisterScreen({ navigation }) {
         error={!!id.error}
         errorText={id.error}
       />
-      <TextInput
+      <PreTextInput
         label="Password"
         returnKeyType="done"
         value={password.value}
@@ -54,7 +54,7 @@ export default function RegisterScreen({ navigation }) {
         errorText={password.error}
         secureTextEntry
       />
-      <TextInput
+      <PreTextInput
         label="Email"
         returnKeyType="next"
         value={email.value}
@@ -66,13 +66,9 @@ export default function RegisterScreen({ navigation }) {
         textContentType="emailAddress"
         keyboardType="email-address"
       />
-      <Button
-        mode="contained"
-        onPress={onSignUpPressed}
-        style={{ marginTop: 24 }}
-      >
+      <PreButton mode="contained" onPress={onSignUpPressed}>
         Sign Up
-      </Button>
+      </PreButton>
       <View style={styles.row}>
         <Text>Already have an account? </Text>
         <TouchableOpacity onPress={() => navigation.navigate("LoginScreen")}>
@@ -90,5 +86,8 @@ const styles = StyleSheet.create({
   },
   link: {
     fontWeight: "bold",
+  },
+  description: {
+    marginBottom: 25,
   },
 });

@@ -2,12 +2,13 @@ import React, { useState } from "react";
 import { TouchableOpacity, StyleSheet, View } from "react-native";
 import { Text } from "react-native-paper";
 import Logo from "../components/Logo";
-import Header from "../components/Header";
-import Button from "../components/Button";
-import TextInput from "../components/TextInput";
+import PreText from "../components/PreText";
+import PreButton from "../components/PreButton";
+import PreTextInput from "../components/PreTextInput";
 import BackButton from "../components/BackButton";
 import Background from "../components/Background";
 import * as Validator from "../Validator";
+import { theme } from "../theme";
 
 export default function LoginScreen({ navigation }) {
   const [id, setId] = useState({ value: "", error: "" });
@@ -25,10 +26,10 @@ export default function LoginScreen({ navigation }) {
 
   return (
     <Background type="pre">
-      <BackButton onPressOut={() => navigation.goBack()} />
+      <BackButton type="pre" onPressOut={() => navigation.goBack()} />
       <Logo />
-      <Header>Todo App</Header>
-      <TextInput
+      <PreText>Todo App</PreText>
+      <PreTextInput
         label="ID"
         returnKeyType="next"
         value={id.value}
@@ -36,7 +37,7 @@ export default function LoginScreen({ navigation }) {
         error={!!id.error}
         errorText={id.error}
       />
-      <TextInput
+      <PreTextInput
         label="Password"
         returnKeyType="done"
         value={password.value}
@@ -45,9 +46,9 @@ export default function LoginScreen({ navigation }) {
         errorText={password.error}
         secureTextEntry
       />
-      <Button mode="contained" onPress={onLoginPressed}>
+      <PreButton mode="contained" onPress={onLoginPressed}>
         Log in
-      </Button>
+      </PreButton>
       <View style={styles.row}>
         <Text>Don’t have an account? </Text>
         <TouchableOpacity onPress={() => navigation.navigate("SignUpScreen")}>
@@ -56,7 +57,7 @@ export default function LoginScreen({ navigation }) {
       </View>
       {/* 추후 메인화면으로 연결 */}
       <TouchableOpacity onPress={() => navigation.navigate("EditScreen")}>
-        <Text style={styles.link}>Skip for Now</Text>
+        <Text style={styles.skip}>Skip for Now</Text>
       </TouchableOpacity>
     </Background>
   );
@@ -69,5 +70,12 @@ const styles = StyleSheet.create({
   },
   link: {
     fontWeight: "bold",
+  },
+  skip: {
+    fontSize: 20,
+    color: theme.colors.primary,
+    fontWeight: "bold",
+    margin: 20,
+    marginTop: 50,
   },
 });
