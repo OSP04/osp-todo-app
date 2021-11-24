@@ -37,7 +37,7 @@ const EditMemo = ({}) => {
           updateSize(e.nativeEvent.contentSize.height)
         }
       />
-      <Pressable onPressOut={onSubmitPressed} disabled={!show}>
+      <Pressable onPress={onSubmitPressed} disabled={!show}>
         {show && (
           <Entypo name="check" style={styles.icon} size={20} color="black" />
         )}
