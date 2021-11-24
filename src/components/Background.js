@@ -22,14 +22,14 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     alignItems: "center",
     justifyContent: "center",
+    backgroundColor: theme.background,
   },
   main: {
     flex: 1,
-    padding: 10,
     width: "100%",
     maxWidth: 340,
     alignSelf: "center",
-    alignItems: "stretch",
     justifyContent: "space-around",
+    backgroundColor: theme.background,
   },
 });
