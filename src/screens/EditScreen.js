@@ -47,7 +47,7 @@ const EditScreen = ({ navigation }) => {
   };
 
   return (
-    <Background>
+    <Background type="main">
       <BackButton onPressOut={() => navigation.goBack()} />
       <View style={styles.topbuttons}>
         <Button mode="outlined" onPress={onDeletePressed} color={theme.primary}>

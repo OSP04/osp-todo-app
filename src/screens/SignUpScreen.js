@@ -32,7 +32,7 @@ export default function RegisterScreen({ navigation }) {
   };
 
   return (
-    <Background>
+    <Background type="pre">
       <BackButton onPressOut={() => navigation.goBack()} />
       <Logo />
       <Header>Welcome!</Header>

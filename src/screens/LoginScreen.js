@@ -24,7 +24,7 @@ export default function LoginScreen({ navigation }) {
   };
 
   return (
-    <Background>
+    <Background type="pre">
       <BackButton onPressOut={() => navigation.goBack()} />
       <Logo />
       <Header>Todo App</Header>
