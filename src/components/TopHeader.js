@@ -12,7 +12,6 @@ const styles = StyleSheet.create({
     marginTop: 20 + getStatusBarHeight(),
     marginBottom: 20,
     paddingHorizontal: 10,
-    alignItems: "center",
     justifyContent: "space-between",
   },
 });
