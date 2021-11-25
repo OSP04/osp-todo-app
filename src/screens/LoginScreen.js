@@ -53,9 +53,8 @@ export default function LoginScreen({ navigation }) {
                 <Text style={styles.link}>Sign up</Text>
             </TouchableOpacity>
         </View>
-        //추후 메인화면으로 연결
         <TouchableOpacity onPress={() => navigation.replace('SignUpScreen')}>
-          <Text style={styles.link}>Skip for Now</Text>
+          <Text style={styles.link}>Sign up</Text>
         </TouchableOpacity>
     </Background>
   )
