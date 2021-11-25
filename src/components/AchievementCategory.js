@@ -14,14 +14,14 @@ const AchievementCategory = () => {
             text: "Study",
             color: "black",
             total: "23",
-            complete: "23",
+            complete: "22",
         },
         {
             id: "2",
             text: "Personal",
             color: "blue",
-            total: "50",
-            complete: "30",
+            total: "53",
+            complete: "31",
         },
     ])
 

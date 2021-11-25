@@ -7,7 +7,7 @@ const DoneCategory = ({ item }) => {
 
     const width = Dimensions.get('window').width;
     const box =
-        <View style={{ borderWidth: 2, borderColor: item.color, width: 124, height: 90, alignItems: "center", justifyContent: "center" }}>
+        <View style={{ borderWidth: 2, borderColor: item.color, width: 154, height: 90, alignItems: "center", justifyContent: "center" }}>
             <Text style={{ padding: 20, fontSize: 32, fontWeight: "bold", color: item.color }}>{(item.complete / item.total).toFixed(2) * 100}%</Text>
         </View>
 

@@ -1,9 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 import { Dimensions, View } from "react-native";
 
 import styled from "styled-components/native";
-import AchievementCategory from "../components/AchievementCategory";
-import AchievementDay from "../components/AchievementDay";
 import IconButton from "../components/IconButton";
 import MenuBar from "../components/MenuBar";
 import { images } from "../images";
@@ -12,8 +10,6 @@ import { theme } from "../theme";
 const Achievement = () => {
 
     const width = Dimensions.get('window').width;
-    const [stateCategory, setStateCategory] = useState(true);
-    const [stateDay, setStateDay] = useState(false);
 
     return (
         <Wrapper>
@@ -24,11 +20,8 @@ const Achievement = () => {
                 <View width={25} />
             </StyledView >
 
-            <MenuBar stateCategory={stateCategory} setStateCategory={setStateCategory}
-                stateDay={stateDay} setStateDay={setStateDay} />
+            <MenuBar />
 
-            {stateCategory == true ? (<AchievementCategory />)
-                : <AchievementDay />}
         </Wrapper>
     );
 };
