@@ -9,12 +9,12 @@ const TopBar = ({ types, screens, title, navigation }) => {
     <StyledView>
       <IconButton
         type={types[0]}
-        onPressOut={() => navigation.navigate(screens[0])}
+        onPressOut={() => screens[0] && navigation.navigate(screens[0])}
       />
       <Title>{title}</Title>
       <IconButton
         type={types[1]}
-        onPressOut={() => navigation.navigate(screens[1])}
+        onPressOut={() => screens[1] && navigation.navigate(screens[1])}
       />
     </StyledView>
   );
@@ -23,6 +23,7 @@ const TopBar = ({ types, screens, title, navigation }) => {
 const StyledView = styled.View`
   padding: 5%;
   padding-bottom: 0;
+  display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
