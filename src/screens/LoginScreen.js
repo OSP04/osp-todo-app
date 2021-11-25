@@ -44,7 +44,7 @@ export default function LoginScreen({ navigation }) {
            errorText={password.error}
            secureTextEntry
         />
-        <Button mode="contained" onPress={onLoginPressed}>
+        <Button>
             Login
         </Button>
         <View style={styles.row}>
