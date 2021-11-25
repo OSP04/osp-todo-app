@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Keyboard } from "react-native";
 
 import styled from "styled-components/native";
 
@@ -15,6 +16,7 @@ const Comments = ({ navigation }) => {
   const [newComment, setNewComment] = useState("");
 
   const onSubmitEditing = () => {
+    Keyboard.dismiss();
     if (newComment) {
       setNewComment("");
       const newCommentObj = {
