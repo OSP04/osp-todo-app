@@ -45,7 +45,7 @@ export default function LoginScreen({ navigation }) {
            secureTextEntry
         />
         <Button mode="contained" onPress={onLoginPressed}>
-            Log in
+            Login
         </Button>
         <View style={styles.row}>
             <Text>Don’t have an account? </Text>
@@ -59,13 +59,3 @@ export default function LoginScreen({ navigation }) {
     </Background>
   )
 }
-
-const styles = StyleSheet.create({
-  row: {
-    flexDirection: 'row',
-    marginTop: 5,
-  },
-  link: {
-    fontWeight: 'bold',
-  },
-})
