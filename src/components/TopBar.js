@@ -21,6 +21,8 @@ const TopBar = ({ types, screens, title, navigation }) => {
 };
 
 const StyledView = styled.View`
+  padding: 5%;
+  padding-bottom: 0;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;

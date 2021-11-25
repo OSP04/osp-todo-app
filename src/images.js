@@ -4,6 +4,7 @@ import UncheckedBox from "../assets/baseline_check_box_outline_blank_black_24.pn
 import CheckedBox from "../assets/outline_check_box_black_24.png";
 import Move from "../assets/outline_import_export_black_24dp.png";
 import Comment from "../assets/baseline_message_black_24dp.png";
+import Send from "../assets/outline_send_black_24dp.png";
 
 export const images = {
   back: Back,
@@ -12,4 +13,5 @@ export const images = {
   complete: CheckedBox,
   move: Move,
   comment: Comment,
+  send: Send,
 };
