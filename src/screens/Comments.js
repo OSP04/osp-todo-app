@@ -43,7 +43,7 @@ const Comments = ({ navigation }) => {
         navigation={navigation}
       />
       <StyledScroll>
-        {user.comments.map((item) => (
+        {comments.map((item) => (
           <CommentItem key={item.id} comment={item} />
         ))}
       </StyledScroll>
