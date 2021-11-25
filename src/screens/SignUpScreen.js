@@ -8,6 +8,7 @@ import PreTextInput from "../components/PreTextInput";
 import BackButton from "../components/BackButton";
 import Background from "../components/Background";
 import * as Validator from "../Validator";
+import { theme } from "../theme";
 
 export default function RegisterScreen({ navigation }) {
   const [id, setId] = useState({ value: "", error: "" });
@@ -35,8 +36,11 @@ export default function RegisterScreen({ navigation }) {
     <Background type="pre">
       <BackButton type="pre" onPressOut={() => navigation.goBack()} />
       <Logo />
-      <PreText>Welcome!</PreText>
-      <Text style={styles.description}>Create a new account</Text>
+      <PreText>
+        {"Welcome!"}
+        <Text style={styles.description}>{"\n\n"}Create a new account</Text>
+      </PreText>
+
       <PreTextInput
         label="ID"
         returnKeyType="next"
@@ -88,6 +92,10 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
   description: {
-    marginBottom: 25,
+    paddingTop: 10,
+    fontWeight: "bold",
+    color: theme.colors.secondary,
+    fontSize: 15,
+    textAlign: "center",
   },
 });

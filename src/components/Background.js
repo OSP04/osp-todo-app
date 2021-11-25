@@ -23,7 +23,7 @@ export default function Background({ type, children }) {
 const styles = StyleSheet.create({
   pre: {
     flex: 1,
-    padding: 20,
+    padding: 30,
     width: "100%",
     alignSelf: "center",
     alignItems: "center",

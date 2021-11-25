@@ -12,6 +12,8 @@ const styles = StyleSheet.create({
     fontSize: 30,
     color: theme.colors.primary,
     fontWeight: "bold",
-    margin: 20,
+    marginTop: 10,
+    marginVertical: 50,
+    textAlign: "center",
   },
 });
