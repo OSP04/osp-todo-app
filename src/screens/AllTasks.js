@@ -7,7 +7,7 @@ import { images } from "../images";
 import { theme } from "../theme";
 
 import TopBar from "../components/TopBar";
-import AllDropdown from "../components/AllDropdown";
+import Dropdown from "../components/Dropdown";
 import HomeTaskItem from "../components/HomeTaskItem";
 
 const AllTasks = ({ navigation }) => {
@@ -67,7 +67,7 @@ const AllTasks = ({ navigation }) => {
         navigation={navigation}
       />
       <StyledView>
-        <AllDropdown setSorting={setSorting} />
+        <Dropdown setSorting={setSorting} category={false} />
       </StyledView>
       <Tasks>
         {sortTasks(tasks).map((item) => (

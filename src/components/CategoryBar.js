@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 import styled from "styled-components/native";
 import { theme } from "../theme";
@@ -6,14 +6,18 @@ import { images } from "../images";
 import IconButton from "./IconButton";
 import Dropdown from "./Dropdown";
 
-const CategoryBar = ({ onPressOut, zIndex, category, doRefresh }) => {
+const CategoryBar = ({ onPressOut, category, doRefresh, setSorting }) => {
   return (
     <StyledView>
       <Category>
         <Title category={category}>{category.title}</Title>
         <IconButton onPressOut={onPressOut} type={images.add} />
       </Category>
-      <Dropdown zIndex={zIndex} category={category} doRefresh={doRefresh} />
+      <Dropdown
+        setSorting={setSorting}
+        category={category}
+        doRefresh={doRefresh}
+      />
     </StyledView>
   );
 };

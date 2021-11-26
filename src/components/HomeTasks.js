@@ -97,10 +97,6 @@ const HomeTasks = ({ tasks, setTasks, categories, selectedDate }) => {
             }}
             category={category}
             title={category.title}
-            zIndex={
-              categories.length -
-              categories.findIndex((element) => element.id === category.id)
-            }
             doRefresh={doRefresh}
           />
           {sortTasks(category).map((item) => {
