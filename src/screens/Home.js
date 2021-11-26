@@ -25,8 +25,12 @@ const Home = ({ navigation }) => {
       />
       <Body>
         <WeekStrip tasks={tasks} setTasks={setTasks} categories={categories} />
-        <Footer navigation={navigation} />
       </Body>
+      <Footer
+        navigation={navigation}
+        type={images.comment}
+        screens={["Comments", null]}
+      />
     </Wrapper>
   );
 };

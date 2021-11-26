@@ -3,16 +3,15 @@ import { Text } from "react-native";
 
 import styled from "styled-components/native";
 
-import { images } from "../images";
 import { theme } from "../theme";
 import IconButton from "./IconButton";
 
-const Footer = ({ navigation }) => {
+const Footer = ({ navigation, type, screens }) => {
   return (
     <StyledView>
       <IconButton
-        type={images.comment}
-        onPressOut={() => navigation.navigate("Comments")}
+        type={type}
+        onPressOut={() => screens[0] && navigation.navigate(screens[0])}
       />
       <SelectButton>
         <Text>Select</Text>
@@ -30,6 +29,7 @@ const StyledView = styled.View`
   padding-bottom: 5%;
   position: absolute;
   bottom: 0;
+  padding: 5%;
 `;
 
 const SelectButton = styled.Pressable`
