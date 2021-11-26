@@ -8,7 +8,7 @@ import { theme } from "../theme";
 
 import TopBar from "../components/TopBar";
 import Dropdown from "../components/Dropdown";
-import HomeTaskItem from "../components/HomeTaskItem";
+import TaskItem from "../components/TaskItem";
 import Footer from "../components/Footer";
 
 const AllTasks = ({ navigation }) => {
@@ -72,7 +72,7 @@ const AllTasks = ({ navigation }) => {
       </StyledView>
       <Tasks>
         {sortTasks(tasks).map((item) => (
-          <HomeTaskItem key={item.id} item={item} doRefresh={doRefresh} />
+          <TaskItem key={item.id} item={item} doRefresh={doRefresh} />
         ))}
       </Tasks>
       <Footer navigation={navigation} type={null} screens={[null, null]} />

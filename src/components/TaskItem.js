@@ -5,7 +5,7 @@ import { theme } from "../theme";
 import { images } from "../images";
 import IconButton from "./IconButton";
 
-const HomeTaskItem = ({ item, doRefresh }) => {
+const TaskItem = ({ item, doRefresh }) => {
   const toggleItem = () => {
     item.complete = !item.complete;
     doRefresh();
@@ -66,4 +66,4 @@ const RightItems = styled.View`
   flex-direction: row;
 `;
 
-export default HomeTaskItem;
+export default TaskItem;

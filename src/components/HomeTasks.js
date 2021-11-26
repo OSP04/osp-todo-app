@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 import styled from "styled-components/native";
 
-import HomeTaskItem from "./HomeTaskItem";
+import TaskItem from "./TaskItem";
 import CategoryBar from "../components/CategoryBar";
 import Input from "./Input";
 
@@ -103,7 +103,7 @@ const HomeTasks = ({ tasks, setTasks, categories, selectedDate }) => {
             return (
               // if dates are the same, return task item
               compareDate(item.date, selectedDate) && (
-                <HomeTaskItem key={item.id} item={item} doRefresh={doRefresh} />
+                <TaskItem key={item.id} item={item} doRefresh={doRefresh} />
               )
             );
           })}
