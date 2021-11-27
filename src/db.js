@@ -12,6 +12,7 @@ export const db = {
             tasks: [
                 {
                     id: "1",
+                    count: "1",
                     text: "Buy Pizza",
                     date: new Date("2021-11-23T03:00:00.000Z"),
                     due: new Date("2022-12-28T03:00:00.000Z"),
@@ -24,6 +25,7 @@ export const db = {
                 },
                 {
                     id: "3",
+                    count: "2",
                     text: "Buy noodle",
                     date: new Date("2021-11-24T03:00:00.000Z"),
                     due: new Date("2022-01-05T03:00:00.000Z"),
@@ -35,6 +37,7 @@ export const db = {
                 },
                 {
                     id: "5",
+                    count: "3",
                     text: "Lunch with my friend",
                     date: new Date("2021-11-23T03:00:00.000Z"),
                     due: new Date("2021-12-04T03:00:00.000Z"),
@@ -46,6 +49,7 @@ export const db = {
                 },
                 {
                     id: "7",
+                    count: "4",
                     text: "Go to market",
                     date: new Date("2021-11-23T03:00:00.000Z"),
                     due: null,
@@ -67,6 +71,7 @@ export const db = {
             tasks: [
                 {
                     id: "2",
+                    count: "1",
                     text: "OpenSW Assignment",
                     date: new Date("2021-11-24T03:00:00.000Z"),
                     due: new Date("2021-12-15T03:00:00.000Z"),
@@ -78,6 +83,7 @@ export const db = {
                 },
                 {
                     id: "4",
+                    count: "2",
                     text: "Submit report",
                     date: new Date("2021-11-22T03:00:00.000Z"),
                     due: null,
@@ -89,6 +95,7 @@ export const db = {
                 },
                 {
                     id: "6",
+                    count: "3",
                     text: "Start project",
                     date: new Date("2021-11-24T03:00:00.000Z"),
                     due: null,
