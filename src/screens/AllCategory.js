@@ -28,15 +28,22 @@ const AllCategory = () => {
         const ID = Date.now().toString();
         const newCategoryObj = {
             id: ID,
-            text: newCategory,
+            title: newCategory,
             color: color,
-            task: null,
+            isAdding: false,
+            sorting: "added",
             tasks:
             {
-                id: ID,
+                id: null,
+                count: "0",
                 text: null,
+                date: null,
                 due: null,
-                completed: false,
+                category: newCategory,
+                image: null,
+                complete: false,
+                created: null,
+                owner: null,
             },
         };
         setNewCategory("");
@@ -73,7 +80,7 @@ const AllCategory = () => {
                 {Object.values(categories).map(item => (
                     <Wrapper>
                         <Categories key={item.id} item={item} color={color} />
-                        {Object.values(item.tasks).map(item => (
+                        {item.tasks[0] != null && Object.values(item.tasks).map(item => (
                             <ShowCateTask key={item.id} item={item} doRefresh={doRefresh} />
                         ))}
                         <MoreView width={width}>

@@ -28,7 +28,7 @@ const OneCategory = ({ item, visible, setVisible, doRefresh }) => {
                         <DropButton />
                     </StyledView>
                     <StyledScroll>
-                        {Object.values(item.tasks).map(item => (
+                        {item.tasks[0] != null && Object.values(item.tasks).map(item => (
                             <ShowTaskOne key={item.id} item={item} doRefresh={doRefresh} />
                         ))}
                     </StyledScroll>
