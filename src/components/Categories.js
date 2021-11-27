@@ -10,7 +10,7 @@ const Categories = ({ item }) => {
     return (
         <Wrapper>
             <StyledView width={width}>
-                <StyledText style={{ color: item.color }}>{item.text}</StyledText>
+                <StyledText style={{ color: item.color }}>{item.title}</StyledText>
             </StyledView>
         </Wrapper>
     );

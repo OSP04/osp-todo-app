@@ -31,7 +31,7 @@ const ShowCateTask = ({ item, doRefresh }) => {
                     }>{item.text}</TaskText>
                 </LeftView>
                 <RightView>
-                    <DueDate>{item.due}</DueDate>
+                    {item.due && <DueDate>{item.due.toLocaleDateString()}</DueDate>}
                 </RightView>
             </TaskView>}
         </StyledView >

@@ -20,7 +20,7 @@ const OneCategory = ({ item, visible, setVisible, doRefresh }) => {
                     <StyledBar barStyle="default" />
                     <StyledView width={width - 20}>
                         <IconButton type={images.back} onPressOut={() => { setVisible(false) }} />
-                        <StyledText style={{ color: item.color }}>{item.text}</StyledText>
+                        <StyledText style={{ color: item.color }}>{item.title}</StyledText>
                         <View width={25} />
                     </StyledView >
                     <StyledView>

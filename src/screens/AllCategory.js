@@ -9,6 +9,7 @@ import { images } from "../images";
 import { theme } from "../theme";
 import AddCategory from "./AddCategory";
 import OneCategory from "./OneCategory";
+import { db } from "../db";
 
 const AllCategory = () => {
 
@@ -20,84 +21,8 @@ const AllCategory = () => {
 
     const [newCategory, setNewCategory] = useState("");
 
-    const [categories, setCategories] = useState([
-        {
-            id: "1",
-            text: "Study",
-            color: "black",
-            task: "exist",
-            tasks: [
-                {
-                    id: "1",
-                    text: "Report Assignment",
-                    due: "2021.11.19",
-                    completed: false,
-                },
-                {
-                    id: "2",
-                    text: "Study for JAVA quiz",
-                    due: "2021.11.29",
-                    completed: false,
-                },
-                {
-                    id: "3",
-                    text: "Homework-Algebra",
-                    due: "2021.12.01",
-                    completed: false,
-                },
-                {
-                    id: "4",
-                    text: "Exercise 6.6~6.8",
-                    due: "2021.12.09",
-                    completed: false,
-                },
-                {
-                    id: "5",
-                    text: "Exam study",
-                    due: "2021.12.13",
-                    completed: false,
-                },
-            ],
-        },
-        {
-            id: "2",
-            text: "Personal",
-            color: "black",
-            task: "exist",
-            tasks: [
-                {
-                    id: "1",
-                    text: "Book a hairdresser",
-                    due: "2021.11.19",
-                    completed: false,
-                },
-                {
-                    id: "2",
-                    text: "Write diary",
-                    due: "2021.11.29",
-                    completed: false,
-                },
-                {
-                    id: "3",
-                    text: "Water plants",
-                    due: "2021.12.01",
-                    completed: false,
-                },
-                {
-                    id: "4",
-                    text: "Visit Anne's market",
-                    due: "2021.12.09",
-                    completed: false,
-                },
-                {
-                    id: "5",
-                    text: "Visit Tom",
-                    due: "2021.12.13",
-                    completed: false,
-                },
-            ],
-        },
-    ]);
+    const [categories, setCategories] = useState(db.categories);
+    const [tasks, setTasks] = useState(db.tasks);
 
     const addCategory = () => {
         const ID = Date.now().toString();
@@ -115,7 +40,7 @@ const AllCategory = () => {
             },
         };
         setNewCategory("");
-        setColor("black");
+        setColor(theme.category.red);
         setCategories([...categories, newCategoryObj]);
         setState(false);
     };
@@ -148,7 +73,7 @@ const AllCategory = () => {
                 {Object.values(categories).map(item => (
                     <Wrapper>
                         <Categories key={item.id} item={item} color={color} />
-                        {item.task != null && Object.values(item.tasks).map(item => (
+                        {Object.values(item.tasks).map(item => (
                             <ShowCateTask key={item.id} item={item} doRefresh={doRefresh} />
                         ))}
                         <MoreView width={width}>
