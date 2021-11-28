@@ -20,11 +20,11 @@ const Categories = ({ item, doRefresh }) => {
                 {item.tasks[0] != null && Object.values(item.tasks).map(item => (
                     <ShowCateTask key={item.id} item={item} doRefresh={doRefresh} />
                 ))}
-                <MoreView width={width}>
-                    <MoreButton onPress={() => { setVisible(true) }}>+ See more tasks...</MoreButton>
-                    <OneCategory key={item.id} item={item} visible={visible} setVisible={setVisible} doRefresh={doRefresh} />
-                </MoreView>
             </View>
+            <MoreView width={width}>
+                <MoreButton onPress={() => { setVisible(true) }}>+ See more tasks...</MoreButton>
+                <OneCategory key={item.id} item={item} visible={visible} setVisible={setVisible} doRefresh={doRefresh} />
+            </MoreView>
         </Wrapper>
     );
 };
