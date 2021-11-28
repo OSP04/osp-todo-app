@@ -6,14 +6,16 @@ import styled from "styled-components/native";
 import useSearchTask from "./useSearchTask";
 
 function SearchField() {
-  const [searchKeyWord, setSearchKeyWord] = useState("");
-
-  const { setSearchQuery, searchedTask } = useSearchTask("");
+  const { searchQuery, setSearchQuery, searchedTask } = useSearchTask("");
 
   const updateSearch = (text) => {
-    setSearchKeyWord(text);
-    console.log(searchKeyWord);
-    setSearchQuery(searchKeyWord);
+    setSearchQuery(text);
+  };
+  const handleSearchCancel = () => {
+    updateSearch("");
+  };
+  const handleSearchClear = () => {
+    updateSearch("");
   };
 
   return (
@@ -21,8 +23,10 @@ function SearchField() {
       <SearchBar
         placeholder="Type Here..."
         onChangeText={updateSearch}
-        value={searchKeyWord}
+        value={searchQuery}
         containerStyle={styles.searchBar}
+        onCancel={handleSearchCancel}
+        onClear={handleSearchClear}
       />
       <TasksContainer style={styles.container}>{searchedTask}</TasksContainer>
     </View>
