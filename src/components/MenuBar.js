@@ -16,7 +16,7 @@ export default class MenuBar extends Component {
                 )}
                 tabBarInactiveTextColor={theme.light}
                 tabBarActiveTextColor={theme.primary}
-                initialPage={1}
+                initialPage={0}
             >
                 <AchievementCategory tabLabel={"Category"} />
                 <AchievementDay tabLabel={"Day"} />

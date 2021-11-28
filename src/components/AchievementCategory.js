@@ -2,34 +2,36 @@ import React, { useState } from "react";
 import { Dimensions } from "react-native";
 
 import styled from "styled-components/native";
+import { db } from "../db";
 import DoneCategory from "./DoneCategory";
 
-const AchievementCategory = () => {
+const AchievementCategory = () => { //카테고리별 성취도 보여주는 화면
 
     const width = Dimensions.get('window').width;
 
-    const [categories, setCategories] = useState([
-        {
-            id: "1",
-            text: "Study",
-            color: "black",
-            total: "23",
-            complete: "21",
-        },
-        {
-            id: "2",
-            text: "Personal",
-            color: "blue",
-            total: "53",
-            complete: "31",
-        },
-    ])
+    const [achieveCate, setAchieveCate] = useState(db.categories);
+
+    // 끝난 task 세는 기능 구현 아직 못함
+
+    // const [doneTask, setDoneTask] = useState(0);
+
+    // const countDone = ({ item }) => {
+    //     for (var i = 0; i < item.tasks.length; i++) {
+    //         if (item.tasks[i].complete === true) {
+    //             setDoneTask(doneTask + 1);
+    //         }
+    //     }
+    //     doneArr.push(doneTask);
+    //     setDoneTask(0);
+    // };
+
+    // const doneArr = [];
 
     return (
         <Wrapper>
             <StyledScroll>
                 <AchievementView width={width}>
-                    {Object.values(categories).map(item => (
+                    {Object.values(achieveCate).map(item => (
                         <DoneCategory key={item.id} item={item} />
                     ))}
                 </AchievementView>
