@@ -1,6 +1,14 @@
 import React, { useState, useEffect } from "react";
 import SearchedTask from "./SearchedTask";
 
+const unformattedCurrent = new Date();
+const year = unformattedCurrent.getFullYear();
+const month = unformattedCurrent.getMonth() + 1;
+const date = unformattedCurrent.getDate();
+const current = `${year}-${month >= 10 ? month : "0" + month}-${
+  date >= 10 ? date : "0" + date
+}`;
+
 const tasks = [
   {
     id: "1",
