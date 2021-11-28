@@ -98,6 +98,6 @@ function useSearchTask(query) {
 
   console.log(searchedTask);
 
-  return { setSearchQuery, searchedTask };
+  return { searchQuery, setSearchQuery, searchedTask };
 }
 export default useSearchTask;
