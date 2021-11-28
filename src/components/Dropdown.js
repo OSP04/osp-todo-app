@@ -4,7 +4,7 @@ import { StyleSheet } from "react-native";
 
 import styled from "styled-components/native";
 
-const Dropdown = ({ category, doRefresh, setSorting }) => {
+const Dropdown = ({ category, doRefresh }) => {
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState(category ? category.sorting : "added");
   const [items, setItems] = useState([
@@ -27,8 +27,6 @@ const Dropdown = ({ category, doRefresh, setSorting }) => {
           if (category) {
             category.sorting = value;
             doRefresh();
-          } else {
-            setSorting(value);
           }
         }}
         style={styles.container}

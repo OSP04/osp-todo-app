@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState } from "react";
 import styled from "styled-components/native";
 
 import TaskItem from "./TaskItem";
@@ -8,8 +8,6 @@ import Input from "./Input";
 const HomeTasks = ({ tasks, setTasks, categories, selectedDate }) => {
   const [refresh, setRefresh] = useState(true);
   const [newTask, setNewTask] = useState("");
-
-  const scrollRef = useRef();
 
   const doRefresh = () => {
     setRefresh((current) => !current);
@@ -115,7 +113,7 @@ const HomeTasks = ({ tasks, setTasks, categories, selectedDate }) => {
             onSubmitEditing={() => {
               addTask(category);
             }}
-            onChangeText={setNewTask}
+            setNewTask={setNewTask}
             onBlur={() => onBlur(category)}
           />
         </StyledView>

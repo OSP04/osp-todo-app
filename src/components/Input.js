@@ -1,22 +1,11 @@
-import React from "react";
-import ReactNative, {
-  NativeSyntheticEvent,
-  TextInputFocusEventData,
-} from "react-native";
+import React, { useState } from "react";
 import styled from "styled-components/native";
-import { findNodeHandle } from "react-native";
 
 import { theme } from "../theme";
 import { images } from "../images";
 import IconButton from "./IconButton";
 
-const Input = ({
-  newTask,
-  isAdding,
-  onSubmitEditing,
-  onChangeText,
-  onBlur,
-}) => {
+const Input = ({ newTask, isAdding, onSubmitEditing, setNewTask, onBlur }) => {
   return (
     isAdding && (
       <StyledView>
@@ -27,8 +16,7 @@ const Input = ({
           autoFocus={true}
           onBlur={onBlur}
           onSubmitEditing={onSubmitEditing}
-          blurOnSubmit={false}
-          onChangeText={onChangeText}
+          onChangeText={setNewTask}
         />
       </StyledView>
     )

@@ -6,18 +6,21 @@ import { images } from "../images";
 import IconButton from "./IconButton";
 import Dropdown from "./Dropdown";
 
-const CategoryBar = ({ onPressOut, category, doRefresh, setSorting }) => {
+const CategoryBar = ({ onPressOut, category, doRefresh }) => {
+  const [isAdding, setIsAdding] = useState(category.isAdding);
   return (
     <StyledView>
       <Category>
         <Title category={category}>{category.title}</Title>
-        <IconButton onPressOut={onPressOut} type={images.add} />
+        <IconButton
+          onPressOut={() => {
+            onPressOut();
+            setIsAdding(category.isAdding);
+          }}
+          type={images.add}
+        />
       </Category>
-      <Dropdown
-        setSorting={setSorting}
-        category={category}
-        doRefresh={doRefresh}
-      />
+      <Dropdown category={category} doRefresh={doRefresh} />
     </StyledView>
   );
 };
