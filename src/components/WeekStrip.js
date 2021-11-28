@@ -68,14 +68,12 @@ const WeekStrip = ({ tasks, setTasks, categories }) => {
         onHeaderSelected={() => console.log("Navigate to calender page")}
         onDateSelected={(date) => selectDate(date)}
       />
-      <StyledScroll>
-        <HomeTasks
-          tasks={tasks}
-          setTasks={setTasks}
-          categories={categories}
-          selectedDate={selectedDate}
-        />
-      </StyledScroll>
+      <HomeTasks
+        tasks={tasks}
+        setTasks={setTasks}
+        categories={categories}
+        selectedDate={selectedDate}
+      />
     </StyledView>
   );
 };
@@ -118,9 +116,5 @@ const styles = StyleSheet.create({
     color: "tomato",
   },
 });
-
-const StyledScroll = styled.ScrollView`
-  width: 98%;
-`;
 
 export default WeekStrip;

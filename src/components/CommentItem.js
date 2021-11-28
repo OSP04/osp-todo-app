@@ -18,22 +18,22 @@ const CommentItem = ({ comment }) => {
 
     if (difference >= YEAR) {
       const year = Math.floor(difference / YEAR);
-      return year + ` year${year !== 1 && "s"} ago`;
+      return year + ` year${year !== 1 ? "s" : ""} ago`;
     } else if (difference >= MONTH) {
       const month = Math.floor(difference / MONTH);
-      return month + ` month${month !== 1 && "s"} ago`;
+      return month + ` month${month !== 1 ? "s" : ""} ago`;
     } else if (difference >= WEEK) {
       const week = Math.floor(difference / WEEK);
-      return week + ` week${week !== 1 && "s"} ago`;
+      return week + ` week${week !== 1 ? "s" : ""} ago`;
     } else if (difference >= DAY) {
       const day = Math.floor(difference / DAY);
-      return day + ` day${day !== 1 && "s"} ago`;
+      return day + ` day${day !== 1 ? "s" : ""} ago`;
     } else if (difference >= HOUR) {
       const hour = Math.floor(difference / HOUR);
-      return hour + ` hour${hour !== 1 && "s"} ago`;
+      return hour + ` hour${hour !== 1 ? "s" : ""} ago`;
     } else if (difference >= MINUTE) {
       const minute = Math.floor(difference / MINUTE);
-      return minute + ` min${minute !== 1 && "s"} ago`;
+      return minute + ` min${minute !== 1 ? "s" : ""} ago`;
     } else if (difference < MINUTE) return "Just now";
   };
 

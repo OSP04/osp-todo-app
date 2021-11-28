@@ -1,6 +1,5 @@
 import React from "react";
 import { Text } from "react-native";
-
 import styled from "styled-components/native";
 
 import { theme } from "../theme";
@@ -21,15 +20,15 @@ const Footer = ({ navigation, type, screens }) => {
 };
 
 const StyledView = styled.View`
-  flex: 1;
+  display: flex;
   flex-direction: row;
   width: 100%;
   justify-content: space-between;
   align-items: center;
-  padding-bottom: 5%;
+  padding: 5%;
   position: absolute;
   bottom: 0;
-  padding: 5%;
+  background-color: ${theme.background};
 `;
 
 const SelectButton = styled.Pressable`

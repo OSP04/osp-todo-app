@@ -41,7 +41,7 @@ const Wrapper = styled.View`
 `;
 
 const Body = styled.SafeAreaView`
-  flex: 1;
+  display: flex;
   justify-content: flex-start;
   align-items: center;
   padding: 5%;

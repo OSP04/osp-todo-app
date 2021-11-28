@@ -1,6 +1,10 @@
-import React, { useState } from "react";
-
+import React from "react";
+import ReactNative, {
+  NativeSyntheticEvent,
+  TextInputFocusEventData,
+} from "react-native";
 import styled from "styled-components/native";
+import { findNodeHandle } from "react-native";
 
 import { theme } from "../theme";
 import { images } from "../images";
@@ -12,7 +16,10 @@ const Input = ({
   onSubmitEditing,
   onChangeText,
   onBlur,
+  _scrollToInput,
 }) => {
+  const autoFocus = (e) => _scrollToInput(findNodeHandle(e.target));
+
   return (
     isAdding && (
       <StyledView>
@@ -25,6 +32,10 @@ const Input = ({
           onSubmitEditing={onSubmitEditing}
           blurOnSubmit={false}
           onChangeText={onChangeText}
+          onFocus={(event) => {
+            _scrollToInput(ReactNative.findNodeHandle(event.target));
+          }}
+          // onFocus={(event) => autoFocus(event)}
         />
       </StyledView>
     )

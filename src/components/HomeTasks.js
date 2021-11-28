@@ -1,6 +1,6 @@
-import React, { useState } from "react";
-
+import React, { useState, useRef } from "react";
 import styled from "styled-components/native";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
 import TaskItem from "./TaskItem";
 import CategoryBar from "../components/CategoryBar";
@@ -9,6 +9,8 @@ import Input from "./Input";
 const HomeTasks = ({ tasks, setTasks, categories, selectedDate }) => {
   const [refresh, setRefresh] = useState(true);
   const [newTask, setNewTask] = useState("");
+
+  const scrollRef = useRef();
 
   const doRefresh = () => {
     setRefresh((current) => !current);
@@ -85,8 +87,15 @@ const HomeTasks = ({ tasks, setTasks, categories, selectedDate }) => {
     return date1.toDateString() === date2.toDateString();
   };
 
+  const _scrollToInput = (reactNode) => {
+    scrollRef.current.scrollToFocusedInput(reactNode);
+  };
+
   return (
-    <>
+    <KeyboardAwareScrollView
+      style={{ width: "98%", marginBottom: "5%" }}
+      ref={scrollRef}
+    >
       {categories.map((category) => (
         <StyledView key={Date.now() + category.id}>
           <CategoryBar
@@ -116,10 +125,11 @@ const HomeTasks = ({ tasks, setTasks, categories, selectedDate }) => {
             }}
             onChangeText={setNewTask}
             onBlur={() => onBlur(category)}
+            _scrollToInput={_scrollToInput}
           />
         </StyledView>
       ))}
-    </>
+    </KeyboardAwareScrollView>
   );
 };
 
