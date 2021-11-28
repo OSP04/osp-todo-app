@@ -41,12 +41,11 @@ const Wrapper = styled.View`
 `;
 
 const Body = styled.SafeAreaView`
-  display: flex;
+  flex: 1;
   justify-content: flex-start;
   align-items: center;
   padding: 5%;
   padding-top: 0;
-  position: relative;
 `;
 
 const StyledBar = styled.StatusBar`

@@ -20,14 +20,12 @@ const Footer = ({ navigation, type, screens }) => {
 };
 
 const StyledView = styled.View`
-  display: flex;
   flex-direction: row;
   width: 100%;
   justify-content: space-between;
   align-items: center;
   padding: 5%;
-  position: absolute;
-  bottom: 0;
+  padding-top: 0;
   background-color: ${theme.background};
 `;
 

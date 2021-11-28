@@ -79,7 +79,7 @@ const WeekStrip = ({ tasks, setTasks, categories }) => {
 };
 
 const StyledView = styled.View`
-  display: flex;
+  flex: 1;
   width: 100%;
 `;
 

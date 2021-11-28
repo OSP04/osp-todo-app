@@ -16,10 +16,7 @@ const Input = ({
   onSubmitEditing,
   onChangeText,
   onBlur,
-  _scrollToInput,
 }) => {
-  const autoFocus = (e) => _scrollToInput(findNodeHandle(e.target));
-
   return (
     isAdding && (
       <StyledView>
@@ -32,10 +29,6 @@ const Input = ({
           onSubmitEditing={onSubmitEditing}
           blurOnSubmit={false}
           onChangeText={onChangeText}
-          onFocus={(event) => {
-            _scrollToInput(ReactNative.findNodeHandle(event.target));
-          }}
-          // onFocus={(event) => autoFocus(event)}
         />
       </StyledView>
     )
