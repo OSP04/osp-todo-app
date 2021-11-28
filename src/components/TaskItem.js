@@ -1,18 +1,19 @@
-import React from "react";
-
+import React, { useState } from "react";
 import styled from "styled-components/native";
+
 import { theme } from "../theme";
 import { images } from "../images";
 import IconButton from "./IconButton";
 
-const TaskItem = ({ item, doRefresh }) => {
+const TaskItem = ({ item }) => {
+  const [isCompleted, setIsCompleted] = useState(item.complete);
   const toggleItem = () => {
     item.complete = !item.complete;
-    doRefresh();
+    setIsCompleted(item.complete);
   };
 
-  const returnIcon = (item) => {
-    return item.complete ? images.complete : images.uncomplete;
+  const returnIcon = () => {
+    return isCompleted ? images.complete : images.uncomplete;
   };
 
   return (
