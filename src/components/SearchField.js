@@ -11,12 +11,6 @@ function SearchField() {
   const updateSearch = (text) => {
     setSearchQuery(text);
   };
-  const handleSearchCancel = () => {
-    updateSearch("");
-  };
-  const handleSearchClear = () => {
-    updateSearch("");
-  };
 
   return (
     <View>
@@ -25,8 +19,6 @@ function SearchField() {
         onChangeText={updateSearch}
         value={searchQuery}
         containerStyle={styles.searchBar}
-        onCancel={handleSearchCancel}
-        onClear={handleSearchClear}
       />
       <TasksContainer style={styles.container}>{searchedTask}</TasksContainer>
     </View>
