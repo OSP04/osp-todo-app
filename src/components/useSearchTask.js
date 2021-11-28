@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import SearchedTask from "./SearchedTask";
 
 const unformattedCurrent = new Date();
@@ -55,11 +55,20 @@ const tasks = [
     owenr: null,
   },
 ];
+const useDidMountEffect = (func, deps) => {
+  const didMount = useRef(false);
+
+  useEffect(() => {
+    if (didMount.current) func();
+    else didMount.current = true;
+  }, deps);
+};
+
 function useSearchTask(query) {
   const [searchQuery, setSearchQuery] = useState(query);
   const [filteredTasks, setFilteredTasks] = useState([]);
 
-  useEffect(() => {
+  useDidMountEffect(() => {
     const filterTasks = async () => {
       setFilteredTasks(
         tasks.filter(
@@ -78,7 +87,7 @@ function useSearchTask(query) {
 
   const searchedTask = filteredTasks.map((task, index) => (
     <SearchedTask
-      key={task.id}
+      key={task.created}
       index={index}
       text={task.text}
       category={task.category}
