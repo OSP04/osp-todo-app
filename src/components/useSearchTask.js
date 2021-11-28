@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
-import styled from "styled-components/native";
+import SearchedTask from "./SearchedTask";
 
 const tasks = [
   {
     id: "1",
     text: "Buy Pizza",
-    date: new Date("2021-11-10T03:00:00.000Z"),
+    date: current,
     due: null,
     category: "Food",
     image:
@@ -17,8 +17,8 @@ const tasks = [
   {
     id: "2",
     text: "OpenSW Assignment",
-    date: new Date("2021-11-20T03:00:00.000Z"),
-    due: "2021. 12. 15",
+    date: current,
+    due: "2021-12-15",
     category: "School",
     image: null,
     complete: true,
@@ -27,8 +27,8 @@ const tasks = [
   {
     id: "3",
     text: "Buy noodle",
-    date: new Date("2021-11-15T03:00:00.000Z"),
-    due: "2022.1.5",
+    date: current,
+    due: "2022-1-5",
     category: "Food",
     image: null,
     complete: true,
@@ -38,7 +38,7 @@ const tasks = [
   {
     id: "4",
     text: "Submit report",
-    date: new Date("2021-11-16T03:00:00.000Z"),
+    date: current,
     due: null,
     category: "School",
     image: null,
@@ -69,9 +69,14 @@ function useSearchTask(query) {
   console.log(filteredTasks);
 
   const searchedTask = filteredTasks.map((task, index) => (
-    <SearchedTask key={task.id} index={index} text={task.text}>
-      {task.text}
-    </SearchedTask>
+    <SearchedTask
+      key={task.id}
+      index={index}
+      text={task.text}
+      category={task.category}
+      date={task.date}
+      due={task.due}
+    />
   ));
 
   console.log(searchedTask);
@@ -79,5 +84,3 @@ function useSearchTask(query) {
   return { setSearchQuery, searchedTask };
 }
 export default useSearchTask;
-
-const SearchedTask = styled.Text``;
