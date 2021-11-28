@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import styled from "styled-components/native";
+import Animated from "react-native-reanimated";
 
 import { theme } from "../theme";
 import { images } from "../images";
 import IconButton from "./IconButton";
 
-const TaskItem = ({ item }) => {
+const TaskItem = ({ item, drag }) => {
   const [isCompleted, setIsCompleted] = useState(item.complete);
   const toggleItem = () => {
     item.complete = !item.complete;
@@ -17,23 +18,25 @@ const TaskItem = ({ item }) => {
   };
 
   return (
-    <StyledView>
-      <LeftItems>
-        <IconButton type={returnIcon(item)} onPressOut={toggleItem} />
-        <StyledText>
-          <TaskText>{item.text}</TaskText>
-          {item.due && <DueDate>{item.due.toLocaleDateString()}</DueDate>}
-        </StyledText>
-      </LeftItems>
-      <RightItems>
-        <TaskImage source={{ uri: item.image }} />
-        <IconButton type={images.move} />
-      </RightItems>
+    <StyledView activeOpacity={1} onLongPress={drag}>
+      <Animated.View>
+        <LeftItems>
+          <IconButton type={returnIcon(item)} onPressOut={toggleItem} />
+          <StyledText>
+            <TaskText>{item.text}</TaskText>
+            {item.due && <DueDate>{item.due.toLocaleDateString()}</DueDate>}
+          </StyledText>
+        </LeftItems>
+        <RightItems>
+          <TaskImage source={{ uri: item.image }} />
+          <IconButton type={images.move} />
+        </RightItems>
+      </Animated.View>
     </StyledView>
   );
 };
 
-const StyledView = styled.View`
+const StyledView = styled.TouchableOpacity`
   flex-direction: row;
   padding: 5px;
   align-items: center;

@@ -3,7 +3,7 @@ import DropDownPicker from "react-native-dropdown-picker";
 import { StyleSheet } from "react-native";
 import styled from "styled-components/native";
 
-const Dropdown = ({ category, setRefresh }) => {
+const Dropdown = ({ category, setRefresh, setSorting }) => {
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState(category ? category.sorting : "added");
   const [items, setItems] = useState([
@@ -26,6 +26,8 @@ const Dropdown = ({ category, setRefresh }) => {
           if (category) {
             category.sorting = value;
             setRefresh((current) => !current);
+          } else {
+            setSorting(value);
           }
         }}
         style={styles.container}

@@ -1,17 +1,22 @@
-import React, { useState } from "react";
-
+import React, { useState, useRef } from "react";
 import styled from "styled-components/native";
+import { View } from "react-native";
+import DraggableFlatList, {
+  ScaleDecorator,
+  ShadowDecorator,
+  OpacityDecorator,
+} from "react-native-draggable-flatlist";
 
 import { db } from "../db";
 import { images } from "../images";
 import { theme } from "../theme";
-
 import TopBar from "../components/TopBar";
 import Dropdown from "../components/Dropdown";
 import TaskItem from "../components/TaskItem";
 import Footer from "../components/Footer";
 
 const AllTasks = ({ navigation }) => {
+  const ref = useRef(null);
   const [tasks, setTasks] = useState(db.tasks);
   const [refresh, setRefresh] = useState(false);
   const [sorting, setSorting] = useState("added");
@@ -38,7 +43,6 @@ const AllTasks = ({ navigation }) => {
         let recentIndex = i;
         for (let j = i + 1; j < dueDates.length; j++) {
           if (dueDates[recentIndex] > dueDates[j]) {
-            console.log(true);
             recentIndex = j;
           }
         }
@@ -54,9 +58,30 @@ const AllTasks = ({ navigation }) => {
       return dueTasks.concat(notDueTasks);
     }
   };
+  const renderItem = ({ item, drag }) => {
+    return (
+      <ScaleDecorator>
+        <OpacityDecorator activeOpacity={1}>
+          <ShadowDecorator>
+            <TaskItem item={item} drag={drag} />
+          </ShadowDecorator>
+        </OpacityDecorator>
+      </ScaleDecorator>
+    );
+  };
 
-  const doRefresh = () => {
-    setRefresh((current) => !current);
+  const dragAndSave = (data) => {
+    if (sorting === "added") {
+      setTasks(data);
+    } else if (sorting === "due") {
+      console.log("Prevent");
+    } else {
+      let filteredTasks = tasks; // Tasks not included in data
+      for (let i = 0; i < data.length; i++) {
+        filteredTasks = filteredTasks.filter((item) => item.id !== data[i].id);
+      }
+      setTasks([...data, ...filteredTasks]);
+    }
   };
 
   return (
@@ -68,12 +93,25 @@ const AllTasks = ({ navigation }) => {
         navigation={navigation}
       />
       <StyledView>
-        <Dropdown setSorting={setSorting} category={false} />
+        <Dropdown
+          category={false}
+          setRefresh={setRefresh}
+          setSorting={setSorting}
+        />
       </StyledView>
       <Tasks>
-        {sortTasks(tasks).map((item) => (
-          <TaskItem key={item.id} item={item} doRefresh={doRefresh} />
-        ))}
+        <DraggableFlatList
+          ref={ref}
+          data={sortTasks(tasks)}
+          onDragEnd={({ data }) => {
+            dragAndSave(data);
+          }}
+          keyExtractor={(item) => item.id}
+          renderItem={renderItem}
+          renderPlaceholder={() => (
+            <View style={{ flex: 1, backgroundColor: "tomato" }} />
+          )}
+        />
       </Tasks>
       <Footer navigation={navigation} type={null} screens={[null, null]} />
     </Wrapper>
@@ -92,7 +130,8 @@ const StyledView = styled.View`
   margin-right: 5%;
 `;
 
-const Tasks = styled.View`
+const Tasks = styled.SafeAreaView`
+  flex: 1;
   padding: 5%;
 `;
 
