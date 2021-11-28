@@ -65,7 +65,16 @@ function useSearchTask(query) {
     };
     filterTasks();
   }, [searchQuery]);
+
   console.log(filteredTasks);
+
+  const searchedTask = filteredTasks.map((task, index) => (
+    <SearchedTask key={task.id} index={index} text={task.text}>
+      {task.text}
+    </SearchedTask>
+  ));
+
+  console.log(searchedTask);
 
   return { setSearchQuery, searchedTask };
 }
