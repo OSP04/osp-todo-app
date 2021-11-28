@@ -4,11 +4,9 @@ import { Dimensions } from "react-native";
 import styled from "styled-components/native";
 import Categories from "../components/Categories";
 import IconButton from "../components/IconButton";
-import ShowCateTask from "../components/ShowCateTask";
 import { images } from "../images";
 import { theme } from "../theme";
 import AddCategory from "./AddCategory";
-import OneCategory from "./OneCategory";
 import { db } from "../db";
 
 const AllCategory = () => {
@@ -17,12 +15,10 @@ const AllCategory = () => {
     const [state, setState] = useState(false);
     const [color, setColor] = useState("black");
     const [refresh, setRefresh] = useState(true);
-    const [visible, setVisible] = useState(false);
 
     const [newCategory, setNewCategory] = useState("");
 
     const [categories, setCategories] = useState(db.categories);
-    const [tasks, setTasks] = useState(db.tasks);
 
     const addCategory = () => {
         const ID = Date.now().toString();
@@ -78,16 +74,7 @@ const AllCategory = () => {
             </StyledView >
             <StyledScroll>
                 {Object.values(categories).map(item => (
-                    <Wrapper>
-                        <Categories key={item.id} item={item} color={color} />
-                        {item.tasks[0] != null && Object.values(item.tasks).map(item => (
-                            <ShowCateTask key={item.id} item={item} doRefresh={doRefresh} />
-                        ))}
-                        <MoreView width={width}>
-                            <MoreButton onPress={() => { setVisible(true) }}>+ See more tasks...</MoreButton>
-                            <OneCategory key={item.id} item={item} visible={visible} setVisible={setVisible} doRefresh={doRefresh} />
-                        </MoreView>
-                    </Wrapper>
+                    <Categories key={item.id} item={item} color={color} doRefresh={doRefresh} />
                 ))}
             </StyledScroll>
         </Wrapper>
@@ -115,17 +102,6 @@ align-items: center;
 const StyledText = styled.Text`
 font-weight: bold;
 font-size: 24px;
-`;
-
-const MoreView = styled.View`
-align-items: flex-end;
-padding-right: 20px;
-padding-top: 10px;
-padding-bottom: 10px;
-`;
-
-const MoreButton = styled.Text`
-color: ${theme.light};
 `;
 
 const StyledScroll = styled.ScrollView``;

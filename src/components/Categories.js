@@ -1,17 +1,30 @@
-import React from "react";
-import { Dimensions } from "react-native";
+import React, { useState } from "react";
+import { Dimensions, View } from "react-native";
 
 import styled from "styled-components/native";
+import OneCategory from "../screens/OneCategory";
+import { theme } from "../theme";
+import ShowCateTask from "./ShowCateTask";
 
-const Categories = ({ item }) => {
+const Categories = ({ item, doRefresh }) => {
 
     const width = Dimensions.get('window').width;
+    const [visible, setVisible] = useState(false);
 
     return (
         <Wrapper>
             <StyledView width={width}>
                 <StyledText style={{ color: item.color }}>{item.title}</StyledText>
             </StyledView>
+            <View>
+                {item.tasks[0] != null && Object.values(item.tasks).map(item => (
+                    <ShowCateTask key={item.id} item={item} doRefresh={doRefresh} />
+                ))}
+                <MoreView width={width}>
+                    <MoreButton onPress={() => { setVisible(true) }}>+ See more tasks...</MoreButton>
+                    <OneCategory key={item.id} item={item} visible={visible} setVisible={setVisible} doRefresh={doRefresh} />
+                </MoreView>
+            </View>
         </Wrapper>
     );
 };
@@ -33,6 +46,17 @@ font-weight: bold;
 font-size: 22px;
 margin-top: 6px;
 margin-bottom: 6px;
+`;
+
+const MoreView = styled.View`
+align-items: flex-end;
+padding-right: 20px;
+padding-top: 10px;
+padding-bottom: 10px;
+`;
+
+const MoreButton = styled.Text`
+color: ${theme.light};
 `;
 
 export default Categories;
