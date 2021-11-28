@@ -1,9 +1,10 @@
 import { SearchBar } from "react-native-elements";
 import React, { useState } from "react";
 import { getStatusBarHeight } from "react-native-status-bar-height";
-import { StyleSheet } from "react-native";
+import { StyleSheet, View } from "react-native";
+import styled from "styled-components/native";
 
-export default SearchField = () => {
+function SearchField() {
   const [searchKeyWord, setSearchKeyWord] = useState("");
 
   const updateSearch = (text) => {
@@ -12,17 +13,21 @@ export default SearchField = () => {
   };
 
   return (
-    <SearchBar
-      placeholder="Type Here..."
-      onChangeText={(text) => updateSearch(text)}
-      value={searchKeyWord}
-      containerStyle={styles.searchBar}
-    />
+    <View>
+      <SearchBar
+        placeholder="Type Here..."
+        onChangeText={updateSearch}
+        value={searchKeyWord}
+        containerStyle={styles.searchBar}
+      />
+    </View>
   );
-};
+}
+export default SearchField;
 
 const styles = StyleSheet.create({
   searchBar: {
     top: 38 + getStatusBarHeight(),
   },
+  container: { top: 50 + getStatusBarHeight() },
 });
