@@ -32,6 +32,30 @@ export default CalendarScreen = (navigation) => {
           //해당 날짜의 메인으로 이동
           console.log("selected day", day);
         }}
+        markingType={"period"}
+        markedDates={{
+          [current]: { selected: true },
+          "2021-11-15": { marked: true, dotColor: "#50cebb" },
+          "2021-11-16": { marked: true, dotColor: "#50cebb" },
+          "2021-11-21": {
+            startingDay: true,
+            color: "#50cebb",
+            textColor: "white",
+          },
+          "2021-11-22": { color: "#70d7c7", textColor: "white" },
+          "2021-11-23": {
+            color: "#70d7c7",
+            textColor: "white",
+            marked: true,
+            dotColor: "white",
+          },
+          "2021-11-24": { color: "#70d7c7", textColor: "white" },
+          "2021-11-25": {
+            endingDay: true,
+            color: "#50cebb",
+            textColor: "white",
+          },
+        }}
       />
     </View>
   );
