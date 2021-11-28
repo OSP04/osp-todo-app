@@ -2,20 +2,21 @@ import { View } from "react-native";
 import React from "react";
 import { CalendarList } from "react-native-calendars";
 import BackButton from "../components/BackButton";
-
-export default CalendarScreen = (navigation) => {
-  const unformattedCurrent = new Date();
-  const year = unformattedCurrent.getFullYear();
-  const month = unformattedCurrent.getMonth() + 1;
-  const date = unformattedCurrent.getDate();
-  const current = `${year}-${month >= 10 ? month : "0" + month}-${
+const formatDate = (newDate) => {
+  const year = newDate.getFullYear();
+  const month = newDate.getMonth() + 1;
+  const date = newDate.getDate();
+  const formattedDate = `${year}-${month >= 10 ? month : "0" + month}-${
     date >= 10 ? date : "0" + date
   }`;
+  return formattedDate;
+};
+export default CalendarScreen = (navigation) => {
   return (
     <View style={{ paddingtop: 50, flex: 1 }}>
       <BackButton onPressOut={() => navigation.goBack()} />
       <CalendarList
-        current={current}
+        current={formatDate(new Date())}
         // Callback which gets executed when visible months change in scroll view. Default = undefined
         onVisibleMonthsChange={(months) => {
           console.log("now these months are visible", months);
@@ -34,7 +35,11 @@ export default CalendarScreen = (navigation) => {
         }}
         markingType={"period"}
         markedDates={{
-          [current]: { selected: true },
+          [formatDate(new Date())]: {
+            startingDay: true,
+            color: "green",
+            endingDay: true,
+          },
           "2021-11-15": { marked: true, dotColor: "#50cebb" },
           "2021-11-16": { marked: true, dotColor: "#50cebb" },
           "2021-11-21": {
@@ -60,6 +65,7 @@ export default CalendarScreen = (navigation) => {
     </View>
   );
 };
+const marking = () => {};
 const [tasks] = [
   {
     id: "1",
