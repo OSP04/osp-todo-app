@@ -8,7 +8,7 @@ const SearchedTask = ({ index, text, category, date, due }) => {
     <StyledView>
       <StyledText>
         <FirstElements>
-          <Index>{index}. </Index>
+          <Index>{index + 1}. </Index>
           <Category>{category}</Category>
         </FirstElements>
         <TaskText>{text}</TaskText>
