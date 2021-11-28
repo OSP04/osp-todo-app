@@ -1,26 +1,19 @@
-import React, { useState } from "react";
-
+import React from "react";
 import styled from "styled-components/native";
+
 import { theme } from "../theme";
 import { images } from "../images";
 import IconButton from "./IconButton";
 import Dropdown from "./Dropdown";
 
-const CategoryBar = ({ onPressOut, category, doRefresh }) => {
-  const [isAdding, setIsAdding] = useState(category.isAdding);
+const CategoryBar = ({ onPressOut, category, setRefresh }) => {
   return (
     <StyledView>
       <Category>
         <Title category={category}>{category.title}</Title>
-        <IconButton
-          onPressOut={() => {
-            onPressOut();
-            setIsAdding(category.isAdding);
-          }}
-          type={images.add}
-        />
+        <IconButton onPressOut={onPressOut} type={images.add} />
       </Category>
-      <Dropdown category={category} doRefresh={doRefresh} />
+      <Dropdown category={category} setRefresh={setRefresh} />
     </StyledView>
   );
 };

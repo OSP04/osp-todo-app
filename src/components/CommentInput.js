@@ -11,6 +11,7 @@ const CommentInput = ({ newComment, onChangeText, onSubmitEditing }) => {
     <StyledView>
       <StyledInput
         value={newComment}
+        multiline={true}
         onChangeText={onChangeText}
         onSubmitEditing={onSubmitEditing}
       />

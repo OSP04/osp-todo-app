@@ -9,10 +9,6 @@ const HomeTasks = ({ tasks, setTasks, categories, selectedDate }) => {
   const [refresh, setRefresh] = useState(true);
   const [newTask, setNewTask] = useState("");
 
-  const doRefresh = () => {
-    setRefresh((current) => !current);
-  };
-
   const addTask = (category) => {
     if (newTask) {
       setNewTask("");
@@ -36,7 +32,7 @@ const HomeTasks = ({ tasks, setTasks, categories, selectedDate }) => {
   const onBlur = (category) => {
     category.isAdding = false; // Hide text input
     setNewTask("");
-    doRefresh();
+    setRefresh((current) => !current);
   };
 
   const sortTasks = (category) => {
@@ -63,7 +59,6 @@ const HomeTasks = ({ tasks, setTasks, categories, selectedDate }) => {
         let recentIndex = i;
         for (let j = i + 1; j < dueDates.length; j++) {
           if (dueDates[recentIndex] > dueDates[j]) {
-            console.log(true);
             recentIndex = j;
           }
         }
@@ -92,17 +87,17 @@ const HomeTasks = ({ tasks, setTasks, categories, selectedDate }) => {
             key={category.id}
             onPressOut={() => {
               category.isAdding = true;
-              doRefresh();
+              setRefresh((current) => !current);
             }}
             category={category}
             title={category.title}
-            doRefresh={doRefresh}
+            setRefresh={setRefresh}
           />
           {sortTasks(category).map((item) => {
             return (
               // if dates are the same, return task item
               compareDate(item.date, selectedDate) && (
-                <TaskItem key={item.id} item={item} doRefresh={doRefresh} />
+                <TaskItem key={item.id} item={item} />
               )
             );
           })}

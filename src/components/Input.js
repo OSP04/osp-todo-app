@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components/native";
 
 import { theme } from "../theme";
@@ -13,6 +13,7 @@ const Input = ({ newTask, isAdding, onSubmitEditing, setNewTask, onBlur }) => {
         <StyledInput
           value={newTask}
           placeholder="Add a task"
+          multiline={true}
           autoFocus={true}
           onBlur={onBlur}
           onSubmitEditing={onSubmitEditing}
