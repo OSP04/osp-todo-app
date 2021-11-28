@@ -1,38 +1,39 @@
-import React from "react";
-import { getStatusBarHeight } from "react-native-status-bar-height";
-import { StyleSheet, Text, View } from "react-native";
 import styled from "styled-components/native";
-
+import * as React from "react";
+import { Card } from "react-native-paper";
+import { TouchableOpacity } from "react-native";
 const SearchedTask = ({ index, text, category, date, due }) => {
   return (
-    <StyledView>
-      <StyledText>
-        <FirstElements>
-          <Index>{index + 1}. </Index>
-          <Category>{category}</Category>
-        </FirstElements>
-        <TaskText>{text}</TaskText>
-        <Date>
-          {date && <StartDate>{date}</StartDate>}
-          {due && <DueDate>~{due}</DueDate>}
-        </Date>
-      </StyledText>
-    </StyledView>
+    <TouchableOpacity
+      style={{ marginRight: 10, marginTop: 17 }}
+      onPress={() => alert(text)}
+      //나중에 onpress 화면이동설정
+    >
+      <Card>
+        <Card.Content>
+          <StyledView>
+            <FirstElements>
+              <Index>{index + 1}. </Index>
+              <TaskText>{text}</TaskText>
+            </FirstElements>
+            <Category> {category} </Category>
+            <Date>
+              {date && <StartDate>{date}</StartDate>}
+              {due && <DueDate>~{due}</DueDate>}
+            </Date>
+          </StyledView>
+        </Card.Content>
+      </Card>
+    </TouchableOpacity>
   );
 };
 export default SearchedTask;
-
-const StyledView = styled.View`
-  flex-direction: row;
-  padding: 5px;
-  align-items: center;
-  justify-content: space-between;
-`;
-
-const StyledText = styled.View`
+const StyledView = styled.Text`
+  display: flex;
   flex-direction: column;
   margin-left: 5px;
 `;
+const FirstElements = styled.Text``;
 const TaskText = styled.Text``;
 const Date = styled.Text``;
 const DueDate = styled.Text`
@@ -41,8 +42,7 @@ const DueDate = styled.Text`
 const StartDate = styled.Text`
   font-size: 12px;
 `;
-const Category = styled.Text``;
-const Index = styled.Text``;
-const FirstElements = styled.Text`
+const Category = styled.Text`
   font-size: 12px;
 `;
+const Index = styled.Text``;
