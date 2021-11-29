@@ -1,7 +1,7 @@
 import React from "react";
 import { StyleSheet } from "react-native";
 import { Text } from "react-native-paper";
-import { theme } from "../theme";
+import { theme } from "../../theme";
 
 export default function PreText(props) {
   return <Text style={styles.header} {...props} />;

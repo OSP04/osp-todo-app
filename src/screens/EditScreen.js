@@ -2,13 +2,13 @@ import React, { useState } from "react";
 import { StyleSheet, View, Alert, Pressable, Text } from "react-native";
 import BackButton from "../components/common/BackButton";
 import { theme } from "../theme";
-import Background from "../components/Background";
-import TopHeader from "../components/TopHeader";
+import Background from "../components/common/Background";
+import TopHeader from "../components/common/TopHeader";
 import EditMemo from "../components/EditMemo";
-import EditDueDate from "../components/EditDueDate";
-import EditRepeat from "../components/EditRepeat";
-import EditLocation from "../components/EditLocation";
-import EditTodoTitle from "../components/EditTodoTitle";
+import EditDueDate from "../components/edit/EditDueDate";
+import EditRepeat from "../components/edit/EditRepeat";
+import EditLocation from "../components/edit/EditLocation";
+import EditTodoTitle from "../components/edit/EditTodoTitle";
 import EditCategory from "../components/edit/EditCategory";
 
 const EditScreen = ({ navigation }) => {

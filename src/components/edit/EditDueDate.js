@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { StyleSheet, Text, Pressable, View } from "react-native";
 import { Entypo } from "@expo/vector-icons";
-import { theme } from "../theme";
-import CommonModal from "../components/CommonModal";
+import { theme } from "../../theme";
+import CommonModal from "../common/CommonModal";
 
 const EditDueDate = ({}) => {
   const [date, setDate] = useState("DueDate");

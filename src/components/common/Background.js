@@ -5,7 +5,7 @@ import {
   TouchableWithoutFeedback,
   Keyboard,
 } from "react-native";
-import { theme } from "../theme";
+import { theme } from "../../theme";
 
 export default function Background({ type, children }) {
   return (

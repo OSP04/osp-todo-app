@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { StyleSheet, View, TextInput, Pressable, Keyboard } from "react-native";
 import { Entypo } from "@expo/vector-icons";
-import { theme } from "../theme";
+import { theme } from "../../theme";
 
 const EditMemo = ({}) => {
   const [memo, setMemo] = useState("");
