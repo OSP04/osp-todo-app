@@ -67,8 +67,28 @@ const EditPicture = ({}) => {
   return (
     <View>
       <CommonModal showModal={showModal} setShowModal={setShowModal}>
-        <Text style={styles.modalText}>Upload your picture</Text>
+        {pickedImagePath !== "" ? (
+          <Image source={{ uri: pickedImagePath }} style={styles.fullImage} />
+        ) : (
+          <Text style={styles.modalText}>Upload your picture</Text>
+        )}
+        <View
+          style={{
+            borderBottomColor: "black",
+            borderBottomWidth: 1,
+          }}
+        />
         <View style={styles.buttonContainer}>
+          {pickedImagePath !== "" && (
+            <Button
+              onPress={() => {
+                setShowModal(false);
+                setPickedImagePath("");
+              }}
+              title="Delete"
+              color="red"
+            />
+          )}
           <Button onPress={showImagePicker} title="Select an image" />
           <Button onPress={openCamera} title="Open camera" />
           <Button
@@ -79,40 +99,18 @@ const EditPicture = ({}) => {
           />
         </View>
       </CommonModal>
-      <CommonModal showModal={showPicture} setShowModal={setShowPicture}>
-        <Image source={{ uri: pickedImagePath }} style={styles.fullImage} />
-        <View style={styles.buttonContainer}>
-          <Button
-            onPress={() => {
-              setShowPicture(false);
-              setPickedImagePath("");
-            }}
-            title="Delete"
-            color="red"
-          />
-          <Button
-            onPress={() => {
-              setShowPicture(false);
-            }}
-            title="Cancel"
-          />
-        </View>
-      </CommonModal>
-      <View style={styles.row}>
-        {pickedImagePath !== "" && (
-          <Pressable onPress={openPicture}>
-            <Image source={{ uri: pickedImagePath }} style={styles.image} />
-          </Pressable>
-        )}
-        <Pressable onPress={openModal}>
+      <Pressable onPress={openModal}>
+        {pickedImagePath !== "" ? (
+          <Image source={{ uri: pickedImagePath }} style={styles.image} />
+        ) : (
           <FontAwesome
             name="picture-o"
             style={styles.icon}
             size={25}
             color="black"
           />
-        </Pressable>
-      </View>
+        )}
+      </Pressable>
     </View>
   );
 };
@@ -121,19 +119,10 @@ const styles = StyleSheet.create({
   icon: {
     paddingRight: 15,
   },
-  screen: {
-    justifyContent: "center",
-    alignItems: "center",
-  },
   buttonContainer: {
     width: "100%",
     height: undefined,
     justifyContent: "center",
-  },
-  row: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "flex-end",
   },
   image: {
     width: 25,
@@ -147,7 +136,7 @@ const styles = StyleSheet.create({
     height: undefined,
     aspectRatio: 0.7,
     resizeMode: "contain",
-    marginBottom: 20,
+    marginBottom: 10,
   },
   modalText: {
     textAlign: "center",
