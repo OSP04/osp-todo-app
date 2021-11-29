@@ -3,8 +3,8 @@ import { Dimensions, View, Modal } from "react-native";
 
 import styled from "styled-components/native";
 import DropButton from "../components/common/DropButton";
-import IconButton from "../components/IconButton";
-import ShowTaskOne from "../components/ShowTaskOne";
+import IconButton from "../components/common/IconButton";
+import ShowTaskOne from "../components/category/ShowTaskOne";
 import { images } from "../images";
 import { theme } from "../theme";
 
