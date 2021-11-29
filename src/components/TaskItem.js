@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components/native";
 import Animated from "react-native-reanimated";
 import { StyleSheet } from "react-native";
@@ -8,8 +8,14 @@ import { theme } from "../theme";
 import { images } from "../images";
 import IconButton from "./IconButton";
 
-const TaskItem = ({ item, drag }) => {
+const TaskItem = ({ item, drag, sorting }) => {
+  // if sorting is due, prevent drag animation
+  useEffect(() => {
+    setDisabled(sorting === "due" ? true : false);
+  }, [sorting]);
+
   const [isCompleted, setIsCompleted] = useState(item.complete);
+  const [disabled, setDisabled] = useState(false);
 
   const toggleItem = () => {
     item.complete = !item.complete;
@@ -23,7 +29,12 @@ const TaskItem = ({ item, drag }) => {
   const { isActive } = useOnCellActiveAnimation();
 
   return (
-    <StyledView activeOpacity={1} onLongPress={drag} isActive={isActive}>
+    <Touchable
+      activeOpacity={1}
+      onLongPress={drag}
+      isActive={isActive}
+      disabled={disabled}
+    >
       <Animated.View style={styles.animatedView}>
         <LeftItems>
           <IconButton type={returnIcon(item)} onPressOut={toggleItem} />
@@ -37,7 +48,7 @@ const TaskItem = ({ item, drag }) => {
           <IconButton type={images.move} />
         </RightItems>
       </Animated.View>
-    </StyledView>
+    </Touchable>
   );
 };
 
@@ -50,7 +61,7 @@ const styles = StyleSheet.create({
   },
 });
 
-const StyledView = styled.TouchableOpacity`
+const Touchable = styled.TouchableOpacity`
   flex-direction: row;
   padding: 5px;
   align-items: center;

@@ -1,6 +1,5 @@
 import React, { useState, useRef } from "react";
 import styled from "styled-components/native";
-import { View } from "react-native";
 import DraggableFlatList, {
   ScaleDecorator,
   ShadowDecorator,
@@ -58,12 +57,13 @@ const AllTasks = ({ navigation }) => {
       return dueTasks.concat(notDueTasks);
     }
   };
+
   const renderItem = ({ item, drag }) => {
     return (
       <ScaleDecorator>
         <OpacityDecorator activeOpacity={1}>
           <ShadowDecorator>
-            <TaskItem item={item} drag={drag} />
+            <TaskItem item={item} drag={drag} sorting={sorting} />
           </ShadowDecorator>
         </OpacityDecorator>
       </ScaleDecorator>
@@ -108,7 +108,6 @@ const AllTasks = ({ navigation }) => {
           }}
           keyExtractor={(item) => item.id}
           renderItem={renderItem}
-          // renderPlaceholder={() => <Placeholder />}
         />
       </Tasks>
       <Footer navigation={navigation} type={null} screens={[null, null]} />

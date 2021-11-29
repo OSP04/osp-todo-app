@@ -1,11 +1,17 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import styled from "styled-components/native";
+import DraggableFlatList, {
+  ScaleDecorator,
+  ShadowDecorator,
+  OpacityDecorator,
+} from "react-native-draggable-flatlist";
 
 import TaskItem from "./TaskItem";
 import CategoryBar from "../components/CategoryBar";
 import Input from "./Input";
 
 const HomeTasks = ({ tasks, setTasks, categories, selectedDate }) => {
+  const ref = useRef(null);
   const [refresh, setRefresh] = useState(true);
   const [newTask, setNewTask] = useState("");
 
@@ -79,6 +85,37 @@ const HomeTasks = ({ tasks, setTasks, categories, selectedDate }) => {
     return date1.toDateString() === date2.toDateString();
   };
 
+  const dragAndSave = (data, category) => {
+    const sorting = category.sorting;
+
+    if (sorting === "added") {
+      category.tasks = data;
+    } else if (sorting === "due") {
+      console.log("Prevent");
+    } else {
+      let filteredTasks = category.tasks; // Tasks not included in data
+      for (let i = 0; i < data.length; i++) {
+        filteredTasks = filteredTasks.filter((item) => item.id !== data[i].id);
+      }
+      category.tasks = [...data, ...filteredTasks];
+    }
+    setRefresh((current) => !current);
+  };
+
+  const renderItem = ({ item, drag }) => {
+    return (
+      <ScaleDecorator>
+        <OpacityDecorator activeOpacity={1}>
+          <ShadowDecorator>
+            {compareDate(item.date, selectedDate) && (
+              <TaskItem drag={drag} item={item} />
+            )}
+          </ShadowDecorator>
+        </OpacityDecorator>
+      </ScaleDecorator>
+    );
+  };
+
   return (
     <StyledScroll>
       {categories.map((category) => (
@@ -93,14 +130,15 @@ const HomeTasks = ({ tasks, setTasks, categories, selectedDate }) => {
             title={category.title}
             setRefresh={setRefresh}
           />
-          {sortTasks(category).map((item) => {
-            return (
-              // if dates are the same, return task item
-              compareDate(item.date, selectedDate) && (
-                <TaskItem key={item.id} item={item} />
-              )
-            );
-          })}
+          <DraggableFlatList
+            ref={ref}
+            data={sortTasks(category)}
+            onDragEnd={({ data }) => {
+              dragAndSave(data, category);
+            }}
+            keyExtractor={(item) => item.id}
+            renderItem={renderItem}
+          />
           <Input
             key={category.id + "Input"}
             newTask={newTask}
