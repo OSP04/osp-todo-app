@@ -108,9 +108,7 @@ const AllTasks = ({ navigation }) => {
           }}
           keyExtractor={(item) => item.id}
           renderItem={renderItem}
-          renderPlaceholder={() => (
-            <View style={{ flex: 1, backgroundColor: "tomato" }} />
-          )}
+          // renderPlaceholder={() => <Placeholder />}
         />
       </Tasks>
       <Footer navigation={navigation} type={null} screens={[null, null]} />
@@ -133,6 +131,11 @@ const StyledView = styled.View`
 const Tasks = styled.SafeAreaView`
   flex: 1;
   padding: 5%;
+`;
+
+const Placeholder = styled.View`
+  flex: 1;
+  background-color: ${theme.light};
 `;
 
 export default AllTasks;

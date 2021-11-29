@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import styled from "styled-components/native";
 import Animated from "react-native-reanimated";
+import { StyleSheet } from "react-native";
+import { useOnCellActiveAnimation } from "react-native-draggable-flatlist";
 
 import { theme } from "../theme";
 import { images } from "../images";
@@ -8,6 +10,7 @@ import IconButton from "./IconButton";
 
 const TaskItem = ({ item, drag }) => {
   const [isCompleted, setIsCompleted] = useState(item.complete);
+
   const toggleItem = () => {
     item.complete = !item.complete;
     setIsCompleted(item.complete);
@@ -17,9 +20,11 @@ const TaskItem = ({ item, drag }) => {
     return isCompleted ? images.complete : images.uncomplete;
   };
 
+  const { isActive } = useOnCellActiveAnimation();
+
   return (
-    <StyledView activeOpacity={1} onLongPress={drag}>
-      <Animated.View>
+    <StyledView activeOpacity={1} onLongPress={drag} isActive={isActive}>
+      <Animated.View style={styles.animatedView}>
         <LeftItems>
           <IconButton type={returnIcon(item)} onPressOut={toggleItem} />
           <StyledText>
@@ -36,11 +41,22 @@ const TaskItem = ({ item, drag }) => {
   );
 };
 
+const styles = StyleSheet.create({
+  animatedView: {
+    flexDirection: "row",
+    flex: 1,
+    justifyContent: "space-between",
+    alignItems: "center",
+  },
+});
+
 const StyledView = styled.TouchableOpacity`
   flex-direction: row;
   padding: 5px;
   align-items: center;
   justify-content: space-between;
+  background-color: ${(props) =>
+    props.isActive ? theme.light : theme.background};
 `;
 
 const StyledText = styled.View`
@@ -68,6 +84,7 @@ const LeftItems = styled.View`
 
 const RightItems = styled.View`
   flex-direction: row;
+  align-items: center;
 `;
 
 export default TaskItem;
