@@ -88,6 +88,7 @@ const CalendarScreen = (navigation) => {
         // Enable or disable vertical scroll indicator. Default = false
         showScrollIndicator={true}
         onDayPress={(day) => {
+          navigation.navigate("Home");
           //해당 날짜의 메인으로 이동
           console.log("selected day", day);
         }}

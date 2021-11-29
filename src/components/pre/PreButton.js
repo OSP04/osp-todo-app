@@ -1,7 +1,7 @@
 import React from "react";
 import { StyleSheet } from "react-native";
 import { Button as PaperButton } from "react-native-paper";
-import { theme } from "../theme";
+import { theme } from "../../theme";
 
 export default function PreButton({ mode, style, ...props }) {
   return (

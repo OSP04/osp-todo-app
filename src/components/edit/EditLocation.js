@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { StyleSheet, Text, Pressable, View, TextInput } from "react-native";
 import { Entypo } from "@expo/vector-icons";
-import { theme } from "../theme";
-import CommonModal from "../components/CommonModal";
+import { theme } from "../../theme";
+import CommonModal from "../common/CommonModal";
 
 const EditLocation = ({}) => {
   const [location, setLocation] = useState("");

@@ -10,8 +10,7 @@ import {
 } from "react-native";
 import { FontAwesome } from "@expo/vector-icons";
 import * as ImagePicker from "expo-image-picker";
-import { theme } from "../theme";
-import CommonModal from "../components/CommonModal";
+import CommonModal from "../common/CommonModal";
 
 const EditPicture = ({}) => {
   const [showModal, setShowModal] = useState(false);
