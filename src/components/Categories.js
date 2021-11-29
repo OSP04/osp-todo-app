@@ -93,7 +93,7 @@ margin-bottom: 6px;
 
 const Underline = styled.View`
 width: 200px;
-height: 4px;
+height: 2px;
 margin-left: 10px;
 margin-bottom: 6px;
 `;

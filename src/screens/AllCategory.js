@@ -9,7 +9,7 @@ import { theme } from "../theme";
 import AddCategory from "./AddCategory";
 import { db } from "../db";
 
-const AllCategory = () => {
+const AllCategory = ({ navigation }) => {
 
     const width = Dimensions.get('window').width;
     const [state, setState] = useState(false);
@@ -72,7 +72,7 @@ const AllCategory = () => {
                 <AddCategory state={state} value={newCategory} onCancel={_onPressCancel} setColor={setColor}
                     onChangeText={_handleTextChange} onConfirm={addCategory} />
             </StyledView >
-            <StyledScroll>
+            <StyledScroll nestedScrollEnabled={true}>
                 {Object.values(categories).map(item => (
                     <Categories key={item.id} item={item} color={color} doRefresh={doRefresh} />
                 ))}
