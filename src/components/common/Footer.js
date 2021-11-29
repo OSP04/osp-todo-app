@@ -2,7 +2,7 @@ import React from "react";
 import { Text } from "react-native";
 import styled from "styled-components/native";
 
-import { theme } from "../theme";
+import { theme } from "../../theme";
 import IconButton from "./IconButton";
 
 const Footer = ({ navigation, type, screens }) => {

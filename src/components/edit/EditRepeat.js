@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { StyleSheet, Text, Pressable, View } from "react-native";
 import { Feather } from "@expo/vector-icons";
-import { theme } from "../theme";
+import { theme } from "../../theme";
 import CommonModal from "../common/CommonModal";
 
 const EditRepeat = ({}) => {

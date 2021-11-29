@@ -2,7 +2,7 @@ import React from "react";
 
 import styled from "styled-components/native";
 
-import IconButton from "../components/common/IconButton";
+import IconButton from "../common/IconButton";
 
 const TopBar = ({ types, screens, title, navigation }) => {
   return (

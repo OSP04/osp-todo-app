@@ -4,9 +4,9 @@ import Animated from "react-native-reanimated";
 import { StyleSheet } from "react-native";
 import { useOnCellActiveAnimation } from "react-native-draggable-flatlist";
 
-import { theme } from "../theme";
-import { images } from "../images";
-import IconButton from "./IconButton";
+import { theme } from "../../theme";
+import { images } from "../../images";
+import IconButton from "../common/IconButton";
 
 const TaskItem = ({ item, drag, sorting }) => {
   // if sorting is due, prevent drag animation

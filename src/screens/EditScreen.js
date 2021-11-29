@@ -4,7 +4,7 @@ import BackButton from "../components/common/BackButton";
 import { theme } from "../theme";
 import Background from "../components/common/Background";
 import TopHeader from "../components/common/TopHeader";
-import EditMemo from "../components/EditMemo";
+import EditMemo from "../components/edit/EditMemo";
 import EditDueDate from "../components/edit/EditDueDate";
 import EditRepeat from "../components/edit/EditRepeat";
 import EditLocation from "../components/edit/EditLocation";

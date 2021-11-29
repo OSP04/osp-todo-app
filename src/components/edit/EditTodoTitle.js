@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { StyleSheet, View, Text, TextInput, Pressable } from "react-native";
-import { theme } from "../theme";
+import { theme } from "../../theme";
 import EditPicture from "./EditPicture";
 
 const EditTodoTitle = ({}) => {

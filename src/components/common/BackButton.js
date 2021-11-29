@@ -11,7 +11,7 @@ const BackButton = ({ type, onPressOut }) => {
     >
       <Image
         style={styles.image}
-        source={require("../../assets/baseline_arrow_back_black_24.png")}
+        source={require("../../../assets/baseline_arrow_back_black_24.png")}
       />
     </TouchableOpacity>
   );
