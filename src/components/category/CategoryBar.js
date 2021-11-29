@@ -1,10 +1,10 @@
 import React from "react";
 import styled from "styled-components/native";
 
-import { theme } from "../theme";
-import { images } from "../images";
-import IconButton from "./IconButton";
-import Dropdown from "./Dropdown";
+import { theme } from "../../theme";
+import { images } from "../../images";
+import IconButton from "../common/IconButton";
+import Dropdown from "../common/Dropdown";
 
 const CategoryBar = ({ onPressOut, category, setRefresh }) => {
   return (

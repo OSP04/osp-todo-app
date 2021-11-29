@@ -3,7 +3,7 @@ import styled from "styled-components/native";
 
 import { theme } from "../theme";
 import { images } from "../images";
-import IconButton from "./IconButton";
+import IconButton from "./common/IconButton";
 
 const Input = ({ newTask, isAdding, onSubmitEditing, setNewTask, onBlur }) => {
   return (

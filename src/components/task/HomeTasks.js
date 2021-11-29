@@ -7,7 +7,7 @@ import DraggableFlatList, {
 } from "react-native-draggable-flatlist";
 
 import TaskItem from "./TaskItem";
-import CategoryBar from "../components/CategoryBar";
+import CategoryBar from "../components/category/CategoryBar";
 import Input from "../Input";
 
 const HomeTasks = ({ tasks, setTasks, categories, selectedDate }) => {

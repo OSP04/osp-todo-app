@@ -4,7 +4,7 @@ import styled from "styled-components/native";
 
 import { images } from "../../images";
 import { theme } from "../../theme";
-import IconButton from "../IconButton";
+import IconButton from "../common/IconButton";
 
 const CommentInput = ({ newComment, onChangeText, onSubmitEditing }) => {
   return (

@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { StyleSheet } from "react-native";
-
 import styled from "styled-components/native";
 import CalendarStrip from "react-native-calendar-strip";
 

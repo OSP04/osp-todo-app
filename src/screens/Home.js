@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 import styled from "styled-components/native";
 
-import Footer from "../components/Footer";
+import Footer from "../components/common/Footer";
 import WeekStrip from "../components/WeekStrip";
 import TopBar from "../components/common/TopBar";
 
