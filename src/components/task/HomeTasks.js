@@ -8,7 +8,7 @@ import DraggableFlatList, {
 
 import TaskItem from "./TaskItem";
 import CategoryBar from "../components/CategoryBar";
-import Input from "./Input";
+import Input from "../Input";
 
 const HomeTasks = ({ tasks, setTasks, categories, selectedDate }) => {
   const ref = useRef(null);

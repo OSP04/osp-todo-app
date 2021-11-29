@@ -19,7 +19,6 @@
     "react": "17.0.1",
     "react-dom": "17.0.1",
     "react-native": "0.64.3",
-<<<<<<< HEAD
     "react-native-calendar-strip": "^2.2.5",
     "react-native-calendars": "^1.1269.0",
     "react-native-draggable-flatlist": "^3.0.3",
@@ -27,22 +26,13 @@
     "react-native-elements": "^3.4.2",
     "react-native-gesture-handler": "^1.10.3",
     "react-native-paper": "^4.10.1",
-<<<<<<< HEAD
     "react-native-reanimated": "^2.2.4",
     "react-native-safe-area-context": "^3.3.2",
     "react-native-screens": "^3.9.0",
     "react-native-scrollable-calendar-strip": "^2.0.14",
     "react-native-scrollable-tab-view": "^1.0.0",
-=======
-    "react-native-safe-area-context": "^3.3.2",
-    "react-native-scrollable-calendar-strip": "^2.0.14",
->>>>>>> feature/CategorySort
     "react-native-status-bar-height": "^2.6.0",
     "react-native-vector-icons": "^9.0.0",
-=======
-    "react-native-paper": "^4.10.1",
-    "react-native-scrollable-tab-view": "^1.0.0",
->>>>>>> feature/achievement
     "react-native-web": "0.17.1",
     "styled-components": "^5.3.3"
   },

@@ -1,6 +1,6 @@
 import React from "react";
 import { View } from "react-native";
-import BackButton from "../components/BackButton";
+import BackButton from "../components/common/BackButton";
 import SearchField from "../components/SearchField";
 
 function SearchScreen({ navigation }) {

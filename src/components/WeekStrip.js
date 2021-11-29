@@ -5,7 +5,7 @@ import styled from "styled-components/native";
 import CalendarStrip from "react-native-calendar-strip";
 
 import { theme } from "../theme";
-import HomeTasks from "./HomeTasks";
+import HomeTasks from "./task/HomeTasks";
 
 const WeekStrip = ({ tasks, setTasks, categories }) => {
   const [markedDates, setMarkedDates] = useState([]);

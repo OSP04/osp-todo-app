@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import { View, StyleSheet, TouchableOpacity } from "react-native";
 import { Text } from "react-native-paper";
-import Logo from "../components/Logo";
+import Logo from "../components/pre/Logo";
 import PreText from "../components/PreText";
 import PreButton from "../components/PreButton";
 import PreTextInput from "../components/PreTextInput";
-import BackButton from "../components/BackButton";
+import BackButton from "../components/common/BackButton";
 import Background from "../components/Background";
 import * as Validator from "../Validator";
 import { theme } from "../theme";

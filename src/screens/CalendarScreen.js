@@ -1,7 +1,7 @@
 import { View } from "react-native";
 import React from "react";
 import { CalendarList } from "react-native-calendars";
-import BackButton from "../components/BackButton";
+import BackButton from "../components/common/BackButton";
 const formatDate = (newDate) => {
   const year = newDate.getFullYear();
   const month = newDate.getMonth() + 1;
