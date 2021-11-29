@@ -68,7 +68,7 @@ markingDates.forEach((day) => {
   };
 });
 
-const CalendarScreen = (navigation) => {
+const CalendarScreen = ({ navigation }) => {
   console.log(markingDates);
   return (
     <View style={{ paddingtop: 50, flex: 1 }}>
