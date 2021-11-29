@@ -4,118 +4,46 @@ import { Dimensions } from "react-native";
 import styled from "styled-components/native";
 import Categories from "../components/Categories";
 import IconButton from "../components/IconButton";
-import ShowCateTask from "../components/ShowCateTask";
 import { images } from "../images";
 import { theme } from "../theme";
 import AddCategory from "./AddCategory";
-import OneCategory from "./OneCategory";
+import { db } from "../db";
 
-const AllCategory = () => {
+const AllCategory = ({ navigation }) => {
 
     const width = Dimensions.get('window').width;
     const [state, setState] = useState(false);
-    const [color, setColor] = useState("black");
+    const [color, setColor] = useState(theme.category.red);
     const [refresh, setRefresh] = useState(true);
-    const [visible, setVisible] = useState(false);
 
     const [newCategory, setNewCategory] = useState("");
 
-    const [categories, setCategories] = useState([
-        {
-            id: "1",
-            text: "Study",
-            color: "black",
-            task: "exist",
-            tasks: [
-                {
-                    id: "1",
-                    text: "Report Assignment",
-                    due: "2021.11.19",
-                    completed: false,
-                },
-                {
-                    id: "2",
-                    text: "Study for JAVA quiz",
-                    due: "2021.11.29",
-                    completed: false,
-                },
-                {
-                    id: "3",
-                    text: "Homework-Algebra",
-                    due: "2021.12.01",
-                    completed: false,
-                },
-                {
-                    id: "4",
-                    text: "Exercise 6.6~6.8",
-                    due: "2021.12.09",
-                    completed: false,
-                },
-                {
-                    id: "5",
-                    text: "Exam study",
-                    due: "2021.12.13",
-                    completed: false,
-                },
-            ],
-        },
-        {
-            id: "2",
-            text: "Personal",
-            color: "black",
-            task: "exist",
-            tasks: [
-                {
-                    id: "1",
-                    text: "Book a hairdresser",
-                    due: "2021.11.19",
-                    completed: false,
-                },
-                {
-                    id: "2",
-                    text: "Write diary",
-                    due: "2021.11.29",
-                    completed: false,
-                },
-                {
-                    id: "3",
-                    text: "Water plants",
-                    due: "2021.12.01",
-                    completed: false,
-                },
-                {
-                    id: "4",
-                    text: "Visit Anne's market",
-                    due: "2021.12.09",
-                    completed: false,
-                },
-                {
-                    id: "5",
-                    text: "Visit Tom",
-                    due: "2021.12.13",
-                    completed: false,
-                },
-            ],
-        },
-    ]);
+    const [categories, setCategories] = useState(db.categories);
 
     const addCategory = () => {
         const ID = Date.now().toString();
         const newCategoryObj = {
             id: ID,
-            text: newCategory,
+            title: newCategory,
             color: color,
-            task: null,
+            isAdding: false,
+            sorting: "added",
             tasks:
             {
-                id: ID,
+                id: null,
+                count: "0",
                 text: null,
+                date: null,
                 due: null,
-                completed: false,
+                category: newCategory,
+                image: null,
+                complete: false,
+                created: null,
+                owner: null,
             },
         };
         setNewCategory("");
-        setColor("black");
+        setColor(theme.category.red);
         setCategories([...categories, newCategoryObj]);
         setState(false);
     };
@@ -144,18 +72,9 @@ const AllCategory = () => {
                 <AddCategory state={state} value={newCategory} onCancel={_onPressCancel} setColor={setColor}
                     onChangeText={_handleTextChange} onConfirm={addCategory} />
             </StyledView >
-            <StyledScroll>
+            <StyledScroll nestedScrollEnabled={true}>
                 {Object.values(categories).map(item => (
-                    <Wrapper>
-                        <Categories key={item.id} item={item} color={color} />
-                        {item.task != null && Object.values(item.tasks).map(item => (
-                            <ShowCateTask key={item.id} item={item} doRefresh={doRefresh} />
-                        ))}
-                        <MoreView width={width}>
-                            <MoreButton onPress={() => { setVisible(true) }}>+ See more tasks...</MoreButton>
-                            <OneCategory key={item.id} item={item} visible={visible} setVisible={setVisible} doRefresh={doRefresh} />
-                        </MoreView>
-                    </Wrapper>
+                    <Categories key={item.id} item={item} color={color} doRefresh={doRefresh} />
                 ))}
             </StyledScroll>
         </Wrapper>
@@ -182,18 +101,7 @@ align-items: center;
 
 const StyledText = styled.Text`
 font-weight: bold;
-font-size: 24px;
-`;
-
-const MoreView = styled.View`
-align-items: flex-end;
-padding-right: 20px;
-padding-top: 10px;
-padding-bottom: 10px;
-`;
-
-const MoreButton = styled.Text`
-color: ${theme.light};
+font-size: 26px;
 `;
 
 const StyledScroll = styled.ScrollView``;

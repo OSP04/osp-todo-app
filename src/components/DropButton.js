@@ -4,14 +4,14 @@ import { StyleSheet } from "react-native";
 import styled from "styled-components/native";
 import DropDownPicker from "react-native-dropdown-picker";
 
-const DropButton = ({ zIndex }) => {
+const DropButton = ({ category, doRefresh, setSorting }) => {
 
     const [open, setOpen] = useState(false);
-    const [value, setValue] = useState(null);
+    const [value, setValue] = useState(category ? category.sorting : "added");
     const [items, setItems] = useState([
-        { label: "Due", value: "Due" },
-        { label: "Added", value: "Added" },
-    ])
+        { label: "Due", value: "due" },
+        { label: "Added", value: "added" },
+    ]);
 
     return (
         <StyledView>
@@ -21,8 +21,16 @@ const DropButton = ({ zIndex }) => {
                 items={items}
                 setOpen={setOpen}
                 setValue={setValue}
-                setItems={setItems}
-                zIndex={zIndex}
+                zIndex={1000}
+                dropDownContainerStyle={{ width: 90 }}
+                onChangeValue={(value) => {
+                    if (category) {
+                        category.sorting = value;
+                        doRefresh();
+                    } else {
+                        setSorting(value);
+                    }
+                }}
                 style={styles.container}
                 labelStyle={styles.label}
                 textStyle={styles.text} />
@@ -32,7 +40,7 @@ const DropButton = ({ zIndex }) => {
 
 const styles = StyleSheet.create({
     label: { fontSize: 12 },
-    container: { height: 30, width: 88, marginRight: 20 },
+    container: { height: 30, width: 90, marginRight: 20 },
     text: {
         fontSize: 12,
     },

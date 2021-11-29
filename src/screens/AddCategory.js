@@ -21,9 +21,9 @@ const AddCategory = ({ state, value, onChangeText, setColor, onConfirm, onCancel
                         onChangeText={onChangeText}>
                     </StyledInput>
                     <ColorView>
-                        <ColorBox style={{ backgroundColor: "black" }} onPress={() => { setColor("black") }} />
-                        <ColorBox style={{ backgroundColor: "red" }} onPress={() => { setColor("red") }} />
-                        <ColorBox style={{ backgroundColor: "blue" }} onPress={() => { setColor("blue") }} />
+                        <ColorBox style={{ backgroundColor: theme.category.red }} onPress={() => { setColor(theme.category.red) }} />
+                        <ColorBox style={{ backgroundColor: theme.category.yellow }} onPress={() => { setColor(theme.category.yellow) }} />
+                        <ColorBox style={{ backgroundColor: theme.category.blue }} onPress={() => { setColor(theme.category.blue) }} />
                     </ColorView>
                     <ButtonView>
                         <ButtonText style={{ color: theme.light }} onPress={onCancel}>Cancel</ButtonText>

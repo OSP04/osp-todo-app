@@ -8,7 +8,7 @@ import ShowTaskOne from "../components/ShowTaskOne";
 import { images } from "../images";
 import { theme } from "../theme";
 
-const OneCategory = ({ item, visible, setVisible, doRefresh }) => {
+const OneCategory = ({ item, doRefresh, visible, setVisible, setSorting, sortTasks }) => {
 
     const width = Dimensions.get('window').width;
 
@@ -20,15 +20,18 @@ const OneCategory = ({ item, visible, setVisible, doRefresh }) => {
                     <StyledBar barStyle="default" />
                     <StyledView width={width - 20}>
                         <IconButton type={images.back} onPressOut={() => { setVisible(false) }} />
-                        <StyledText style={{ color: item.color }}>{item.text}</StyledText>
+                        <StyledText style={{ color: item.color }}>{item.title}</StyledText>
                         <View width={25} />
                     </StyledView >
                     <StyledView>
                         <StyledText style={{ marginLeft: 10 }}>Tasks</StyledText>
-                        <DropButton />
+                        <DropButton
+                            setSorting={setSorting}
+                            category={item}
+                            doRefresh={doRefresh} />
                     </StyledView>
                     <StyledScroll>
-                        {item.task != null && Object.values(item.tasks).map(item => (
+                        {item.tasks[0] != null && sortTasks(item).map(item => (
                             <ShowTaskOne key={item.id} item={item} doRefresh={doRefresh} />
                         ))}
                     </StyledScroll>
@@ -64,7 +67,7 @@ align-items: center;
 
 const StyledText = styled.Text`
 font-weight: bold;
-font-size: 24px;
+font-size: 26px;
 `;
 
 const StyledScroll = styled.ScrollView``;

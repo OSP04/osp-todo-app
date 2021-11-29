@@ -23,7 +23,7 @@ const ShowCateTask = ({ item, doRefresh }) => {
 
     return (
         <StyledView>
-            {item.id != null && item.id < 5 && <TaskView width={width}>
+            {item.id != null && item.count < 5 && <TaskView width={width}>
                 <LeftView>
                     <IconButton type={returnIcon(item)} onPressOut={toggleItem} />
                     <TaskText style={
@@ -31,7 +31,7 @@ const ShowCateTask = ({ item, doRefresh }) => {
                     }>{item.text}</TaskText>
                 </LeftView>
                 <RightView>
-                    <DueDate>{item.due}</DueDate>
+                    {item.due && <DueDate>{item.due.toLocaleDateString()}</DueDate>}
                 </RightView>
             </TaskView>}
         </StyledView >
