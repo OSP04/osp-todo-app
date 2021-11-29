@@ -2,12 +2,15 @@ import styled from "styled-components/native";
 import * as React from "react";
 import { Card } from "react-native-paper";
 import { TouchableOpacity } from "react-native";
-const SearchedTask = ({ index, text, category, date, due }) => {
+
+const SearchedTask = ({ navigation, index, text, category, date, due }) => {
   return (
     <TouchableOpacity
       style={{ marginRight: 10, marginTop: 17 }}
-      onPress={() => navigation.navigate("EditScreen")}
-      //나중에 onpress 화면이동설정
+      onPress={() => {
+        navigation.navigate("EditScreen");
+        console.log(date);
+      }}
     >
       <Card>
         <Card.Content>
