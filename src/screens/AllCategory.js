@@ -101,7 +101,7 @@ align-items: center;
 
 const StyledText = styled.Text`
 font-weight: bold;
-font-size: 24px;
+font-size: 26px;
 `;
 
 const StyledScroll = styled.ScrollView``;

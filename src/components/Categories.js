@@ -54,12 +54,15 @@ const Categories = ({ item, doRefresh }) => {
                 <DropButton
                     setSorting={setSorting}
                     category={item}
-                    doRefresh={doRefresh} />
+                    doRefresh={doRefresh}
+                />
             </StyledView>
+            <Underline style={{ backgroundColor: item.color }} />
             <View>
-                {item.tasks[0] != null && sortTasks(item).map(item => (
+                {item.tasks[0] != null ? (sortTasks(item).map(item => (
                     <ShowCateTask key={item.id} item={item} doRefresh={doRefresh} />
-                ))}
+                )))
+                    : (<View style={{ height: 50 }} />)}
             </View>
             <MoreView width={width}>
                 <MoreButton onPress={() => { setVisible(true) }}>+ See more tasks...</MoreButton>
@@ -73,7 +76,6 @@ const Categories = ({ item, doRefresh }) => {
 const Wrapper = styled.SafeAreaView`
 flex: 1;
 justify-content: flex-start;
-align-items: center;
 `;
 
 const StyledView = styled.View`
@@ -84,8 +86,15 @@ margin-left: 10px;
 `;
 const StyledText = styled.Text`
 font-weight: bold;
-font-size: 22px;
+font-size: 24px;
 margin-top: 6px;
+margin-bottom: 6px;
+`;
+
+const Underline = styled.View`
+width: 200px;
+height: 4px;
+margin-left: 10px;
 margin-bottom: 6px;
 `;
 
