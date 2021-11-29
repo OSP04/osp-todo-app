@@ -1,18 +1,11 @@
-import React, { useState } from "react";
-
+import React from "react";
 import styled from "styled-components/native";
 
 import { theme } from "../theme";
 import { images } from "../images";
 import IconButton from "./IconButton";
 
-const Input = ({
-  newTask,
-  isAdding,
-  onSubmitEditing,
-  onChangeText,
-  onBlur,
-}) => {
+const Input = ({ newTask, isAdding, onSubmitEditing, setNewTask, onBlur }) => {
   return (
     isAdding && (
       <StyledView>
@@ -20,11 +13,11 @@ const Input = ({
         <StyledInput
           value={newTask}
           placeholder="Add a task"
+          multiline={true}
           autoFocus={true}
           onBlur={onBlur}
           onSubmitEditing={onSubmitEditing}
-          blurOnSubmit={false}
-          onChangeText={onChangeText}
+          onChangeText={setNewTask}
         />
       </StyledView>
     )

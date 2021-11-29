@@ -1,19 +1,19 @@
-import React, { useState } from "react";
-
+import React, { useState, useRef } from "react";
 import styled from "styled-components/native";
+import DraggableFlatList, {
+  ScaleDecorator,
+  ShadowDecorator,
+  OpacityDecorator,
+} from "react-native-draggable-flatlist";
 
-import { theme } from "../theme";
-import HomeTaskItem from "./HomeTaskItem";
+import TaskItem from "./TaskItem";
 import CategoryBar from "../components/CategoryBar";
 import Input from "./Input";
 
 const HomeTasks = ({ tasks, setTasks, categories, selectedDate }) => {
+  const ref = useRef(null);
   const [refresh, setRefresh] = useState(true);
   const [newTask, setNewTask] = useState("");
-
-  const doRefresh = () => {
-    setRefresh((current) => !current);
-  };
 
   const addTask = (category) => {
     if (newTask) {
@@ -36,20 +36,15 @@ const HomeTasks = ({ tasks, setTasks, categories, selectedDate }) => {
   };
 
   const onBlur = (category) => {
-    category.isAdding = false;
-    doRefresh();
+    category.isAdding = false; // Hide text input
     setNewTask("");
-  };
-
-  const swap = (x, y) => {
-    const temp = x;
-    x = y;
-    y = temp;
+    setRefresh((current) => !current);
   };
 
   const sortTasks = (category) => {
     const sorting = category.sorting;
     const _tasks = category.tasks;
+
     if (sorting === "added") {
       return _tasks;
     } else if (sorting === "done") {
@@ -57,73 +52,93 @@ const HomeTasks = ({ tasks, setTasks, categories, selectedDate }) => {
     } else if (sorting === "not") {
       return _tasks.filter((task) => task.complete === false);
     } else {
-      // sort tasks by due date (not work yet)
+      const notDueTasks = _tasks.filter((task) => task.due === null); // Tasks not having due date
+      const dueTasks = _tasks.filter((task) => task.due !== null); // Tasks having due date
+      let dueDates = []; // Due dates
 
-      // const notDue = _tasks.filter((task) => task.due === null);
-      // const dueTasks = _tasks.filter((task) => task.due !== null);
-      // let dueDates = [];
+      // Get due dates
+      for (let i = 0; i < dueTasks.length; i++) {
+        dueDates[i] = dueTasks[i].due.getTime();
+      }
+      // Sort dueTasks in the order of the deadline
+      for (let i = 0; i < dueDates.length - 1; i++) {
+        let recentIndex = i;
+        for (let j = i + 1; j < dueDates.length; j++) {
+          if (dueDates[recentIndex] > dueDates[j]) {
+            recentIndex = j;
+          }
+        }
+        const temp = dueDates[i];
+        dueDates[i] = dueDates[recentIndex];
+        dueDates[recentIndex] = temp;
 
-      // for (let i = 0; i < dueTasks.length; i++) {
-      //   dueDates[i] = new Date(dueTasks[i].due);
-      // }
+        temp = dueTasks[i];
+        dueTasks[i] = dueTasks[recentIndex];
+        dueTasks[recentIndex] = temp;
+      }
 
-      // for (let i = 0; i < dueTasks.length - 1; i++) {
-      //   const key = dueDates[i].getDate();
-      //   if (key > dueDates[i + 1].getDate()) {
-      //     swap(dueDates[i], dueDates[i + 1]);
-      //     swap(dueTasks[i], dueTasks[i + 1]);
-      //   }
-      // }
-
-      // for (let i = 0; i < dueTasks.length - 1; i++) {
-      //   const key = dueDates[i].getMonth();
-      //   if (key > dueDates[i + 1].getMonth()) {
-      //     swap(dueDates[i], dueDates[i + 1]);
-      //     swap(dueTasks[i], dueTasks[i + 1]);
-      //   }
-      // }
-      // for (let i = 0; i < dueTasks.length - 1; i++) {
-      //   const key = dueDates[i].getFullYear();
-      //   if (key > dueDates[i + 1].getFullYear()) {
-      //     swap(dueDates[i], dueDates[i + 1]);
-      //     swap(dueTasks[i], dueTasks[i + 1]);
-      //   }
-      // }
-      // return dueTasks.concat(notDue);
-
-      return _tasks;
+      return dueTasks.concat(notDueTasks);
     }
   };
 
   const compareDate = (date1, date2) => {
-    return date1.getTime() === date2.getTime();
+    return date1.toDateString() === date2.toDateString();
+  };
+
+  const dragAndSave = (data, category) => {
+    const sorting = category.sorting;
+
+    if (sorting === "added") {
+      category.tasks = data;
+    } else if (sorting === "due") {
+      console.log("Prevent");
+    } else {
+      let filteredTasks = category.tasks; // Tasks not included in data
+      for (let i = 0; i < data.length; i++) {
+        filteredTasks = filteredTasks.filter((item) => item.id !== data[i].id);
+      }
+      category.tasks = [...data, ...filteredTasks];
+    }
+    setRefresh((current) => !current);
+  };
+
+  const renderItem = ({ item, drag }) => {
+    return (
+      <ScaleDecorator>
+        <OpacityDecorator activeOpacity={1}>
+          <ShadowDecorator>
+            {compareDate(item.date, selectedDate) && (
+              <TaskItem drag={drag} item={item} sorting={null} />
+            )}
+          </ShadowDecorator>
+        </OpacityDecorator>
+      </ScaleDecorator>
+    );
   };
 
   return (
-    <>
+    <StyledScroll>
       {categories.map((category) => (
         <StyledView key={Date.now() + category.id}>
           <CategoryBar
             key={category.id}
             onPressOut={() => {
               category.isAdding = true;
-              doRefresh();
+              setRefresh((current) => !current);
             }}
             category={category}
             title={category.title}
-            zIndex={
-              categories.length -
-              categories.findIndex((element) => element.id === category.id)
-            }
-            doRefresh={doRefresh}
+            setRefresh={setRefresh}
           />
-          {sortTasks(category).map((item) => {
-            return (
-              compareDate(item.date, selectedDate) && (
-                <HomeTaskItem key={item.id} item={item} doRefresh={doRefresh} />
-              )
-            );
-          })}
+          <DraggableFlatList
+            ref={ref}
+            data={sortTasks(category)}
+            onDragEnd={({ data }) => {
+              dragAndSave(data, category);
+            }}
+            keyExtractor={(item) => item.id}
+            renderItem={renderItem}
+          />
           <Input
             key={category.id + "Input"}
             newTask={newTask}
@@ -131,17 +146,22 @@ const HomeTasks = ({ tasks, setTasks, categories, selectedDate }) => {
             onSubmitEditing={() => {
               addTask(category);
             }}
-            onChangeText={setNewTask}
+            setNewTask={setNewTask}
             onBlur={() => onBlur(category)}
           />
         </StyledView>
       ))}
-    </>
+    </StyledScroll>
   );
 };
 
+const StyledScroll = styled.ScrollView`
+  width: 98%;
+  flex: 1;
+`;
+
 const StyledView = styled.View`
-  margin-bottom: 10px;
+  margin-bottom: 5%;
   min-height: 200px;
 `;
 

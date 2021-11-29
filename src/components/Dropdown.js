@@ -1,12 +1,11 @@
 import React, { useState } from "react";
 import DropDownPicker from "react-native-dropdown-picker";
 import { StyleSheet } from "react-native";
-
 import styled from "styled-components/native";
 
-const Dropdown = ({ zIndex, category, doRefresh }) => {
+const Dropdown = ({ category, setRefresh, setSorting }) => {
   const [open, setOpen] = useState(false);
-  const [value, setValue] = useState(category.sorting);
+  const [value, setValue] = useState(category ? category.sorting : "added");
   const [items, setItems] = useState([
     { label: "Added", value: "added" },
     { label: "Done", value: "done" },
@@ -22,10 +21,14 @@ const Dropdown = ({ zIndex, category, doRefresh }) => {
         items={items}
         setOpen={setOpen}
         setValue={setValue}
-        zIndex={zIndex}
+        zIndex={10}
         onChangeValue={(value) => {
-          category.sorting = value;
-          doRefresh();
+          if (category) {
+            category.sorting = value;
+            setRefresh((current) => !current);
+          } else {
+            setSorting(value);
+          }
         }}
         style={styles.container}
         labelStyle={styles.label}
