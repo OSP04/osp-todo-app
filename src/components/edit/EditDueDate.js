@@ -1,33 +1,78 @@
 import React, { useState } from "react";
-import { StyleSheet, Text, Pressable, View } from "react-native";
+import { StyleSheet, Text, Pressable, View, Button } from "react-native";
 import { Entypo } from "@expo/vector-icons";
 import { theme } from "../../theme";
 import CommonModal from "../common/CommonModal";
+import CalendarBox from "../CalendarBox";
 
 const EditDueDate = ({}) => {
-  const [date, setDate] = useState("DueDate");
-
   const [showModal, setShowModal] = useState(false);
   const openModal = () => {
     setShowModal((prev) => !prev);
+    if (dueDate !== "Due Date" || dueDate !== "Please set your Due Date")
+      setMarkedDates(makeSelectedTrue(dueDate));
+  };
+
+  const unformattedCurrent = new Date();
+  const year = unformattedCurrent.getFullYear();
+  const month = unformattedCurrent.getMonth() + 1;
+  const date = unformattedCurrent.getDate();
+  const current = `${year}-${month >= 10 ? month : "0" + month}-${
+    date >= 10 ? date : "0" + date
+  }`;
+
+  const [dueDate, setDueDate] = useState("Due Date");
+  const [selectedDate, setSelectedDate] = useState(dueDate);
+  const [markedDates, setMarkedDates] = useState({});
+
+  const makeSelectedTrue = (day) => {
+    let markedDates = {};
+    markedDates[day] = {
+      selected: true,
+    };
+    return markedDates;
+  };
+
+  const onDayPress = (day) => {
+    setSelectedDate(day);
+    setMarkedDates(makeSelectedTrue(day));
   };
 
   return (
     <Pressable style={styles.listItem} onPress={openModal}>
       <CommonModal showModal={showModal} setShowModal={setShowModal}>
-        <Text style={styles.modalText}>calendar</Text>
-        <Pressable
-          style={[styles.button, styles.buttonClose]}
-          onPress={() => setShowModal(false)}
-        >
-          <Text style={styles.textStyle}>Hide Modal</Text>
-        </Pressable>
+        <Text style={styles.modalText}>Set your Due Date</Text>
+        <Text style={styles.selected}>{selectedDate}</Text>
+        <CalendarBox
+          current={current}
+          onDayPress={(day) => {
+            onDayPress(day.dateString);
+          }}
+          markedDates={markedDates}
+        />
+        <View style={styles.buttons}>
+          <Button
+            onPress={() => {
+              setSelectedDate(dueDate);
+              setShowModal(false);
+            }}
+            title="Cancel"
+            color="red"
+          />
+          <Button
+            onPress={() => {
+              setDueDate(selectedDate);
+              setShowModal(false);
+            }}
+            title="Confirm"
+          />
+        </View>
       </CommonModal>
       <View style={styles.leftItem}>
         <Entypo name="calendar" style={styles.icon} size={24} color="black" />
-        <Text style={styles.dueDate}>{date}</Text>
+        <Text style={styles.dueDate}>{dueDate}</Text>
       </View>
-      <Pressable onPress={() => setDate("Please set your Due Date")}>
+      <Pressable onPress={() => setDueDate("Please set your Due Date")}>
         <Entypo name="cross" style={styles.icon} size={24} color="black" />
       </Pressable>
     </Pressable>
@@ -56,22 +101,26 @@ const styles = StyleSheet.create({
     backgroundColor: theme.colors.surface,
     color: "#424242",
   },
-  button: {
-    borderRadius: 20,
-    padding: 10,
-    elevation: 2,
-  },
-  buttonClose: {
-    backgroundColor: "#2196F3",
-  },
-  textStyle: {
-    color: "white",
+  selected: {
     fontWeight: "bold",
-    textAlign: "center",
+    padding: 5,
+    color: theme.colors.primary,
+    fontSize: 15,
+  },
+  buttons: {
+    flexDirection: "row",
+    alignItems: "center",
+    paddingTop: 10,
   },
   modalText: {
-    marginBottom: 15,
     textAlign: "center",
+    alignItems: "center",
+    borderBottomWidth: 1,
+    borderBottomColor: "#E5E5E5",
+    justifyContent: "space-between",
+    marginBottom: 10,
+    fontSize: 20,
+    fontWeight: "bold",
   },
 });
 

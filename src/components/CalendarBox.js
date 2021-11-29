@@ -1,15 +1,10 @@
-import { Calendar, CalendarList, Agenda } from "react-native-calendars";
-import { View } from "react-native";
+import { Calendar } from "react-native-calendars";
+import PropTypes from "prop-types";
 import React from "react";
 import { AntDesign } from "@expo/vector-icons";
-const CalendarBox = () => {
-  const unformattedCurrent = new Date();
-  const year = unformattedCurrent.getFullYear();
-  const month = unformattedCurrent.getMonth() + 1;
-  const date = unformattedCurrent.getDate();
-  const current = `${year}-${month >= 10 ? month : "0" + month}-${
-    date >= 10 ? date : "0" + date
-  }`;
+import { theme } from "../theme";
+
+const CalendarBox = ({ onDayPress, current, markedDates }) => {
   return (
     <Calendar
       // Initially visible month. Default = Date()
@@ -19,15 +14,12 @@ const CalendarBox = () => {
       // Maximum date that can be selected, dates after maxDate will be grayed out. Default = undefined
       maxDate={"2025-12-31"}
       // Handler which gets executed on day press. Default = undefined
-      onDayPress={(day) => {
-        console.log("selected day", day);
-      }}
+      onDayPress={onDayPress}
       // Month format in calendar title. Formatting values: http://arshaw.com/xdate/#Formatting
+      markedDates={markedDates}
       monthFormat={"yyyy MM"}
       // Handler which gets executed when visible month changes in calendar. Default = undefined
-      onMonthChange={(month) => {
-        console.log("month changed", month);
-      }}
+      onMonthChange={(month) => {}}
       // Hide month navigation arrows. Default = false
       hideArrows={false}
       // Replace default arrows with custom ones (direction can be 'left' or 'right')
@@ -61,7 +53,26 @@ const CalendarBox = () => {
       disableAllTouchEventsForDisabledDays={false}
       // Enable the option to swipe between months. Default = false
       enableSwipeMonths={true}
+      theme={{
+        todayTextColor: theme.colors.primary,
+        dayTextColor: "#222222",
+        textDisabledColor: "#d9e1e8",
+        monthTextColor: "#222222",
+        textDayFontWeight: "300",
+        textMonthFontWeight: "bold",
+        textDayHeaderFontWeight: "400",
+        textDayFontSize: 16,
+        textMonthFontSize: 18,
+        selectedDayBackgroundColor: theme.colors.primary,
+        selectedDayTextColor: "white",
+        textDayHeaderFontSize: 8,
+      }}
     />
   );
 };
+
+CalendarBox.propTypes = {
+  onDayPress: PropTypes.func,
+};
+
 export default CalendarBox;
