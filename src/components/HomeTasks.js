@@ -108,7 +108,7 @@ const HomeTasks = ({ tasks, setTasks, categories, selectedDate }) => {
         <OpacityDecorator activeOpacity={1}>
           <ShadowDecorator>
             {compareDate(item.date, selectedDate) && (
-              <TaskItem drag={drag} item={item} />
+              <TaskItem drag={drag} item={item} sorting={null} />
             )}
           </ShadowDecorator>
         </OpacityDecorator>
