@@ -4,26 +4,67 @@ import { Dimensions, View } from "react-native";
 import styled from "styled-components/native";
 import OneCategory from "../screens/OneCategory";
 import { theme } from "../theme";
+import DropButton from "./DropButton";
 import ShowCateTask from "./ShowCateTask";
 
 const Categories = ({ item, doRefresh }) => {
 
     const width = Dimensions.get('window').width;
     const [visible, setVisible] = useState(false);
+    const [sorting, setSorting] = useState("added");
+
+    const sortTasks = (category) => {
+        const sorting = category.sorting;
+        const tasks = category.tasks;
+
+        if (sorting === "added") {
+            return tasks;
+        }
+        else if (sorting === "due") {
+            const notDueTask = tasks.filter((task) => task.due === null);
+            const dueTask = tasks.filter((task) => task.due != null);
+            let dueDates = [];
+
+            for (let i = 0; i < dueTask.length; i++) {
+                dueDates[i] = dueTask[i].due.getTime();
+            }
+            for (let i = 0; i < dueDates.length - 1; i++) {
+                let index = i;
+                for (let j = i + 1; j < dueDates.length; j++) {
+                    if (dueDates[index] > dueDates[j]) {
+                        index = j;
+                    }
+                }
+                const temp = dueDates[i];
+                dueDates[i] = dueDates[index];
+                dueDates[index] = temp;
+
+                temp = dueTask[i];
+                dueTask[i] = dueTask[index];
+                dueTask[index] = temp;
+            }
+            return dueTask.concat(notDueTask)
+        }
+    };
 
     return (
         <Wrapper>
             <StyledView width={width}>
                 <StyledText style={{ color: item.color }}>{item.title}</StyledText>
+                <DropButton
+                    setSorting={setSorting}
+                    category={item}
+                    doRefresh={doRefresh} />
             </StyledView>
             <View>
-                {item.tasks[0] != null && Object.values(item.tasks).map(item => (
+                {item.tasks[0] != null && sortTasks(item).map(item => (
                     <ShowCateTask key={item.id} item={item} doRefresh={doRefresh} />
                 ))}
             </View>
             <MoreView width={width}>
                 <MoreButton onPress={() => { setVisible(true) }}>+ See more tasks...</MoreButton>
-                <OneCategory key={item.id} item={item} visible={visible} setVisible={setVisible} doRefresh={doRefresh} />
+                <OneCategory key={item.id} item={item} visible={visible} setVisible={setVisible}
+                    sortTasks={sortTasks} doRefresh={doRefresh} />
             </MoreView>
         </Wrapper>
     );
@@ -36,9 +77,9 @@ align-items: center;
 `;
 
 const StyledView = styled.View`
-flex-direction: column;
-align-items: flex-start;
-justify-content: flex-start;
+flex-direction: row;
+align-items: center;
+justify-content: space-between;
 margin-left: 10px;
 `;
 const StyledText = styled.Text`

@@ -8,7 +8,7 @@ import ShowTaskOne from "../components/ShowTaskOne";
 import { images } from "../images";
 import { theme } from "../theme";
 
-const OneCategory = ({ item, visible, setVisible, doRefresh }) => {
+const OneCategory = ({ item, doRefresh, visible, setVisible, setSorting, sortTasks }) => {
 
     const width = Dimensions.get('window').width;
 
@@ -25,10 +25,13 @@ const OneCategory = ({ item, visible, setVisible, doRefresh }) => {
                     </StyledView >
                     <StyledView>
                         <StyledText style={{ marginLeft: 10 }}>Tasks</StyledText>
-                        <DropButton />
+                        <DropButton
+                            setSorting={setSorting}
+                            category={item}
+                            doRefresh={doRefresh} />
                     </StyledView>
                     <StyledScroll>
-                        {item.tasks[0] != null && Object.values(item.tasks).map(item => (
+                        {item.tasks[0] != null && sortTasks(item).map(item => (
                             <ShowTaskOne key={item.id} item={item} doRefresh={doRefresh} />
                         ))}
                     </StyledScroll>

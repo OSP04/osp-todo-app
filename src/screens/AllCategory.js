@@ -13,7 +13,7 @@ const AllCategory = () => {
 
     const width = Dimensions.get('window').width;
     const [state, setState] = useState(false);
-    const [color, setColor] = useState("black");
+    const [color, setColor] = useState(theme.category.red);
     const [refresh, setRefresh] = useState(true);
 
     const [newCategory, setNewCategory] = useState("");
