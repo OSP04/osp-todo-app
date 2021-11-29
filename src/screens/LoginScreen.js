@@ -22,6 +22,7 @@ export default function LoginScreen({ navigation }) {
       setPassword({ ...password, error: passwordError });
       return;
     }
+    navigation.navigate("Home");
   };
 
   return (
@@ -55,7 +56,6 @@ export default function LoginScreen({ navigation }) {
           <Text style={styles.link}>Sign up</Text>
         </TouchableOpacity>
       </View>
-      {/* 추후 메인화면으로 연결 */}
       <TouchableOpacity onPress={() => navigation.navigate("Home")}>
         <Text style={styles.skip}>Skip for Now</Text>
       </TouchableOpacity>
