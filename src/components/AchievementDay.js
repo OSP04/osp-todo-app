@@ -2,28 +2,20 @@ import React, { useState } from "react";
 import { Dimensions } from "react-native";
 
 import styled from "styled-components/native";
+import { db } from "../db";
 import DoneDay from "./DoneDay";
 
 const AchievementDay = () => {
 
     const width = Dimensions.get('window').width;
 
-    const [tasks, setTasks] = useState([
-        {
-            id: "1",
-            date: "2021.11.21",
-            total: "17",
-            complete: "10",
-        },
-    ])
+    const [tasks, setTasks] = useState(db.tasks);
 
     return (
         <Wrapper>
             <StyledScroll>
                 <AchievementView width={width}>
-                    {Object.values(tasks).map(item => (
-                        <DoneDay key={item.id} item={item} />
-                    ))}
+                    <DoneDay key={tasks.id} item={tasks} />
                 </AchievementView>
             </StyledScroll>
         </Wrapper>

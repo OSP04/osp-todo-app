@@ -3,16 +3,28 @@ import { Dimensions, View, Text } from "react-native";
 
 import styled from "styled-components/native";
 
-const DoneCategory = ({ item, doneTask }) => {
+const DoneCategory = ({ item }) => {
 
     const width = Dimensions.get('window').width;
 
+    const countDone = (category) => { //count completed tasks per category
+        const tasks = category.tasks;
+        const doneTasks = tasks.filter((task) => task.complete === true);
+
+        return doneTasks.length;
+    };
+
+    // show the percentage of completed tasks
     const box =
-        <View style={{ borderWidth: 2, borderColor: item.color, width: 124, height: 90, alignItems: "center", justifyContent: "center" }}>
-            <Text style={{ padding: 20, fontSize: 32, fontWeight: "bold", color: item.color }}>
-                {Math.round((item.length / item.tasks.length).toFixed(2) * 100)}%
-            </Text>
-        </View>
+        <BoxView style={{ borderColor: item.color }}>
+            {item.tasks.length != 0 ?
+                (<Text style={{ padding: 20, fontSize: 32, fontWeight: "bold", color: item.color }}>
+                    {Math.round((countDone(item) / item.tasks.length).toFixed(2) * 100)}%
+                </Text>)
+                : ((<Text style={{ padding: 20, fontSize: 32, fontWeight: "bold", color: item.color }}>
+                    0%
+                </Text>))}
+        </BoxView>
 
     return (
 
@@ -23,7 +35,7 @@ const DoneCategory = ({ item, doneTask }) => {
                 <DoneView>
                     <View style={{ flexDirection: "row", alignItems: "baseline" }}>
                         <DoneText>Completed</DoneText>
-                        <DoneText style={{ fontSize: 28, fontWeight: "bold", color: item.color }}>{item.length}</DoneText>
+                        <DoneText style={{ fontSize: 28, fontWeight: "bold", color: item.color }}>{countDone(item)}</DoneText>
                         <DoneText>tasks</DoneText>
                     </View>
                     <View style={{ flexDirection: "row", alignItems: "baseline" }}>
@@ -42,6 +54,14 @@ flex: 1;
 flex-direction: column;
 align-items: flex-start;
 padding-left: 14px;
+`;
+
+const BoxView = styled.View`
+align-items: center;
+justify-content: center;
+border-width: 2px;
+width: 124px;
+height: 90px;
 `;
 
 const AchievementView = styled.View`
