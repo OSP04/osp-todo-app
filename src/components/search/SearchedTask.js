@@ -6,7 +6,7 @@ const SearchedTask = ({ index, text, category, date, due }) => {
   return (
     <TouchableOpacity
       style={{ marginRight: 10, marginTop: 17 }}
-      onPress={() => alert(text)}
+      onPress={() => navigation.navigate("EditScreen")}
       //나중에 onpress 화면이동설정
     >
       <Card>
