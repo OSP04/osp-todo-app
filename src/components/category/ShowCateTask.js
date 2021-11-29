@@ -4,7 +4,7 @@ import { Dimensions } from "react-native";
 import styled from "styled-components/native";
 import { images } from "../../images";
 import { theme } from "../../theme";
-import IconButton from "../IconButton";
+import IconButton from "../common/IconButton";
 
 const ShowCateTask = ({ item, doRefresh }) => {
   const width = Dimensions.get("window").width;

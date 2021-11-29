@@ -3,9 +3,9 @@ import ScrollableTabView, {
   ScrollableTabBar,
 } from "react-native-scrollable-tab-view";
 
-import { theme } from "../theme";
+import { theme } from "../../src/theme";
 import AchievementCategory from "./achievement/AchievementCategory";
-import AchievementDay from "./AchievementDay";
+import AchievementDay from "./achievement/AchievementDay";
 
 export default class MenuBar extends Component {
   render() {

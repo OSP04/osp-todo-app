@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import { Dimensions } from "react-native";
 
 import styled from "styled-components/native";
-import { db } from "../db";
-import DoneDay from "./DoneDay";
+import { db } from "../../db";
+import DoneDay from "../achievement/DoneDay";
 
 const AchievementDay = () => {
 

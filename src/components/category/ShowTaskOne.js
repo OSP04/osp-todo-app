@@ -2,9 +2,9 @@ import React from "react";
 import { Dimensions } from "react-native";
 
 import styled from "styled-components/native";
-import { images } from "../images";
-import { theme } from "../theme";
-import IconButton from "./IconButton";
+import { images } from "../../images";
+import { theme } from "../../theme";
+import IconButton from "../common/IconButton";
 
 
 const ShowTaskOne = ({ item, doRefresh }) => {

@@ -2,7 +2,7 @@ import React from "react";
 import { Modal, View } from "react-native";
 
 import styled from "styled-components/native";
-import { theme } from "../theme";
+import { theme } from "../../src/theme";
 
 const AddCategory = ({ state, value, onChangeText, setColor, onConfirm, onCancel }) => {
 

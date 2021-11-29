@@ -3,7 +3,7 @@ import { Dimensions } from "react-native";
 
 import styled from "styled-components/native";
 import { db } from "../../db";
-import DoneCategory from "../category/DoneCategory";
+import DoneCategory from "../achievement/DoneCategory";
 
 const AchievementCategory = () => {
   const width = Dimensions.get("window").width;

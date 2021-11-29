@@ -2,12 +2,12 @@ import React from "react";
 import { Dimensions, View } from "react-native";
 
 import styled from "styled-components/native";
-import IconButton from "../components/IconButton";
+import IconButton from "../components/common/IconButton";
 import MenuBar from "../components/MenuBar";
-import { images } from "../images";
-import { theme } from "../theme";
+import { images } from "../../src/images";
+import { theme } from "../../src/theme";
 
-const Achievement = () => {
+const Achievement = ({ navigation }) => {
 
     const width = Dimensions.get('window').width;
 
@@ -15,7 +15,7 @@ const Achievement = () => {
         <Wrapper>
             <StyledBar barStyle="default" />
             <StyledView width={width - 20}>
-                <IconButton type={images.back} />
+                <IconButton type={images.back} onPressout={() => navigation.navigate("Home")} />
                 <StyledText>Achievement</StyledText>
                 <View width={25} />
             </StyledView >
