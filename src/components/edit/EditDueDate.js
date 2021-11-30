@@ -105,7 +105,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     padding: 5,
     color: theme.colors.primary,
-    fontSize: 15,
+    fontSize: 17,
   },
   buttons: {
     flexDirection: "row",
@@ -118,7 +118,7 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     borderBottomColor: "#E5E5E5",
     justifyContent: "space-between",
-    marginBottom: 10,
+    marginBottom: 40,
     fontSize: 20,
     fontWeight: "bold",
   },

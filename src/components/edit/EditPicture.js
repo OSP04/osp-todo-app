@@ -143,7 +143,7 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     borderBottomColor: "#E5E5E5",
     justifyContent: "space-between",
-    marginBottom: 20,
+    marginBottom: 40,
     fontSize: 20,
     fontWeight: "bold",
   },
