@@ -3,7 +3,7 @@ import { StyleSheet, Text, Pressable, View, Button } from "react-native";
 import { Entypo } from "@expo/vector-icons";
 import { theme } from "../../theme";
 import CommonModal from "../common/CommonModal";
-import CalendarBox from "../CalendarBox";
+import CalendarBox from "./CalendarBox";
 
 const EditDueDate = ({}) => {
   const [showModal, setShowModal] = useState(false);
