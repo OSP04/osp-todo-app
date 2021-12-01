@@ -2,7 +2,7 @@ import { Calendar } from "react-native-calendars";
 import PropTypes from "prop-types";
 import React from "react";
 import { AntDesign } from "@expo/vector-icons";
-import { theme } from "../theme";
+import { theme } from "../../theme";
 
 const CalendarBox = ({ onDayPress, current, markedDates }) => {
   return (
