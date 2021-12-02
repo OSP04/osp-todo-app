@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { StyleSheet, Text, Pressable, View } from "react-native";
-import { Feather } from "@expo/vector-icons";
+import { FontAwesome } from "@expo/vector-icons";
 import { theme } from "../../theme";
 import CommonModal from "../common/CommonModal";
 
@@ -20,7 +20,7 @@ const EditRepeat = ({}) => {
         headerText="Repeat"
         onCancelPressed={() => setShowModal(false)}
       ></CommonModal>
-      <Feather name="repeat" style={styles.icon} size={24} color="black" />
+      <FontAwesome name="repeat" style={styles.icon} size={22} color="black" />
       <Text style={styles.repeat}>{repeat}</Text>
     </Pressable>
   );
@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
   },
   repeat: {
     fontWeight: "bold",
-    padding: 10,
+    padding: 14,
     backgroundColor: theme.colors.surface,
     color: "#424242",
   },

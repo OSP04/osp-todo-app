@@ -59,7 +59,7 @@ const EditCategory = ({}) => {
       <FontAwesome5
         name="hashtag"
         style={styles.icon}
-        size={24}
+        size={22}
         color="black"
       />
       <Text style={styles.category}>{category}</Text>

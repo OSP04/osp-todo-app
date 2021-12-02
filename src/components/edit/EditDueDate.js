@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { StyleSheet, Text, Pressable, View, Button } from "react-native";
-import { Entypo } from "@expo/vector-icons";
+import { Entypo, MaterialCommunityIcons } from "@expo/vector-icons";
 import { theme } from "../../theme";
 import CommonModal from "../common/CommonModal";
 import CalendarBox from "./CalendarBox";
@@ -60,18 +60,21 @@ const EditDueDate = ({}) => {
             markedDates={markedDates}
           />
         </View>
-        <View style={styles.button}>
-          <Button
-            onPress={() => {
-              setDueDate(selectedDate);
-              setShowModal(false);
-            }}
-            title="Confirm"
-          />
-        </View>
+        <Button
+          onPress={() => {
+            setDueDate(selectedDate);
+            setShowModal(false);
+          }}
+          title="Confirm"
+        />
       </CommonModal>
       <View style={styles.leftItem}>
-        <Entypo name="calendar" style={styles.icon} size={24} color="black" />
+        <MaterialCommunityIcons
+          name="clock-end"
+          style={styles.icon}
+          size={24}
+          color="black"
+        />
         <Text style={styles.dueDate}>{dueDate}</Text>
       </View>
       <Pressable onPress={() => setDueDate("Please set your Due Date")}>
