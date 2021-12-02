@@ -1,18 +1,10 @@
 import React, { useState, useEffect } from "react";
-import {
-  StyleSheet,
-  Text,
-  Pressable,
-  View,
-  TextInput,
-  Button,
-} from "react-native";
+import { StyleSheet, Text, Pressable, View, TextInput } from "react-native";
 import MapView, { Marker, PROVIDER_GOOGLE } from "react-native-maps";
 import { Entypo } from "@expo/vector-icons";
 import { theme } from "../../theme";
 import CommonModal from "../common/CommonModal";
 import MapContainer from "./MapContainer";
-import MyMapView from "./MyMapView";
 
 const latitudeDelta = 0.004;
 const longitudeDelta = 0.004;
