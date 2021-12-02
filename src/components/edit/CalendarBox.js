@@ -17,8 +17,7 @@ const CalendarBox = ({ onDayPress, current, markedDates }) => {
       onDayPress={onDayPress}
       // Month format in calendar title. Formatting values: http://arshaw.com/xdate/#Formatting
       markedDates={markedDates}
-      monthFormat={"yyyy MM"}
-      // Handler which gets executed when visible month changes in calendar. Default = undefined
+      // {'YYYY MM'}, Handler which gets executed when visible month changes in calendar. Default = undefined
       onMonthChange={(month) => {}}
       // Hide month navigation arrows. Default = false
       hideArrows={false}
@@ -66,6 +65,14 @@ const CalendarBox = ({ onDayPress, current, markedDates }) => {
         selectedDayBackgroundColor: theme.colors.primary,
         selectedDayTextColor: "white",
         textDayHeaderFontSize: 8,
+        "stylesheet.calendar.header": {
+          dayTextAtIndex0: {
+            color: "red",
+          },
+          dayTextAtIndex6: {
+            color: "blue",
+          },
+        },
       }}
     />
   );
