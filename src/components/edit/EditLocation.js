@@ -88,21 +88,21 @@ const EditLocation = ({}) => {
   };
 
   return (
-    <View styles={styles.container}>
-      <CommonModal showModal={showModal} setShowModal={setShowModal}>
-        <View style={{ width: 250, flex: 0.7 }}>
-          <Text style={styles.modalText}>Map</Text>
-          <MapContainer
-            onPress={(data, details = null) =>
-              onMapContainerPressed((data, (details = null)))
-            }
-          />
-          <Button
-            onPress={() => {
-              setShowModal(false);
-            }}
-            title="Cancel"
-          />
+    <View>
+      <CommonModal
+        showModal={showModal}
+        setShowModal={setShowModal}
+        headerText="Map"
+        onCancelPressed={() => setShowModal(false)}
+      >
+        <View>
+          <View style={styles.searchMap}>
+            <MapContainer
+              onPress={(data, details = null) =>
+                onMapContainerPressed((data, (details = null)))
+              }
+            />
+          </View>
         </View>
       </CommonModal>
       <View
@@ -158,11 +158,6 @@ const EditLocation = ({}) => {
 };
 
 const styles = StyleSheet.create({
-  container: {
-    borderBottomWidth: 1,
-    borderBottomColor: "#E5E5E5",
-    justifyContent: "center",
-  },
   leftItem: {
     flexDirection: "row",
     alignItems: "center",
@@ -170,6 +165,11 @@ const styles = StyleSheet.create({
   row: {
     flex: 1,
     flexDirection: "row",
+  },
+  searchMap: {
+    width: 300,
+    height: 250,
+    marginBottom: 40,
   },
   listItem: {
     flexDirection: "row",
@@ -193,16 +193,6 @@ const styles = StyleSheet.create({
     padding: 10,
     backgroundColor: theme.colors.surface,
     color: "#424242",
-  },
-  modalText: {
-    textAlign: "center",
-    alignItems: "center",
-    borderBottomWidth: 1,
-    borderBottomColor: "#E5E5E5",
-    justifyContent: "space-between",
-    marginBottom: 40,
-    fontSize: 20,
-    fontWeight: "bold",
   },
   map: {
     width: 120,

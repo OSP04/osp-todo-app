@@ -8,9 +8,10 @@ import CalendarBox from "./CalendarBox";
 const EditDueDate = ({}) => {
   const [showModal, setShowModal] = useState(false);
   const openModal = () => {
-    setShowModal((prev) => !prev);
+    setSelectedDate(dueDate);
     if (dueDate !== "Due Date" || dueDate !== "Please set your Due Date")
       setMarkedDates(makeSelectedTrue(dueDate));
+    setShowModal((prev) => !prev);
   };
 
   const unformattedCurrent = new Date();
@@ -40,25 +41,26 @@ const EditDueDate = ({}) => {
 
   return (
     <Pressable style={styles.listItem} onPress={openModal}>
-      <CommonModal showModal={showModal} setShowModal={setShowModal}>
-        <Text style={styles.modalText}>Set your Due Date</Text>
+      <CommonModal
+        showModal={showModal}
+        setShowModal={setShowModal}
+        headerText="Due Date"
+        onCancelPressed={() => {
+          setSelectedDate(dueDate);
+          setShowModal(false);
+        }}
+      >
         <Text style={styles.selected}>{selectedDate}</Text>
-        <CalendarBox
-          current={current}
-          onDayPress={(day) => {
-            onDayPress(day.dateString);
-          }}
-          markedDates={markedDates}
-        />
-        <View style={styles.buttons}>
-          <Button
-            onPress={() => {
-              setSelectedDate(dueDate);
-              setShowModal(false);
+        <View style={styles.container}>
+          <CalendarBox
+            current={current}
+            onDayPress={(day) => {
+              onDayPress(day.dateString);
             }}
-            title="Cancel"
-            color="red"
+            markedDates={markedDates}
           />
+        </View>
+        <View style={styles.button}>
           <Button
             onPress={() => {
               setDueDate(selectedDate);
@@ -103,24 +105,15 @@ const styles = StyleSheet.create({
   },
   selected: {
     fontWeight: "bold",
-    padding: 5,
     color: theme.colors.primary,
     fontSize: 17,
+    alignContent: "flex-start",
   },
-  buttons: {
-    flexDirection: "row",
-    alignItems: "center",
-    paddingTop: 10,
-  },
-  modalText: {
-    textAlign: "center",
-    alignItems: "center",
-    borderBottomWidth: 1,
-    borderBottomColor: "#E5E5E5",
-    justifyContent: "space-between",
-    marginBottom: 40,
-    fontSize: 20,
-    fontWeight: "bold",
+  container: {
+    width: "100%",
+    height: undefined,
+    aspectRatio: 1,
+    margin: 10,
   },
 });
 
