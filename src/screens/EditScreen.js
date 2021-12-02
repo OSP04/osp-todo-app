@@ -5,6 +5,7 @@ import { theme } from "../theme";
 import Background from "../components/common/Background";
 import TopHeader from "../components/common/TopHeader";
 import EditMemo from "../components/edit/EditMemo";
+import EditStartDate from "../components/edit/EditStartDate";
 import EditDueDate from "../components/edit/EditDueDate";
 import EditRepeat from "../components/edit/EditRepeat";
 import EditLocation from "../components/edit/EditLocation";
@@ -48,12 +49,13 @@ const EditScreen = ({ navigation }) => {
       </TopHeader>
 
       <View style={styles.list}>
-        <EditTodoTitle></EditTodoTitle>
-        <EditDueDate></EditDueDate>
-        <EditRepeat></EditRepeat>
-        <EditCategory></EditCategory>
-        <EditLocation></EditLocation>
-        <EditMemo></EditMemo>
+        <EditTodoTitle />
+        <EditStartDate />
+        <EditDueDate />
+        <EditRepeat />
+        <EditCategory />
+        <EditLocation />
+        <EditMemo />
       </View>
     </Background>
   );
