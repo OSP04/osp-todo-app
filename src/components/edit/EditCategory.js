@@ -79,7 +79,7 @@ const styles = StyleSheet.create({
     padding: 10,
   },
   flatlist: {
-    width: 270,
+    width: "95%",
     margin: 10,
     borderTopWidth: 1,
     borderTopColor: "#E5E5E5",
