@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from "react";
-import { View, StyleSheet } from "react-native";
+import React from "react";
 import PropTypes from "prop-types";
 import { GooglePlacesAutocomplete } from "react-native-google-places-autocomplete";
+import { REACT_APP_GOOGLE_API_KEY } from "@env";
 
 const MapContainer = ({ onPress }) => {
   return (
@@ -14,7 +14,7 @@ const MapContainer = ({ onPress }) => {
       fetchDetails={true}
       onPress={onPress}
       query={{
-        key: "AIzaSyAUaRmEc-zPLrjIyuBLYyCq4u3QF1LM1kI",
+        key: REACT_APP_GOOGLE_API_KEY,
         language: "en",
       }}
       nearbyPlacesAPI="GooglePlacesSearch"

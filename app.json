@@ -17,7 +17,7 @@
     "ios": {
       "supportsTablet": true,
       "config": {
-        "googleMapsApiKey": "AIzaSyAUaRmEc-zPLrjIyuBLYyCq4u3QF1LM1kI"
+        "googleMapsApiKey": "dotenv cross-var foobar %REACT_APP_GOOGLE_API_KEY%"
       },
       "buildNumber": "1.0.0"
     },
@@ -29,7 +29,7 @@
       },
       "config": {
         "googleMaps": {
-          "apiKey": "AIzaSyAUaRmEc-zPLrjIyuBLYyCq4u3QF1LM1kI"
+          "apiKey": "dotenv cross-var foobar %REACT_APP_GOOGLE_API_KEY%"
         }
       }
     },
