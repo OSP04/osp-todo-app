@@ -2,16 +2,19 @@ import React from "react";
 import MapView, { Marker, PROVIDER_GOOGLE } from "react-native-maps";
 import PropTypes from "prop-types";
 
-const MyMapView = ({ region, onRegionChange }) => {
+const MyMapView = ({ region }) => {
   return (
     <MapView
-      style={{ flex: 1, width: 250 }}
       provider={PROVIDER_GOOGLE}
       showsUserLocation={true}
       showsMyLocationButton={true}
-      onRegionChange={(reg) => onRegionChange(reg)}
     >
-      <Marker coordinate={region} />
+      <Marker
+        coordinate={{
+          latitude: region.latitude,
+          longitude: region.longitude,
+        }}
+      />
     </MapView>
   );
 };
