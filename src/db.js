@@ -1,4 +1,9 @@
+import AsyncStorage from "@react-native-async-storage/async-storage";
+
 import { theme } from "./theme";
+
+const latitudeDelta = 0.004;
+const longitudeDelta = 0.004;
 
 export const db = {
   // memo 추가해주세요
@@ -114,8 +119,8 @@ export const db = {
           location: {
             latitude: 37.559285765296,
             longitude: 126.94568079431,
-            latitudeDelta: 0.004,
-            longitudeDelta: 0.004,
+            latitudeDelta,
+            longitudeDelta,
           },
         },
         {
@@ -130,8 +135,8 @@ export const db = {
           location: {
             latitude: 37.559285765296,
             longitude: 126.94568079431,
-            latitudeDelta: 0.004,
-            longitudeDelta: 0.004,
+            latitudeDelta,
+            longitudeDelta,
           },
         },
         {
@@ -146,8 +151,8 @@ export const db = {
           location: {
             latitude: 37.559285765296,
             longitude: 126.94568079431,
-            latitudeDelta: 0.004,
-            longitudeDelta: 0.004,
+            latitudeDelta,
+            longitudeDelta,
           },
         },
       ],
@@ -430,4 +435,25 @@ export const db = {
       },
     },
   ],
+};
+
+export const storeData = async (key, value) => {
+  try {
+    const jsonValue = JSON.stringify(value);
+    await AsyncStorage.setItem(key, jsonValue);
+  } catch (e) {
+    // saving error
+  }
+};
+
+export const getData = async (key) => {
+  try {
+    const value = await AsyncStorage.getItem(key);
+    if (value !== null) {
+      // value previously stored
+      console.log(value);
+    }
+  } catch (e) {
+    // error reading value
+  }
 };

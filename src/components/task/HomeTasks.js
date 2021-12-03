@@ -1,14 +1,16 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import styled from "styled-components/native";
 import DraggableFlatList, {
   ScaleDecorator,
   ShadowDecorator,
   OpacityDecorator,
 } from "react-native-draggable-flatlist";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 import TaskItem from "./TaskItem";
 import CategoryBar from "../category/CategoryBar";
 import Input from "../Input";
+import { getData } from "../../db";
 
 const HomeTasks = ({ tasks, setTasks, categories, selectedDate }) => {
   const ref = useRef(null);
