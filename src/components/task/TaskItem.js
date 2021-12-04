@@ -85,7 +85,7 @@ const DueDate = styled.Text`
 const TaskImage = styled.Image`
   width: 25px;
   height: 25px;
-  margin-right: 5px;
+  margin-right: 15px;
 `;
 
 const LeftItems = styled.View`

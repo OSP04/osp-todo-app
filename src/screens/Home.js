@@ -11,6 +11,7 @@ import { images } from "../images";
 const Home = ({ navigation }) => {
   const [categories, setCategories] = useState(db.categories);
   const [tasks, setTasks] = useState(db.tasks);
+  const [isSelecting, setIsSelecting] = useState(false);
 
   return (
     <Wrapper>
@@ -18,7 +19,7 @@ const Home = ({ navigation }) => {
       <TopBar
         types={[images.search, images.menu]}
         screens={[null, "AllTasks"]}
-        title=""
+        title={null}
         navigation={navigation}
       />
       <Body>
@@ -28,6 +29,8 @@ const Home = ({ navigation }) => {
         navigation={navigation}
         type={images.comment}
         screens={["Comments", null]}
+        isSelecting={isSelecting}
+        setIsSelecting={setIsSelecting}
       />
     </Wrapper>
   );

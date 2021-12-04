@@ -19,6 +19,7 @@ const AllTasks = ({ navigation }) => {
   const [tasks, setTasks] = useState(db.tasks);
   const [refresh, setRefresh] = useState(false);
   const [sorting, setSorting] = useState("added");
+  const [isSelecting, setIsSelecting] = useState(false);
 
   const sortTasks = () => {
     const _tasks = tasks;
@@ -110,7 +111,13 @@ const AllTasks = ({ navigation }) => {
           renderItem={renderItem}
         />
       </Tasks>
-      <Footer navigation={navigation} type={null} screens={[null, null]} />
+      <Footer
+        navigation={navigation}
+        type={null}
+        screens={[null, null]}
+        isSelecting={isSelecting}
+        setIsSelecting={setIsSelecting}
+      />
     </Wrapper>
   );
 };

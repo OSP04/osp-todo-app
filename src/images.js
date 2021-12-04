@@ -8,6 +8,7 @@ import Send from "../assets/outline_send_black_24dp.png";
 import Search from "../assets/outline_search_black_24dp.png";
 import Menu from "../assets/outline_menu_black_24dp.png";
 import Edit from "../assets/outline_edit_black_24dp.png";
+import Remove from "../assets/outline_delete_black_24dp.png";
 
 export const images = {
   back: Back,
@@ -20,4 +21,5 @@ export const images = {
   search: Search,
   menu: Menu,
   edit: Edit,
+  remove: Remove,
 };
