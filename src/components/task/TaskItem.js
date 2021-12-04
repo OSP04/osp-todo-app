@@ -45,7 +45,7 @@ const TaskItem = ({ item, drag, sorting }) => {
         </LeftItems>
         <RightItems>
           <TaskImage source={{ uri: item.image }} />
-          <IconButton type={images.move} />
+          <IconButton type={images.edit} />
         </RightItems>
       </Animated.View>
     </Touchable>

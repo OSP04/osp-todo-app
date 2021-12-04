@@ -7,6 +7,7 @@ import Comment from "../assets/baseline_message_black_24dp.png";
 import Send from "../assets/outline_send_black_24dp.png";
 import Search from "../assets/outline_search_black_24dp.png";
 import Menu from "../assets/outline_menu_black_24dp.png";
+import Edit from "../assets/outline_edit_black_24dp.png";
 
 export const images = {
   back: Back,
@@ -18,4 +19,5 @@ export const images = {
   send: Send,
   search: Search,
   menu: Menu,
+  edit: Edit,
 };
