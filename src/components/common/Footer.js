@@ -1,12 +1,19 @@
 import React, { useState } from "react";
-import { Text } from "react-native";
 import styled from "styled-components/native";
 
 import { images } from "../../images";
 import { theme } from "../../theme";
+import { getData, storeData } from "../../db";
 import IconButton from "./IconButton";
 
-const Footer = ({ navigation, type, screens, isSelecting, setIsSelecting }) => {
+const Footer = ({
+  navigation,
+  type,
+  screens,
+  isSelecting,
+  setIsSelecting,
+  setTasks,
+}) => {
   const [all, setAll] = useState(false);
 
   return (
@@ -39,9 +46,12 @@ const Footer = ({ navigation, type, screens, isSelecting, setIsSelecting }) => {
         )}
         <SelectButton
           isSelecting={isSelecting}
-          onPress={() => {
+          onPress={async () => {
             setIsSelecting((current) => !current);
             setAll(false);
+            const tasks = await getData("tasks");
+            tasks.map((item) => (item.selected = false));
+            setTasks(tasks);
           }}
         >
           <SelectText isSelecting={isSelecting}>

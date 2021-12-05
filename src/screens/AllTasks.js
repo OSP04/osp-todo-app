@@ -64,7 +64,12 @@ const AllTasks = ({ navigation }) => {
       <ScaleDecorator>
         <OpacityDecorator activeOpacity={1}>
           <ShadowDecorator>
-            <TaskItem item={item} drag={drag} sorting={sorting} />
+            <TaskItem
+              item={item}
+              drag={drag}
+              sorting={sorting}
+              isSelecting={isSelecting}
+            />
           </ShadowDecorator>
         </OpacityDecorator>
       </ScaleDecorator>
@@ -117,6 +122,7 @@ const AllTasks = ({ navigation }) => {
         screens={[null, null]}
         isSelecting={isSelecting}
         setIsSelecting={setIsSelecting}
+        setTasks={setTasks}
       />
     </Wrapper>
   );

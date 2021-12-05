@@ -1,5 +1,4 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
-
 import { theme } from "./theme";
 
 const latitudeDelta = 0.004;
@@ -24,6 +23,7 @@ export const db = {
           image:
             "https://images.unsplash.com/photo-1637004253818-d3072efc73fe?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2070&q=80",
           complete: false,
+          selected: false,
           created: Date.now(),
           location: {
             latitude: 37.559285765296,
@@ -40,6 +40,7 @@ export const db = {
           category: "Food",
           image: null,
           complete: true,
+          selected: false,
           created: Date.now(),
           location: {
             latitude: 37.559285765296,
@@ -56,6 +57,7 @@ export const db = {
           category: "Food",
           image: null,
           complete: false,
+          selected: false,
           created: Date.now(),
           location: {
             latitude: 37.559285765296,
@@ -72,6 +74,7 @@ export const db = {
           category: "Food",
           image: null,
           complete: false,
+          selected: false,
           created: Date.now(),
           location: {
             latitude: 37.559285765296,
@@ -89,6 +92,7 @@ export const db = {
           category: "Food",
           image: null,
           complete: false,
+          selected: false,
           created: Date.now(),
           location: {
             latitude: 37.559285765296,
@@ -115,6 +119,7 @@ export const db = {
           category: "School",
           image: null,
           complete: true,
+          selected: false,
           created: Date.now(),
           location: {
             latitude: 37.559285765296,
@@ -131,6 +136,7 @@ export const db = {
           category: "School",
           image: null,
           complete: false,
+          selected: false,
           created: Date.now(),
           location: {
             latitude: 37.559285765296,
@@ -147,6 +153,7 @@ export const db = {
           category: "School",
           image: null,
           complete: false,
+          selected: false,
           created: Date.now(),
           location: {
             latitude: 37.559285765296,
@@ -170,6 +177,7 @@ export const db = {
       image:
         "https://images.unsplash.com/photo-1637004253818-d3072efc73fe?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2070&q=80",
       complete: false,
+      selected: false,
       created: Date.now(),
       location: {
         latitude: 37.559285765296,
@@ -186,6 +194,7 @@ export const db = {
       category: "School",
       image: null,
       complete: true,
+      selected: false,
       created: Date.now(),
       location: {
         latitude: 37.559285765296,
@@ -202,6 +211,7 @@ export const db = {
       category: "Food",
       image: null,
       complete: true,
+      selected: false,
       created: Date.now(),
       location: {
         latitude: 37.559285765296,
@@ -218,6 +228,7 @@ export const db = {
       category: "School",
       image: null,
       complete: false,
+      selected: false,
       created: Date.now(),
       location: {
         latitude: 37.559285765296,
@@ -234,6 +245,7 @@ export const db = {
       category: "Food",
       image: null,
       complete: false,
+      selected: false,
       created: Date.now(),
       location: {
         latitude: 37.559285765296,
@@ -250,6 +262,7 @@ export const db = {
       category: "School",
       image: null,
       complete: false,
+      selected: false,
       created: Date.now(),
       location: {
         latitude: 37.559285765296,
@@ -266,6 +279,7 @@ export const db = {
       category: "Food",
       image: null,
       complete: false,
+      selected: false,
       created: Date.now(),
       location: {
         latitude: 37.559285765296,
@@ -283,6 +297,7 @@ export const db = {
       category: "Food",
       image: null,
       complete: false,
+      selected: false,
       created: Date.now(),
       location: {
         latitude: 37.559285765296,
@@ -441,8 +456,8 @@ export const storeData = async (key, value) => {
   try {
     const jsonValue = JSON.stringify(value);
     await AsyncStorage.setItem(key, jsonValue);
-  } catch (e) {
-    // saving error
+  } catch (error) {
+    console.log(error);
   }
 };
 
@@ -450,10 +465,9 @@ export const getData = async (key) => {
   try {
     const value = await AsyncStorage.getItem(key);
     if (value !== null) {
-      // value previously stored
-      console.log(value);
+      return JSON.parse(value);
     }
-  } catch (e) {
-    // error reading value
+  } catch (error) {
+    console.log(error);
   }
 };
