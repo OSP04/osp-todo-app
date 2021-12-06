@@ -87,6 +87,7 @@ function useSearchTask(query) {
 
   const searchedTask = filteredTasks.map((task, index) => (
     <SearchedTask
+      task={task}
       key={task.created}
       index={index}
       text={task.text}

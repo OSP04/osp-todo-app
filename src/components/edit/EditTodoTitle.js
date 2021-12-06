@@ -4,7 +4,7 @@ import { theme } from "../../theme";
 import EditPicture from "./EditPicture";
 
 const EditTodoTitle = ({}) => {
-  const [text, setText] = useState("Todo.text");
+  const [text, setText] = useState("Title");
   const [edit, setEdit] = useState(false);
 
   return (
@@ -13,7 +13,7 @@ const EditTodoTitle = ({}) => {
         {edit ? (
           <TextInput
             style={styles.input}
-            placeholder={text}
+            placeholder="Title"
             value={text}
             onChangeText={(text) => {
               setText(text);

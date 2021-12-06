@@ -1,21 +1,28 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef } from "react";
+import { Text } from "react-native";
 import styled from "styled-components/native";
 import DraggableFlatList, {
   ScaleDecorator,
   ShadowDecorator,
   OpacityDecorator,
 } from "react-native-draggable-flatlist";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 
 import TaskItem from "./TaskItem";
 import CategoryBar from "../category/CategoryBar";
 import Input from "../Input";
-import { getData } from "../../db";
+import { storeData } from "../../db";
 
-const HomeTasks = ({ tasks, setTasks, categories, selectedDate }) => {
+const HomeTasks = ({
+  tasks,
+  setTasks,
+  categories,
+  selectedDate,
+  setSelectedCategory,
+}) => {
   const ref = useRef(null);
   const [refresh, setRefresh] = useState(true);
   const [newTask, setNewTask] = useState("");
+  const [isSelecting, setIsSelecting] = useState(false);
 
   const addTask = (category) => {
     if (newTask) {
@@ -31,9 +38,14 @@ const HomeTasks = ({ tasks, setTasks, categories, selectedDate }) => {
         complete: false,
         created: Date.now(),
       };
+      // Update tasks
       setTasks([...tasks, newTaskObj]);
+      storeData("tasks", [...tasks, newTaskObj]);
+
+      // Update category
       const updatedTasks = category.tasks.concat(newTaskObj);
       category.tasks = updatedTasks;
+      storeData("categories", categories);
     }
   };
 
@@ -109,8 +121,14 @@ const HomeTasks = ({ tasks, setTasks, categories, selectedDate }) => {
       <ScaleDecorator>
         <OpacityDecorator activeOpacity={1}>
           <ShadowDecorator>
-            {compareDate(item.date, selectedDate) && (
-              <TaskItem drag={drag} item={item} sorting={null} />
+            {compareDate(new Date(item.date), new Date(selectedDate)) && (
+              <TaskItem
+                drag={drag}
+                item={item}
+                sorting={null}
+                isSelecting={isSelecting}
+                setSelectedCategory={setSelectedCategory}
+              />
             )}
           </ShadowDecorator>
         </OpacityDecorator>
@@ -118,10 +136,10 @@ const HomeTasks = ({ tasks, setTasks, categories, selectedDate }) => {
     );
   };
 
-  return (
-    <StyledScroll>
-      {categories.map((category) => (
-        <StyledView key={Date.now() + category.id}>
+  return categories.map((category) => (
+    <StyledView key={Date.now() + category.id}>
+      <DraggableFlatList
+        ListHeaderComponent={
           <CategoryBar
             key={category.id}
             onPressOut={() => {
@@ -132,16 +150,16 @@ const HomeTasks = ({ tasks, setTasks, categories, selectedDate }) => {
             title={category.title}
             setRefresh={setRefresh}
           />
-          <DraggableFlatList
-            ref={ref}
-            data={sortTasks(category)}
-            onDragEnd={({ data }) => {
-              dragAndSave(data, category);
-            }}
-            keyExtractor={(item) => item.id}
-            renderItem={renderItem}
-          />
-          <Input
+        }
+        ref={ref}
+        data={sortTasks(category)}
+        onDragEnd={({ data }) => {
+          dragAndSave(data, category);
+        }}
+        keyExtractor={(item) => item.id}
+        renderItem={renderItem}
+      />
+      {/* <Input
             key={category.id + "Input"}
             newTask={newTask}
             isAdding={category.isAdding}
@@ -150,19 +168,19 @@ const HomeTasks = ({ tasks, setTasks, categories, selectedDate }) => {
             }}
             setNewTask={setNewTask}
             onBlur={() => onBlur(category)}
-          />
-        </StyledView>
-      ))}
-    </StyledScroll>
-  );
+          /> */}
+    </StyledView>
+  ));
 };
 
-const StyledScroll = styled.ScrollView`
-  width: 98%;
-  flex: 1;
-`;
+// const StyledScroll = styled.ScrollView`
+//   width: 98%;
+//   flex: 1;
+// `;
 
 const StyledView = styled.View`
+  width: 98%;
+  flex: 1;
   margin-bottom: 5%;
   min-height: 200px;
 `;

@@ -1,35 +1,59 @@
-import React, { useState } from "react";
-
+import React, { useEffect, useState } from "react";
 import styled from "styled-components/native";
 
 import Footer from "../components/common/Footer";
 import WeekStrip from "../components/WeekStrip";
 import TopBar from "../components/common/TopBar";
-
 import { theme } from "../theme";
-import { db } from "../db";
+import { getData } from "../db";
 import { images } from "../images";
 
-const Home = ({ navigation }) => {
-  const [categories, setCategories] = useState(db.categories);
-  const [tasks, setTasks] = useState(db.tasks);
+const Home = ({ navigation, route }) => {
+  const [categories, setCategories] = useState(null);
+  const [tasks, setTasks] = useState(null);
+  const [isSelecting, setIsSelecting] = useState(false);
+  const [selectedCategory, setSelectedCategory] = useState(null);
+
+  useEffect(async () => {
+    try {
+      const categoryObjs = await getData("categories");
+      const taskObjs = await getData("tasks");
+      setCategories(categoryObjs);
+      setTasks(taskObjs);
+    } catch (error) {
+      console.log(error);
+    }
+  }, []);
 
   return (
     <Wrapper>
       <StyledBar barStyle="auto" />
       <TopBar
         types={[images.search, images.menu]}
-        screens={[null, "AllTasks"]}
-        title=""
+        screens={["SearchScreen", "AllTasks"]}
+        title={null}
         navigation={navigation}
       />
       <Body>
-        <WeekStrip tasks={tasks} setTasks={setTasks} categories={categories} />
+        {tasks && categories && (
+          <WeekStrip
+            tasks={tasks}
+            setTasks={setTasks}
+            categories={categories}
+            setSelectedCategory={setSelectedCategory}
+            navigation={navigation}
+          />
+        )}
       </Body>
       <Footer
         navigation={navigation}
         type={images.comment}
         screens={["Comments", null]}
+        isSelecting={isSelecting}
+        setIsSelecting={setIsSelecting}
+        tasks={tasks}
+        setTasks={setTasks}
+        selectedCategory={selectedCategory}
       />
     </Wrapper>
   );

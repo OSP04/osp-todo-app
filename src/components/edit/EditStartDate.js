@@ -1,16 +1,17 @@
 import React, { useState } from "react";
 import { StyleSheet, Text, Pressable, View, Button } from "react-native";
-import { Entypo, MaterialCommunityIcons } from "@expo/vector-icons";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { theme } from "../../theme";
+import { db } from "../../db";
 import CommonModal from "../common/CommonModal";
 import CalendarBox from "./CalendarBox";
 
-const EditDueDate = ({}) => {
+const date = db.tasks.date;
+const EditStartDate = ({}) => {
   const [showModal, setShowModal] = useState(false);
   const openModal = () => {
-    setSelectedDate(dueDate);
-    if (dueDate !== "Due Date" || dueDate !== "Please set your Due Date")
-      setMarkedDates(makeSelectedTrue(dueDate));
+    setSelectedDate(startDate);
+    if (startDate !== "Date") setMarkedDates(makeSelectedTrue(startDate));
     setShowModal((prev) => !prev);
   };
 
@@ -22,8 +23,8 @@ const EditDueDate = ({}) => {
     date >= 10 ? date : "0" + date
   }`;
 
-  const [dueDate, setDueDate] = useState("Due Date");
-  const [selectedDate, setSelectedDate] = useState(dueDate);
+  const [startDate, setStartDate] = useState("Date");
+  const [selectedDate, setSelectedDate] = useState(startDate);
   const [markedDates, setMarkedDates] = useState({});
 
   const makeSelectedTrue = (day) => {
@@ -44,9 +45,9 @@ const EditDueDate = ({}) => {
       <CommonModal
         showModal={showModal}
         setShowModal={setShowModal}
-        headerText="Due Date"
+        headerText="Date"
         onCancelPressed={() => {
-          setSelectedDate(dueDate);
+          setSelectedDate(startDate);
           setShowModal(false);
         }}
       >
@@ -62,24 +63,19 @@ const EditDueDate = ({}) => {
         </View>
         <Button
           onPress={() => {
-            setDueDate(selectedDate);
+            setStartDate(selectedDate);
             setShowModal(false);
           }}
           title="Confirm"
         />
       </CommonModal>
-      <View style={styles.leftItem}>
-        <MaterialCommunityIcons
-          name="clock-end"
-          style={styles.icon}
-          size={24}
-          color="black"
-        />
-        <Text style={styles.dueDate}>{dueDate}</Text>
-      </View>
-      <Pressable onPress={() => setDueDate("Please set your Due Date")}>
-        <Entypo name="cross" style={styles.icon} size={24} color="black" />
-      </Pressable>
+      <MaterialCommunityIcons
+        name="calendar-today"
+        style={styles.icon}
+        size={24}
+        color="black"
+      />
+      <Text style={styles.startDate}>{startDate}</Text>
     </Pressable>
   );
 };
@@ -91,16 +87,11 @@ const styles = StyleSheet.create({
     height: 60,
     borderBottomWidth: 1,
     borderBottomColor: "#E5E5E5",
-    justifyContent: "space-between",
   },
   icon: {
     padding: 10,
   },
-  leftItem: {
-    flexDirection: "row",
-    alignItems: "center",
-  },
-  dueDate: {
+  startDate: {
     fontWeight: "bold",
     padding: 10,
     backgroundColor: theme.colors.surface,
@@ -120,4 +111,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default EditDueDate;
+export default EditStartDate;
