@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef } from "react";
 import styled from "styled-components/native";
 import DraggableFlatList, {
   ScaleDecorator,
@@ -11,10 +11,17 @@ import CategoryBar from "../category/CategoryBar";
 import Input from "../Input";
 import { storeData } from "../../db";
 
-const HomeTasks = ({ tasks, setTasks, categories, selectedDate }) => {
+const HomeTasks = ({
+  tasks,
+  setTasks,
+  categories,
+  selectedDate,
+  setSelectedCategory,
+}) => {
   const ref = useRef(null);
   const [refresh, setRefresh] = useState(true);
   const [newTask, setNewTask] = useState("");
+  const [isSelecting, setIsSelecting] = useState(false);
 
   const addTask = (category) => {
     if (newTask) {
@@ -30,10 +37,14 @@ const HomeTasks = ({ tasks, setTasks, categories, selectedDate }) => {
         complete: false,
         created: Date.now(),
       };
+      // Update tasks
       setTasks([...tasks, newTaskObj]);
       storeData("tasks", [...tasks, newTaskObj]);
+
+      // Update category
       const updatedTasks = category.tasks.concat(newTaskObj);
       category.tasks = updatedTasks;
+      storeData("categories", categories);
     }
   };
 
@@ -110,7 +121,13 @@ const HomeTasks = ({ tasks, setTasks, categories, selectedDate }) => {
         <OpacityDecorator activeOpacity={1}>
           <ShadowDecorator>
             {compareDate(new Date(item.date), new Date(selectedDate)) && (
-              <TaskItem drag={drag} item={item} sorting={null} />
+              <TaskItem
+                drag={drag}
+                item={item}
+                sorting={null}
+                isSelecting={isSelecting}
+                setSelectedCategory={setSelectedCategory}
+              />
             )}
           </ShadowDecorator>
         </OpacityDecorator>

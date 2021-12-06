@@ -12,28 +12,38 @@ const Footer = ({
   screens,
   isSelecting,
   setIsSelecting,
-  tasks,
   setTasks,
+  tasks,
+  selectedCategory,
 }) => {
   const [all, setAll] = useState(false);
 
-  const pressSelectButton = async () => {
-    setIsSelecting((current) => !current);
-    setAll(false);
-    tasks.map((item) => (item.selected = false));
-    setTasks(tasks);
+  const readyToSelect = async () => {
+    console.log(selectedCategory); // 아무것도 안 뜸
+    try {
+      setIsSelecting((current) => !current);
+      setAll(false);
+      tasks.map((item) => (item.selected = false));
+      setTasks(tasks);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
-  const pressAllButton = async () => {
-    setAll((current) => !current);
-    tasks.map((item) => (item.selected = all ? false : true));
-    setTasks(tasks);
+  const selectAll = async () => {
+    try {
+      setAll((current) => !current);
+      tasks.map((item) => (item.selected = all ? false : true));
+      setTasks(tasks);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const deleteTasks = () => {
     const unSelectedTasks = tasks.filter((item) => item.selected === false);
     setTasks(unSelectedTasks);
-    storeData(unSelectedTasks);
+    storeData("tasks", unSelectedTasks);
     setIsSelecting(false);
     setAll(false);
   };
@@ -46,7 +56,7 @@ const Footer = ({
           onPressOut={() => screens[0] && navigation.navigate(screens[0])}
         />
       ) : (
-        <AllButton all={all} onPress={pressAllButton} isSelecting={isSelecting}>
+        <AllButton all={all} onPress={selectAll} isSelecting={isSelecting}>
           <AllText all={all} isSelecting={isSelecting}>
             All
           </AllText>
@@ -57,7 +67,7 @@ const Footer = ({
         {isSelecting && (
           <IconButton type={images.remove} onPressOut={deleteTasks} />
         )}
-        <SelectButton isSelecting={isSelecting} onPress={pressSelectButton}>
+        <SelectButton isSelecting={isSelecting} onPress={readyToSelect}>
           <SelectText isSelecting={isSelecting}>
             {!isSelecting ? "Select" : "Cancel"}
           </SelectText>
