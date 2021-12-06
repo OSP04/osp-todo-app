@@ -8,6 +8,7 @@ import SignUpScreen from "./src/screens/SignUpScreen";
 import EditScreen from "./src/screens/EditScreen";
 import Home from "./src/screens/Home";
 import Achievement from "./src/screens/Achievement";
+import Achievement2 from "./src/screens/Achievement2";
 import Comments from "./src/screens/Comments";
 import AllTasks from "./src/screens/AllTasks";
 import SearchScreen from "./src/screens/SearchScreen";
@@ -41,6 +42,7 @@ export default function App() {
           <Stack.Screen name="EditScreen" component={EditScreen} />
           <Stack.Screen name="Home" component={Home} />
           <Stack.Screen name="Achievement" component={Achievement} />
+          <Stack.Screen name="Achievement2" component={Achievement2} />
           <Stack.Screen name="Comments" component={Comments} />
           <Stack.Screen name="AllTasks" component={AllTasks} />
           <Stack.Screen name="CalendarScreen" component={CalendarScreen} />

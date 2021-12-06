@@ -6,9 +6,9 @@ import IconButton from "../components/common/IconButton";
 import { images } from "../../src/images";
 import { theme } from "../../src/theme";
 import { TouchableOpacity } from "react-native-gesture-handler";
-import AchievementCategory from "../components/achievement/AchievementCategory";
+import AchievementDay from "../components/achievement/AchievementDay";
 
-const Achievement = ({ navigation }) => {
+const Achievement2 = ({ navigation }) => {
 
     const width = Dimensions.get('window').width;
 
@@ -21,15 +21,15 @@ const Achievement = ({ navigation }) => {
                 <View width={25} />
             </StyledView>
             <StyledView width={width - 20} style={{ justifyContent: "flex-start" }}>
-                <TouchableOpacity>
-                    <StyledText style={{ fontSize: 22 }}>Category</StyledText>
+                <TouchableOpacity onPress={() => navigation.navigate("Achievement")}>
+                    <StyledText style={{ fontSize: 22, color: theme.light }}>Category</StyledText>
                 </TouchableOpacity>
                 <View style={{ paddingHorizontal: 30 }} />
                 <TouchableOpacity onPress={() => navigation.navigate("Achievement2")}>
-                    <StyledText style={{ fontSize: 22, color: theme.light }}>Day</StyledText>
+                    <StyledText style={{ fontSize: 22 }}>Day</StyledText>
                 </TouchableOpacity>
             </StyledView>
-            <AchievementCategory />
+            <AchievementDay />
         </Wrapper>
     );
 };
@@ -57,4 +57,4 @@ font-weight: bold;
 font-size: 24px;
 `;
 
-export default Achievement;
+export default Achievement2;
