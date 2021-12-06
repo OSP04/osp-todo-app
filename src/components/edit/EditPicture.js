@@ -3,6 +3,7 @@ import { StyleSheet, Text, Pressable, View, Image, Button } from "react-native";
 import { FontAwesome } from "@expo/vector-icons";
 import * as ImagePicker from "expo-image-picker";
 import CommonModal from "../common/CommonModal";
+import { updateTodo } from "../../editTasksFunc";
 
 const EditPicture = ({}) => {
   const [showModal, setShowModal] = useState(false);
@@ -17,6 +18,14 @@ const EditPicture = ({}) => {
 
   // The path of the picked image
   const [pickedImagePath, setPickedImagePath] = useState("");
+
+  if (selectedTask.image === null) {
+    setPickedImagePath("");
+  } else {
+    setPickedImagePath(selectedTask.image);
+  }
+  const selectedId = selectedTask.id;
+  const [todo, setTodo] = useState(selectedTask);
 
   // This function is triggered when the "Select an image" button pressed
   const showImagePicker = async () => {
@@ -33,6 +42,8 @@ const EditPicture = ({}) => {
 
     if (!result.cancelled) {
       setPickedImagePath(result.uri);
+      setTodo({ ...todo, image: pickedImagePath });
+      updateTodo(todo, selectedId);
       setShowModal(false);
     }
   };
@@ -51,6 +62,8 @@ const EditPicture = ({}) => {
 
     if (!result.cancelled) {
       setPickedImagePath(result.uri);
+      setTodo({ ...todo, image: pickedImagePath });
+      updateTodo(todo, selectedId);
       setShowModal(false);
     }
   };

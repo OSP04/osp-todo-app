@@ -2,12 +2,23 @@ import React, { useState } from "react";
 import { StyleSheet, Text, Pressable, View, Button } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { theme } from "../../theme";
-import { db } from "../../db";
 import CommonModal from "../common/CommonModal";
 import CalendarBox from "./CalendarBox";
+import { updateTodo } from "../../editTasksFunc";
 
-const date = db.tasks.date;
-const EditStartDate = ({}) => {
+const EditStartDate = ({ selectedTask }) => {
+  const [startDate, setStartDate] = useState("");
+  const [selectedDate, setSelectedDate] = useState(startDate);
+  const [markedDates, setMarkedDates] = useState({});
+
+  if (selectedTask.date === null) {
+    setDueDate("Date");
+  } else {
+    setDueDate(selectedTask.date.toString());
+  }
+  const selectedId = selectedTask.id;
+  const [todo, setTodo] = useState(selectedTask);
+
   const [showModal, setShowModal] = useState(false);
   const openModal = () => {
     setSelectedDate(startDate);
@@ -22,10 +33,6 @@ const EditStartDate = ({}) => {
   const current = `${year}-${month >= 10 ? month : "0" + month}-${
     date >= 10 ? date : "0" + date
   }`;
-
-  const [startDate, setStartDate] = useState("Date");
-  const [selectedDate, setSelectedDate] = useState(startDate);
-  const [markedDates, setMarkedDates] = useState({});
 
   const makeSelectedTrue = (day) => {
     let markedDates = {};
@@ -64,6 +71,8 @@ const EditStartDate = ({}) => {
         <Button
           onPress={() => {
             setStartDate(selectedDate);
+            setTodo({ ...todo, date: Date(startDate) });
+            updateTodo(todo, selectedId);
             setShowModal(false);
           }}
           title="Confirm"

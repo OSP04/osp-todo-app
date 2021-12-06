@@ -3,15 +3,24 @@ import { StyleSheet, Text, Pressable, View, FlatList } from "react-native";
 import { FontAwesome5, MaterialCommunityIcons } from "@expo/vector-icons";
 import { theme } from "../../theme";
 import { db } from "../../db";
+import { updateTodo } from "../../editTasksFunc";
 import CommonModal from "../common/CommonModal";
 import { useEffect } from "react";
 
 const categoryData = db.categories;
 
-const EditCategory = ({}) => {
-  const [category, setCategory] = useState("Category");
-  const [selectedId, setSelectedId] = useState("");
-  useEffect(() => {}, [selectedId]);
+const EditCategory = ({ selectedTask }) => {
+  const [category, setCategory] = useState(selectedTask.category);
+  if (selectedTask.category === null) {
+    setCategory("Category");
+  } else {
+    setCategory(selectedTask.category);
+  }
+  const selectedId = selectedTask.id;
+  const [todo, setTodo] = useState(selectedTask);
+
+  const [categoryId, setCategoryId] = useState("");
+  useEffect(() => {}, [categoryId]);
   const [showModal, setShowModal] = useState(false);
   const openModal = () => {
     setShowModal((prev) => !prev);
@@ -20,8 +29,10 @@ const EditCategory = ({}) => {
   const renderCategory = ({ item }) => (
     <Pressable
       onPress={() => {
-        setSelectedId(item.id);
+        setCategoryId(item.id);
         setCategory(item.title);
+        setTodo({ ...todo, category: category });
+        updateTodo(todo, selectedId);
         setTimeout(() => {
           setShowModal(false);
         }, 50);
@@ -44,7 +55,7 @@ const EditCategory = ({}) => {
           }}
         >
           <Text style={{ fontWeight: "bold", fontSize: 17 }}>{item.title}</Text>
-          {selectedId === item.id ? (
+          {categoryId === item.id ? (
             <MaterialCommunityIcons
               name="radiobox-marked"
               size={24}

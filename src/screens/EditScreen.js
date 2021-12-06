@@ -12,7 +12,14 @@ import EditLocation from "../components/edit/EditLocation";
 import EditTodoTitle from "../components/edit/EditTodoTitle";
 import EditCategory from "../components/edit/EditCategory";
 
-const EditScreen = ({ navigation }) => {
+const EditScreen = ({ route, navigation }) => {
+  const { selectedTask, category } = route.params;
+
+  if (selectedTask === null) {
+    selectedTask.id = new Date();
+    selectedTask.category = category.title;
+  }
+
   const onDeletePressed = () => {
     Alert.alert("Delete", "Do you really want to delete this todo?", [
       {
@@ -20,7 +27,13 @@ const EditScreen = ({ navigation }) => {
         onPress: () => null,
         style: "cancel",
       },
-      { text: "OK", onPress: () => navigation.navigate("Home") },
+      {
+        text: "OK",
+        onPress: () => {
+          removeTodo(selectedTask.id);
+          navigation.navigate("Home");
+        },
+      },
       { cancelable: true },
     ]);
   };
@@ -49,13 +62,13 @@ const EditScreen = ({ navigation }) => {
       </TopHeader>
 
       <View style={styles.list}>
-        <EditTodoTitle />
+        <EditTodoTitle selectedTask={selectedTask} />
         <KeyboardAwareScrollView keyboardShouldPersistTaps="always">
-          <EditStartDate />
-          <EditDueDate />
-          <EditCategory />
-          <EditLocation />
-          <EditMemo />
+          <EditStartDate selectedTask={selectedTask} />
+          <EditDueDate selectedTask={selectedTask} />
+          <EditCategory selectedTask={selectedTask} />
+          <EditLocation selectedTask={selectedTask} />
+          <EditMemo selectedTask={selectedTask} />
         </KeyboardAwareScrollView>
       </View>
     </Background>

@@ -4,8 +4,21 @@ import { Entypo, MaterialCommunityIcons } from "@expo/vector-icons";
 import { theme } from "../../theme";
 import CommonModal from "../common/CommonModal";
 import CalendarBox from "./CalendarBox";
+import { updateTodo } from "../../editTasksFunc";
 
-const EditDueDate = ({}) => {
+const EditDueDate = ({ selectedTask }) => {
+  const [dueDate, setDueDate] = useState("");
+  const [selectedDate, setSelectedDate] = useState(dueDate);
+  const [markedDates, setMarkedDates] = useState({});
+
+  if (selectedTask.due === null) {
+    setDueDate("Due Date");
+  } else {
+    setDueDate(selectedTask.due.toString());
+  }
+  const selectedId = selectedTask.id;
+  const [todo, setTodo] = useState(selectedTask);
+
   const [showModal, setShowModal] = useState(false);
   const openModal = () => {
     setSelectedDate(dueDate);
@@ -21,10 +34,6 @@ const EditDueDate = ({}) => {
   const current = `${year}-${month >= 10 ? month : "0" + month}-${
     date >= 10 ? date : "0" + date
   }`;
-
-  const [dueDate, setDueDate] = useState("Due Date");
-  const [selectedDate, setSelectedDate] = useState(dueDate);
-  const [markedDates, setMarkedDates] = useState({});
 
   const makeSelectedTrue = (day) => {
     let markedDates = {};
@@ -63,6 +72,8 @@ const EditDueDate = ({}) => {
         <Button
           onPress={() => {
             setDueDate(selectedDate);
+            setTodo({ ...todo, due: Date(dueDate) });
+            updateTodo(todo, selectedId);
             setShowModal(false);
           }}
           title="Confirm"

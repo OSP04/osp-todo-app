@@ -5,11 +5,12 @@ import { Entypo } from "@expo/vector-icons";
 import { theme } from "../../theme";
 import CommonModal from "../common/CommonModal";
 import MapContainer from "./MapContainer";
+import { updateTodo } from "../../editTasksFunc";
 
 const latitudeDelta = 0.004;
 const longitudeDelta = 0.004;
 
-const EditLocation = ({}) => {
+const EditLocation = ({ selectedTask }) => {
   const [location, setLocation] = useState("");
   const [locationData, setLocationData] = useState({
     mainText: "",
@@ -24,8 +25,24 @@ const EditLocation = ({}) => {
       longitudeDelta,
     },
     listViewDisplayed: false,
-    mainText: "",
   });
+
+  if (selectedTask.location.region !== null) {
+    setLocationData(selectedTask.location.locationData);
+    setAddressPicker({
+      ...addressPicker,
+      region: selectedTask.location.region,
+    });
+    setLocation(selectedTask.location.text);
+  } else if (
+    selectedTask.location.text !== null ||
+    selectedTask.location.text !== ""
+  ) {
+    setLocation(selectedTask.location.text);
+  }
+
+  const selectedId = selectedTask.id;
+  const [todo, setTodo] = useState(selectedTask);
 
   const [showModal, setShowModal] = useState(false);
   const openModal = () => {
@@ -37,21 +54,22 @@ const EditLocation = ({}) => {
     setShowFullMap((prev) => !prev);
   };
 
-  // useEffect(() => {
-  //   getInitialState();
-  // }, []);
-
   const getInitialState = () => {
+    setLocation("");
     setAddressPicker({
       region: {
-        latitude: 37.559285765296,
-        longitude: 126.94568079431,
+        latitude: 35.91395373474155,
+        longitude: 127.73829440215488,
         latitudeDelta,
         longitudeDelta,
       },
       listViewDisplayed: false,
-      mainText: "",
     });
+    setTodo({
+      ...todo,
+      location: { text: null, region: null, locationData: null },
+    });
+    updateTodo(todo, selectedId);
   };
 
   const getCoordsFromName = (loc) => {
@@ -81,6 +99,15 @@ const EditLocation = ({}) => {
     });
     getCoordsFromName(details.geometry.location);
     setIsMapSelected(true);
+    setTodo({
+      ...todo,
+      location: {
+        text: locationData.mainText,
+        region: addressPicker.region,
+        locationData: locationData,
+      },
+    });
+    updateTodo(todo, selectedId);
     setShowModal(false);
   };
 
@@ -157,13 +184,21 @@ const EditLocation = ({}) => {
           value={isMapSelected ? locationData.mainText : location}
           onChangeText={(location) => setLocation(location)}
           editable={isMapSelected ? false : true}
+          onEndEditing={() => {
+            setTodo({
+              ...todo,
+              location: {
+                text: location,
+              },
+            });
+            updateTodo(todo, selectedId);
+          }}
         />
         {isMapSelected ? (
           <Pressable
             onPress={() => {
               setIsMapSelected(false);
               getInitialState();
-              setLocation("");
             }}
           >
             <Entypo name="cross" style={styles.icon} size={20} color="black" />

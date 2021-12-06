@@ -2,10 +2,19 @@ import React, { useState } from "react";
 import { StyleSheet, View, Text, TextInput, Pressable } from "react-native";
 import { theme } from "../../theme";
 import EditPicture from "./EditPicture";
+import { updateTodo } from "../../editTasksFunc";
 
-const EditTodoTitle = ({}) => {
+const EditTodoTitle = ({ selectedTask }) => {
   const [text, setText] = useState("Title");
   const [edit, setEdit] = useState(false);
+
+  if (selectedTask.title === null) {
+    setText("");
+  } else {
+    setText(selectedTask.title);
+  }
+  const selectedId = selectedTask.id;
+  const [todo, setTodo] = useState(selectedTask);
 
   return (
     <View style={styles.listItem}>
@@ -17,6 +26,10 @@ const EditTodoTitle = ({}) => {
             value={text}
             onChangeText={(text) => {
               setText(text);
+            }}
+            onEndEditing={() => {
+              setTodo({ ...todo, title: text });
+              updateTodo(todo, selectedId);
             }}
           />
         ) : (
