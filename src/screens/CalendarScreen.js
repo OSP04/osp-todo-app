@@ -60,25 +60,24 @@ const tasks = [
 
 const markingDates = tasks.map((task) => formatDate(task.date));
 
-const mark = {};
-markingDates.forEach((day) => {
-  mark[day] = {
-    marked: true,
-    dotColor: "red",
-  };
-});
+const CalendarScreen = ({ route, navigation }) => {
+  const { selectedDate } = route.params;
 
-const CalendarScreen = (navigation) => {
+  const mark = { [formatDate(selectedDate)]: { selected: true } };
+  markingDates.forEach((day) => {
+    mark[day] = {
+      marked: true,
+      dotColor: "red",
+    };
+  });
   console.log(markingDates);
   return (
     <View style={{ paddingtop: 50, flex: 1 }}>
       <BackButton onPressOut={() => navigation.goBack()} />
       <CalendarList
-        current={formatDate(new Date())}
+        current={formatDate(selectedDate)}
         // Callback which gets executed when visible months change in scroll view. Default = undefined
-        onVisibleMonthsChange={(months) => {
-          console.log("now these months are visible", months);
-        }}
+        onVisibleMonthsChange={(months) => {}}
         // Max amount of months allowed to scroll to the past. Default = 50
         pastScrollRange={50}
         // Max amount of months allowed to scroll to the future. Default = 50
@@ -88,7 +87,7 @@ const CalendarScreen = (navigation) => {
         // Enable or disable vertical scroll indicator. Default = false
         showScrollIndicator={true}
         onDayPress={(day) => {
-          navigation.navigate("Home");
+          navigation.navigate("Home", { day });
           //해당 날짜의 메인으로 이동
           console.log("selected day", day);
         }}
