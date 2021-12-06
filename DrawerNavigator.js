@@ -19,7 +19,7 @@ const DrawerNavigator = () => {
       }}
     >
       <Drawer.Screen
-        name="LoginScreen"
+        name="LoginScreen2"
         component={StackNavigator}
         options={{ drawerLabel: "LoginScreen" }}
       />
