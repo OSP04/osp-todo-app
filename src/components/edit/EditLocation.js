@@ -69,10 +69,10 @@ const EditLocation = ({}) => {
     setAddressPicker({
       listViewDisplayed: false,
       region: {
-        latitudeDelta,
-        longitudeDelta,
         latitude: details.geometry.location.lat,
         longitude: details.geometry.location.lng,
+        latitudeDelta,
+        longitudeDelta,
       },
     });
     setLocationData({
@@ -113,6 +113,7 @@ const EditLocation = ({}) => {
             showsMyLocationButton={true}
             region={addressPicker.region}
             style={styles.fullmap}
+            moveOnMarkerPress={true}
           >
             <Marker
               coordinate={{
@@ -175,7 +176,15 @@ const EditLocation = ({}) => {
       </View>
       {isMapSelected && (
         <Pressable style={styles.mapContainer} onPress={openFullMap}>
-          <MapView style={styles.map} region={addressPicker.region}>
+          <MapView
+            style={styles.map}
+            region={addressPicker.region}
+            pitchEnabled={false}
+            rotateEnabled={false}
+            scrollEnabled={false}
+            zoomEnabled={false}
+            zoomTapEnabled={false}
+          >
             <Marker
               coordinate={{
                 latitude: addressPicker.region.latitude,
