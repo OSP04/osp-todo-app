@@ -1,9 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { db, storeData } from "./src/db";
-import { useEffect } from "react";
+
 import { NavigationContainer } from "@react-navigation/native";
 import DrawerNavigator from "./DrawerNavigator";
-
 
 function App() {
   useEffect(() => {
