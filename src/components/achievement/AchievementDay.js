@@ -9,7 +9,7 @@ const AchievementDay = () => {
 
     const width = Dimensions.get('window').width;
 
-
+    const [tasks, setTasks] = useState(db.tasks);
 
     return (
         <Wrapper>
