@@ -36,16 +36,22 @@ const AllCategory = ({ navigation }) => {
             isAdding: false,
             sorting: "added",
             tasks: {
-                id: "null",
+                id: "",
                 count: "0",
-                text: "null",
+                text: "",
                 date: null,
                 due: null,
                 category: newCategory,
-                image: "null",
+                image: "",
                 complete: false,
                 selected: false,
-                created: "null",
+                created: "",
+                location: {
+                    latitude: null,
+                    longitude: null,
+                    latitudeDelta: 0.004,
+                    longitudeDelta: 0.004,
+                },
             },
         };
         setNewCategory("");
