@@ -6,12 +6,16 @@ import { images } from "../../images";
 import IconButton from "../common/IconButton";
 import Dropdown from "../common/Dropdown";
 
-const CategoryBar = ({ onPressOut, category, setRefresh }) => {
+const CategoryBar = ({ category, setRefresh, navigation }) => {
+  const moveToEditScreen = () => {
+    navigation.navigate("EditScreen", { selectedTask: null, category });
+  };
+
   return (
     <StyledView>
       <Category>
         <Title category={category}>{category.title}</Title>
-        <IconButton onPressOut={onPressOut} type={images.add} />
+        <IconButton onPressOut={moveToEditScreen} type={images.add} />
       </Category>
       <Dropdown category={category} setRefresh={setRefresh} />
     </StyledView>
@@ -23,6 +27,7 @@ const StyledView = styled.View`
   align-items: center;
   justify-content: space-between;
   margin-bottom: 10px;
+  elevation: 100;
 `;
 
 const Category = styled.View`

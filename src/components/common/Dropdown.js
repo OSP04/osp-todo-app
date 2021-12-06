@@ -46,8 +46,6 @@ const styles = StyleSheet.create({
   },
 });
 
-const StyledView = styled.SafeAreaView`
-  z-index: 10;
-`;
+const StyledView = styled.SafeAreaView``;
 
 export default Dropdown;

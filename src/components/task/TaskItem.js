@@ -75,7 +75,7 @@ const Touchable = styled.TouchableOpacity`
   align-items: center;
   justify-content: space-between;
   background-color: ${(props) =>
-    props.isActive || props.selected ? theme.light : theme.background};
+    props.isActive || props.selected ? theme.light : null};
 `;
 
 const StyledText = styled.View`
