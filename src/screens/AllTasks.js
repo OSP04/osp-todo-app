@@ -22,8 +22,12 @@ const AllTasks = ({ navigation }) => {
   const [isSelecting, setIsSelecting] = useState(false);
 
   useEffect(async () => {
-    const taskObjs = await getData("tasks");
-    setTasks(taskObjs);
+    try {
+      const taskObjs = await getData("tasks");
+      setTasks(taskObjs);
+    } catch (error) {
+      console.log(error);
+    }
   }, []);
 
   const sortTasks = () => {
@@ -100,7 +104,7 @@ const AllTasks = ({ navigation }) => {
       <TopBar
         types={[images.back, images.search]}
         title="All Tasks"
-        screens={["Home", null]}
+        screens={["Home", "SearchScreen"]}
         navigation={navigation}
       />
       <StyledView>
@@ -131,6 +135,8 @@ const AllTasks = ({ navigation }) => {
         setIsSelecting={setIsSelecting}
         tasks={tasks}
         setTasks={setTasks}
+        setRefresh={setRefresh}
+        selectedCategory={null}
       />
     </Wrapper>
   );
@@ -151,11 +157,6 @@ const StyledView = styled.View`
 const Tasks = styled.SafeAreaView`
   flex: 1;
   padding: 5%;
-`;
-
-const Placeholder = styled.View`
-  flex: 1;
-  background-color: ${theme.light};
 `;
 
 export default AllTasks;

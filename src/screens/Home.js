@@ -12,12 +12,17 @@ const Home = ({ navigation }) => {
   const [categories, setCategories] = useState(null);
   const [tasks, setTasks] = useState(null);
   const [isSelecting, setIsSelecting] = useState(false);
+  const [selectedCategory, setSelectedCategory] = useState(null);
 
   useEffect(async () => {
-    const categoryObjs = await getData("categories");
-    const taskObjs = await getData("tasks");
-    setCategories(categoryObjs);
-    setTasks(taskObjs);
+    try {
+      const categoryObjs = await getData("categories");
+      const taskObjs = await getData("tasks");
+      setCategories(categoryObjs);
+      setTasks(taskObjs);
+    } catch (error) {
+      console.log(error);
+    }
   }, []);
 
   return (
@@ -25,7 +30,7 @@ const Home = ({ navigation }) => {
       <StyledBar barStyle="auto" />
       <TopBar
         types={[images.search, images.menu]}
-        screens={[null, "AllTasks"]}
+        screens={["SearchScreen", "AllTasks"]}
         title={null}
         navigation={navigation}
       />
@@ -35,6 +40,8 @@ const Home = ({ navigation }) => {
             tasks={tasks}
             setTasks={setTasks}
             categories={categories}
+            setSelectedCategory={setSelectedCategory}
+            navigation={navigation}
           />
         )}
       </Body>
@@ -44,6 +51,9 @@ const Home = ({ navigation }) => {
         screens={["Comments", null]}
         isSelecting={isSelecting}
         setIsSelecting={setIsSelecting}
+        tasks={tasks}
+        setTasks={setTasks}
+        selectedCategory={selectedCategory}
       />
     </Wrapper>
   );

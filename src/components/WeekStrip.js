@@ -6,7 +6,13 @@ import CalendarStrip from "react-native-calendar-strip";
 import { theme } from "../theme";
 import HomeTasks from "./task/HomeTasks";
 
-const WeekStrip = ({ tasks, setTasks, categories }) => {
+const WeekStrip = ({
+  tasks,
+  setTasks,
+  categories,
+  setSelectedCategory,
+  navigation,
+}) => {
   const [markedDates, setMarkedDates] = useState(null);
   const [year, setYear] = useState(new Date().getFullYear());
   const [selectedDate, setSelectedDate] = useState(new Date());
@@ -64,7 +70,9 @@ const WeekStrip = ({ tasks, setTasks, categories }) => {
         markedDates={markedDates}
         iconContainer={{ flex: 0.1 }}
         calendarHeaderFormat={`MMMM`}
-        onHeaderSelected={() => console.log("Navigate to calender page")}
+        onHeaderSelected={() => {
+          navigation.navigate("CalendarScreen", { selectedDate });
+        }}
         onDateSelected={(date) => selectDate(date)}
       />
       <HomeTasks
@@ -72,6 +80,7 @@ const WeekStrip = ({ tasks, setTasks, categories }) => {
         setTasks={setTasks}
         categories={categories}
         selectedDate={selectedDate}
+        setSelectedCategory={setSelectedCategory}
       />
     </StyledView>
   );
