@@ -1,5 +1,5 @@
 import React from "react";
-
+import { useEffect } from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import DrawerNavigator from "./DrawerNavigator";
 import { db, storeData } from "./src/db";
