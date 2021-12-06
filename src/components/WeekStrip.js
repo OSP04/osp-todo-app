@@ -7,7 +7,7 @@ import { theme } from "../theme";
 import HomeTasks from "./task/HomeTasks";
 
 const WeekStrip = ({ tasks, setTasks, categories }) => {
-  const [markedDates, setMarkedDates] = useState([]);
+  const [markedDates, setMarkedDates] = useState(null);
   const [year, setYear] = useState(new Date().getFullYear());
   const [selectedDate, setSelectedDate] = useState(new Date());
 

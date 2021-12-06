@@ -5,12 +5,11 @@ import DraggableFlatList, {
   ShadowDecorator,
   OpacityDecorator,
 } from "react-native-draggable-flatlist";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 
 import TaskItem from "./TaskItem";
 import CategoryBar from "../category/CategoryBar";
 import Input from "../Input";
-import { getData } from "../../db";
+import { storeData } from "../../db";
 
 const HomeTasks = ({ tasks, setTasks, categories, selectedDate }) => {
   const ref = useRef(null);
@@ -32,6 +31,7 @@ const HomeTasks = ({ tasks, setTasks, categories, selectedDate }) => {
         created: Date.now(),
       };
       setTasks([...tasks, newTaskObj]);
+      storeData("tasks", [...tasks, newTaskObj]);
       const updatedTasks = category.tasks.concat(newTaskObj);
       category.tasks = updatedTasks;
     }
@@ -109,7 +109,7 @@ const HomeTasks = ({ tasks, setTasks, categories, selectedDate }) => {
       <ScaleDecorator>
         <OpacityDecorator activeOpacity={1}>
           <ShadowDecorator>
-            {compareDate(item.date, selectedDate) && (
+            {compareDate(new Date(item.date), new Date(selectedDate)) && (
               <TaskItem drag={drag} item={item} sorting={null} />
             )}
           </ShadowDecorator>

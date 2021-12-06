@@ -1,17 +1,24 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components/native";
 
 import Footer from "../components/common/Footer";
 import WeekStrip from "../components/WeekStrip";
 import TopBar from "../components/common/TopBar";
 import { theme } from "../theme";
-import { db } from "../db";
+import { getData } from "../db";
 import { images } from "../images";
 
 const Home = ({ navigation }) => {
-  const [categories, setCategories] = useState(db.categories);
-  const [tasks, setTasks] = useState(db.tasks);
+  const [categories, setCategories] = useState(null);
+  const [tasks, setTasks] = useState(null);
   const [isSelecting, setIsSelecting] = useState(false);
+
+  useEffect(async () => {
+    const categoryObjs = await getData("categories");
+    const taskObjs = await getData("tasks");
+    setCategories(categoryObjs);
+    setTasks(taskObjs);
+  }, []);
 
   return (
     <Wrapper>
@@ -23,7 +30,13 @@ const Home = ({ navigation }) => {
         navigation={navigation}
       />
       <Body>
-        <WeekStrip tasks={tasks} setTasks={setTasks} categories={categories} />
+        {tasks && categories && (
+          <WeekStrip
+            tasks={tasks}
+            setTasks={setTasks}
+            categories={categories}
+          />
+        )}
       </Body>
       <Footer
         navigation={navigation}

@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import styled from "styled-components/native";
 import DraggableFlatList, {
   ScaleDecorator,
@@ -6,7 +6,7 @@ import DraggableFlatList, {
   OpacityDecorator,
 } from "react-native-draggable-flatlist";
 
-import { db } from "../db";
+import { getData } from "../db";
 import { images } from "../images";
 import { theme } from "../theme";
 import TopBar from "../components/common/TopBar";
@@ -16,10 +16,15 @@ import Footer from "../components/common/Footer";
 
 const AllTasks = ({ navigation }) => {
   const ref = useRef(null);
-  const [tasks, setTasks] = useState(db.tasks);
+  const [tasks, setTasks] = useState(null);
   const [refresh, setRefresh] = useState(false);
   const [sorting, setSorting] = useState("added");
   const [isSelecting, setIsSelecting] = useState(false);
+
+  useEffect(async () => {
+    const taskObjs = await getData("tasks");
+    setTasks(taskObjs);
+  }, []);
 
   const sortTasks = () => {
     const _tasks = tasks;
@@ -105,17 +110,19 @@ const AllTasks = ({ navigation }) => {
           setSorting={setSorting}
         />
       </StyledView>
-      <Tasks>
-        <DraggableFlatList
-          ref={ref}
-          data={sortTasks(tasks)}
-          onDragEnd={({ data }) => {
-            dragAndSave(data);
-          }}
-          keyExtractor={(item) => item.id}
-          renderItem={renderItem}
-        />
-      </Tasks>
+      {tasks && (
+        <Tasks>
+          <DraggableFlatList
+            ref={ref}
+            data={sortTasks(tasks)}
+            onDragEnd={({ data }) => {
+              dragAndSave(data);
+            }}
+            keyExtractor={(item) => item.id}
+            renderItem={renderItem}
+          />
+        </Tasks>
+      )}
       <Footer
         navigation={navigation}
         type={null}

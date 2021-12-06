@@ -16,6 +16,15 @@ const Footer = ({
 }) => {
   const [all, setAll] = useState(false);
 
+  const pressSelectButton = async () => {
+    setIsSelecting((current) => !current);
+    setAll(false);
+    const tasks = await getData("tasks");
+    tasks.map((item) => (item.selected = false));
+    setTasks(tasks);
+    storeData("tasks", tasks);
+  };
+
   return (
     <StyledView>
       {!isSelecting ? (
@@ -44,16 +53,7 @@ const Footer = ({
             }}
           />
         )}
-        <SelectButton
-          isSelecting={isSelecting}
-          onPress={async () => {
-            setIsSelecting((current) => !current);
-            setAll(false);
-            const tasks = await getData("tasks");
-            tasks.map((item) => (item.selected = false));
-            setTasks(tasks);
-          }}
-        >
+        <SelectButton isSelecting={isSelecting} onPress={pressSelectButton}>
           <SelectText isSelecting={isSelecting}>
             {!isSelecting ? "Select" : "Cancel"}
           </SelectText>

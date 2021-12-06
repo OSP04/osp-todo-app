@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import styled from "styled-components/native";
 import Animated from "react-native-reanimated";
 import { StyleSheet } from "react-native";
@@ -27,7 +27,6 @@ const TaskItem = ({ item, drag, isSelecting }) => {
       setRefresh((current) => !current);
     }
   };
-  console.log(item);
 
   const { isActive } = useOnCellActiveAnimation();
 
@@ -45,7 +44,9 @@ const TaskItem = ({ item, drag, isSelecting }) => {
           <IconButton type={returnIcon(item)} onPressOut={toggleItem} />
           <StyledText>
             <TaskText>{item.text}</TaskText>
-            {item.due && <DueDate>{item.due.toString()}</DueDate>}
+            {item.due && (
+              <DueDate>{new Date(item.due).toLocaleDateString()}</DueDate>
+            )}
           </StyledText>
         </LeftItems>
         <RightItems>
