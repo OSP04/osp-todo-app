@@ -2,8 +2,7 @@ import React, { useEffect } from "react";
 import { db, storeData } from "./src/db";
 
 import { NavigationContainer } from "@react-navigation/native";
-import DrawerNavigator from "./DrawerNavigator";
-
+import { StackNavigator } from "./StackNavigator";
 function App() {
   useEffect(() => {
     storeData("tasks", db.tasks);
@@ -13,7 +12,7 @@ function App() {
   }, []);
   return (
     <NavigationContainer>
-      <DrawerNavigator />
+      <StackNavigator />
     </NavigationContainer>
   );
 }
