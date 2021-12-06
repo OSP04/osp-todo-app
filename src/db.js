@@ -1,19 +1,21 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { theme } from "./theme";
 
+const latitudeDelta = 0.004;
+const longitudeDelta = 0.004;
+
 export const db = {
+  // memo 추가해주세요
   categories: [
     {
       id: "5",
       title: "Food",
       color: theme.category.red,
-      owner: null,
-      isAdding: false,
+      isAdding: false, // 삭제
       sorting: "added",
       tasks: [
         {
           id: "1",
-          count: "1",
           text: "Buy Pizza",
           date: new Date("2021-11-23T03:00:00.000Z"),
           due: new Date("2022-12-28T03:00:00.000Z"),
@@ -21,46 +23,66 @@ export const db = {
           image:
             "https://images.unsplash.com/photo-1637004253818-d3072efc73fe?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2070&q=80",
           complete: false,
+          selected: false,
           created: Date.now(),
-          owner: null,
+          location: {
+            latitude: 37.559285765296,
+            longitude: 126.94568079431,
+            latitudeDelta,
+            longitudeDelta,
+          },
         },
         {
           id: "3",
-          count: "2",
           text: "Buy noodle",
           date: new Date("2021-11-24T03:00:00.000Z"),
           due: new Date("2022-01-05T03:00:00.000Z"),
           category: "Food",
           image: null,
           complete: true,
+          selected: false,
           created: Date.now(),
-          owner: null,
+          location: {
+            latitude: 37.559285765296,
+            longitude: 126.94568079431,
+            latitudeDelta: 0.004,
+            longitudeDelta: 0.004,
+          },
         },
         {
           id: "5",
-          count: "3",
           text: "Lunch with my friend",
           date: new Date("2021-11-23T03:00:00.000Z"),
           due: new Date("2021-12-04T03:00:00.000Z"),
           category: "Food",
           image: null,
           complete: false,
+          selected: false,
           created: Date.now(),
-          owner: null,
+          location: {
+            latitude: 37.559285765296,
+            longitude: 126.94568079431,
+            latitudeDelta: 0.004,
+            longitudeDelta: 0.004,
+          },
         },
         {
           id: "7",
-          count: "4",
           text: "Go to market",
           date: new Date("2021-11-23T03:00:00.000Z"),
           due: null,
           category: "Food",
           image: null,
           complete: false,
+          selected: false,
           created: Date.now(),
-          owner: null,
+          location: {
+            latitude: 37.559285765296,
+            longitude: 126.94568079431,
+            latitudeDelta,
+            longitudeDelta,
+          },
         },
-
         {
           id: "8",
           count: "5",
@@ -70,8 +92,14 @@ export const db = {
           category: "Food",
           image: null,
           complete: false,
+          selected: false,
           created: Date.now(),
-          owner: null,
+          location: {
+            latitude: 37.559285765296,
+            longitude: 126.94568079431,
+            latitudeDelta,
+            longitudeDelta,
+          },
         },
       ],
     },
@@ -85,44 +113,60 @@ export const db = {
       tasks: [
         {
           id: "2",
-          count: "1",
           text: "OpenSW Assignment",
           date: new Date("2021-11-24T03:00:00.000Z"),
           due: new Date("2021-12-15T03:00:00.000Z"),
           category: "School",
           image: null,
           complete: true,
+          selected: false,
           created: Date.now(),
-          owner: null,
+          location: {
+            latitude: 37.559285765296,
+            longitude: 126.94568079431,
+            latitudeDelta,
+            longitudeDelta,
+          },
         },
         {
           id: "4",
-          count: "2",
           text: "Submit report",
           date: new Date("2021-11-22T03:00:00.000Z"),
           due: null,
           category: "School",
           image: null,
           complete: false,
+          selected: false,
           created: Date.now(),
-          owner: null,
+          location: {
+            latitude: 37.559285765296,
+            longitude: 126.94568079431,
+            latitudeDelta,
+            longitudeDelta,
+          },
         },
         {
           id: "6",
-          count: "3",
           text: "Start project",
           date: new Date("2021-11-24T03:00:00.000Z"),
           due: null,
           category: "School",
           image: null,
           complete: false,
+          selected: false,
           created: Date.now(),
-          owner: null,
+          location: {
+            latitude: 37.559285765296,
+            longitude: 126.94568079431,
+            latitudeDelta,
+            longitudeDelta,
+          },
         },
       ],
     },
   ],
 
+  // memo 추가해주세요
   tasks: [
     {
       id: "1",
@@ -133,8 +177,14 @@ export const db = {
       image:
         "https://images.unsplash.com/photo-1637004253818-d3072efc73fe?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2070&q=80",
       complete: false,
+      selected: false,
       created: Date.now(),
-      owner: null,
+      location: {
+        latitude: 37.559285765296,
+        longitude: 126.94568079431,
+        latitudeDelta,
+        longitudeDelta,
+      },
     },
     {
       id: "2",
@@ -144,7 +194,14 @@ export const db = {
       category: "School",
       image: null,
       complete: true,
+      selected: false,
       created: Date.now(),
+      location: {
+        latitude: 37.559285765296,
+        longitude: 126.94568079431,
+        latitudeDelta: 0.004,
+        longitudeDelta: 0.004,
+      },
     },
     {
       id: "3",
@@ -154,8 +211,14 @@ export const db = {
       category: "Food",
       image: null,
       complete: true,
+      selected: false,
       created: Date.now(),
-      owner: null,
+      location: {
+        latitude: 37.559285765296,
+        longitude: 126.94568079431,
+        latitudeDelta: 0.004,
+        longitudeDelta: 0.004,
+      },
     },
     {
       id: "4",
@@ -165,8 +228,14 @@ export const db = {
       category: "School",
       image: null,
       complete: false,
+      selected: false,
       created: Date.now(),
-      owner: null,
+      location: {
+        latitude: 37.559285765296,
+        longitude: 126.94568079431,
+        latitudeDelta: 0.004,
+        longitudeDelta: 0.004,
+      },
     },
     {
       id: "5",
@@ -176,8 +245,14 @@ export const db = {
       category: "Food",
       image: null,
       complete: false,
+      selected: false,
       created: Date.now(),
-      owner: null,
+      location: {
+        latitude: 37.559285765296,
+        longitude: 126.94568079431,
+        latitudeDelta: 0.004,
+        longitudeDelta: 0.004,
+      },
     },
     {
       id: "6",
@@ -187,8 +262,14 @@ export const db = {
       category: "School",
       image: null,
       complete: false,
+      selected: false,
       created: Date.now(),
-      owner: null,
+      location: {
+        latitude: 37.559285765296,
+        longitude: 126.94568079431,
+        latitudeDelta: 0.004,
+        longitudeDelta: 0.004,
+      },
     },
     {
       id: "7",
@@ -198,8 +279,32 @@ export const db = {
       category: "Food",
       image: null,
       complete: false,
+      selected: false,
       created: Date.now(),
-      owner: null,
+      location: {
+        latitude: 37.559285765296,
+        longitude: 126.94568079431,
+        latitudeDelta,
+        longitudeDelta,
+      },
+    },
+    {
+      id: "8",
+      count: "5",
+      text: "Prepare dinner",
+      date: new Date("2021-11-23T03:00:00.000Z"),
+      due: null,
+      category: "Food",
+      image: null,
+      complete: false,
+      selected: false,
+      created: Date.now(),
+      location: {
+        latitude: 37.559285765296,
+        longitude: 126.94568079431,
+        latitudeDelta,
+        longitudeDelta,
+      },
     },
   ],
 

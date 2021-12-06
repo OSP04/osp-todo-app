@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import styled from "styled-components/native";
 import Animated from "react-native-reanimated";
 import { StyleSheet } from "react-native";
@@ -8,14 +8,9 @@ import { theme } from "../../theme";
 import { images } from "../../images";
 import IconButton from "../common/IconButton";
 
-const TaskItem = ({ item, drag, sorting }) => {
-  // if sorting is due, prevent drag animation
-  useEffect(() => {
-    setDisabled(sorting === "due" ? true : false);
-  }, [sorting]);
-
+const TaskItem = ({ item, drag, isSelecting, setSelectedCategory }) => {
   const [isCompleted, setIsCompleted] = useState(item.complete);
-  const [disabled, setDisabled] = useState(false);
+  const [refresh, setRefresh] = useState(false);
 
   const toggleItem = () => {
     item.complete = !item.complete;
@@ -26,26 +21,39 @@ const TaskItem = ({ item, drag, sorting }) => {
     return isCompleted ? images.complete : images.uncomplete;
   };
 
+  const selectItem = () => {
+    // home에서 isSelecting 이 계속 false
+    if (isSelecting) {
+      setSelectedCategory && setSelectedCategory(item.category);
+      item.selected = !item.selected;
+      setRefresh((current) => !current);
+    }
+  };
+
   const { isActive } = useOnCellActiveAnimation();
 
   return (
     <Touchable
+      selected={item.selected}
+      isSelecting={isSelecting}
       activeOpacity={1}
       onLongPress={drag}
       isActive={isActive}
-      disabled={disabled}
+      onPress={selectItem}
     >
       <Animated.View style={styles.animatedView}>
         <LeftItems>
           <IconButton type={returnIcon(item)} onPressOut={toggleItem} />
           <StyledText>
             <TaskText>{item.text}</TaskText>
-            {item.due && <DueDate>{item.due.toLocaleDateString()}</DueDate>}
+            {item.due && (
+              <DueDate>{new Date(item.due).toLocaleDateString()}</DueDate>
+            )}
           </StyledText>
         </LeftItems>
         <RightItems>
           <TaskImage source={{ uri: item.image }} />
-          <IconButton type={images.move} />
+          <IconButton type={images.edit} />
         </RightItems>
       </Animated.View>
     </Touchable>
@@ -67,7 +75,7 @@ const Touchable = styled.TouchableOpacity`
   align-items: center;
   justify-content: space-between;
   background-color: ${(props) =>
-    props.isActive ? theme.light : theme.background};
+    props.isActive || props.selected ? theme.light : null};
 `;
 
 const StyledText = styled.View`
@@ -85,7 +93,7 @@ const DueDate = styled.Text`
 const TaskImage = styled.Image`
   width: 25px;
   height: 25px;
-  margin-right: 5px;
+  margin-right: 15px;
 `;
 
 const LeftItems = styled.View`

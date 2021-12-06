@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Provider } from "react-native-paper";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
+
 import LoginScreen from "./src/screens/LoginScreen";
 import SignUpScreen from "./src/screens/SignUpScreen";
 import EditScreen from "./src/screens/EditScreen";
@@ -13,12 +14,19 @@ import SearchScreen from "./src/screens/SearchScreen";
 import CalendarScreen from "./src/screens/CalendarScreen";
 import AllCategory from "./src/screens/AllCategory";
 import OneCategory from "./src/screens/OneCategory";
-
+import { db, storeData } from "./src/db";
 import { theme } from "./src/theme";
 
 const Stack = createStackNavigator();
 
 export default function App() {
+  useEffect(() => {
+    storeData("tasks", db.tasks);
+    storeData("categories", db.categories);
+    storeData("users", db.users);
+    storeData("comments", db.comments);
+  }, []);
+
   return (
     <Provider theme={theme}>
       <NavigationContainer>
