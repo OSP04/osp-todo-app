@@ -1,16 +1,19 @@
-import React from "react";
+import React, { useState } from "react";
 import { Dimensions, View } from "react-native";
 
 import styled from "styled-components/native";
 import IconButton from "../components/common/IconButton";
 import { images } from "../../src/images";
 import { theme } from "../../src/theme";
-import { TouchableOpacity } from "react-native-gesture-handler";
 import AchievementCategory from "../components/achievement/AchievementCategory";
+import MenuBar from "../MenuBar";
+import AchievementDay from "../components/achievement/AchievementDay";
 
 const Achievement = ({ navigation }) => {
 
     const width = Dimensions.get('window').width;
+    const [stateCategory, setStateCategory] = useState(true);
+    const [stateDay, setStateDay] = useState(false);
 
     return (
         <Wrapper>
@@ -20,16 +23,12 @@ const Achievement = ({ navigation }) => {
                 <StyledText>Achievement</StyledText>
                 <View width={25} />
             </StyledView>
-            <StyledView width={width - 20} style={{ justifyContent: "flex-start" }}>
-                <TouchableOpacity>
-                    <StyledText style={{ fontSize: 22 }}>Category</StyledText>
-                </TouchableOpacity>
-                <View style={{ paddingHorizontal: 30 }} />
-                <TouchableOpacity onPress={() => navigation.navigate("Achievement2")}>
-                    <StyledText style={{ fontSize: 22, color: theme.light }}>Day</StyledText>
-                </TouchableOpacity>
-            </StyledView>
-            <AchievementCategory />
+
+            <MenuBar stateCategory={stateCategory} setStateCategory={setStateCategory}
+                stateDay={stateDay} setStateDay={setStateDay} />
+
+            {stateCategory == true ? (<AchievementCategory stateCategory={stateCategory} />)
+                : <AchievementDay stateDay={stateDay} />}
         </Wrapper>
     );
 };
