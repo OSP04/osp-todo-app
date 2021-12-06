@@ -51,7 +51,6 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     minHeight: 60,
-    maxHeight: 180,
     borderBottomWidth: 1,
     borderBottomColor: "#E5E5E5",
     justifyContent: "space-between",
