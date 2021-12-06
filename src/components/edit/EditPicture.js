@@ -1,13 +1,5 @@
 import React, { useState } from "react";
-import {
-  StyleSheet,
-  Text,
-  Pressable,
-  View,
-  Image,
-  Button,
-  Dimensions,
-} from "react-native";
+import { StyleSheet, Text, Pressable, View, Image, Button } from "react-native";
 import { FontAwesome } from "@expo/vector-icons";
 import * as ImagePicker from "expo-image-picker";
 import CommonModal from "../common/CommonModal";
@@ -65,38 +57,28 @@ const EditPicture = ({}) => {
 
   return (
     <View>
-      <CommonModal showModal={showModal} setShowModal={setShowModal}>
-        {pickedImagePath !== "" ? (
+      <CommonModal
+        showModal={showModal}
+        setShowModal={setShowModal}
+        headerText="Picture"
+        onCancelPressed={() => setShowModal(false)}
+      >
+        {pickedImagePath !== "" && (
           <Image source={{ uri: pickedImagePath }} style={styles.fullImage} />
-        ) : (
-          <Text style={styles.modalText}>Upload your picture</Text>
         )}
-        <View
-          style={{
-            borderBottomColor: "black",
-            borderBottomWidth: 1,
-          }}
-        />
-        <View style={styles.buttonContainer}>
-          {pickedImagePath !== "" && (
-            <Button
-              onPress={() => {
-                setShowModal(false);
-                setPickedImagePath("");
-              }}
-              title="Delete"
-              color="red"
-            />
-          )}
-          <Button onPress={showImagePicker} title="Select an image" />
-          <Button onPress={openCamera} title="Open camera" />
+
+        {pickedImagePath !== "" && (
           <Button
             onPress={() => {
               setShowModal(false);
+              setPickedImagePath("");
             }}
-            title="Cancel"
+            title="Delete"
+            color="red"
           />
-        </View>
+        )}
+        <Button onPress={showImagePicker} title="Select an image" />
+        <Button onPress={openCamera} title="Open camera" />
       </CommonModal>
       <Pressable onPress={openModal}>
         {pickedImagePath !== "" ? (
@@ -115,13 +97,11 @@ const EditPicture = ({}) => {
 };
 
 const styles = StyleSheet.create({
+  constainer: {
+    width: 270,
+  },
   icon: {
     paddingRight: 15,
-  },
-  buttonContainer: {
-    width: "100%",
-    height: undefined,
-    justifyContent: "center",
   },
   image: {
     width: 25,
@@ -131,21 +111,11 @@ const styles = StyleSheet.create({
     marginRight: 5,
   },
   fullImage: {
-    width: "90%",
+    width: "95%",
     height: undefined,
     aspectRatio: 0.7,
     resizeMode: "contain",
     marginBottom: 10,
-  },
-  modalText: {
-    textAlign: "center",
-    alignItems: "center",
-    borderBottomWidth: 1,
-    borderBottomColor: "#E5E5E5",
-    justifyContent: "space-between",
-    marginBottom: 20,
-    fontSize: 20,
-    fontWeight: "bold",
   },
 });
 

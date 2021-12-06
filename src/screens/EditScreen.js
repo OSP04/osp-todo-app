@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import { StyleSheet, View, Alert, Pressable, Text } from "react-native";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import BackButton from "../components/common/BackButton";
 import { theme } from "../theme";
 import Background from "../components/common/Background";
 import TopHeader from "../components/common/TopHeader";
 import EditMemo from "../components/edit/EditMemo";
+import EditStartDate from "../components/edit/EditStartDate";
 import EditDueDate from "../components/edit/EditDueDate";
-import EditRepeat from "../components/edit/EditRepeat";
 import EditLocation from "../components/edit/EditLocation";
 import EditTodoTitle from "../components/edit/EditTodoTitle";
 import EditCategory from "../components/edit/EditCategory";
@@ -48,12 +49,14 @@ const EditScreen = ({ navigation }) => {
       </TopHeader>
 
       <View style={styles.list}>
-        <EditTodoTitle></EditTodoTitle>
-        <EditDueDate></EditDueDate>
-        <EditRepeat></EditRepeat>
-        <EditCategory></EditCategory>
-        <EditLocation></EditLocation>
-        <EditMemo></EditMemo>
+        <EditTodoTitle />
+        <KeyboardAwareScrollView keyboardShouldPersistTaps="always">
+          <EditStartDate />
+          <EditDueDate />
+          <EditCategory />
+          <EditLocation />
+          <EditMemo />
+        </KeyboardAwareScrollView>
       </View>
     </Background>
   );
