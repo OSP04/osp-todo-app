@@ -345,3 +345,47 @@ export const db = {
     },
   ],
 };
+
+const [tasks, setTasks] = useState(AsyncStorage.getItem("tasks"));
+
+const addTodo = (todo) => {
+  const newTodo = {
+    id: Date.now(),
+    text: todo,
+    completed: false,
+  };
+  setTasks((prevState) => {
+    const todos = [newTodo, ...prevState.todos];
+    AsyncStorage.setItem("tasks", JSON.stringify(todos));
+    return { todos };
+  });
+};
+
+const checkTodo = (id) => {
+  setTasks((prevState) => {
+    const [todo] = prevState.tasks.filter((e) => e.id === id);
+    todo.completed = !todo.completed;
+    const todos = [...prevState.todos];
+    AsyncStorage.setItem("tasks", JSON.stringify(todos));
+    return { todos };
+  });
+};
+
+const updateTodo = (todo, id) => {
+  setTasks((prevState) => {
+    const updatedTodo = {
+      ...updateTodo,
+      text: todo.text,
+      date: todo.date,
+      due: todo.dueDate,
+      category: todo.category,
+      location: todo.location,
+      memo: todo.memo,
+    };
+    const index = prevState.tasks.findIndex((e) => e.id === id);
+    prevState.tasks.splice(index, 1, updatedTodo);
+    const todos = [...prevState.tasks];
+    AsyncStorage.setItem("tasks", JSON.stringify(todos));
+    return { todos };
+  });
+};
