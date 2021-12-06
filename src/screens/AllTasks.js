@@ -129,6 +129,7 @@ const AllTasks = ({ navigation }) => {
         screens={[null, null]}
         isSelecting={isSelecting}
         setIsSelecting={setIsSelecting}
+        tasks={tasks}
         setTasks={setTasks}
       />
     </Wrapper>

@@ -3,7 +3,7 @@ import styled from "styled-components/native";
 
 import { images } from "../../images";
 import { theme } from "../../theme";
-import { getData, storeData } from "../../db";
+import { storeData } from "../../db";
 import IconButton from "./IconButton";
 
 const Footer = ({
@@ -12,6 +12,7 @@ const Footer = ({
   screens,
   isSelecting,
   setIsSelecting,
+  tasks,
   setTasks,
 }) => {
   const [all, setAll] = useState(false);
@@ -19,10 +20,22 @@ const Footer = ({
   const pressSelectButton = async () => {
     setIsSelecting((current) => !current);
     setAll(false);
-    const tasks = await getData("tasks");
     tasks.map((item) => (item.selected = false));
     setTasks(tasks);
-    storeData("tasks", tasks);
+  };
+
+  const pressAllButton = async () => {
+    setAll((current) => !current);
+    tasks.map((item) => (item.selected = all ? false : true));
+    setTasks(tasks);
+  };
+
+  const deleteTasks = () => {
+    const unSelectedTasks = tasks.filter((item) => item.selected === false);
+    setTasks(unSelectedTasks);
+    storeData(unSelectedTasks);
+    setIsSelecting(false);
+    setAll(false);
   };
 
   return (
@@ -33,11 +46,7 @@ const Footer = ({
           onPressOut={() => screens[0] && navigation.navigate(screens[0])}
         />
       ) : (
-        <AllButton
-          all={all}
-          onPress={() => setAll((current) => !current)}
-          isSelecting={isSelecting}
-        >
+        <AllButton all={all} onPress={pressAllButton} isSelecting={isSelecting}>
           <AllText all={all} isSelecting={isSelecting}>
             All
           </AllText>
@@ -46,12 +55,7 @@ const Footer = ({
 
       <RightButtons>
         {isSelecting && (
-          <IconButton
-            type={images.remove}
-            onPressOut={() => {
-              console.log("Delete tasks");
-            }}
-          />
+          <IconButton type={images.remove} onPressOut={deleteTasks} />
         )}
         <SelectButton isSelecting={isSelecting} onPress={pressSelectButton}>
           <SelectText isSelecting={isSelecting}>
