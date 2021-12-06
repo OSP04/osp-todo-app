@@ -56,7 +56,7 @@ export default function LoginScreen({ navigation }) {
           <Text style={styles.link}>Sign up</Text>
         </TouchableOpacity>
       </View>
-      <TouchableOpacity onPress={() => navigation.navigate("Achievement")}>
+      <TouchableOpacity onPress={() => navigation.navigate("EditScreen")}>
         <Text style={styles.skip}>Skip for Now</Text>
       </TouchableOpacity>
     </Background>
