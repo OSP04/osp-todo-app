@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Dimensions } from "react-native";
 
 import styled from "styled-components/native";
@@ -7,17 +7,25 @@ import IconButton from "../components/common/IconButton";
 import { images } from "../../src/images";
 import { theme } from "../../src/theme";
 import AddCategory from "../screens/AddCategory";
-import { db } from "../../src/db";
+import { getData, storeData } from "../../src/db";
 
-const AllCategory = () => {
+const AllCategory = ({ navigation }) => {
     const width = Dimensions.get("window").width;
     const [state, setState] = useState(false);
     const [color, setColor] = useState(theme.category.red);
     const [refresh, setRefresh] = useState(true);
 
     const [newCategory, setNewCategory] = useState("");
+    const [categories, setCategories] = useState(null);
 
-    const [categories, setCategories] = useState(db.categories);
+    useEffect(async () => {
+        try {
+            const categoryObjs = await getData("categories");
+            setCategories(categoryObjs);
+        } catch (error) {
+            console.log(error);
+        }
+    }, []);
 
     const addCategory = () => {
         const ID = Date.now().toString();
@@ -28,21 +36,28 @@ const AllCategory = () => {
             isAdding: false,
             sorting: "added",
             tasks: {
-                id: null,
+                id: "",
                 count: "0",
-                text: null,
+                text: "",
                 date: null,
                 due: null,
                 category: newCategory,
-                image: null,
+                image: "",
                 complete: false,
-                created: null,
-                owner: null,
+                selected: false,
+                created: "",
+                location: {
+                    latitude: null,
+                    longitude: null,
+                    latitudeDelta: 0.004,
+                    longitudeDelta: 0.004,
+                },
             },
         };
         setNewCategory("");
         setColor(theme.category.red);
         setCategories([...categories, newCategoryObj]);
+        storeData("categories", [...categories, newCategoryObj]);
         setState(false);
     };
 
@@ -63,7 +78,7 @@ const AllCategory = () => {
         <Wrapper>
             <StyledBar barStyle="default" />
             <StyledView width={width - 20}>
-                <IconButton type={images.back} onPressout={() => navigation.navigate("Home")} />
+                <IconButton type={images.back} onPressOut={() => navigation.navigate("Home")} />
                 <StyledText>Category</StyledText>
                 <IconButton
                     type={images.add}
@@ -81,12 +96,13 @@ const AllCategory = () => {
                 />
             </StyledView>
             <StyledScroll nestedScrollEnabled={true}>
-                {Object.values(categories).map((item) => (
+                {categories != null && Object.values(categories).map((item) => (
                     <Categories
                         key={item.id}
                         item={item}
                         color={color}
                         doRefresh={doRefresh}
+                        navigation={navigation}
                     />
                 ))}
             </StyledScroll>

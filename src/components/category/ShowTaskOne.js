@@ -26,7 +26,7 @@ const ShowTaskOne = ({ item, doRefresh }) => {
                     }>{item.text}</TaskText>
                 </LeftView>
                 <RightView>
-                    {item.due && <DueDate>{item.due.toLocaleDateString()}</DueDate>}
+                    {item.due && <DueDate>{new Date(item.due).toLocaleDateString()}</DueDate>}
                 </RightView>
             </TaskView>}
         </StyledView >
