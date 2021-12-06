@@ -1,4 +1,5 @@
 import React, { useState, useRef } from "react";
+import { Text } from "react-native";
 import styled from "styled-components/native";
 import DraggableFlatList, {
   ScaleDecorator,
@@ -135,10 +136,10 @@ const HomeTasks = ({
     );
   };
 
-  return (
-    <StyledScroll>
-      {categories.map((category) => (
-        <StyledView key={Date.now() + category.id}>
+  return categories.map((category) => (
+    <StyledView key={Date.now() + category.id}>
+      <DraggableFlatList
+        ListHeaderComponent={
           <CategoryBar
             key={category.id}
             onPressOut={() => {
@@ -149,16 +150,16 @@ const HomeTasks = ({
             title={category.title}
             setRefresh={setRefresh}
           />
-          <DraggableFlatList
-            ref={ref}
-            data={sortTasks(category)}
-            onDragEnd={({ data }) => {
-              dragAndSave(data, category);
-            }}
-            keyExtractor={(item) => item.id}
-            renderItem={renderItem}
-          />
-          <Input
+        }
+        ref={ref}
+        data={sortTasks(category)}
+        onDragEnd={({ data }) => {
+          dragAndSave(data, category);
+        }}
+        keyExtractor={(item) => item.id}
+        renderItem={renderItem}
+      />
+      {/* <Input
             key={category.id + "Input"}
             newTask={newTask}
             isAdding={category.isAdding}
@@ -167,19 +168,19 @@ const HomeTasks = ({
             }}
             setNewTask={setNewTask}
             onBlur={() => onBlur(category)}
-          />
-        </StyledView>
-      ))}
-    </StyledScroll>
-  );
+          /> */}
+    </StyledView>
+  ));
 };
 
-const StyledScroll = styled.ScrollView`
-  width: 98%;
-  flex: 1;
-`;
+// const StyledScroll = styled.ScrollView`
+//   width: 98%;
+//   flex: 1;
+// `;
 
 const StyledView = styled.View`
+  width: 98%;
+  flex: 1;
   margin-bottom: 5%;
   min-height: 200px;
 `;
