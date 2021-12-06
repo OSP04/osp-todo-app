@@ -81,6 +81,7 @@ const WeekStrip = ({
         categories={categories}
         selectedDate={selectedDate}
         setSelectedCategory={setSelectedCategory}
+        navigation={navigation}
       />
     </StyledView>
   );

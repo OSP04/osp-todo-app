@@ -9,10 +9,10 @@ import DraggableFlatList, {
 
 import TaskItem from "./TaskItem";
 import CategoryBar from "../category/CategoryBar";
-import Input from "../Input";
 import { storeData } from "../../db";
 
 const HomeTasks = ({
+  navigation,
   tasks,
   setTasks,
   categories,
@@ -23,37 +23,6 @@ const HomeTasks = ({
   const [refresh, setRefresh] = useState(true);
   const [newTask, setNewTask] = useState("");
   const [isSelecting, setIsSelecting] = useState(false);
-
-  const addTask = (category) => {
-    if (newTask) {
-      setNewTask("");
-      const ID = Date.now().toString();
-      const newTaskObj = {
-        id: ID,
-        text: newTask,
-        date: selectedDate,
-        due: null,
-        category: category.title,
-        image: null,
-        complete: false,
-        created: Date.now(),
-      };
-      // Update tasks
-      setTasks([...tasks, newTaskObj]);
-      storeData("tasks", [...tasks, newTaskObj]);
-
-      // Update category
-      const updatedTasks = category.tasks.concat(newTaskObj);
-      category.tasks = updatedTasks;
-      storeData("categories", categories);
-    }
-  };
-
-  const onBlur = (category) => {
-    category.isAdding = false; // Hide text input
-    setNewTask("");
-    setRefresh((current) => !current);
-  };
 
   const sortTasks = (category) => {
     const sorting = category.sorting;
@@ -142,13 +111,10 @@ const HomeTasks = ({
         ListHeaderComponent={
           <CategoryBar
             key={category.id}
-            onPressOut={() => {
-              category.isAdding = true;
-              setRefresh((current) => !current);
-            }}
             category={category}
             title={category.title}
             setRefresh={setRefresh}
+            navigation={navigation}
           />
         }
         ref={ref}
@@ -159,24 +125,9 @@ const HomeTasks = ({
         keyExtractor={(item) => item.id}
         renderItem={renderItem}
       />
-      {/* <Input
-            key={category.id + "Input"}
-            newTask={newTask}
-            isAdding={category.isAdding}
-            onSubmitEditing={() => {
-              addTask(category);
-            }}
-            setNewTask={setNewTask}
-            onBlur={() => onBlur(category)}
-          /> */}
     </StyledView>
   ));
 };
-
-// const StyledScroll = styled.ScrollView`
-//   width: 98%;
-//   flex: 1;
-// `;
 
 const StyledView = styled.View`
   width: 98%;
