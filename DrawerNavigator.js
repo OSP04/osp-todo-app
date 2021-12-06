@@ -6,16 +6,29 @@ import Home from "./src/screens/Home";
 import AllCategory from "./src/screens/AllCategory";
 import SearchScreen from "./src/screens/SearchScreen";
 import { Image, StyleSheet } from "react-native";
+import { TouchableOpacity } from "react-native-gesture-handler";
 
+import IconButton from "./src/components/common/IconButton";
+import { images } from "./src/images";
 const Drawer = createDrawerNavigator();
 
-const DrawerNavigator = () => {
+const DrawerNavigator = ({ navigation }) => {
   return (
     <Drawer.Navigator
       initialRouteName="Home"
       screenOptions={{
         headerShown: true,
         drawerPosition: "left",
+        headerRight: () => (
+          <TouchableOpacity onPress={() => navigation.navigate("SearchScreen")}>
+            <IconButton
+              type={images.search}
+              size={32}
+              color="black"
+              style={styles.menu}
+            />
+          </TouchableOpacity>
+        ),
       }}
     >
       <Drawer.Screen
