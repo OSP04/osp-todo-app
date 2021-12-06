@@ -6,12 +6,12 @@ import { db } from "../../db";
 import CommonModal from "../common/CommonModal";
 import CalendarBox from "./CalendarBox";
 
-const date = db.tasks;
+const date = db.tasks.date;
 const EditStartDate = ({}) => {
   const [showModal, setShowModal] = useState(false);
   const openModal = () => {
     setSelectedDate(startDate);
-    if (startDate !== "Start Date") setMarkedDates(makeSelectedTrue(startDate));
+    if (startDate !== "Date") setMarkedDates(makeSelectedTrue(startDate));
     setShowModal((prev) => !prev);
   };
 
@@ -23,7 +23,7 @@ const EditStartDate = ({}) => {
     date >= 10 ? date : "0" + date
   }`;
 
-  const [startDate, setStartDate] = useState("Start Date");
+  const [startDate, setStartDate] = useState("Date");
   const [selectedDate, setSelectedDate] = useState(startDate);
   const [markedDates, setMarkedDates] = useState({});
 
@@ -45,7 +45,7 @@ const EditStartDate = ({}) => {
       <CommonModal
         showModal={showModal}
         setShowModal={setShowModal}
-        headerText="Start Date"
+        headerText="Date"
         onCancelPressed={() => {
           setSelectedDate(startDate);
           setShowModal(false);
@@ -70,7 +70,7 @@ const EditStartDate = ({}) => {
         />
       </CommonModal>
       <MaterialCommunityIcons
-        name="clock-start"
+        name="calendar-today"
         style={styles.icon}
         size={24}
         color="black"
