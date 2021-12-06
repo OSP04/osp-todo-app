@@ -8,7 +8,7 @@ import { theme } from "../theme";
 import { getData } from "../db";
 import { images } from "../images";
 
-const Home = ({ navigation }) => {
+const Home = ({ navigation, route }) => {
   const [categories, setCategories] = useState(null);
   const [tasks, setTasks] = useState(null);
   const [isSelecting, setIsSelecting] = useState(false);
