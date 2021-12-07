@@ -115,6 +115,7 @@ const HomeTasks = ({
             title={category.title}
             setRefresh={setRefresh}
             navigation={navigation}
+            selectedDate={selectedDate}
           />
         }
         ref={ref}
