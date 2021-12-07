@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components/native";
 
 import { theme } from "../../theme";
@@ -6,16 +6,38 @@ import { images } from "../../images";
 import IconButton from "../common/IconButton";
 import Dropdown from "../common/Dropdown";
 
-const CategoryBar = ({ category, setRefresh, navigation }) => {
+const CategoryBar = ({ selectedDate, category, setRefresh, navigation }) => {
   const moveToEditScreen = () => {
-    navigation.navigate("EditScreen", { selectedTask: null, category });
+    navigation.navigate("EditScreen", {
+      selectedTask: {
+        id: Math.random().toString(36),
+        title: "",
+        date: selectedDate,
+        due: new Date(),
+        category: category.title,
+        image: "",
+        location: {
+          text: "",
+          region: {},
+          locationData: {
+            mainText: "",
+            address: "",
+          },
+        },
+        memo: "",
+        completed: false,
+      },
+      category,
+      selectedDate,
+      isAddPressed: true,
+    });
   };
 
   return (
     <StyledView>
       <Category>
         <Title category={category}>{category.title}</Title>
-        <IconButton onPressOut={moveToEditScreen} type={images.add} />
+        <IconButton onPressOut={() => moveToEditScreen()} type={images.add} />
       </Category>
       <Dropdown category={category} setRefresh={setRefresh} />
     </StyledView>
