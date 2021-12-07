@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { StyleSheet, View, Alert, Pressable, Text } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import BackButton from "../components/common/BackButton";
@@ -11,14 +11,16 @@ import EditDueDate from "../components/edit/EditDueDate";
 import EditLocation from "../components/edit/EditLocation";
 import EditTodoTitle from "../components/edit/EditTodoTitle";
 import EditCategory from "../components/edit/EditCategory";
+import { addTodo, removeTodo, updateTodo } from "../editTasksFunc";
 
 const EditScreen = ({ route, navigation }) => {
-  const { selectedTask, category } = route.params;
+  const { selectedTask, category, selectedDate, isAddPressed } = route.params;
 
-  if (selectedTask === null) {
-    selectedTask.id = new Date();
-    selectedTask.category = category.title;
-  }
+  // useEffect(() => {
+  //   if (isAddPressed) {
+  //     addTodo(selectedTask);
+  //   }
+  // }, []);
 
   const onDeletePressed = () => {
     Alert.alert("Delete", "Do you really want to delete this todo?", [
@@ -30,7 +32,6 @@ const EditScreen = ({ route, navigation }) => {
       {
         text: "OK",
         onPress: () => {
-          removeTodo(selectedTask.id);
           navigation.navigate("Home");
         },
       },
@@ -51,7 +52,10 @@ const EditScreen = ({ route, navigation }) => {
             <Text style={styles.buttonText}>Delete</Text>
           </Pressable>
           <Pressable
-            style={{ ...styles.button, backgroundColor: theme.colors.primary }}
+            style={{
+              ...styles.button,
+              backgroundColor: theme.colors.primary,
+            }}
             onPress={onConfirmPressed}
           >
             <Text style={{ ...styles.buttonText, color: "white" }}>
@@ -64,10 +68,22 @@ const EditScreen = ({ route, navigation }) => {
       <View style={styles.list}>
         <EditTodoTitle selectedTask={selectedTask} />
         <KeyboardAwareScrollView keyboardShouldPersistTaps="always">
-          <EditStartDate selectedTask={selectedTask} />
-          <EditDueDate selectedTask={selectedTask} />
-          <EditCategory selectedTask={selectedTask} />
-          <EditLocation selectedTask={selectedTask} />
+          <EditStartDate
+            selectedTask={selectedTask}
+            isAddPressed={isAddPressed}
+          />
+          <EditDueDate
+            selectedTask={selectedTask}
+            isAddPressed={isAddPressed}
+          />
+          <EditCategory
+            selectedTask={selectedTask}
+            selectedCategory={category}
+          />
+          <EditLocation
+            selectedTask={selectedTask}
+            isAddPressed={isAddPressed}
+          />
           <EditMemo selectedTask={selectedTask} />
         </KeyboardAwareScrollView>
       </View>
