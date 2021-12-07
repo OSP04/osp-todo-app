@@ -11,16 +11,32 @@ import EditDueDate from "../components/edit/EditDueDate";
 import EditLocation from "../components/edit/EditLocation";
 import EditTodoTitle from "../components/edit/EditTodoTitle";
 import EditCategory from "../components/edit/EditCategory";
-import { addTodo, removeTodo, updateTodo } from "../editTasksFunc";
+import {
+  addTodo,
+  removeTodo,
+  updateTodo,
+  updateCategories,
+} from "../editTasksFunc";
+import { storeData, getData } from "../db";
+import EditTaskContext from "../context/EditTask";
 
 const EditScreen = ({ route, navigation }) => {
-  const { selectedTask, category, selectedDate, isAddPressed } = route.params;
+  const { selectedTask, category, isAddPressed } = route.params;
+  const selectedId = selectedTask.id;
 
-  // useEffect(() => {
-  //   if (isAddPressed) {
-  //     addTodo(selectedTask);
-  //   }
-  // }, []);
+  const [tasks, setTasks] = useState([]);
+  const [categories, setCategories] = useState([]);
+
+  useEffect(async () => {
+    try {
+      const taskObjs = await getData("tasks");
+      setTasks(taskObjs);
+      const categoryObjs = await getData("categories");
+      setCategories(categoryObjs);
+    } catch (error) {
+      console.log(error);
+    }
+  }, []);
 
   const onDeletePressed = () => {
     Alert.alert("Delete", "Do you really want to delete this todo?", [
@@ -32,6 +48,7 @@ const EditScreen = ({ route, navigation }) => {
       {
         text: "OK",
         onPress: () => {
+          removeTodo(tasks, selectedId);
           navigation.navigate("Home");
         },
       },
@@ -40,54 +57,68 @@ const EditScreen = ({ route, navigation }) => {
   };
 
   const onConfirmPressed = () => {
-    return navigation.navigate("Home");
+    if (isAddPressed) {
+      addTodo(tasks, selectedTask);
+    } else {
+      updateTodo(tasks, selectedTask, selectedId);
+    }
+    updateCategories(categories, category, selectedTask);
+    navigation.navigate("Home");
   };
 
   return (
-    <Background type="main">
-      <TopHeader>
-        <BackButton onPressOut={() => navigation.goBack()} />
-        <View style={styles.row}>
-          <Pressable style={styles.button} onPress={onDeletePressed}>
-            <Text style={styles.buttonText}>Delete</Text>
-          </Pressable>
-          <Pressable
-            style={{
-              ...styles.button,
-              backgroundColor: theme.colors.primary,
-            }}
-            onPress={onConfirmPressed}
-          >
-            <Text style={{ ...styles.buttonText, color: "white" }}>
-              Confirm
-            </Text>
-          </Pressable>
-        </View>
-      </TopHeader>
+    <EditTaskContext.Provider
+      value={{
+        selectedTask: selectedTask,
+        isAddPressed: isAddPressed,
+        selectedId: selectedId,
+      }}
+    >
+      <Background type="main">
+        <TopHeader>
+          <BackButton onPressOut={() => navigation.goBack()} />
+          <View style={styles.row}>
+            <Pressable style={styles.button} onPress={onDeletePressed}>
+              <Text style={styles.buttonText}>Delete</Text>
+            </Pressable>
+            <Pressable
+              style={{
+                ...styles.button,
+                backgroundColor: theme.colors.primary,
+              }}
+              onPress={onConfirmPressed}
+            >
+              <Text style={{ ...styles.buttonText, color: "white" }}>
+                Confirm
+              </Text>
+            </Pressable>
+          </View>
+        </TopHeader>
 
-      <View style={styles.list}>
-        <EditTodoTitle selectedTask={selectedTask} />
-        <KeyboardAwareScrollView keyboardShouldPersistTaps="always">
-          <EditStartDate
-            selectedTask={selectedTask}
-            isAddPressed={isAddPressed}
-          />
-          <EditDueDate
-            selectedTask={selectedTask}
-            isAddPressed={isAddPressed}
-          />
-          <EditCategory
-            selectedTask={selectedTask}
-            selectedCategory={category}
-          />
-          <EditLocation
-            selectedTask={selectedTask}
-            isAddPressed={isAddPressed}
-          />
-          <EditMemo selectedTask={selectedTask} />
-        </KeyboardAwareScrollView>
-      </View>
-    </Background>
+        <View style={styles.list}>
+          <KeyboardAwareScrollView keyboardShouldPersistTaps="always">
+            <EditTodoTitle selectedTask={selectedTask} />
+            <EditStartDate
+              selectedTask={selectedTask}
+              isAddPressed={isAddPressed}
+            />
+            <EditDueDate
+              selectedTask={selectedTask}
+              isAddPressed={isAddPressed}
+            />
+            <EditCategory
+              selectedTask={selectedTask}
+              selectedCategory={category}
+            />
+            <EditLocation
+              selectedTask={selectedTask}
+              isAddPressed={isAddPressed}
+            />
+            <EditMemo selectedTask={selectedTask} />
+          </KeyboardAwareScrollView>
+        </View>
+      </Background>
+    </EditTaskContext.Provider>
   );
 };
 

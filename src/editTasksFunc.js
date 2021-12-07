@@ -1,70 +1,42 @@
 import React, { useState, useEffect } from "react";
 import { storeData, getData } from "./db";
 
-export const addTodo = (task) => {
-  const [tasks, setTasks] = useState([]);
-  useEffect(async () => {
-    try {
-      const tasksArr = await getData("tasks");
-      if (tasksArr !== null) {
-        setTasks(tasksArr);
-      }
-    } catch (err) {
-      console.log(err);
-    }
-  }, []);
+export const addTodo = async (tasks, selectedTask) => {
+  const todos = [...tasks, selectedTask];
 
-  const todos = [...tasks, task];
-
-  setTasks(todos);
   storeData("tasks", todos);
 };
 
-export const removeTodo = (id) => {
-  const [tasks, setTasks] = useState([]);
-  useEffect(async () => {
-    try {
-      const tasksArr = await getData("tasks");
-      if (tasksArr !== null) {
-        setTasks(tasksArr);
-      }
-    } catch (err) {
-      console.log(err);
-    }
-  }, []);
-
+export const removeTodo = async (tasks, id) => {
   let todos = [...tasks];
   const index = tasks.findIndex((e) => e.id === id);
   todos.splice(index, 1);
-  setTasks(todos);
   storeData("tasks", todos);
 };
 
-export const updateTodo = (todo, id) => {
-  const [tasks, setTasks] = useState([]);
-  useEffect(async () => {
-    try {
-      const tasksArr = await getData("tasks");
-      if (tasksArr !== null) {
-        setTasks(tasksArr);
-      }
-    } catch (err) {
-      console.log(err);
-    }
-  }, []);
-
+export const updateTodo = async (tasks, selectedTask, id) => {
   let todos = [...tasks];
   const updatedTodo = {
-    ...todo,
-    title: todo.title,
-    date: todo.date,
-    due: todo.dueDate,
-    category: todo.category,
-    location: todo.location,
-    memo: todo.memo,
+    ...selectedTask,
+    title: selectedTask.title,
+    date: selectedTask.date,
+    due: selectedTask.dueDate,
+    category: selectedTask.category,
+    location: selectedTask.location,
+    memo: selectedTask.memo,
   };
   const index = tasks.findIndex((e) => e.id === id);
   todos.splice(index, 1, updatedTodo);
-  setTasks(todos);
   storeData("tasks", todos);
+};
+
+export const updateCategories = async (
+  categoriesObj,
+  taskOfCategory,
+  selectedTask
+) => {
+  const category = [...taskOfCategory, selectedTask];
+
+  const categories = [...categoriesObj, category];
+  storeData("categories", categories);
 };
