@@ -2,7 +2,15 @@ import styled from "styled-components/native";
 import * as React from "react";
 import { Card } from "react-native-paper";
 import { TouchableOpacity } from "react-native";
-const SearchedTask = ({ task, index, text, category, date, due }) => {
+const SearchedTask = ({
+  task,
+  index,
+  text,
+  category,
+  date,
+  due,
+  navigation,
+}) => {
   return (
     <TouchableOpacity
       style={{ marginRight: 10, marginTop: 17 }}

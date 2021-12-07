@@ -1,7 +1,9 @@
 import { View } from "react-native";
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { CalendarList } from "react-native-calendars";
 import BackButton from "../components/common/BackButton";
+import { getData } from "../db";
+
 const formatDate = (newDate) => {
   const year = newDate.getFullYear();
   const month = newDate.getMonth() + 1;
@@ -11,6 +13,7 @@ const formatDate = (newDate) => {
   }`;
   return formattedDate;
 };
+
 const tasks = [
   {
     id: "1",
@@ -58,11 +61,22 @@ const tasks = [
   },
 ];
 
-const markingDates = tasks.map((task) => formatDate(task.date));
-
 const CalendarScreen = ({ route, navigation }) => {
-  const { selectedDate } = route.params;
+  // const [tasks, setTasks] = useState(null);
 
+  // useEffect(async () => {
+  //   try {
+  //     const taskObjs = await getData("tasks");
+  //     setTasks(taskObjs);
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // }, []);
+  // console.log("Chekc", tasks);
+
+  const markingDates = tasks.map((task) => formatDate(task.date));
+
+  const { selectedDate } = route.params;
   const mark = { [formatDate(selectedDate)]: { selected: true } };
   markingDates.forEach((day) => {
     mark[day] = {
@@ -71,6 +85,7 @@ const CalendarScreen = ({ route, navigation }) => {
     };
   });
   console.log(markingDates);
+
   return (
     <View style={{ paddingtop: 50, flex: 1 }}>
       <BackButton onPressOut={() => navigation.goBack()} />
