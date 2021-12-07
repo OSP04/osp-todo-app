@@ -5,12 +5,13 @@ import { Entypo } from "@expo/vector-icons";
 import { theme } from "../../theme";
 import CommonModal from "../common/CommonModal";
 import MapContainer from "./MapContainer";
-import { updateTodo } from "../../editTasksFunc";
+import { addTodo, removeTodo, updateTodo } from "../../editTasksFunc";
 
 const latitudeDelta = 0.004;
 const longitudeDelta = 0.004;
 
-const EditLocation = ({ selectedTask }) => {
+const EditLocation = ({ selectedTask, isAddPressed }) => {
+  const selectedId = selectedTask.id;
   const [location, setLocation] = useState("");
   const [locationData, setLocationData] = useState({
     mainText: "",
@@ -27,21 +28,24 @@ const EditLocation = ({ selectedTask }) => {
     listViewDisplayed: false,
   });
 
-  if (selectedTask.location.region !== null) {
-    setLocationData(selectedTask.location.locationData);
-    setAddressPicker({
-      ...addressPicker,
-      region: selectedTask.location.region,
-    });
-    setLocation(selectedTask.location.text);
-  } else if (
-    selectedTask.location.text !== null ||
-    selectedTask.location.text !== ""
-  ) {
-    setLocation(selectedTask.location.text);
-  }
+  useEffect(() => {
+    if (selectedTask.location !== null || isAddPressed !== true) {
+      if (Object.entries(selectedTask.location.region).length !== 0) {
+        setLocationData(selectedTask.location.locationData);
+        setAddressPicker({
+          ...addressPicker,
+          region: selectedTask.location.region,
+        });
+        setLocation(selectedTask.location.text);
+      } else if (
+        selectedTask.location.text !== null ||
+        selectedTask.location.text !== ""
+      ) {
+        setLocation(selectedTask.location.text);
+      }
+    }
+  }, []);
 
-  const selectedId = selectedTask.id;
   const [todo, setTodo] = useState(selectedTask);
 
   const [showModal, setShowModal] = useState(false);
@@ -67,9 +71,13 @@ const EditLocation = ({ selectedTask }) => {
     });
     setTodo({
       ...todo,
-      location: { text: null, region: null, locationData: null },
+      location: {
+        text: "",
+        region: {},
+        locationData: { mainText: "", address: "" },
+      },
     });
-    updateTodo(todo, selectedId);
+    // updateTodo(todo, selectedId);
   };
 
   const getCoordsFromName = (loc) => {
@@ -107,7 +115,7 @@ const EditLocation = ({ selectedTask }) => {
         locationData: locationData,
       },
     });
-    updateTodo(todo, selectedId);
+    // updateTodo(todo, selectedId);
     setShowModal(false);
   };
 
@@ -191,7 +199,7 @@ const EditLocation = ({ selectedTask }) => {
                 text: location,
               },
             });
-            updateTodo(todo, selectedId);
+            // updateTodo(todo, selectedId);
           }}
         />
         {isMapSelected ? (

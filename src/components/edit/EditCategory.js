@@ -1,26 +1,36 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { StyleSheet, Text, Pressable, View, FlatList } from "react-native";
 import { FontAwesome5, MaterialCommunityIcons } from "@expo/vector-icons";
 import { theme } from "../../theme";
-import { db } from "../../db";
-import { updateTodo } from "../../editTasksFunc";
+import { getData } from "../../db";
+import { addTodo, removeTodo, updateTodo } from "../../editTasksFunc";
 import CommonModal from "../common/CommonModal";
-import { useEffect } from "react";
 
-const categoryData = db.categories;
-
-const EditCategory = ({ selectedTask }) => {
+const EditCategory = ({ selectedTask, selectedCategory }) => {
   const [category, setCategory] = useState(selectedTask.category);
-  if (selectedTask.category === null) {
-    setCategory("Category");
-  } else {
-    setCategory(selectedTask.category);
-  }
-  const selectedId = selectedTask.id;
+  const [categoryData, setCategoryData] = useState([]);
+
   const [todo, setTodo] = useState(selectedTask);
 
   const [categoryId, setCategoryId] = useState("");
-  useEffect(() => {}, [categoryId]);
+  const selectedId = selectedTask.id;
+
+  useEffect(async () => {
+    try {
+      const categoryObjs = await getData("categories");
+      setCategoryData(categoryObjs);
+    } catch (error) {
+      console.log(error);
+    }
+
+    if (selectedTask.category === null) {
+      setCategory("Category");
+    } else {
+      setCategory(selectedTask.category);
+      setCategoryId(selectedCategory.id);
+    }
+  }, []);
+
   const [showModal, setShowModal] = useState(false);
   const openModal = () => {
     setShowModal((prev) => !prev);
@@ -32,7 +42,7 @@ const EditCategory = ({ selectedTask }) => {
         setCategoryId(item.id);
         setCategory(item.title);
         setTodo({ ...todo, category: category });
-        updateTodo(todo, selectedId);
+        // updateTodo(todo, selectedId);
         setTimeout(() => {
           setShowModal(false);
         }, 50);

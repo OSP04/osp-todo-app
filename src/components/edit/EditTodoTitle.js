@@ -1,18 +1,20 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { StyleSheet, View, Text, TextInput, Pressable } from "react-native";
 import { theme } from "../../theme";
 import EditPicture from "./EditPicture";
-import { updateTodo } from "../../editTasksFunc";
+import { addTodo, removeTodo, updateTodo } from "../../editTasksFunc";
 
 const EditTodoTitle = ({ selectedTask }) => {
-  const [text, setText] = useState("Title");
+  const [text, setText] = useState("");
   const [edit, setEdit] = useState(false);
 
-  if (selectedTask.title === null) {
-    setText("");
-  } else {
-    setText(selectedTask.title);
-  }
+  useEffect(() => {
+    if (selectedTask.title !== null || selectedTask.title !== "") {
+      setText(selectedTask.title);
+      setEdit(true);
+    }
+  }, []);
+
   const selectedId = selectedTask.id;
   const [todo, setTodo] = useState(selectedTask);
 
@@ -29,14 +31,14 @@ const EditTodoTitle = ({ selectedTask }) => {
             }}
             onEndEditing={() => {
               setTodo({ ...todo, title: text });
-              updateTodo(todo, selectedId);
+              // updateTodo(todo, selectedId);
             }}
           />
         ) : (
           <Text style={styles.title}>{text}</Text>
         )}
       </Pressable>
-      <EditPicture></EditPicture>
+      <EditPicture selectedTask={selectedTask}></EditPicture>
     </View>
   );
 };
