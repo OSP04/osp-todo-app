@@ -12,11 +12,22 @@ const EditDueDate = ({ selectedTask, isAddPressed }) => {
   const [markedDates, setMarkedDates] = useState({});
   const selectedId = selectedTask.id;
 
+  const formatDate = (unformatted) => {
+    const unformattedDate = new Date(unformatted);
+    const year = unformattedDate.getFullYear();
+    const month = unformattedDate.getMonth() + 1;
+    const date = unformattedDate.getDate();
+    const formatted = `${year}-${month >= 10 ? month : "0" + month}-${
+      date >= 10 ? date : "0" + date
+    }`;
+    return formatted;
+  };
+
   useEffect(() => {
     if (selectedTask.due === null || isAddPressed === true) {
       setDueDate("Due Date");
     } else {
-      setDueDate(selectedTask.due.toString());
+      setDueDate(formatDate(selectedTask.due));
     }
   }, []);
 
@@ -62,7 +73,6 @@ const EditDueDate = ({ selectedTask, isAddPressed }) => {
           setShowModal(false);
         }}
       >
-        <Text style={styles.selected}>{selectedDate}</Text>
         <View style={styles.container}>
           <CalendarBox
             current={current}
@@ -72,15 +82,25 @@ const EditDueDate = ({ selectedTask, isAddPressed }) => {
             markedDates={markedDates}
           />
         </View>
-        <Button
-          onPress={() => {
-            setDueDate(selectedDate);
-            setTodo({ ...todo, due: Date(dueDate) });
-            // updateTodo(todo, selectedId);
-            setShowModal(false);
-          }}
-          title="Confirm"
-        />
+        <View style={styles.row}>
+          <Text style={styles.selected}>{selectedDate}</Text>
+          <Pressable
+            style={{
+              ...styles.button,
+              backgroundColor: theme.colors.primary,
+            }}
+            onPress={() => {
+              setDueDate(selectedDate);
+              setTodo({ ...todo, due: Date(dueDate) });
+              // updateTodo(todo, selectedId);
+              setShowModal(false);
+            }}
+          >
+            <Text style={{ ...styles.buttonText, color: "white" }}>
+              Confirm
+            </Text>
+          </Pressable>
+        </View>
       </CommonModal>
       <View style={styles.leftItem}>
         <MaterialCommunityIcons
@@ -131,6 +151,26 @@ const styles = StyleSheet.create({
     height: undefined,
     aspectRatio: 1,
     margin: 10,
+  },
+  row: {
+    width: "100%",
+    flexDirection: "row",
+    alignItems: "center",
+    marginTop: 20,
+    justifyContent: "space-around",
+  },
+  button: {
+    alignItems: "center",
+    justifyContent: "center",
+    padding: 7,
+    borderRadius: 50,
+    width: 80,
+    borderColor: theme.colors.primary,
+    borderWidth: 1,
+  },
+  buttonText: {
+    fontWeight: "bold",
+    color: theme.colors.primary,
   },
 });
 
