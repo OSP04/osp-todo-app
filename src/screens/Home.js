@@ -5,7 +5,7 @@ import Footer from "../components/common/Footer";
 import WeekStrip from "../components/WeekStrip";
 import TopBar from "../components/common/TopBar";
 import { theme } from "../theme";
-import { getData } from "../db";
+import { db, getData, storeData } from "../db";
 import { images } from "../images";
 
 const Home = ({ navigation, route }) => {
@@ -13,6 +13,15 @@ const Home = ({ navigation, route }) => {
   const [tasks, setTasks] = useState(null);
   const [isSelecting, setIsSelecting] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState(null);
+
+  useEffect(async () => {
+    try {
+      storeData("tasks", db.tasks);
+      storeData("categories", db.categories);
+    } catch (error) {
+      console.log(error);
+    }
+  }, []);
 
   useEffect(async () => {
     try {
