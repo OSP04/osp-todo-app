@@ -1,11 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { StyleSheet, Text, Pressable, View, Image, Button } from "react-native";
 import { FontAwesome } from "@expo/vector-icons";
 import * as ImagePicker from "expo-image-picker";
 import CommonModal from "../common/CommonModal";
-import { addTodo, removeTodo, updateTodo } from "../../editTasksFunc";
+import EditTaskContext from "../../context/EditTask";
 
-const EditPicture = ({ selectedTask }) => {
+const EditPicture = () => {
+  const { selectedTask, updateTodo } = useContext(EditTaskContext);
+
   const [showModal, setShowModal] = useState(false);
   const openModal = () => {
     setShowModal((prev) => !prev);
@@ -44,7 +46,7 @@ const EditPicture = ({ selectedTask }) => {
     if (!result.cancelled) {
       setPickedImagePath(result.uri);
       setTodo({ ...todo, image: pickedImagePath });
-      // updateTodo(todo, selectedId);
+      updateTodo(todo);
       setShowModal(false);
     }
   };
@@ -64,7 +66,7 @@ const EditPicture = ({ selectedTask }) => {
     if (!result.cancelled) {
       setPickedImagePath(result.uri);
       setTodo({ ...todo, image: pickedImagePath });
-      updateTodo(todo, selectedId);
+      updateTodo(todo);
       setShowModal(false);
     }
   };
@@ -86,6 +88,8 @@ const EditPicture = ({ selectedTask }) => {
             onPress={() => {
               setShowModal(false);
               setPickedImagePath("");
+              setTodo({ ...todo, image: pickedImagePath });
+              updateTodo(todo);
             }}
             title="Delete"
             color="red"

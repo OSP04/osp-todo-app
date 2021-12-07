@@ -26,6 +26,8 @@ const EditScreen = ({ route, navigation }) => {
 
   const [tasks, setTasks] = useState([]);
   const [categories, setCategories] = useState([]);
+  const [updatedTodo, setUpdatedTodo] = useState(selectedTask);
+  const [updatedCategory, setUpdatedCategory] = useState(category);
 
   useEffect(async () => {
     try {
@@ -33,6 +35,7 @@ const EditScreen = ({ route, navigation }) => {
       setTasks(taskObjs);
       const categoryObjs = await getData("categories");
       setCategories(categoryObjs);
+      console.log(taskObjs);
     } catch (error) {
       console.log(error);
     }
@@ -72,6 +75,8 @@ const EditScreen = ({ route, navigation }) => {
         selectedTask: selectedTask,
         isAddPressed: isAddPressed,
         selectedId: selectedId,
+        selectedCategory: category,
+        updateTodo: setUpdatedTodo,
       }}
     >
       <Background type="main">
@@ -97,23 +102,11 @@ const EditScreen = ({ route, navigation }) => {
 
         <View style={styles.list}>
           <KeyboardAwareScrollView keyboardShouldPersistTaps="always">
-            <EditTodoTitle selectedTask={selectedTask} />
-            <EditStartDate
-              selectedTask={selectedTask}
-              isAddPressed={isAddPressed}
-            />
-            <EditDueDate
-              selectedTask={selectedTask}
-              isAddPressed={isAddPressed}
-            />
-            <EditCategory
-              selectedTask={selectedTask}
-              selectedCategory={category}
-            />
-            <EditLocation
-              selectedTask={selectedTask}
-              isAddPressed={isAddPressed}
-            />
+            <EditTodoTitle />
+            <EditStartDate />
+            <EditDueDate />
+            <EditCategory />
+            <EditLocation />
             <EditMemo selectedTask={selectedTask} />
           </KeyboardAwareScrollView>
         </View>

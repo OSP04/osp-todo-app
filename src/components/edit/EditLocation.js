@@ -1,17 +1,19 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { StyleSheet, Text, Pressable, View, TextInput } from "react-native";
 import MapView, { Marker, PROVIDER_GOOGLE } from "react-native-maps";
 import { Entypo } from "@expo/vector-icons";
 import { theme } from "../../theme";
 import CommonModal from "../common/CommonModal";
 import MapContainer from "./MapContainer";
-import { addTodo, removeTodo, updateTodo } from "../../editTasksFunc";
+import EditTaskContext from "../../context/EditTask";
 
 const latitudeDelta = 0.004;
 const longitudeDelta = 0.004;
 
-const EditLocation = ({ selectedTask, isAddPressed }) => {
-  const selectedId = selectedTask.id;
+const EditLocation = () => {
+  const { selectedTask, isAddPressed, updateTodo } =
+    useContext(EditTaskContext);
+
   const [location, setLocation] = useState("");
   const [locationData, setLocationData] = useState({
     mainText: "",
@@ -77,7 +79,7 @@ const EditLocation = ({ selectedTask, isAddPressed }) => {
         locationData: { mainText: "", address: "" },
       },
     });
-    // updateTodo(todo, selectedId);
+    updateTodo(todo);
   };
 
   const getCoordsFromName = (loc) => {
@@ -115,7 +117,7 @@ const EditLocation = ({ selectedTask, isAddPressed }) => {
         locationData: locationData,
       },
     });
-    // updateTodo(todo, selectedId);
+    updateTodo(todo);
     setShowModal(false);
   };
 
@@ -199,7 +201,7 @@ const EditLocation = ({ selectedTask, isAddPressed }) => {
                 text: location,
               },
             });
-            // updateTodo(todo, selectedId);
+            updateTodo(todo);
           }}
         />
         {isMapSelected ? (

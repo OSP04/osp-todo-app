@@ -1,19 +1,21 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { StyleSheet, Text, Pressable, View, FlatList } from "react-native";
 import { FontAwesome5, MaterialCommunityIcons } from "@expo/vector-icons";
 import { theme } from "../../theme";
 import { getData } from "../../db";
 import { addTodo, removeTodo, updateTodo } from "../../editTasksFunc";
 import CommonModal from "../common/CommonModal";
+import EditTaskContext from "../../context/EditTask";
 
-const EditCategory = ({ selectedTask, selectedCategory }) => {
+const EditCategory = () => {
+  const { selectedTask, selectedCategory, updateTodo } =
+    useContext(EditTaskContext);
   const [category, setCategory] = useState(selectedTask.category);
   const [categoryData, setCategoryData] = useState([]);
 
   const [todo, setTodo] = useState(selectedTask);
 
   const [categoryId, setCategoryId] = useState("");
-  const selectedId = selectedTask.id;
 
   useEffect(async () => {
     try {
@@ -42,7 +44,7 @@ const EditCategory = ({ selectedTask, selectedCategory }) => {
         setCategoryId(item.id);
         setCategory(item.title);
         setTodo({ ...todo, category: category });
-        // updateTodo(todo, selectedId);
+        updateTodo(todo);
         setTimeout(() => {
           setShowModal(false);
         }, 50);

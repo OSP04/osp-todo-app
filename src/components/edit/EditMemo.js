@@ -1,16 +1,17 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { StyleSheet, View, TextInput, Pressable, Keyboard } from "react-native";
 import { Entypo } from "@expo/vector-icons";
 import { theme } from "../../theme";
 import { addTodo, removeTodo, updateTodo } from "../../editTasksFunc";
+import EditTaskContext from "../../context/EditTask";
 
-const EditMemo = ({ selectedTask }) => {
+const EditMemo = () => {
+  const { selectedTask, updateTodo } = useContext(EditTaskContext);
+
   const [memo, setMemo] = useState("");
   const [height, setHeight] = useState(60);
   const [show, setShow] = useState(false);
   const [submit, setSubmit] = useState(true);
-
-  const selectedId = selectedTask.id;
 
   useEffect(() => {
     if (selectedTask.memo !== null || selectedTask.memo !== "") {
@@ -28,7 +29,7 @@ const EditMemo = ({ selectedTask }) => {
     setSubmit(true);
     if (submit) {
       setTodo({ ...todo, memo: memo });
-      // updateTodo(todo, selectedId);
+      updateTodo(todo);
       Keyboard.dismiss();
     }
     setShow(false);

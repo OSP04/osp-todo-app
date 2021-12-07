@@ -1,16 +1,19 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { StyleSheet, Text, Pressable, View, Button } from "react-native";
 import { Entypo, MaterialCommunityIcons } from "@expo/vector-icons";
 import { theme } from "../../theme";
 import CommonModal from "../common/CommonModal";
 import CalendarBox from "./CalendarBox";
 import { addTodo, removeTodo, updateTodo } from "../../editTasksFunc";
+import EditTaskContext from "../../context/EditTask";
 
-const EditDueDate = ({ selectedTask, isAddPressed }) => {
+const EditDueDate = () => {
+  const { selectedTask, isAddPressed, updateTodo } =
+    useContext(EditTaskContext);
+
   const [dueDate, setDueDate] = useState("");
   const [selectedDate, setSelectedDate] = useState(dueDate);
   const [markedDates, setMarkedDates] = useState({});
-  const selectedId = selectedTask.id;
 
   const formatDate = (unformatted) => {
     const unformattedDate = new Date(unformatted);
@@ -92,7 +95,7 @@ const EditDueDate = ({ selectedTask, isAddPressed }) => {
             onPress={() => {
               setDueDate(selectedDate);
               setTodo({ ...todo, due: Date(dueDate) });
-              // updateTodo(todo, selectedId);
+              updateTodo(todo);
               setShowModal(false);
             }}
           >
