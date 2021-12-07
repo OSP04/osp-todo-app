@@ -15,11 +15,17 @@ export default function LoginScreen({ navigation }) {
   const [password, setPassword] = useState({ value: "", error: "" });
 
   const onLoginPressed = () => {
-    const idError = Validator.idValidator(id.value);
-    const passwordError = Validator.passwordValidator(password.value);
+    const idError = Validator.idValidator("login", id.value);
+    const passwordError = Validator.passwordValidator("login", password.value);
     if (idError || passwordError) {
       setId({ ...id, error: idError });
       setPassword({ ...password, error: passwordError });
+      return;
+    }
+    const loginError = Validator.loginValidator(id.value, password.value);
+    if (loginError) {
+      setId({ ...id, error: loginError });
+      setPassword({ ...password, error: loginError });
       return;
     }
     navigation.navigate("Home");

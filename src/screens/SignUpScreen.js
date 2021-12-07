@@ -9,6 +9,7 @@ import BackButton from "../components/common/BackButton";
 import Background from "../components/common/Background";
 import * as Validator from "../Validator";
 import { theme } from "../theme";
+import { getUserData, storeUserData } from "../Authentication";
 
 export default function RegisterScreen({ navigation }) {
   const [id, setId] = useState({ value: "", error: "" });
@@ -16,9 +17,9 @@ export default function RegisterScreen({ navigation }) {
   const [email, setEmail] = useState({ value: "", error: "" });
 
   const onSignUpPressed = () => {
-    const idError = Validator.idValidator(id.value);
-    const passwordError = Validator.passwordValidator(password.value);
-    const emailError = Validator.emailValidator(email.value);
+    const idError = Validator.idValidator("signup", id.value);
+    const passwordError = Validator.passwordValidator("signup", password.value);
+    const emailError = Validator.emailValidator("signup", email.value);
 
     if (emailError || passwordError || idError) {
       setId({ ...id, error: idError });
@@ -30,6 +31,7 @@ export default function RegisterScreen({ navigation }) {
       index: 0,
       routes: [{ name: "LoginScreen" }],
     });
+    storeUserData({ id: id, password: password, email: email });
     navigation.navigate("Home");
   };
 
