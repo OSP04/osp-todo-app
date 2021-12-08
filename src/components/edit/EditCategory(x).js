@@ -7,29 +7,27 @@ import { addTodo, removeTodo, updateTodo } from "../../editTasksFunc";
 import CommonModal from "../common/CommonModal";
 import EditTaskContext from "../../context/EditTask";
 
-const EditCategory = () => {
-  const { selectedTask, selectedCategory, updateTodo } =
-    useContext(EditTaskContext);
-  const [category, setCategory] = useState(selectedTask.category);
-  const [categoryData, setCategoryData] = useState([]);
-
-  const [todo, setTodo] = useState(selectedTask);
+const EditCategory = ({ categoryArr }) => {
+  const {
+    editingTask,
+    editingCategory,
+    editingId,
+    updateCategoryData,
+    updateCategory,
+  } = useContext(EditTaskContext);
+  const [category, setCategory] = useState(editingTask.category);
+  const [categoryData, setCategoryData] = useState(categoryArr);
 
   const [categoryId, setCategoryId] = useState("");
+  const [prevId, setPrevId] = useState[""];
 
   useEffect(async () => {
-    try {
-      const categoryObjs = await getData("categories");
-      setCategoryData(categoryObjs);
-    } catch (error) {
-      console.log(error);
-    }
-
-    if (selectedTask.category === null) {
+    if (editingTask.category === null) {
       setCategory("Category");
     } else {
-      setCategory(selectedTask.category);
-      setCategoryId(selectedCategory.id);
+      setCategory(editingTask.category);
+      setCategoryId(editingCategory.id);
+      setPrevId(editingCategory.id);
     }
   }, []);
 
@@ -38,13 +36,33 @@ const EditCategory = () => {
     setShowModal((prev) => !prev);
   };
 
+  const changeCategory = (prevId, id, task) => {
+    const prevIndex = categoryData.findIndex((e) => e.id === prevId);
+    const prevTaskIndex = categoryData[prevIndex].tasks.findIndex(
+      (e) => e.id === editingId
+    );
+    categoryData[prevId].tasks.splice(prevTaskIndex, 1); //전에 속해 있던 카테고리의 task 배열에서 삭제
+
+    const index = categoryData.findIndex((e) => e.id === id);
+    const newCategoryObj = {
+      ...categoryData[index],
+      tasks: [...categoryData[index].tasks, task],
+    };
+    setCategoryData([...categoryData, newCategoryObj]);
+    updateCategory(newCategoryObj);
+    updateCategoryData(categoryData);
+  };
+
   const renderCategory = ({ item }) => (
     <Pressable
       onPress={() => {
+        setPrevId(categoryId);
         setCategoryId(item.id);
         setCategory(item.title);
-        setTodo({ ...todo, category: category });
-        updateTodo(todo);
+        changeCategory(prevId, item.id, {
+          ...editingTask,
+          category: item.title,
+        });
         setTimeout(() => {
           setShowModal(false);
         }, 50);
