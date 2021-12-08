@@ -33,4 +33,5 @@ export function loginValidator(id, password) {
   ) {
     return "Your ID or Password does not exist";
   }
+  return "";
 }
