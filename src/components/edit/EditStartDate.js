@@ -4,14 +4,12 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { theme } from "../../theme";
 import CommonModal from "../common/CommonModal";
 import CalendarBox from "./CalendarBox";
-import { addTodo, removeTodo, updateTodo } from "../../editTasksFunc";
 import EditTaskContext from "../../context/EditTask";
 
 const EditStartDate = () => {
-  const { selectedTask, isAddPressed, updateTodo } =
-    useContext(EditTaskContext);
+  const { editingTask, isAddPressed, updateDate } = useContext(EditTaskContext);
 
-  const [startDate, setStartDate] = useState("Due Date");
+  const [startDate, setStartDate] = useState("Date");
   const [selectedDate, setSelectedDate] = useState(startDate);
   const [markedDates, setMarkedDates] = useState({});
 
@@ -27,12 +25,12 @@ const EditStartDate = () => {
   };
 
   useEffect(() => {
-    if (selectedTask.date !== null || isAddPressed !== true) {
-      setStartDate(formatDate(selectedTask.date));
+    if (editingTask.date !== null || isAddPressed !== true) {
+      setStartDate(formatDate(editingTask.date));
     }
   }, []);
 
-  const [todo, setTodo] = useState(selectedTask);
+  const [todo, setTodo] = useState(editingTask);
 
   const [showModal, setShowModal] = useState(false);
   const openModal = () => {
@@ -91,8 +89,7 @@ const EditStartDate = () => {
             }}
             onPress={() => {
               setStartDate(selectedDate);
-              setTodo({ ...todo, date: Date(startDate) });
-              updateTodo(todo);
+              updateDate(selectedDate);
               setShowModal(false);
             }}
           >

@@ -11,7 +11,7 @@ const latitudeDelta = 0.004;
 const longitudeDelta = 0.004;
 
 const EditLocation = () => {
-  const { selectedTask, isAddPressed, updateTodo } =
+  const { editingTask, isAddPressed, updateLocation } =
     useContext(EditTaskContext);
 
   const [location, setLocation] = useState("");
@@ -31,24 +31,24 @@ const EditLocation = () => {
   });
 
   useEffect(() => {
-    if (selectedTask.location !== null || isAddPressed !== true) {
-      if (Object.entries(selectedTask.location.region).length !== 0) {
-        setLocationData(selectedTask.location.locationData);
+    if (editingTask.location !== null || isAddPressed !== true) {
+      if (Object.entries(editingTask.location.region).length !== 0) {
+        setLocationData(editingTask.location.locationData);
         setAddressPicker({
           ...addressPicker,
-          region: selectedTask.location.region,
+          region: editingTask.location.region,
         });
-        setLocation(selectedTask.location.text);
+        setLocation(editingTask.location.text);
       } else if (
-        selectedTask.location.text !== null ||
-        selectedTask.location.text !== ""
+        editingTask.location.text !== null ||
+        editingTask.location.text !== ""
       ) {
-        setLocation(selectedTask.location.text);
+        setLocation(editingTask.location.text);
       }
     }
   }, []);
 
-  const [todo, setTodo] = useState(selectedTask);
+  const [todo, setTodo] = useState(editingTask);
 
   const [showModal, setShowModal] = useState(false);
   const openModal = () => {
@@ -71,15 +71,11 @@ const EditLocation = () => {
       },
       listViewDisplayed: false,
     });
-    setTodo({
-      ...todo,
-      location: {
-        text: "",
-        region: {},
-        locationData: { mainText: "", address: "" },
-      },
+    updateLocation({
+      text: "",
+      region: {},
+      locationData: { mainText: "", address: "" },
     });
-    updateTodo(todo);
   };
 
   const getCoordsFromName = (loc) => {
@@ -109,15 +105,19 @@ const EditLocation = () => {
     });
     getCoordsFromName(details.geometry.location);
     setIsMapSelected(true);
-    setTodo({
-      ...todo,
-      location: {
-        text: locationData.mainText,
-        region: addressPicker.region,
-        locationData: locationData,
+    updateLocation({
+      text: data.structured_formatting.main_text,
+      region: {
+        latitude: details.geometry.location.lat,
+        longitude: details.geometry.location.lng,
+        latitudeDelta,
+        longitudeDelta,
+      },
+      locationData: {
+        mainText: data.structured_formatting.main_text,
+        address: data.description,
       },
     });
-    updateTodo(todo);
     setShowModal(false);
   };
 
@@ -195,13 +195,9 @@ const EditLocation = () => {
           onChangeText={(location) => setLocation(location)}
           editable={isMapSelected ? false : true}
           onEndEditing={() => {
-            setTodo({
-              ...todo,
-              location: {
-                text: location,
-              },
+            updateLocation({
+              text: location,
             });
-            updateTodo(todo);
           }}
         />
         {isMapSelected ? (

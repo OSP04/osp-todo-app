@@ -4,12 +4,10 @@ import { Entypo, MaterialCommunityIcons } from "@expo/vector-icons";
 import { theme } from "../../theme";
 import CommonModal from "../common/CommonModal";
 import CalendarBox from "./CalendarBox";
-import { addTodo, removeTodo, updateTodo } from "../../editTasksFunc";
 import EditTaskContext from "../../context/EditTask";
 
 const EditDueDate = () => {
-  const { selectedTask, isAddPressed, updateTodo } =
-    useContext(EditTaskContext);
+  const { editingTask, isAddPressed, updateDue } = useContext(EditTaskContext);
 
   const [dueDate, setDueDate] = useState("");
   const [selectedDate, setSelectedDate] = useState(dueDate);
@@ -27,14 +25,14 @@ const EditDueDate = () => {
   };
 
   useEffect(() => {
-    if (selectedTask.due === null || isAddPressed === true) {
+    if (editingTask.due === null || isAddPressed === true) {
       setDueDate("Due Date");
     } else {
-      setDueDate(formatDate(selectedTask.due));
+      setDueDate(formatDate(editingTask.due));
     }
   }, []);
 
-  const [todo, setTodo] = useState(selectedTask);
+  const [todo, setTodo] = useState(editingTask);
 
   const [showModal, setShowModal] = useState(false);
   const openModal = () => {
@@ -94,8 +92,7 @@ const EditDueDate = () => {
             }}
             onPress={() => {
               setDueDate(selectedDate);
-              setTodo({ ...todo, due: Date(dueDate) });
-              updateTodo(todo);
+              updateDue(selectedDate);
               setShowModal(false);
             }}
           >

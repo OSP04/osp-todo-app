@@ -6,7 +6,7 @@ import CommonModal from "../common/CommonModal";
 import EditTaskContext from "../../context/EditTask";
 
 const EditPicture = () => {
-  const { selectedTask, updateTodo } = useContext(EditTaskContext);
+  const { editingTask, updateImage } = useContext(EditTaskContext);
 
   const [showModal, setShowModal] = useState(false);
   const openModal = () => {
@@ -20,15 +20,12 @@ const EditPicture = () => {
 
   // The path of the picked image
   const [pickedImagePath, setPickedImagePath] = useState("");
-  const selectedId = selectedTask.id;
 
   useEffect(() => {
-    if (selectedTask.image !== null || selectedTask.image !== "") {
-      setPickedImagePath(selectedTask.image);
+    if (editingTask.image !== null || editingTask.image !== "") {
+      setPickedImagePath(editingTask.image);
     }
   }, []);
-
-  const [todo, setTodo] = useState(selectedTask);
 
   // This function is triggered when the "Select an image" button pressed
   const showImagePicker = async () => {
@@ -45,8 +42,7 @@ const EditPicture = () => {
 
     if (!result.cancelled) {
       setPickedImagePath(result.uri);
-      setTodo({ ...todo, image: pickedImagePath });
-      updateTodo(todo);
+      updateImage(result.uri);
       setShowModal(false);
     }
   };
@@ -65,8 +61,7 @@ const EditPicture = () => {
 
     if (!result.cancelled) {
       setPickedImagePath(result.uri);
-      setTodo({ ...todo, image: pickedImagePath });
-      updateTodo(todo);
+      updateImage(result.uri);
       setShowModal(false);
     }
   };
@@ -88,8 +83,7 @@ const EditPicture = () => {
             onPress={() => {
               setShowModal(false);
               setPickedImagePath("");
-              setTodo({ ...todo, image: pickedImagePath });
-              updateTodo(todo);
+              updateImage("");
             }}
             title="Delete"
             color="red"
