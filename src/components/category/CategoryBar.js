@@ -22,7 +22,7 @@ const CategoryBar = ({ category, setRefresh, navigation }) => {
   );
 };
 
-const StyledView = styled.View`
+const StyledView = styled.SafeAreaView`
   flex-direction: row;
   align-items: center;
   justify-content: space-between;

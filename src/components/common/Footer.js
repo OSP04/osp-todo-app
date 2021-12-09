@@ -15,11 +15,12 @@ const Footer = ({
   setTasks,
   tasks,
   selectedCategory,
+  setRefresh,
 }) => {
   const [all, setAll] = useState(false);
 
-  const readyToSelect = async () => {
-    console.log(selectedCategory); // 아무것도 안 뜸
+  const readyToSelect = () => {
+    // console.log(selectedCategory); // 아무것도 안 뜸
     try {
       setIsSelecting((current) => !current);
       setAll(false);
@@ -30,11 +31,11 @@ const Footer = ({
     }
   };
 
-  const selectAll = async () => {
+  const selectAll = () => {
     try {
       setAll((current) => !current);
       tasks.map((item) => (item.selected = all ? false : true));
-      setTasks(tasks);
+      setRefresh((current) => !current);
     } catch (error) {
       console.log(error);
     }

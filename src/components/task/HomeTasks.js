@@ -1,5 +1,4 @@
 import React, { useState, useRef } from "react";
-import { Text } from "react-native";
 import styled from "styled-components/native";
 import DraggableFlatList, {
   ScaleDecorator,
@@ -9,12 +8,9 @@ import DraggableFlatList, {
 
 import TaskItem from "./TaskItem";
 import CategoryBar from "../category/CategoryBar";
-import { storeData } from "../../db";
 
 const HomeTasks = ({
   navigation,
-  tasks,
-  setTasks,
   categories,
   selectedDate,
   setSelectedCategory,
