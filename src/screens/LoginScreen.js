@@ -65,7 +65,7 @@ export default function LoginScreen({ navigation }) {
       <TouchableOpacity onPress={() => navigation.navigate("Home")}>
         <Text style={styles.skip}>Skip for Now</Text>
       </TouchableOpacity>
-      <Text style={styles.footer}>Copyright © 2021 EWHA OSP04</Text>
+      <Text style={styles.footer}>© 2021 EWHA OSP04</Text>
     </Background>
   );
 }

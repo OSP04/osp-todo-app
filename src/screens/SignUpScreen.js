@@ -82,7 +82,7 @@ export default function RegisterScreen({ navigation }) {
           <Text style={styles.link}>Log in</Text>
         </TouchableOpacity>
       </View>
-      <Text style={styles.footer}>Copyright © 2021 EWHA OSP04</Text>
+      <Text style={styles.footer}>© 2021 EWHA OSP04</Text>
     </Background>
   );
 }
