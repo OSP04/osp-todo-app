@@ -1,6 +1,13 @@
 import React, { useState, useEffect, useContext } from "react";
-import { StyleSheet, Text, Pressable, View, Image, Button } from "react-native";
-import { FontAwesome } from "@expo/vector-icons";
+import {
+  StyleSheet,
+  Text,
+  Pressable,
+  View,
+  Image,
+  Dimensions,
+} from "react-native";
+import { FontAwesome, Feather } from "@expo/vector-icons";
 import * as ImagePicker from "expo-image-picker";
 import CommonModal from "../common/CommonModal";
 import EditTaskContext from "../../context/EditTask";
@@ -79,18 +86,28 @@ const EditPicture = () => {
         )}
 
         {pickedImagePath !== "" && (
-          <Button
+          <Pressable
             onPress={() => {
               setShowModal(false);
               setPickedImagePath("");
               updateImage("");
             }}
-            title="Delete"
-            color="red"
-          />
+            style={styles.buttonList}
+          >
+            <Feather name="trash-2" style={styles.icon} size={24} color="red" />
+            <Text style={{ fontSize: 17, color: "red" }}>Delete</Text>
+          </Pressable>
         )}
-        <Button onPress={showImagePicker} title="Select an image" />
-        <Button onPress={openCamera} title="Open camera" />
+        <Pressable onPress={showImagePicker} style={styles.buttonList}>
+          <Feather name="image" style={styles.icon} size={24} color="black" />
+          <Text style={{ fontSize: 17 }}>Select an image</Text>
+        </Pressable>
+        <Pressable onPress={openCamera} style={styles.buttonList}>
+          <Feather name="camera" style={styles.icon} size={24} color="black" />
+          <Text style={{ fontSize: 17 }} style={{ fontSize: 17 }}>
+            Open camera
+          </Text>
+        </Pressable>
       </CommonModal>
       <Pressable onPress={openModal}>
         {pickedImagePath !== "" ? (
@@ -109,8 +126,15 @@ const EditPicture = () => {
 };
 
 const styles = StyleSheet.create({
-  constainer: {
-    width: 270,
+  buttonList: {
+    flexDirection: "row",
+    alignItems: "center",
+    width: "100%",
+    height: 50,
+    borderBottomWidth: 1,
+    borderBottomColor: "#E5E5E5",
+    justifyContent: "flex-start",
+    padding: 10,
   },
   icon: {
     paddingRight: 15,
@@ -123,9 +147,8 @@ const styles = StyleSheet.create({
     marginRight: 5,
   },
   fullImage: {
-    width: "95%",
-    height: undefined,
-    aspectRatio: 0.7,
+    width: Dimensions.get("window").width * 0.8,
+    height: Dimensions.get("window").height * 0.5,
     resizeMode: "contain",
     marginBottom: 10,
   },
