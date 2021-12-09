@@ -56,28 +56,42 @@ const EditButtons = ({ selectedTask, goHome }) => {
   };
 
   const onConfirmPressed = () => {
-    const task = {
-      ...selectedTask,
-      title: editingTitle,
-      image: editingImage,
-      date: editingDate,
-      due: editingDue,
-      location: editingLocation,
-      memo: editingMemo,
-    };
-    if (isAddPressed) {
-      addTodo(tasks, task);
+    if (editingTitle === "") {
+      Alert.alert(
+        "Error",
+        "No title entered.\nPlease enter the title of Todo.",
+        [
+          {
+            text: "OK",
+            onPress: () => null,
+          },
+          { cancelable: false },
+        ]
+      );
     } else {
-      updateTodo(tasks, task, editingId);
+      const task = {
+        ...selectedTask,
+        title: editingTitle,
+        image: editingImage,
+        date: editingDate,
+        due: editingDue,
+        location: editingLocation,
+        memo: editingMemo,
+      };
+      if (isAddPressed) {
+        addTodo(tasks, task);
+      } else {
+        updateTodo(tasks, task, editingId);
+      }
+      updateCategories(
+        categories,
+        editingCategory,
+        editingCategory.tasks,
+        task,
+        editingCategory.id
+      );
+      goHome();
     }
-    updateCategories(
-      categories,
-      editingCategory,
-      editingCategory.tasks,
-      task,
-      editingCategory.id
-    );
-    goHome();
   };
   return (
     <View style={styles.row}>
