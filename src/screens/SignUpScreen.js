@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, StyleSheet, TouchableOpacity } from "react-native";
+import { View, StyleSheet, TouchableOpacity, Dimensions } from "react-native";
 import { Text } from "react-native-paper";
 import Logo from "../components/pre/Logo";
 import PreText from "../components/pre/PreText";
@@ -82,6 +82,7 @@ export default function RegisterScreen({ navigation }) {
           <Text style={styles.link}>Log in</Text>
         </TouchableOpacity>
       </View>
+      <Text style={styles.footer}>Copyright © 2021 EWHA OSP04</Text>
     </Background>
   );
 }
@@ -100,5 +101,11 @@ const styles = StyleSheet.create({
     color: theme.colors.secondary,
     fontSize: 15,
     textAlign: "center",
+  },
+  footer: {
+    fontSize: 10,
+    color: theme.colors.secondary,
+    position: "absolute",
+    bottom: Dimensions.get("window").height * 0.06,
   },
 });

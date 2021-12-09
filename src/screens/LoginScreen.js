@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { TouchableOpacity, StyleSheet, View } from "react-native";
+import { TouchableOpacity, StyleSheet, View, Dimensions } from "react-native";
 import { Text } from "react-native-paper";
 import Logo from "../components/pre/Logo";
 import PreText from "../components/pre/PreText";
@@ -33,7 +33,7 @@ export default function LoginScreen({ navigation }) {
 
   return (
     <Background type="pre">
-      <BackButton type="pre" onPressOut={() => navigation.goBack()} />
+      {/* <BackButton type="pre" onPressOut={() => navigation.goBack()} /> */}
       <Logo />
       <PreText>Todo App</PreText>
       <PreTextInput
@@ -65,6 +65,7 @@ export default function LoginScreen({ navigation }) {
       <TouchableOpacity onPress={() => navigation.navigate("Home")}>
         <Text style={styles.skip}>Skip for Now</Text>
       </TouchableOpacity>
+      <Text style={styles.footer}>Copyright © 2021 EWHA OSP04</Text>
     </Background>
   );
 }
@@ -83,5 +84,11 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     margin: 20,
     marginTop: 50,
+  },
+  footer: {
+    fontSize: 10,
+    color: theme.colors.secondary,
+    position: "absolute",
+    bottom: Dimensions.get("window").height * 0.06,
   },
 });
