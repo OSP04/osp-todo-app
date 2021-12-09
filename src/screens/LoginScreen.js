@@ -83,7 +83,7 @@ const styles = StyleSheet.create({
     color: theme.colors.primary,
     fontWeight: "bold",
     margin: 20,
-    marginTop: 50,
+    marginTop: 40,
   },
   footer: {
     fontSize: 10,

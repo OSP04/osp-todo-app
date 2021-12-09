@@ -1,5 +1,12 @@
 import React, { useState, useEffect, useContext } from "react";
-import { StyleSheet, Text, Pressable, View, TextInput } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  Pressable,
+  View,
+  TextInput,
+  Dimensions,
+} from "react-native";
 import MapView, { Marker, PROVIDER_GOOGLE } from "react-native-maps";
 import { Entypo } from "@expo/vector-icons";
 import { theme } from "../../theme";
@@ -207,7 +214,7 @@ const EditLocation = () => {
               getInitialState();
             }}
           >
-            <Entypo name="cross" style={styles.icon} size={20} color="black" />
+            <Entypo name="cross" style={styles.icon} size={24} color="black" />
           </Pressable>
         ) : (
           <Pressable onPress={openModal}>
@@ -250,8 +257,8 @@ const styles = StyleSheet.create({
     flexDirection: "row",
   },
   searchMap: {
-    width: 330,
-    height: 580,
+    width: Dimensions.get("window").width * 0.8,
+    height: Dimensions.get("window").height * 0.68,
   },
   listItem: {
     flexDirection: "row",
@@ -283,12 +290,12 @@ const styles = StyleSheet.create({
     marginHorizontal: 10,
   },
   fullmapContainer: {
-    width: 330,
-    height: 580,
+    width: Dimensions.get("window").width * 0.8,
+    height: Dimensions.get("window").height * 0.68,
   },
   fullmap: {
-    width: 330,
-    height: 450,
+    width: Dimensions.get("window").width * 0.8,
+    height: Dimensions.get("window").height * 0.55,
     marginBottom: 10,
   },
   addressHeader: {
