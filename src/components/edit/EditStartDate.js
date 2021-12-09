@@ -30,8 +30,6 @@ const EditStartDate = () => {
     }
   }, []);
 
-  const [todo, setTodo] = useState(editingTask);
-
   const [showModal, setShowModal] = useState(false);
   const openModal = () => {
     setSelectedDate(startDate);
@@ -89,7 +87,7 @@ const EditStartDate = () => {
             }}
             onPress={() => {
               setStartDate(selectedDate);
-              updateDate(selectedDate);
+              updateDate(Date(selectedDate));
               setShowModal(false);
             }}
           >

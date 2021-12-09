@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
-import { StyleSheet, Text, Pressable, View, Button } from "react-native";
+import { StyleSheet, Text, Pressable, View, Alert } from "react-native";
 import { Entypo, MaterialCommunityIcons } from "@expo/vector-icons";
 import { theme } from "../../theme";
 import CommonModal from "../common/CommonModal";
@@ -32,8 +32,6 @@ const EditDueDate = () => {
     }
   }, []);
 
-  const [todo, setTodo] = useState(editingTask);
-
   const [showModal, setShowModal] = useState(false);
   const openModal = () => {
     setSelectedDate(dueDate);
@@ -61,6 +59,12 @@ const EditDueDate = () => {
   const onDayPress = (day) => {
     setSelectedDate(day);
     setMarkedDates(makeSelectedTrue(day));
+  };
+
+  const onConfirmPressed = () => {
+    setDueDate(selectedDate);
+    updateDue(Date(selectedDate));
+    setShowModal(false);
   };
 
   return (
@@ -91,9 +95,7 @@ const EditDueDate = () => {
               backgroundColor: theme.colors.primary,
             }}
             onPress={() => {
-              setDueDate(selectedDate);
-              updateDue(selectedDate);
-              setShowModal(false);
+              onConfirmPressed();
             }}
           >
             <Text style={{ ...styles.buttonText, color: "white" }}>
@@ -111,7 +113,12 @@ const EditDueDate = () => {
         />
         <Text style={styles.dueDate}>{dueDate}</Text>
       </View>
-      <Pressable onPress={() => setDueDate("Please set your Due Date")}>
+      <Pressable
+        onPress={() => {
+          setDueDate("Please set your Due Date");
+          updateDue(null);
+        }}
+      >
         <Entypo name="cross" style={styles.icon} size={24} color="black" />
       </Pressable>
     </Pressable>
