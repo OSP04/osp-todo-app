@@ -29,7 +29,6 @@ const Home = ({ navigation, route }) => {
       const taskObjs = await getData("tasks");
       setCategories(categoryObjs);
       setTasks(taskObjs);
-      console.log(taskObjs);
     } catch (error) {
       console.log(error);
     }
