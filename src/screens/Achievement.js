@@ -2,12 +2,11 @@ import React, { useState } from "react";
 import { Dimensions, View } from "react-native";
 
 import styled from "styled-components/native";
-import IconButton from "../components/common/IconButton";
-import { images } from "../../src/images";
 import { theme } from "../../src/theme";
 import AchievementCategory from "../components/achievement/AchievementCategory";
 import MenuBar from "../MenuBar";
 import AchievementDay from "../components/achievement/AchievementDay";
+import BackButton from "../components/common/BackButton";
 
 const Achievement = ({ navigation }) => {
 
@@ -19,7 +18,7 @@ const Achievement = ({ navigation }) => {
         <Wrapper>
             <StyledBar barStyle="default" />
             <StyledView width={width - 20}>
-                <IconButton type={images.back} onPressOut={() => navigation.navigate("Home")} />
+                <BackButton onPressOut={() => navigation.navigate("Home")} />
                 <StyledText>Achievement</StyledText>
                 <View width={25} />
             </StyledView>

@@ -1,5 +1,6 @@
 import React from "react";
 import { Dimensions } from "react-native";
+import { TouchableOpacity } from "react-native-gesture-handler";
 
 import styled from "styled-components/native";
 import { theme } from "./theme";
@@ -12,23 +13,31 @@ const MenuBar = ({ stateCategory, setStateCategory, stateDay, setStateDay }) => 
         <Wrapper width={width}>
 
             {stateCategory == true ? (<MenuView>
+                <TouchableOpacity>
                 <StyledText>Category</StyledText>
                 <Underline />
+                </TouchableOpacity>
             </MenuView>)
                 : (<MenuView>
+                    <TouchableOpacity>
                     <StyledText style={{ color: theme.light }}
                         onPress={() => { setStateCategory(true); setStateDay(false) }}>Category</StyledText>
                     <Underline style={{ backgroundColor: theme.light }} />
+                    </TouchableOpacity>
                 </MenuView>)}
 
             {stateDay == true ? (<MenuView style={{ paddingLeft: 10 }}>
+                <TouchableOpacity>
                 <StyledText>Day</StyledText>
                 <Underline style={{ width: 50 }} />
+                </TouchableOpacity>
             </MenuView>)
                 : (<MenuView style={{ paddingLeft: 10 }}>
+                    <TouchableOpacity>
                     <StyledText style={{ color: theme.light }}
                         onPress={() => { setStateCategory(false); setStateDay(true) }}>Day</StyledText>
                     <Underline style={{ width: 50, backgroundColor: theme.light }} />
+                    </TouchableOpacity>
                 </MenuView>)}
         </Wrapper>
     );
