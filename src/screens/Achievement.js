@@ -19,7 +19,7 @@ const Achievement = ({ navigation }) => {
         <Wrapper>
             <StyledBar barStyle="default" />
             <StyledView width={width - 20}>
-                <IconButton type={images.back} onPress={() => navigation.navigate("Home")} />
+                <IconButton type={images.back} onPressOut={() => navigation.navigate("Home")} />
                 <StyledText>Achievement</StyledText>
                 <View width={25} />
             </StyledView>
