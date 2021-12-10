@@ -91,7 +91,7 @@ const EditScreen = ({ route, navigation }) => {
       <Background type="main">
         <TopHeader>
           <BackButton selectedTask={selectedTask} onPressOut={onBackPressed} />
-          <EditButtons goHome={goHome} />
+          <EditButtons selectedTask={selectedTask} goHome={goHome} />
         </TopHeader>
         <View style={styles.list}>
           <KeyboardAwareScrollView keyboardShouldPersistTaps="always">
