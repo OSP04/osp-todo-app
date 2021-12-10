@@ -48,6 +48,7 @@ const Wrapper = styled.SafeAreaView`
   flex: 1;
   justify-content: flex-start;
   align-items: center;
+  background-color: ${theme.background};
 `;
 
 const StyledBar = styled.StatusBar`
