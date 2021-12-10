@@ -13,7 +13,7 @@ const CategoryBar = ({ selectedDate, category, setRefresh, navigation }) => {
         id: Math.random().toString(36),
         title: "",
         date: selectedDate,
-        due: new Date(),
+        due: null,
         category: category.title,
         image: "",
         location: {
