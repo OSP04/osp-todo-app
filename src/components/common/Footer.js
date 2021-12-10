@@ -65,7 +65,6 @@ const Footer = ({
             (item) => item.id === id
           );
           if (index >= 0) {
-            console.log(index);
             _categories[i].tasks.splice(index, 1);
             break;
           }
@@ -86,7 +85,6 @@ const Footer = ({
       setTasks(_tasks);
       storeData("tasks", _tasks);
     }
-    console.log(_categories);
     setCategories(_categories);
     storeData("categories", _categories);
     setIsSelecting(false);
