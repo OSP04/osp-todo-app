@@ -2,14 +2,12 @@ import React, { useState } from "react";
 import { Dimensions, View } from "react-native";
 
 import styled from "styled-components/native";
-import OneCategory from "../../screens/OneCategory";
 import { theme } from "../../theme";
 import DropButton from "../common/DropButton";
 import ShowCateTask from "./ShowCateTask";
 
-const Categories = ({ item, doRefresh }) => {
+const Categories = ({ item, doRefresh, navigation }) => {
   const width = Dimensions.get("window").width;
-  const [visible, setVisible] = useState(false);
   const [sorting, setSorting] = useState("added");
 
   const sortTasks = (category) => {
@@ -68,19 +66,17 @@ const Categories = ({ item, doRefresh }) => {
       <MoreView width={width}>
         <MoreButton
           onPress={() => {
-            setVisible(true);
+            navigation.navigate("OneCategory", {
+              key: item.id,
+              item: item,
+              sortTasks: sortTasks,
+              setSorting: setSorting,
+              doRefresh: doRefresh,
+            })
           }}
         >
           + See more tasks...
         </MoreButton>
-        <OneCategory
-          key={item.id}
-          item={item}
-          visible={visible}
-          setVisible={setVisible}
-          sortTasks={sortTasks}
-          doRefresh={doRefresh}
-        />
       </MoreView>
     </Wrapper>
   );
