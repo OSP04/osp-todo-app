@@ -26,6 +26,8 @@ const CategoryBar = ({ selectedDate, category, setRefresh, navigation }) => {
         },
         memo: "",
         completed: false,
+        selected: false,
+        created: Date.now(),
       },
       category,
       selectedDate,
