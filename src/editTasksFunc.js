@@ -26,9 +26,15 @@ export const updateCategories = (
   editingCategory,
   taskOfCategory,
   task,
-  id
+  id,
+  isAddpressed
 ) => {
-  const categoryTasks = [...taskOfCategory, task]; //편집하고 있던 카테고리 객체 tasks: 배열에 오브젝트 추가
+  const [categoryTasks, setCategoryTasks] = useState([]);
+  if (isAddpressed) {
+    setCategoryTasks([...taskOfCategory, task]); //편집하고 있던 카테고리 객체 tasks: 배열에 오브젝트 추가
+  } else {
+    setCategoryTasks(taskOfCategory.map((e) => (e.id === task.id ? task : e)));
+  }
   const categoryObj = { ...editingCategory, tasks: categoryTasks }; //편집하고 있던 카테고리 객체 tasks: 배열 업테이트
 
   const updatedCategories = categories.map((category) =>
