@@ -1,25 +1,29 @@
-import React from "react";
-import { Dimensions, View, Modal } from "react-native";
+import React, { useState } from "react";
+import { Dimensions, View } from "react-native";
 
 import styled from "styled-components/native";
 import DropButton from "../components/common/DropButton";
-import IconButton from "../components/common/IconButton";
 import ShowTaskOne from "../components/category/ShowTaskOne";
-import { images } from "../images";
 import { theme } from "../theme";
+import BackButton from "../components/common/BackButton";
 
 const OneCategory = ({ route, navigation }) => {
 
-  const { item, doRefresh, sortTasks, setSorting } = route.params;
+  const { item, sortTasks, doRefresh, setSorting } = route.params;
+  const [refresh, setRefresh] = useState(true);
   const width = Dimensions.get("window").width;
+
+  const screenRefresh = () => {
+    setRefresh((current) => setRefresh(!current));
+};
 
   return (
     <Wrapper>
           <StyledBar barStyle="default" />
           <StyledView width={width}>
-            <IconButton
-              type={images.back}
+            <BackButton
               onPressOut={() => {
+                doRefresh();
                 navigation.navigate("AllCategory");
               }}
             />
@@ -31,13 +35,13 @@ const OneCategory = ({ route, navigation }) => {
             <DropButton
               setSorting={setSorting}
               category={item}
-              doRefresh={doRefresh}
+              doRefresh={screenRefresh}
             />
           </StyledView>
           <StyledScroll>
             {item.tasks[0] != null &&
               sortTasks(item).map((item) => (
-                <ShowTaskOne key={item.id} item={item} doRefresh={doRefresh} />
+                <ShowTaskOne key={item.id} item={item} doRefresh={screenRefresh} />
               ))}
           </StyledScroll>
     </Wrapper>

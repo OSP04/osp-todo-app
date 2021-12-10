@@ -8,6 +8,7 @@ import { images } from "../../src/images";
 import { theme } from "../../src/theme";
 import AddCategory from "../screens/AddCategory";
 import { getData, storeData } from "../../src/db";
+import BackButton from "../components/common/BackButton";
 
 const AllCategory = ({ navigation }) => {
     const width = Dimensions.get("window").width;
@@ -78,7 +79,7 @@ const AllCategory = ({ navigation }) => {
         <Wrapper>
             <StyledBar barStyle="default" />
             <StyledView width={width - 20}>
-                <IconButton type={images.back} onPressOut={() => navigation.navigate("Home")} />
+                <BackButton onPressOut={() => navigation.navigate("Home")} />
                 <StyledText>Category</StyledText>
                 <IconButton
                     type={images.add}
@@ -100,7 +101,6 @@ const AllCategory = ({ navigation }) => {
                     <Categories
                         key={item.id}
                         item={item}
-                        color={color}
                         doRefresh={doRefresh}
                         navigation={navigation}
                     />

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Dimensions, View } from "react-native";
+import { Dimensions, Text, View } from "react-native";
 
 import styled from "styled-components/native";
 import { theme } from "../../theme";
@@ -75,7 +75,7 @@ const Categories = ({ item, doRefresh, navigation }) => {
             })
           }}
         >
-          + See more tasks...
+          <Text style={{color: theme.light}}>+ See more tasks...</Text>
         </MoreButton>
       </MoreView>
     </Wrapper>
@@ -114,7 +114,7 @@ const MoreView = styled.View`
   padding-bottom: 10px;
 `;
 
-const MoreButton = styled.Text`
+const MoreButton = styled.TouchableOpacity`
   color: ${theme.light};
 `;
 
