@@ -3,6 +3,7 @@ import { Dimensions } from "react-native";
 
 import styled from "styled-components/native";
 import { db } from "../../db";
+import { theme } from "../../theme";
 import DoneCategory from "../achievement/DoneCategory";
 
 const AchievementCategory = () => {
@@ -27,6 +28,7 @@ const Wrapper = styled.SafeAreaView`
   flex: 1;
   justify-content: flex-start;
   align-items: center;
+  background_color: ${theme.background};
 `;
 
 const AchievementView = styled.View`
