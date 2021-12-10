@@ -17,13 +17,16 @@ import Footer from "../components/common/Footer";
 const AllTasks = ({ navigation }) => {
   const ref = useRef(null);
   const [tasks, setTasks] = useState(null);
+  const [categories, setCategories] = useState(null);
   const [refresh, setRefresh] = useState(false);
   const [sorting, setSorting] = useState("added");
   const [isSelecting, setIsSelecting] = useState(false);
 
   useEffect(async () => {
     try {
+      const categoryObjs = await getData("categories");
       const taskObjs = await getData("tasks");
+      setCategories(categoryObjs);
       setTasks(taskObjs);
     } catch (error) {
       console.log(error);
@@ -136,7 +139,9 @@ const AllTasks = ({ navigation }) => {
         tasks={tasks}
         setTasks={setTasks}
         setRefresh={setRefresh}
-        selectedCategory={null}
+        categories={categories}
+        setCategories={setCategories}
+        where="all"
       />
     </Wrapper>
   );

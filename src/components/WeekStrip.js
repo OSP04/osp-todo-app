@@ -10,8 +10,8 @@ const WeekStrip = ({
   tasks,
   setTasks,
   categories,
-  setSelectedCategory,
   navigation,
+  isSelecting,
 }) => {
   const [markedDates, setMarkedDates] = useState(null);
   const [year, setYear] = useState(new Date().getFullYear());
@@ -80,8 +80,8 @@ const WeekStrip = ({
         setTasks={setTasks}
         categories={categories}
         selectedDate={selectedDate}
-        setSelectedCategory={setSelectedCategory}
         navigation={navigation}
+        isSelecting={isSelecting}
       />
     </StyledView>
   );

@@ -8,7 +8,7 @@ import { theme } from "../../theme";
 import { images } from "../../images";
 import IconButton from "../common/IconButton";
 
-const TaskItem = ({ item, drag, isSelecting, setSelectedCategory }) => {
+const TaskItem = ({ item, drag, isSelecting }) => {
   const [isCompleted, setIsCompleted] = useState(item.complete);
   const [refresh, setRefresh] = useState(false);
 
@@ -22,12 +22,9 @@ const TaskItem = ({ item, drag, isSelecting, setSelectedCategory }) => {
   };
 
   const selectItem = () => {
-    // home에서 isSelecting 이 계속 false
     if (isSelecting) {
-      setSelectedCategory && setSelectedCategory(item.category);
       item.selected = !item.selected;
       setRefresh((current) => !current);
-      console.log(item.selected);
     }
   };
 

@@ -12,7 +12,7 @@ const Home = ({ navigation, route }) => {
   const [categories, setCategories] = useState(null);
   const [tasks, setTasks] = useState(null);
   const [isSelecting, setIsSelecting] = useState(false);
-  const [selectedCategory, setSelectedCategory] = useState(null);
+  const [refresh, setRefresh] = useState(false);
 
   useEffect(async () => {
     try {
@@ -40,21 +40,26 @@ const Home = ({ navigation, route }) => {
             tasks={tasks}
             setTasks={setTasks}
             categories={categories}
-            setSelectedCategory={setSelectedCategory}
             navigation={navigation}
+            isSelecting={isSelecting}
           />
         )}
       </Body>
-      <Footer
-        navigation={navigation}
-        type={images.comment}
-        screens={["Comments", null]}
-        isSelecting={isSelecting}
-        setIsSelecting={setIsSelecting}
-        tasks={tasks}
-        setTasks={setTasks}
-        selectedCategory={selectedCategory}
-      />
+      {tasks && categories && (
+        <Footer
+          navigation={navigation}
+          type={images.comment}
+          screens={["Comments", null]}
+          isSelecting={isSelecting}
+          setIsSelecting={setIsSelecting}
+          tasks={tasks}
+          setTasks={setTasks}
+          categories={categories}
+          setCategories={setCategories}
+          setRefresh={setRefresh}
+          where="home"
+        />
+      )}
     </Wrapper>
   );
 };

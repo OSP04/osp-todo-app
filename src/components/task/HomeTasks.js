@@ -9,16 +9,9 @@ import DraggableFlatList, {
 import TaskItem from "./TaskItem";
 import CategoryBar from "../category/CategoryBar";
 
-const HomeTasks = ({
-  navigation,
-  categories,
-  selectedDate,
-  setSelectedCategory,
-}) => {
+const HomeTasks = ({ navigation, categories, selectedDate, isSelecting }) => {
   const ref = useRef(null);
   const [refresh, setRefresh] = useState(true);
-  const [newTask, setNewTask] = useState("");
-  const [isSelecting, setIsSelecting] = useState(false);
 
   const sortTasks = (category) => {
     const sorting = category.sorting;
@@ -92,7 +85,6 @@ const HomeTasks = ({
                 item={item}
                 sorting={null}
                 isSelecting={isSelecting}
-                setSelectedCategory={setSelectedCategory}
               />
             )}
           </ShadowDecorator>

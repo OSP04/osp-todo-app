@@ -14,18 +14,23 @@ const Footer = ({
   setIsSelecting,
   setTasks,
   tasks,
-  selectedCategory,
   setRefresh,
+  categories,
+  setCategories,
+  where,
 }) => {
   const [all, setAll] = useState(false);
 
-  const readyToSelect = () => {
-    // console.log(selectedCategory); // 아무것도 안 뜸
+  const pressSelectButton = () => {
     try {
       setIsSelecting((current) => !current);
-      setAll(false);
+      // reset tasks
       tasks.map((item) => (item.selected = false));
-      setTasks(tasks);
+      // reset tasks of categories
+      for (let i = 0; i < categories.length; i++) {
+        categories[i].tasks.map((item) => (item.selected = false));
+      }
+      setAll(false);
     } catch (error) {
       console.log(error);
     }
@@ -42,11 +47,51 @@ const Footer = ({
   };
 
   const deleteTasks = () => {
-    const unSelectedTasks = tasks.filter((item) => item.selected === false);
-    setTasks(unSelectedTasks);
-    storeData("tasks", unSelectedTasks);
+    let _categories = categories;
+    let _tasks = [];
+
+    if (where === "all") {
+      // Delete tasks
+      const selectedTasks = tasks.filter((item) => item.selected === true);
+      const unSelectedTasks = tasks.filter((item) => item.selected === false);
+      setTasks(unSelectedTasks);
+      storeData("tasks", unSelectedTasks);
+
+      // Delete tasks in categories following all tasks
+      for (const task of selectedTasks) {
+        const { id } = task;
+        for (let i = 0; i < _categories.length; i++) {
+          const index = _categories[i].tasks.findIndex(
+            (item) => item.id === id
+          );
+          if (index >= 0) {
+            console.log(index);
+            _categories[i].tasks.splice(index, 1);
+            break;
+          }
+        }
+      }
+    } else {
+      let unSelectedTasks;
+      // Set selected tasks
+      for (let i = 0; i < _categories.length; i++) {
+        unSelectedTasks = _categories[i].tasks.filter(
+          (item) => item.selected === false
+        );
+        // Delete tasks of all tasks
+          _tasks.push(...unSelectedTasks);
+        // Delete tasks of categories
+        _categories[i].tasks = unSelectedTasks;
+      }
+      setTasks(_tasks);
+      storeData("tasks", _tasks);
+    }
+    console.log(_categories);
+    setCategories(_categories);
+    storeData("categories", _categories);
     setIsSelecting(false);
     setAll(false);
+    setRefresh(current => !current);
   };
 
   return (
@@ -68,7 +113,7 @@ const Footer = ({
         {isSelecting && (
           <IconButton type={images.remove} onPressOut={deleteTasks} />
         )}
-        <SelectButton isSelecting={isSelecting} onPress={readyToSelect}>
+        <SelectButton isSelecting={isSelecting} onPress={pressSelectButton}>
           <SelectText isSelecting={isSelecting}>
             {!isSelecting ? "Select" : "Cancel"}
           </SelectText>
