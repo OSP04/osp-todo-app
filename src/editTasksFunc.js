@@ -14,33 +14,25 @@ export const removeTodo = (tasks, id) => {
   storeData("tasks", todos);
 };
 
-export const updateTodo = (tasks, selectedTask, id) => {
-  let todos = [...tasks];
-  const updatedTodo = {
-    ...selectedTask,
-    title: selectedTask.title,
-    date: selectedTask.date,
-    due: selectedTask.dueDate,
-    category: selectedTask.category,
-    location: selectedTask.location,
-    memo: selectedTask.memo,
-  };
-  const index = tasks.findIndex((e) => e.id === id);
-  todos.splice(index, 1);
-  storeData("tasks", [...todos, updatedTodo]);
+export const updateTodo = (tasks, updatedTodo, id) => {
+  const updatedTasks = tasks.map((task) =>
+    task.id === id ? updatedTodo : task
+  );
+  storeData("tasks", updatedTasks);
 };
 
 export const updateCategories = (
-  categoriesArr,
+  categories,
   editingCategory,
   taskOfCategory,
-  selectedTask,
+  task,
   id
 ) => {
-  const categoryTasks = [...taskOfCategory, selectedTask]; //편집하고 있던 카테고리 객체 tasks: 배열에 오브젝트 추가
+  const categoryTasks = [...taskOfCategory, task]; //편집하고 있던 카테고리 객체 tasks: 배열에 오브젝트 추가
   const categoryObj = { ...editingCategory, tasks: categoryTasks }; //편집하고 있던 카테고리 객체 tasks: 배열 업테이트
 
-  const index = categoriesArr.findIndex((e) => e.id === id);
-  categoriesArr.splice(index, 1);
-  storeData("categories", [...categoriesArr, categoryObj]);
+  const updatedCategories = categories.map((category) =>
+    category.id === id ? categoryObj : category
+  );
+  storeData("categories", updatedCategories);
 };

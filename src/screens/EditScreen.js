@@ -37,6 +37,7 @@ const EditScreen = ({ route, navigation }) => {
       setCategoryArr(categoryObjs);
       const taskObjs = await getData("tasks");
       // console.log(taskObjs);
+      // console.log(categoryObjs);
     } catch (error) {
       console.log(error);
     }
