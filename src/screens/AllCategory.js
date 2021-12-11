@@ -7,7 +7,7 @@ import IconButton from "../components/common/IconButton";
 import { images } from "../../src/images";
 import { theme } from "../../src/theme";
 import AddCategory from "../screens/AddCategory";
-import { db, getData, storeData } from "../../src/db";
+import { storeData } from "../../src/db";
 import BackButton from "../components/common/BackButton";
 import AppLoading from "expo-app-loading";
 
@@ -108,9 +108,9 @@ const AllCategory = ({ navigation }) => {
         </Wrapper>)
         : (
             <AppLoading
-      startAsync={_loadCategories}
-      onFinish={() => setIsReady(true)}
-      onError={console.error}/>
+                startAsync={_loadCategories}
+                onFinish={() => setIsReady(true)}
+                onError={console.error}/>
         )
     );
 };
