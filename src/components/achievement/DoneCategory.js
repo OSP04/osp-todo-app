@@ -9,15 +9,14 @@ const DoneCategory = ({ item }) => {
 
     const countDone = (category) => { //count completed tasks per category
         const tasks = category.tasks;
-        const doneTasks = tasks.filter((task) => task.complete === true);
-
+        const doneTasks = tasks[0] != null ? Object.values(tasks).filter((task) => task.complete === true) : [];
         return doneTasks.length;
     };
 
     // show the percentage of completed tasks
     const box =
         <BoxView style={{ borderColor: item.color }}>
-            {item.tasks.length != 0 ?
+            {item.tasks.length != null ?
                 (<Text style={{ padding: 20, fontSize: 32, fontWeight: "bold", color: item.color }}>
                     {Math.round((countDone(item) / item.tasks.length).toFixed(2) * 100)}%
                 </Text>)
@@ -29,7 +28,8 @@ const DoneCategory = ({ item }) => {
     return (
 
         <Wrapper width={width}>
-            <Text style={{ fontSize: 24, fontWeight: "bold", color: item.color, paddingBottom: 10 }}>{item.title}</Text>
+            <Text style={{ fontSize: 24, fontWeight: "bold", color: item.color, paddingBottom: 10 }}
+            onPress={console.log(item)}>{item.title}</Text>
             <AchievementView width={width - 80}>
                 <View>{box}</View>
                 <DoneView>
@@ -40,7 +40,9 @@ const DoneCategory = ({ item }) => {
                     </View>
                     <View style={{ flexDirection: "row", alignItems: "baseline" }}>
                         <DoneText>out of</DoneText>
-                        <DoneText style={{ fontSize: 22, fontWeight: "bold", color: item.color }}>{item.tasks.length}</DoneText>
+                        {item.tasks.length != null ?
+                        (<DoneText style={{ fontSize: 22, fontWeight: "bold", color: item.color }}>{item.tasks.length}</DoneText>)
+                    : (<DoneText style={{ fontSize: 22, fontWeight: "bold", color: item.color }}>0</DoneText>)}
                         <DoneText>tasks</DoneText>
                     </View>
                 </DoneView>

@@ -13,6 +13,11 @@ const Achievement = ({ navigation }) => {
     const width = Dimensions.get('window').width;
     const [stateCategory, setStateCategory] = useState(true);
     const [stateDay, setStateDay] = useState(false);
+    const [refresh, setRefresh] = useState(true);
+
+    const doRefresh = () => {
+        setRefresh((current) => setRefresh(!current));
+    };
 
     return (
         <Wrapper>
@@ -26,7 +31,7 @@ const Achievement = ({ navigation }) => {
             <MenuBar stateCategory={stateCategory} setStateCategory={setStateCategory}
                 stateDay={stateDay} setStateDay={setStateDay} />
 
-            {stateCategory == true ? (<AchievementCategory stateCategory={stateCategory} />)
+            {stateCategory == true ? (<AchievementCategory stateCategory={stateCategory} doRefresh={doRefresh}/>)
                 : <AchievementDay stateDay={stateDay} />}
         </Wrapper>
     );
