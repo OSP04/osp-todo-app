@@ -6,6 +6,7 @@ import {
   Text,
   Pressable,
   KeyboardAvoidingView,
+  SafeAreaView,
 } from "react-native";
 import { Entypo } from "@expo/vector-icons";
 
@@ -19,28 +20,32 @@ const CommonModal = ({
   return (
     <>
       {showModal ? (
-        <KeyboardAvoidingView enabled={false}>
-          <Modal
-            animationType="fade"
-            transparent={true}
-            visible={showModal}
-            onRequestClose={() => {
-              setShowModal(!showModal);
-            }}
-          >
-            <View style={styles.centeredView}>
-              <View style={styles.modalView}>
-                <View style={styles.header}>
-                  <Text style={styles.headerText}>{headerText}</Text>
-                  <Pressable onPress={onCancelPressed}>
-                    <Entypo name="cross" size={24} color="black" />
-                  </Pressable>
+        <SafeAreaView>
+          <StatusBar hidden />
+          <KeyboardAvoidingView enabled={false} behavior="position">
+            <Modal
+              animationType="fade"
+              transparent={true}
+              visible={showModal}
+              onRequestClose={() => {
+                setShowModal(!showModal);
+              }}
+              statusBarTranslucent={true}
+            >
+              <View style={styles.centeredView}>
+                <View style={styles.modalView}>
+                  <View style={styles.header}>
+                    <Text style={styles.headerText}>{headerText}</Text>
+                    <Pressable onPress={onCancelPressed}>
+                      <Entypo name="cross" size={24} color="black" />
+                    </Pressable>
+                  </View>
+                  <View style={{ alignItems: "center" }}>{children}</View>
                 </View>
-                <View style={{ alignItems: "center" }}>{children}</View>
               </View>
-            </View>
-          </Modal>
-        </KeyboardAvoidingView>
+            </Modal>
+          </KeyboardAvoidingView>
+        </SafeAreaView>
       ) : null}
     </>
   );
