@@ -71,7 +71,7 @@ const EditScreen = ({ route, navigation }) => {
   };
 
   const goHome = () => {
-    navigation.navigate("Home");
+    navigation.navigate("Drawer");
   };
 
   return (
