@@ -7,6 +7,7 @@ import { Provider } from "react-native-paper";
 import DrawerNavigator from "./DrawerNavigator";
 import CalendarScreen from "./src/screens/CalendarScreen";
 import OneCategory from "./src/screens/OneCategory";
+import Comments from "./src/screens/OneCategory";
 import EditScreen from "./src/screens/EditScreen";
 const Stack = createStackNavigator();
 const StackNavigator = () => {
@@ -38,6 +39,7 @@ const StackNavigator2 = () => {
         <Stack.Screen name="EditScreen" component={EditScreen} />
         <Stack.Screen name="Home" component={DrawerNavigator} />
         <Stack.Screen name="OneCategory" component={OneCategory} />
+        <Stack.Screen name="Comments" component={Comments} />
       </Stack.Navigator>
     </Provider>
   );
