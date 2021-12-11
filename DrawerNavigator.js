@@ -10,6 +10,7 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 
 import IconButton from "./src/components/common/IconButton";
 import { images } from "./src/images";
+import { DrawerActions } from "@react-navigation/native";
 const Drawer = createDrawerNavigator();
 
 const DrawerNavigator = ({ navigation }) => {
@@ -18,17 +19,20 @@ const DrawerNavigator = ({ navigation }) => {
       initialRouteName="Home"
       screenOptions={{
         headerShown: true,
-        drawerPosition: "left",
+        drawerPosition: "right",
         headerRight: () => (
-          <TouchableOpacity onPress={() => navigation.navigate("SearchScreen")}>
+          <TouchableOpacity
+            onPress={() => navigation.dispatch(DrawerActions.toggleDrawer())}
+          >
             <IconButton
-              type={images.search}
+              type={images.menu}
               size={32}
               color="black"
               style={styles.menu}
             />
           </TouchableOpacity>
         ),
+        headerLeft: () => <TouchableOpacity></TouchableOpacity>,
       }}
     >
       <Drawer.Screen
@@ -50,6 +54,18 @@ const DrawerNavigator = ({ navigation }) => {
           headerTitle: () => (
             <Image source={require("./assets/logo.png")} style={styles.image} />
           ),
+          headerLeft: () => (
+            <TouchableOpacity
+              onPress={() => navigation.dispatch(DrawerActions.jumpTo("Home"))}
+            >
+              <IconButton
+                type={images.back}
+                size={32}
+                color="black"
+                style={styles.menu}
+              />
+            </TouchableOpacity>
+          ),
         }}
       />
       <Drawer.Screen
@@ -59,6 +75,18 @@ const DrawerNavigator = ({ navigation }) => {
           drawerLabel: "Search",
           headerTitle: () => (
             <Image source={require("./assets/logo.png")} style={styles.image} />
+          ),
+          headerLeft: () => (
+            <TouchableOpacity
+              onPress={() => navigation.dispatch(DrawerActions.jumpTo("Home"))}
+            >
+              <IconButton
+                type={images.back}
+                size={32}
+                color="black"
+                style={styles.menu}
+              />
+            </TouchableOpacity>
           ),
         }}
       />
@@ -70,6 +98,18 @@ const DrawerNavigator = ({ navigation }) => {
           headerTitle: () => (
             <Image source={require("./assets/logo.png")} style={styles.image} />
           ),
+          headerLeft: () => (
+            <TouchableOpacity
+              onPress={() => navigation.dispatch(DrawerActions.jumpTo("Home"))}
+            >
+              <IconButton
+                type={images.back}
+                size={32}
+                color="black"
+                style={styles.menu}
+              />
+            </TouchableOpacity>
+          ),
         }}
       />
 
@@ -80,6 +120,18 @@ const DrawerNavigator = ({ navigation }) => {
           drawerLabel: "Category",
           headerTitle: () => (
             <Image source={require("./assets/logo.png")} style={styles.image} />
+          ),
+          headerLeft: () => (
+            <TouchableOpacity
+              onPress={() => navigation.dispatch(DrawerActions.jumpTo("Home"))}
+            >
+              <IconButton
+                type={images.back}
+                size={32}
+                color="black"
+                style={styles.menu}
+              />
+            </TouchableOpacity>
           ),
         }}
       />
