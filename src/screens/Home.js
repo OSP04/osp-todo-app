@@ -5,25 +5,15 @@ import Footer from "../components/common/Footer";
 import WeekStrip from "../components/WeekStrip";
 import TopBar from "../components/common/TopBar";
 import { theme } from "../theme";
-import { getData } from "../db";
 import { images } from "../images";
+import useGetData from "../hooks/useGetData";
 
 const Home = ({ navigation, route }) => {
-  const [categories, setCategories] = useState(null);
-  const [tasks, setTasks] = useState(null);
+  const {categories, tasks, setCategories, setTasks, getDataFirst} = useGetData();
+  useEffect(getDataFirst, []);
+
   const [isSelecting, setIsSelecting] = useState(false);
   const [refresh, setRefresh] = useState(false);
-
-  useEffect(async () => {
-    try {
-      const categoryObjs = await getData("categories");
-      const taskObjs = await getData("tasks");
-      setCategories(categoryObjs);
-      setTasks(taskObjs);
-    } catch (error) {
-      console.log(error);
-    }
-  }, []);
 
   return (
     <Wrapper>

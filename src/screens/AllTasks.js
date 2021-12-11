@@ -13,11 +13,13 @@ import TopBar from "../components/common/TopBar";
 import Dropdown from "../components/common/Dropdown";
 import TaskItem from "../components/task/TaskItem";
 import Footer from "../components/common/Footer";
+import useGetData from "../hooks/useGetData";
 
 const AllTasks = ({ navigation }) => {
+  const {categories, tasks, setCategories, setTasks, getDataFirst} = useGetData();
+  useEffect(getDataFirst, []);
+  
   const ref = useRef(null);
-  const [tasks, setTasks] = useState(null);
-  const [categories, setCategories] = useState(null);
   const [refresh, setRefresh] = useState(false);
   const [sorting, setSorting] = useState("added");
   const [isSelecting, setIsSelecting] = useState(false);
