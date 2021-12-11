@@ -8,10 +8,13 @@ import DraggableFlatList, {
 
 import TaskItem from "./TaskItem";
 import CategoryBar from "../category/CategoryBar";
+import ImageDialog from "./ImageDialog";
 
 const HomeTasks = ({ navigation, categories, selectedDate, isSelecting }) => {
   const ref = useRef(null);
   const [refresh, setRefresh] = useState(true);
+  const [modalVisible, setModalVisible] = useState(false);
+  const [imagePath, setImagePath] = useState(null);
 
   const sortTasks = (category) => {
     const sorting = category.sorting;
@@ -86,6 +89,9 @@ const HomeTasks = ({ navigation, categories, selectedDate, isSelecting }) => {
                 sorting={null}
                 isSelecting={isSelecting}
                 navigation={navigation}
+                modalVisible={modalVisible}
+                setModalVisible={setModalVisible}
+                setImagePath={setImagePath}
               />
             )}
           </ShadowDecorator>
@@ -96,6 +102,11 @@ const HomeTasks = ({ navigation, categories, selectedDate, isSelecting }) => {
 
   return categories.map((category) => (
     <StyledView key={Date.now() + category.id}>
+      <ImageDialog
+        modalVisible={modalVisible}
+        imagePath={imagePath}
+        setModalVisible={setModalVisible}
+      />
       <DraggableFlatList
         ListHeaderComponent={
           <CategoryBar

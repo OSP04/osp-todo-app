@@ -4,7 +4,6 @@ import { Modal } from "react-native";
 import { theme } from "../../theme";
 
 const ImageDialog = ({ modalVisible, imagePath, setModalVisible }) => {
-  //   console.log(imagePath);
   return (
     <Modal transparent={true} visible={modalVisible} animationType="fade">
       <StyledView>
