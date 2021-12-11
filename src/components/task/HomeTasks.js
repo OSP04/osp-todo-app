@@ -85,6 +85,7 @@ const HomeTasks = ({ navigation, categories, selectedDate, isSelecting }) => {
                 item={item}
                 sorting={null}
                 isSelecting={isSelecting}
+                navigation={navigation}
               />
             )}
           </ShadowDecorator>

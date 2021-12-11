@@ -68,7 +68,7 @@ markingDates.forEach((day) => {
   };
 });
 
-const CalendarScreen = (navigation) => {
+const CalendarScreen = ({navigation}) => {
   console.log(markingDates);
   return (
     <View style={{ paddingtop: 50, flex: 1 }}>
@@ -88,9 +88,8 @@ const CalendarScreen = (navigation) => {
         // Enable or disable vertical scroll indicator. Default = false
         showScrollIndicator={true}
         onDayPress={(day) => {
-          navigation.navigate("Home");
+          navigation.navigate("Home", {day});
           //해당 날짜의 메인으로 이동
-          console.log("selected day", day);
         }}
         markedDates={mark}
       />

@@ -32,6 +32,7 @@ const Home = ({ navigation, route }) => {
             categories={categories}
             navigation={navigation}
             isSelecting={isSelecting}
+            route={route}
           />
         )}
       </Body>

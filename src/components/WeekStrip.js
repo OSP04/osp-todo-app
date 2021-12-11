@@ -12,10 +12,21 @@ const WeekStrip = ({
   categories,
   navigation,
   isSelecting,
+  route
 }) => {
   const [markedDates, setMarkedDates] = useState(null);
   const [year, setYear] = useState(new Date().getFullYear());
   const [selectedDate, setSelectedDate] = useState(new Date());
+  const [refresh, setRefresh] = useState(true);
+
+  useEffect(() => {
+    if (route.params) {
+      const {day} = route.params;
+      const date = new Date(day.timestamp);
+      setSelectedDate(date);
+      setRefresh(current => !current);
+    }
+  }, [route.params]);
 
   useEffect(() => markDate(), [tasks, categories]);
 
@@ -29,7 +40,7 @@ const WeekStrip = ({
             {
               color: categories[i].color,
             },
-          ],
+          ], 
         });
       }
     }
@@ -79,6 +90,7 @@ const WeekStrip = ({
         tasks={tasks}
         setTasks={setTasks}
         categories={categories}
+        tasks={tasks}
         selectedDate={selectedDate}
         navigation={navigation}
         isSelecting={isSelecting}

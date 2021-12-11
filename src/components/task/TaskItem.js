@@ -8,7 +8,7 @@ import { theme } from "../../theme";
 import { images } from "../../images";
 import IconButton from "../common/IconButton";
 
-const TaskItem = ({ item, drag, isSelecting }) => {
+const TaskItem = ({ item, drag, isSelecting, navigation }) => {
   const [isCompleted, setIsCompleted] = useState(item.complete);
   const [refresh, setRefresh] = useState(false);
 
@@ -51,7 +51,7 @@ const TaskItem = ({ item, drag, isSelecting }) => {
         </LeftItems>
         <RightItems>
           <TaskImage source={{ uri: item.image }} />
-          <IconButton type={images.edit} />
+          <IconButton type={images.edit} onPressOut={() => navigation.navigate("EditScreen", {item})} />
         </RightItems>
       </Animated.View>
     </Touchable>
