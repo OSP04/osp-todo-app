@@ -1,5 +1,12 @@
 import React from "react";
-import { Modal, StyleSheet, View, Text, Pressable } from "react-native";
+import {
+  Modal,
+  StyleSheet,
+  View,
+  Text,
+  Pressable,
+  KeyboardAvoidingView,
+} from "react-native";
 import { Entypo } from "@expo/vector-icons";
 
 const CommonModal = ({
@@ -12,7 +19,7 @@ const CommonModal = ({
   return (
     <>
       {showModal ? (
-        <View>
+        <KeyboardAvoidingView enabled={false}>
           <Modal
             animationType="fade"
             transparent={true}
@@ -33,7 +40,7 @@ const CommonModal = ({
               </View>
             </View>
           </Modal>
-        </View>
+        </KeyboardAvoidingView>
       ) : null}
     </>
   );
