@@ -51,7 +51,6 @@ const StyledView = styled.View`
   align-items: center;
   justify-content: space-between;
   margin-bottom: 10px;
-  elevation: 1;
 `;
 
 const Category = styled.View`
