@@ -33,7 +33,7 @@ const HomeTasks = ({ navigation, categories, selectedDate, isSelecting }) => {
 
       // Get due dates
       for (let i = 0; i < dueTasks.length; i++) {
-        dueDates[i] = dueTasks[i].due.getTime();
+        dueDates[i] = new Date(dueTasks[i].due).getTime();
       }
       // Sort dueTasks in the order of the deadline
       for (let i = 0; i < dueDates.length - 1; i++) {
