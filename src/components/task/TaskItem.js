@@ -14,7 +14,6 @@ const TaskItem = ({
   drag,
   isSelecting,
   navigation,
-  modalVisible,
   setModalVisible,
   setImagePath,
 }) => {
