@@ -10,6 +10,7 @@ import AddCategory from "../screens/AddCategory";
 import { storeData } from "../../src/db";
 import BackButton from "../components/common/BackButton";
 import AppLoading from "expo-app-loading";
+import { FlatList } from "react-native-gesture-handler";
 
 const AllCategory = ({ navigation }) => {
   const width = Dimensions.get("window").width;
@@ -74,11 +75,22 @@ const AllCategory = ({ navigation }) => {
     setRefresh((current) => setRefresh(!current));
   };
 
+  const renderItem = ({item, index}) => {
+      return (
+        <Categories
+        key={index}
+        item={item}
+        doRefresh={doRefresh}
+        navigation={navigation}
+      />
+      )
+  }
   return isReady ? (
+    <FlatList style={{backgroundColor: theme.background}}
+    ListHeaderComponent={
     <Wrapper>
-      <StyledBar barStyle="default" />
+    <StyledBar barStyle="default" />
       <StyledView width={width - 20}>
-        <StyledText>Category</StyledText>
         <IconButton
           type={images.add}
           onPressOut={() => {
@@ -86,26 +98,19 @@ const AllCategory = ({ navigation }) => {
           }}
         />
         <AddCategory
-          state={state}
-          value={newCategory}
-          onCancel={_onPressCancel}
-          setColor={setColor}
-          onChangeText={_handleTextChange}
-          onConfirm={addCategory}
+            state={state}
+            value={newCategory}
+            onCancel={_onPressCancel}
+            setColor={setColor}
+            onChangeText={_handleTextChange}
+            onConfirm={addCategory}
         />
-      </StyledView>
-      <StyledScroll nestedScrollEnabled={true}>
-        {categories != null &&
-          Object.values(categories).map((item) => (
-            <Categories
-              key={item.id}
-              item={item}
-              doRefresh={doRefresh}
-              navigation={navigation}
-            />
-          ))}
-      </StyledScroll>
-    </Wrapper>
+    </StyledView>
+</Wrapper>
+    }
+    data={categories}
+    renderItem={renderItem}
+    />
   ) : (
     <AppLoading
       startAsync={_loadCategories}

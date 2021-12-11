@@ -7,6 +7,7 @@ const SearchedTask = ({
   index,
   text,
   category,
+  categoryObj,
   date,
   due,
   navigation,
@@ -14,7 +15,13 @@ const SearchedTask = ({
   return (
     <TouchableOpacity
       style={{ marginRight: 10, marginTop: 17 }}
-      onPress={() => navigation.navigate("EditScreen", { task })}
+      onPress={() =>
+        navigation.navigate("EditScreen", {
+          selectedTask: task,
+          category: categoryObj,
+          isAddPressed: true,
+        })
+      }
     >
       <Card>
         <Card.Content>

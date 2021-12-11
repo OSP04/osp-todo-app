@@ -15,11 +15,14 @@ function useSearchTask(query) {
   const [searchQuery, setSearchQuery] = useState(query);
   const [filteredTasks, setFilteredTasks] = useState([]);
   const [tasks, setTasks] = useState(null);
+  const [categories, setCategories] = useState(null);
 
   useEffect(async () => {
     try {
       const taskObjs = await getData("tasks");
+      const categoryObjs = await getData("categories");
       setTasks(taskObjs);
+      setCategories(categoryObjs);
     } catch (error) {
       console.log(error);
     }
@@ -40,7 +43,14 @@ function useSearchTask(query) {
     filterTasks();
   }, [searchQuery]);
 
-  console.log(filteredTasks);
+  const findCategory = (task) => {
+    const categoryTitle = task.category;
+    const category = categories.find(
+      (element) => element.title === categoryTitle
+    );
+
+    return category;
+  };
 
   const searchedTask = filteredTasks.map((task, index) => (
     <SearchedTask
@@ -48,6 +58,7 @@ function useSearchTask(query) {
       key={task.created}
       index={index}
       text={task.text}
+      categoryObj={findCategory(task)}
       category={task.category}
       date={task.date.split("T")[0]}
       due={task.due && task.due.split("T")[0]}
