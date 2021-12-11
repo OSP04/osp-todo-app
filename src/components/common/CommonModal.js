@@ -7,6 +7,7 @@ import {
   Pressable,
   KeyboardAvoidingView,
   SafeAreaView,
+  StatusBar,
 } from "react-native";
 import { Entypo } from "@expo/vector-icons";
 
