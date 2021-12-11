@@ -102,14 +102,14 @@ const EditScreen = ({ route, navigation }) => {
           <EditButtons selectedTask={selectedTask} goHome={goHome} />
         </TopHeader>
         <View style={styles.list}>
-          <ScrollView keyboardShouldPersistTaps="always">
+          <KeyboardAwareScrollView keyboardShouldPersistTaps="always">
             <EditTodoTitle />
             <ShowCategory />
             <EditStartDate />
             <EditDueDate />
             <EditLocation />
             <EditMemo />
-          </ScrollView>
+          </KeyboardAwareScrollView>
         </View>
       </Background>
     </EditTaskContext.Provider>
