@@ -6,9 +6,7 @@ import DraggableFlatList, {
   OpacityDecorator,
 } from "react-native-draggable-flatlist";
 
-import { images } from "../images";
 import { theme } from "../theme";
-import TopBar from "../components/common/TopBar";
 import Dropdown from "../components/common/Dropdown";
 import TaskItem from "../components/task/TaskItem";
 import Footer from "../components/common/Footer";
@@ -72,9 +70,11 @@ const AllTasks = ({ navigation }) => {
           <ShadowDecorator>
             <TaskItem
               item={item}
+              categories={categories}
               drag={drag}
               sorting={sorting}
               isSelecting={isSelecting}
+              navigation={navigation}
               modalVisible={modalVisible}
               setModalVisible={setModalVisible}
               setImagePath={setImagePath}
