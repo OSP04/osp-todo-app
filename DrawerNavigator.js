@@ -7,7 +7,7 @@ import AllCategory from "./src/screens/AllCategory";
 import SearchScreen from "./src/screens/SearchScreen";
 import { Image, StyleSheet } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
-import { Text } from "react-native";
+import { View } from "react-native";
 import IconButton from "./src/components/common/IconButton";
 import { images } from "./src/images";
 import { DrawerActions } from "@react-navigation/native";
@@ -43,6 +43,34 @@ const DrawerNavigator = ({ navigation }) => {
           drawerLabel: "Home",
           headerTitle: () => (
             <Image source={require("./assets/logo.png")} style={styles.image} />
+          ),
+          headerRight: () => (
+            <RightContainer>
+              <TouchableOpacity
+                onPress={() =>
+                  navigation.dispatch(DrawerActions.jumpTo("SearchScreen"))
+                }
+              >
+                <IconButton
+                  type={images.search}
+                  size={32}
+                  color="black"
+                  style={styles.menu}
+                />
+              </TouchableOpacity>
+              <TouchableOpacity
+                onPress={() =>
+                  navigation.dispatch(DrawerActions.toggleDrawer())
+                }
+              >
+                <IconButton
+                  type={images.menu}
+                  size={32}
+                  color="black"
+                  style={styles.menu}
+                />
+              </TouchableOpacity>
+            </RightContainer>
           ),
         }}
       />
@@ -105,6 +133,34 @@ const DrawerNavigator = ({ navigation }) => {
               />
             </TouchableOpacity>
           ),
+          headerRight: () => (
+            <RightContainer>
+              <TouchableOpacity
+                onPress={() =>
+                  navigation.dispatch(DrawerActions.jumpTo("SearchScreen"))
+                }
+              >
+                <IconButton
+                  type={images.search}
+                  size={32}
+                  color="black"
+                  style={styles.menu}
+                />
+              </TouchableOpacity>
+              <TouchableOpacity
+                onPress={() =>
+                  navigation.dispatch(DrawerActions.toggleDrawer())
+                }
+              >
+                <IconButton
+                  type={images.menu}
+                  size={32}
+                  color="black"
+                  style={styles.menu}
+                />
+              </TouchableOpacity>
+            </RightContainer>
+          ),
         }}
       />
 
@@ -139,6 +195,11 @@ const styles = StyleSheet.create({
   },
 });
 const StyledText = styled.Text`
+  font-weight: bold;
+  font-size: 24px;
+`;
+const RightContainer = styled.View`
+  flex-direction: row;
   font-weight: bold;
   font-size: 24px;
 `;
