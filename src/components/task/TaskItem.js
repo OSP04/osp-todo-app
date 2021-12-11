@@ -60,7 +60,9 @@ const TaskItem = ({
           </StyledText>
         </LeftItems>
         <RightItems>
-          <TaskImage path={item.image} setModalVisible={setModalVisible} />
+          {item.image && (
+            <TaskImage path={item.image} setModalVisible={setModalVisible} />
+          )}
           <IconButton
             type={images.edit}
             onPressOut={() => navigation.navigate("EditScreen", { item })}
