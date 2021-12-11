@@ -1,5 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { StyleSheet, View, Alert, Pressable, Text } from "react-native";
+import {
+  StyleSheet,
+  View,
+  Alert,
+  Pressable,
+  Text,
+  ScrollView,
+} from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
 import { theme } from "../theme";
@@ -94,14 +101,14 @@ const EditScreen = ({ route, navigation }) => {
           <EditButtons selectedTask={selectedTask} goHome={goHome} />
         </TopHeader>
         <View style={styles.list}>
-          <KeyboardAwareScrollView keyboardShouldPersistTaps="always">
+          <ScrollView keyboardShouldPersistTaps="always">
             <EditTodoTitle />
             <ShowCategory />
             <EditStartDate />
             <EditDueDate />
             <EditLocation />
             <EditMemo />
-          </KeyboardAwareScrollView>
+          </ScrollView>
         </View>
       </Background>
     </EditTaskContext.Provider>
