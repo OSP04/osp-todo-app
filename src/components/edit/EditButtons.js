@@ -88,7 +88,8 @@ const EditButtons = ({ selectedTask, goHome }) => {
         editingCategory,
         editingCategory.tasks,
         task,
-        editingCategory.id
+        editingCategory.id,
+        isAddPressed
       );
       goHome();
     }

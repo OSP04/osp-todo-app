@@ -24,7 +24,7 @@ const Categories = ({ item, doRefresh }) => {
       let dueDates = [];
 
       for (let i = 0; i < dueTask.length; i++) {
-        dueDates[i] = dueTask[i].due.getTime();
+        dueDates[i] = dueTask[i].due;
       }
       for (let i = 0; i < dueDates.length - 1; i++) {
         let index = i;
