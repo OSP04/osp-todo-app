@@ -6,7 +6,6 @@ import DraggableFlatList, {
   OpacityDecorator,
 } from "react-native-draggable-flatlist";
 
-import { getData } from "../db";
 import { images } from "../images";
 import { theme } from "../theme";
 import TopBar from "../components/common/TopBar";
@@ -18,22 +17,11 @@ import useGetData from "../hooks/useGetData";
 const AllTasks = ({ navigation }) => {
   const {categories, tasks, setCategories, setTasks, getDataFirst} = useGetData();
   useEffect(getDataFirst, []);
-  
+
   const ref = useRef(null);
   const [refresh, setRefresh] = useState(false);
   const [sorting, setSorting] = useState("added");
   const [isSelecting, setIsSelecting] = useState(false);
-
-  useEffect(async () => {
-    try {
-      const categoryObjs = await getData("categories");
-      const taskObjs = await getData("tasks");
-      setCategories(categoryObjs);
-      setTasks(taskObjs);
-    } catch (error) {
-      console.log(error);
-    }
-  }, []);
 
   const sortTasks = () => {
     const _tasks = tasks;
