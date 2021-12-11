@@ -12,6 +12,9 @@ import IconButton from "./src/components/common/IconButton";
 import { images } from "./src/images";
 import { DrawerActions } from "@react-navigation/native";
 import styled from "styled-components/native";
+import AddCategory from "./src/screens/AddCategory";
+import { CommonActions } from "@react-navigation/native";
+
 const Drawer = createDrawerNavigator();
 
 const DrawerNavigator = ({ navigation }) => {
@@ -25,12 +28,14 @@ const DrawerNavigator = ({ navigation }) => {
           <TouchableOpacity
             onPress={() => navigation.dispatch(DrawerActions.toggleDrawer())}
           >
-            <IconButton
-              type={images.menu}
-              size={32}
-              color="black"
-              style={styles.menu}
-            />
+            <MenuButton>
+              <IconButton
+                type={images.menu}
+                size={32}
+                color="black"
+                style={styles.menu}
+              />
+            </MenuButton>
           </TouchableOpacity>
         ),
         headerLeft: () => <TouchableOpacity></TouchableOpacity>,
@@ -51,24 +56,29 @@ const DrawerNavigator = ({ navigation }) => {
                   navigation.dispatch(DrawerActions.jumpTo("SearchScreen"))
                 }
               >
-                <IconButton
-                  type={images.search}
-                  size={32}
-                  color="black"
-                  style={styles.menu}
-                />
+                <SearchButton>
+                  <IconButton
+                    type={images.search}
+                    size={32}
+                    color="black"
+                    style={styles.menu}
+                  />
+                </SearchButton>
               </TouchableOpacity>
+
               <TouchableOpacity
                 onPress={() =>
                   navigation.dispatch(DrawerActions.toggleDrawer())
                 }
               >
-                <IconButton
-                  type={images.menu}
-                  size={32}
-                  color="black"
-                  style={styles.menu}
-                />
+                <MenuButton>
+                  <IconButton
+                    type={images.menu}
+                    size={32}
+                    color="black"
+                    style={styles.menu}
+                  />
+                </MenuButton>
               </TouchableOpacity>
             </RightContainer>
           ),
@@ -125,12 +135,16 @@ const DrawerNavigator = ({ navigation }) => {
             <TouchableOpacity
               onPress={() => navigation.dispatch(DrawerActions.jumpTo("Home"))}
             >
-              <IconButton
-                type={images.back}
-                size={32}
-                color="black"
-                style={styles.menu}
-              />
+              <RightContainer>
+                <MenuButton>
+                  <IconButton
+                    type={images.back}
+                    size={32}
+                    color="black"
+                    style={styles.menu}
+                  />
+                </MenuButton>
+              </RightContainer>
             </TouchableOpacity>
           ),
           headerRight: () => (
@@ -140,24 +154,29 @@ const DrawerNavigator = ({ navigation }) => {
                   navigation.dispatch(DrawerActions.jumpTo("SearchScreen"))
                 }
               >
-                <IconButton
-                  type={images.search}
-                  size={32}
-                  color="black"
-                  style={styles.menu}
-                />
+                <SearchButton>
+                  <IconButton
+                    type={images.search}
+                    size={32}
+                    color="black"
+                    style={styles.menu}
+                  />
+                </SearchButton>
               </TouchableOpacity>
+
               <TouchableOpacity
                 onPress={() =>
                   navigation.dispatch(DrawerActions.toggleDrawer())
                 }
               >
-                <IconButton
-                  type={images.menu}
-                  size={32}
-                  color="black"
-                  style={styles.menu}
-                />
+                <MenuButton>
+                  <IconButton
+                    type={images.menu}
+                    size={32}
+                    color="black"
+                    style={styles.menu}
+                  />
+                </MenuButton>
               </TouchableOpacity>
             </RightContainer>
           ),
@@ -182,6 +201,39 @@ const DrawerNavigator = ({ navigation }) => {
               />
             </TouchableOpacity>
           ),
+          headerRight: () => (
+            <RightContainer>
+              {/* <TouchableOpacity
+                onPress={() =>
+                  navigation.dispatch(CommonActions.navigate("AddCategory"))
+                }
+              >
+                <SearchButton>
+                  <IconButton
+                    type={images.add}
+                    size={32}
+                    color="black"
+                    style={styles.menu}
+                  />
+                </SearchButton>
+              </TouchableOpacity> */}
+
+              <TouchableOpacity
+                onPress={() =>
+                  navigation.dispatch(DrawerActions.toggleDrawer())
+                }
+              >
+                <MenuButton>
+                  <IconButton
+                    type={images.menu}
+                    size={32}
+                    color="black"
+                    style={styles.menu}
+                  />
+                </MenuButton>
+              </TouchableOpacity>
+            </RightContainer>
+          ),
         }}
       />
     </Drawer.Navigator>
@@ -200,7 +252,11 @@ const StyledText = styled.Text`
 `;
 const RightContainer = styled.View`
   flex-direction: row;
-  font-weight: bold;
-  font-size: 24px;
+`;
+const MenuButton = styled.View`
+  margin-right: 10px;
+`;
+const SearchButton = styled.View`
+  margin-right: 10px;
 `;
 export default DrawerNavigator;
