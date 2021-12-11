@@ -10,6 +10,7 @@ const ShowCateTask = ({ item, doRefresh }) => {
   const width = Dimensions.get("window").width;
 
   const toggleItem = () => {
+    const currentTasks = Object.assign({}, item);
     item.complete = !item.complete;
     doRefresh();
   };

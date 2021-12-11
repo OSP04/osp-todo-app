@@ -8,7 +8,7 @@ const AddCategory = ({ state, value, onChangeText, setColor, onConfirm, onCancel
 
     return (
         <Modal
-            transparent={true} visible={state}>
+            transparent={true} visible={state} animationType="fade">
             <ModalView>
                 <ModalInnerView>
                     <StyledText>Add category</StyledText>

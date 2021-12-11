@@ -21,10 +21,6 @@ const Achievement = ({ navigation }) => {
   return (
     <Wrapper>
       <StyledBar barStyle="default" />
-      <StyledView width={width - 20}>
-        <StyledText>Achievement</StyledText>
-        <View width={25} />
-      </StyledView>
 
       <MenuBar
         stateCategory={stateCategory}
