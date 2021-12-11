@@ -4,16 +4,20 @@ import {
   KeyboardAvoidingView,
   TouchableWithoutFeedback,
   Keyboard,
-  SafeAreaView,
+  View,
+  Platform,
 } from "react-native";
 import { theme } from "../../theme";
 
 export default function Background({ type, children }) {
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-      <SafeAreaView style={type === "pre" ? styles.pre : styles.main}>
+      <KeyboardAvoidingView
+        style={type === "pre" ? styles.pre : styles.main}
+        behavior={"padding"}
+      >
         {children}
-      </SafeAreaView>
+      </KeyboardAvoidingView>
     </TouchableWithoutFeedback>
   );
 }
