@@ -24,6 +24,7 @@ const TaskItem = ({
   const toggleItem = () => {
     item.complete = !item.complete;
     setIsCompleted(item.complete);
+    // Store completed task
   };
 
   const returnIcon = () => {
