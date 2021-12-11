@@ -91,7 +91,6 @@ const AllCategory = ({ navigation }) => {
     <Wrapper>
     <StyledBar barStyle="default" />
       <StyledView width={width - 20}>
-        <StyledText>Category</StyledText>
         <IconButton
           type={images.add}
           onPressOut={() => {
