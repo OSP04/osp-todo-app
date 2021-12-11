@@ -61,7 +61,7 @@ const DrawerNavigator = ({ navigation }) => {
                     type={images.search}
                     size={32}
                     color="black"
-                    style={styles.menu}
+                    style={styles.search}
                   />
                 </SearchButton>
               </TouchableOpacity>
@@ -99,7 +99,7 @@ const DrawerNavigator = ({ navigation }) => {
                 type={images.back}
                 size={32}
                 color="black"
-                style={styles.menu}
+                style={styles.back}
               />
             </TouchableOpacity>
           ),
@@ -119,7 +119,7 @@ const DrawerNavigator = ({ navigation }) => {
                 type={images.back}
                 size={32}
                 color="black"
-                style={styles.menu}
+                style={styles.back}
               />
             </TouchableOpacity>
           ),
@@ -141,7 +141,7 @@ const DrawerNavigator = ({ navigation }) => {
                     type={images.back}
                     size={32}
                     color="black"
-                    style={styles.menu}
+                    style={styles.back}
                   />
                 </MenuButton>
               </RightContainer>
@@ -159,7 +159,7 @@ const DrawerNavigator = ({ navigation }) => {
                     type={images.search}
                     size={32}
                     color="black"
-                    style={styles.menu}
+                    style={styles.search}
                   />
                 </SearchButton>
               </TouchableOpacity>
@@ -197,7 +197,7 @@ const DrawerNavigator = ({ navigation }) => {
                 type={images.back}
                 size={32}
                 color="black"
-                style={styles.menu}
+                style={styles.back}
               />
             </TouchableOpacity>
           ),
@@ -245,6 +245,9 @@ const styles = StyleSheet.create({
     height: 40,
     marginBottom: 8,
   },
+  menu: { width: 40, height: 40 },
+  search: { width: 40, height: 40 },
+  back: { width: 40, height: 40 },
 });
 const StyledText = styled.Text`
   font-weight: bold;
