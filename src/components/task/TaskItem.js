@@ -11,6 +11,7 @@ import TaskImage from "./TaskImage";
 
 const TaskItem = ({
   item,
+  categories,
   drag,
   isSelecting,
   navigation,
@@ -35,6 +36,15 @@ const TaskItem = ({
       item.selected = !item.selected;
       setRefresh((current) => !current);
     }
+  };
+
+  const findCategory = (item) => {
+    const categoryTitle = item.category;
+    const category = categories.find(
+      (element) => element.title === categoryTitle
+    );
+    console.log(category);
+    return category;
   };
 
   const { isActive } = useOnCellActiveAnimation();
@@ -68,7 +78,14 @@ const TaskItem = ({
           )}
           <IconButton
             type={images.edit}
-            onPressOut={() => navigation.navigate("EditScreen", { item })}
+            // selectedTask(선택한 task), category(선택한 task가 속한 카테고리 객체), isAddPressed(추가인지 편집인지 구분, 새로 추가면 true 편집이면 false)
+            onPressOut={() =>
+              navigation.navigate("EditScreen", {
+                selectedTask: item,
+                category: findCategory(item),
+                isAddPressed: false,
+              })
+            }
           />
         </RightItems>
       </Animated.View>
