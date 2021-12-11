@@ -12,7 +12,7 @@ import { storeData, getData } from "../../db";
 
 const EditButtons = ({ selectedTask, goHome }) => {
   const {
-    editingTitle,
+    editingText,
     editingImage,
     editingDate,
     editingDue,
@@ -60,7 +60,7 @@ const EditButtons = ({ selectedTask, goHome }) => {
   };
 
   const onConfirmPressed = () => {
-    if (editingTitle === "") {
+    if (editingText === "") {
       Alert.alert(
         "Error",
         "No title entered.\nPlease enter the title of Todo.",
@@ -73,9 +73,9 @@ const EditButtons = ({ selectedTask, goHome }) => {
         { cancelable: false }
       );
     } else {
-      const task = {
+      const updatedtask = {
         ...selectedTask,
-        title: editingTitle,
+        text: editingText,
         image: editingImage,
         date: editingDate,
         due: editingDue,
@@ -83,15 +83,15 @@ const EditButtons = ({ selectedTask, goHome }) => {
         memo: editingMemo,
       };
       if (isAddPressed) {
-        addTodo(tasks, task);
+        addTodo(tasks, updatedtask);
       } else {
-        updateTodo(tasks, task, editingId);
+        updateTodo(tasks, updatedtask, editingId);
       }
       updateCategories(
         categories,
         editingCategory,
         editingCategory.tasks,
-        task,
+        updatedtask,
         editingCategory.id,
         isAddPressed
       );

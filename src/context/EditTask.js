@@ -2,7 +2,7 @@ import { createContext } from "react";
 
 const EditTaskContext = createContext({
   editingTask: {},
-  editingTitle: "",
+  editingText: "",
   editingImage: "",
   editingDate: new Date(),
   editingDue: new Date(),
@@ -13,7 +13,7 @@ const EditTaskContext = createContext({
   editingCategory: {},
   categoryArr: [],
   updateTask: () => {},
-  updateTitle: () => {},
+  updateText: () => {},
   updateImage: () => {},
   updateDate: () => {},
   updateDue: () => {},

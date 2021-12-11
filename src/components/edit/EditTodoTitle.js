@@ -6,18 +6,17 @@ import { addTodo, removeTodo, updateTodo } from "../../editTasksFunc";
 import EditTaskContext from "../../context/EditTask";
 
 const EditTodoTitle = () => {
-  const { editingTask, updateTitle } = useContext(EditTaskContext);
+  const { editingTask, updateText } = useContext(EditTaskContext);
 
   const [text, setText] = useState("");
   const [edit, setEdit] = useState(false);
 
   useEffect(() => {
-    if (editingTask.title !== null || editingTask.title !== "") {
-      setText(editingTask.title);
+    if (editingTask.text !== null || editingTask.text !== "") {
+      setText(editingTask.text);
       setEdit(true);
     }
   }, []);
-  const [todo, setTodo] = useState(editingTask);
 
   return (
     <View style={styles.listItem}>
@@ -29,10 +28,10 @@ const EditTodoTitle = () => {
             value={text}
             onChangeText={(text) => {
               setText(text);
-              updateTitle(text);
+              updateText(text);
             }}
             onEndEditing={() => {
-              updateTitle(text);
+              updateText(text);
             }}
           />
         ) : (
