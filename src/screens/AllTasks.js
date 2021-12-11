@@ -13,15 +13,19 @@ import Dropdown from "../components/common/Dropdown";
 import TaskItem from "../components/task/TaskItem";
 import Footer from "../components/common/Footer";
 import useGetData from "../hooks/useGetData";
+import ImageDialog from "../components/task/ImageDialog";
 
 const AllTasks = ({ navigation }) => {
-  const {categories, tasks, setCategories, setTasks, getDataFirst} = useGetData();
+  const { categories, tasks, setCategories, setTasks, getDataFirst } =
+    useGetData();
   useEffect(getDataFirst, []);
 
   const ref = useRef(null);
   const [refresh, setRefresh] = useState(false);
   const [sorting, setSorting] = useState("added");
   const [isSelecting, setIsSelecting] = useState(false);
+  const [modalVisible, setModalVisible] = useState(false);
+  const [imagePath, setImagePath] = useState(null);
 
   const sortTasks = () => {
     const _tasks = tasks;
@@ -71,6 +75,9 @@ const AllTasks = ({ navigation }) => {
               drag={drag}
               sorting={sorting}
               isSelecting={isSelecting}
+              modalVisible={modalVisible}
+              setModalVisible={setModalVisible}
+              setImagePath={setImagePath}
             />
           </ShadowDecorator>
         </OpacityDecorator>
@@ -107,6 +114,11 @@ const AllTasks = ({ navigation }) => {
           setSorting={setSorting}
         />
       </StyledView>
+      <ImageDialog
+        modalVisible={modalVisible}
+        imagePath={imagePath}
+        setModalVisible={setModalVisible}
+      />
       {tasks && (
         <Tasks>
           <DraggableFlatList

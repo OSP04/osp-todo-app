@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components/native";
 import Animated from "react-native-reanimated";
 import { StyleSheet } from "react-native";
@@ -7,10 +7,20 @@ import { useOnCellActiveAnimation } from "react-native-draggable-flatlist";
 import { theme } from "../../theme";
 import { images } from "../../images";
 import IconButton from "../common/IconButton";
+import TaskImage from "./TaskImage";
 
-const TaskItem = ({ item, drag, isSelecting, navigation }) => {
+const TaskItem = ({
+  item,
+  drag,
+  isSelecting,
+  navigation,
+  setModalVisible,
+  setImagePath,
+}) => {
   const [isCompleted, setIsCompleted] = useState(item.complete);
   const [refresh, setRefresh] = useState(false);
+
+  useEffect(() => setImagePath(item.image), [item.image]);
 
   const toggleItem = () => {
     item.complete = !item.complete;
@@ -50,7 +60,7 @@ const TaskItem = ({ item, drag, isSelecting, navigation }) => {
           </StyledText>
         </LeftItems>
         <RightItems>
-          <TaskImage source={{ uri: item.image }} />
+          <TaskImage path={item.image} setModalVisible={setModalVisible} />
           <IconButton
             type={images.edit}
             onPressOut={() => navigation.navigate("EditScreen", { item })}
@@ -89,12 +99,6 @@ const TaskText = styled.Text``;
 const DueDate = styled.Text`
   color: ${theme.secondary};
   font-size: 12px;
-`;
-
-const TaskImage = styled.Image`
-  width: 25px;
-  height: 25px;
-  margin-right: 15px;
 `;
 
 const LeftItems = styled.View`
