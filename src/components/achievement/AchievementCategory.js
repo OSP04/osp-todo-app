@@ -6,7 +6,7 @@ import { theme } from "../../theme";
 import DoneCategory from "../achievement/DoneCategory";
 import AppLoading from "expo-app-loading";
 
-const AchievementCategory = ({doRefresh}) => {
+const AchievementCategory = () => {
   const width = Dimensions.get("window").width;
   const [isReady, setIsReady] = useState(false);
 
