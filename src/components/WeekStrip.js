@@ -24,6 +24,7 @@ const WeekStrip = ({
       const {day} = route.params;
       const date = new Date(day.timestamp);
       setSelectedDate(date);
+      setYear(day.year);
       setRefresh(current => !current);
     }
   }, [route.params]);
