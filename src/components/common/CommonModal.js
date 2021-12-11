@@ -1,5 +1,14 @@
 import React from "react";
-import { Modal, StyleSheet, View, Text, Pressable } from "react-native";
+import {
+  Modal,
+  StyleSheet,
+  View,
+  Text,
+  Pressable,
+  KeyboardAvoidingView,
+  SafeAreaView,
+  StatusBar,
+} from "react-native";
 import { Entypo } from "@expo/vector-icons";
 
 const CommonModal = ({
@@ -12,28 +21,32 @@ const CommonModal = ({
   return (
     <>
       {showModal ? (
-        <View>
-          <Modal
-            animationType="fade"
-            transparent={true}
-            visible={showModal}
-            onRequestClose={() => {
-              setShowModal(!showModal);
-            }}
-          >
-            <View style={styles.centeredView}>
-              <View style={styles.modalView}>
-                <View style={styles.header}>
-                  <Text style={styles.headerText}>{headerText}</Text>
-                  <Pressable onPress={onCancelPressed}>
-                    <Entypo name="cross" size={24} color="black" />
-                  </Pressable>
+        <SafeAreaView>
+          <StatusBar hidden />
+          <KeyboardAvoidingView enabled={false} behavior="position">
+            <Modal
+              animationType="fade"
+              transparent={true}
+              visible={showModal}
+              onRequestClose={() => {
+                setShowModal(!showModal);
+              }}
+              statusBarTranslucent={true}
+            >
+              <View style={styles.centeredView}>
+                <View style={styles.modalView}>
+                  <View style={styles.header}>
+                    <Text style={styles.headerText}>{headerText}</Text>
+                    <Pressable onPress={onCancelPressed}>
+                      <Entypo name="cross" size={24} color="black" />
+                    </Pressable>
+                  </View>
+                  <View style={{ alignItems: "center" }}>{children}</View>
                 </View>
-                <View style={{ alignItems: "center" }}>{children}</View>
               </View>
-            </View>
-          </Modal>
-        </View>
+            </Modal>
+          </KeyboardAvoidingView>
+        </SafeAreaView>
       ) : null}
     </>
   );
