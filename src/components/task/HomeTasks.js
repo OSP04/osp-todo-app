@@ -86,6 +86,7 @@ const HomeTasks = ({ navigation, categories, selectedDate, isSelecting }) => {
               <TaskItem
                 drag={drag}
                 item={item}
+                categories={categories}
                 sorting={null}
                 isSelecting={isSelecting}
                 navigation={navigation}
