@@ -43,7 +43,7 @@ const TaskItem = ({
     const category = categories.find(
       (element) => element.title === categoryTitle
     );
-    console.log(category);
+
     return category;
   };
 
