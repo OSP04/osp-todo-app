@@ -19,6 +19,11 @@ function SearchField() {
         onChangeText={updateSearch}
         value={searchQuery}
         containerStyle={styles.searchBar}
+        lightTheme={true}
+        containerStyle={{ backgroundColor: "#FFFFFF" }}
+        inputContainerStyle={{ backgroundColor: "#ece6ff" }}
+        inputStyle={{ backgroundColor: "#ece6ff" }}
+        leftIconContainerStyle={{ backgroundColor: "#ece6ff" }}
       />
       <TasksContainer style={styles.container}>{searchedTask}</TasksContainer>
     </View>
@@ -27,9 +32,7 @@ function SearchField() {
 export default SearchField;
 
 const styles = StyleSheet.create({
-  searchBar: {
-    top: 38 + getStatusBarHeight(),
-  },
-  container: { top: 50 + getStatusBarHeight() },
+  searchBar: {},
+  container: {},
 });
 const TasksContainer = styled.View``;
