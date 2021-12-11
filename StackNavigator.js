@@ -30,16 +30,16 @@ const StackNavigator2 = () => {
   return (
     <Provider>
       <Stack.Navigator
-        initialRouteName="Home"
+        initialRouteName="Drawer"
         screenOptions={{
           headerShown: false,
         }}
       >
         <Stack.Screen name="CalendarScreen" component={CalendarScreen} />
         <Stack.Screen name="EditScreen" component={EditScreen} />
-        <Stack.Screen name="Home" component={DrawerNavigator} />
-        <Stack.Screen name="OneCategory" component={OneCategory} />
+        <Stack.Screen name="Drawer" component={DrawerNavigator} />
         <Stack.Screen name="Comments" component={Comments} />
+        <Stack.Screen name="OneCategory" component={OneCategory} />
       </Stack.Navigator>
     </Provider>
   );
