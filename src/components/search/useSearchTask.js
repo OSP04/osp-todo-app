@@ -50,7 +50,7 @@ function useSearchTask(query) {
       text={task.text}
       category={task.category}
       date={task.date.split("T")[0]}
-      due={task.due.split("T")[0]}
+      due={task.due && task.due.split("T")[0]}
     />
   ));
 
