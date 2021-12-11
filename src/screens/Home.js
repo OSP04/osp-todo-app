@@ -3,7 +3,6 @@ import styled from "styled-components/native";
 
 import Footer from "../components/common/Footer";
 import WeekStrip from "../components/WeekStrip";
-import TopBar from "../components/common/TopBar";
 import { theme } from "../theme";
 import { images } from "../images";
 import useGetData from "../hooks/useGetData";
@@ -19,12 +18,6 @@ const Home = ({ navigation, route }) => {
   return (
     <Wrapper>
       <StyledBar barStyle="auto" />
-      <TopBar
-        types={[images.search, images.menu]}
-        screens={["SearchScreen", "AllTasks"]}
-        title={null}
-        navigation={navigation}
-      />
       <Body>
         {tasks && categories && (
           <WeekStrip

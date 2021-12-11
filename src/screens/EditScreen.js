@@ -6,6 +6,7 @@ import {
   Pressable,
   Text,
   ScrollView,
+  SafeAreaView,
 } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
@@ -70,7 +71,7 @@ const EditScreen = ({ route, navigation }) => {
   };
 
   const goHome = () => {
-    navigation.navigate("Home");
+    navigation.navigate("Drawer");
   };
 
   return (

@@ -46,12 +46,11 @@ const CategoryBar = ({ selectedDate, category, setRefresh, navigation }) => {
   );
 };
 
-const StyledView = styled.SafeAreaView`
+const StyledView = styled.View`
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
   margin-bottom: 10px;
-  elevation: 100;
 `;
 
 const Category = styled.View`

@@ -5,13 +5,19 @@ import {
   TouchableWithoutFeedback,
   Keyboard,
   View,
+  Platform,
 } from "react-native";
 import { theme } from "../../theme";
 
 export default function Background({ type, children }) {
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-      <View style={type === "pre" ? styles.pre : styles.main}>{children}</View>
+      <KeyboardAvoidingView
+        style={type === "pre" ? styles.pre : styles.main}
+        behavior={"padding"}
+      >
+        {children}
+      </KeyboardAvoidingView>
     </TouchableWithoutFeedback>
   );
 }

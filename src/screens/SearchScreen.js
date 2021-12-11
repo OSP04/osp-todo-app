@@ -6,7 +6,6 @@ import SearchField from "../components/search/SearchField";
 function SearchScreen({ navigation }) {
   return (
     <View>
-      <BackButton onPressOut={() => navigation.goBack()} />
       <SearchField />
     </View>
   );

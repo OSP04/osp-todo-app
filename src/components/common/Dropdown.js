@@ -40,12 +40,12 @@ const Dropdown = ({ category, setRefresh, setSorting }) => {
 
 const styles = StyleSheet.create({
   label: { fontSize: 12 },
-  container: { height: 30, width: 88 },
+  container: { height: 30, width: 88, elevation: 1 },
   text: {
     fontSize: 12,
   },
 });
 
-const StyledView = styled.SafeAreaView``;
+const StyledView = styled.View``;
 
 export default Dropdown;
