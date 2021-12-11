@@ -2,24 +2,28 @@ import React, { useState } from "react";
 import { Dimensions, View } from "react-native";
 
 import styled from "styled-components/native";
-import IconButton from "../components/common/IconButton";
-import { images } from "../../src/images";
 import { theme } from "../../src/theme";
 import AchievementCategory from "../components/achievement/AchievementCategory";
 import MenuBar from "../MenuBar";
 import AchievementDay from "../components/achievement/AchievementDay";
+import BackButton from "../components/common/BackButton";
 
 const Achievement = ({ navigation }) => {
 
     const width = Dimensions.get('window').width;
     const [stateCategory, setStateCategory] = useState(true);
     const [stateDay, setStateDay] = useState(false);
+    const [refresh, setRefresh] = useState(true);
+
+    const doRefresh = () => {
+        setRefresh((current) => setRefresh(!current));
+    };
 
     return (
         <Wrapper>
             <StyledBar barStyle="default" />
             <StyledView width={width - 20}>
-                <IconButton type={images.back} onPress={() => navigation.navigate("Home")} />
+                <BackButton onPressOut={() => navigation.navigate("Home")} />
                 <StyledText>Achievement</StyledText>
                 <View width={25} />
             </StyledView>
@@ -27,7 +31,7 @@ const Achievement = ({ navigation }) => {
             <MenuBar stateCategory={stateCategory} setStateCategory={setStateCategory}
                 stateDay={stateDay} setStateDay={setStateDay} />
 
-            {stateCategory == true ? (<AchievementCategory stateCategory={stateCategory} />)
+            {stateCategory == true ? (<AchievementCategory stateCategory={stateCategory} doRefresh={doRefresh}/>)
                 : <AchievementDay stateDay={stateDay} />}
         </Wrapper>
     );
@@ -37,6 +41,7 @@ const Wrapper = styled.SafeAreaView`
 flex: 1;
 justify-content: flex-start;
 align-items: center;
+background-color: ${theme.background};
 `;
 
 const StyledBar = styled.StatusBar`

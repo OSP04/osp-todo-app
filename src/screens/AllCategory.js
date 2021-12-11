@@ -1,31 +1,29 @@
 import React, { useEffect, useState } from "react";
 import { Dimensions } from "react-native";
-
 import styled from "styled-components/native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import Categories from "../components/category/Categories";
 import IconButton from "../components/common/IconButton";
 import { images } from "../../src/images";
 import { theme } from "../../src/theme";
 import AddCategory from "../screens/AddCategory";
-import { getData, storeData } from "../../src/db";
+import { storeData } from "../../src/db";
+import BackButton from "../components/common/BackButton";
+import AppLoading from "expo-app-loading";
 
 const AllCategory = ({ navigation }) => {
     const width = Dimensions.get("window").width;
     const [state, setState] = useState(false);
     const [color, setColor] = useState(theme.category.red);
     const [refresh, setRefresh] = useState(true);
+    const [isReady, setIsReady] = useState(false);
 
     const [newCategory, setNewCategory] = useState("");
-    const [categories, setCategories] = useState(null);
-
-    useEffect(async () => {
-        try {
-            const categoryObjs = await getData("categories");
-            setCategories(categoryObjs);
-        } catch (error) {
-            console.log(error);
-        }
-    }, []);
+    const [categories, setCategories] = useState([]);
+    const _loadCategories = async () => {
+        const loadedCategories = await AsyncStorage.getItem("categories");
+        setCategories(JSON.parse(loadedCategories || "{}"));
+    };
 
     const addCategory = () => {
         const ID = Date.now().toString();
@@ -56,10 +54,12 @@ const AllCategory = ({ navigation }) => {
         };
         setNewCategory("");
         setColor(theme.category.red);
-        setCategories([...categories, newCategoryObj]);
-        storeData("categories", [...categories, newCategoryObj]);
+        categories.push(newCategoryObj);
+        storeData("categories", [...categories]);
         setState(false);
     };
+
+    console.log(categories);
 
     const _onPressCancel = () => {
         setNewCategory("");
@@ -74,11 +74,11 @@ const AllCategory = ({ navigation }) => {
         setRefresh((current) => setRefresh(!current));
     };
 
-    return (
-        <Wrapper>
+    return ( isReady ?
+        (<Wrapper>
             <StyledBar barStyle="default" />
             <StyledView width={width - 20}>
-                <IconButton type={images.back} onPressOut={() => navigation.navigate("Home")} />
+                <BackButton onPressOut={() => navigation.navigate("Home")} />
                 <StyledText>Category</StyledText>
                 <IconButton
                     type={images.add}
@@ -100,13 +100,18 @@ const AllCategory = ({ navigation }) => {
                     <Categories
                         key={item.id}
                         item={item}
-                        color={color}
                         doRefresh={doRefresh}
                         navigation={navigation}
                     />
                 ))}
             </StyledScroll>
-        </Wrapper>
+        </Wrapper>)
+        : (
+            <AppLoading
+                startAsync={_loadCategories}
+                onFinish={() => setIsReady(true)}
+                onError={console.error}/>
+        )
     );
 };
 
@@ -114,6 +119,7 @@ const Wrapper = styled.SafeAreaView`
   flex: 1;
   justify-content: flex-start;
   align-items: center;
+  background_color: ${theme.background};
 `;
 
 const StyledBar = styled.StatusBar`

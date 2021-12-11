@@ -16,11 +16,15 @@ const ShowTaskOne = ({ item, doRefresh }) => {
         doRefresh();
     };
 
+    const returnIcon = (item) => {
+        return item.complete ? images.complete : images.uncomplete;
+      };
+
     return (
         <StyledView>
             {item.id != null && <TaskView width={width}>
                 <LeftView>
-                    <IconButton type={item.complete ? images.complete : images.uncomplete} onPressOut={toggleItem} />
+                    <IconButton type={returnIcon(item)} onPressOut={toggleItem} />
                     <TaskText style={
                         { textDecorationLine: (item.complete ? "line-through" : "none") }
                     }>{item.text}</TaskText>

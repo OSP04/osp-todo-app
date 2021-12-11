@@ -6,6 +6,7 @@ import SignUpScreen from "./src/screens/SignUpScreen";
 import { Provider } from "react-native-paper";
 import DrawerNavigator from "./DrawerNavigator";
 import CalendarScreen from "./src/screens/CalendarScreen";
+import OneCategory from "./src/screens/OneCategory";
 const Stack = createStackNavigator();
 const StackNavigator = () => {
   return (
@@ -34,6 +35,7 @@ const StackNavigator2 = () => {
       >
         <Stack.Screen name="CalendarScreen" component={CalendarScreen} />
         <Stack.Screen name="Home" component={DrawerNavigator} />
+        <Stack.Screen name="OneCategory" component={OneCategory}/>
       </Stack.Navigator>
     </Provider>
   );

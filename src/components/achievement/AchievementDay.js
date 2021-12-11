@@ -3,6 +3,7 @@ import { Dimensions } from "react-native";
 
 import styled from "styled-components/native";
 import { db } from "../../db";
+import { theme } from "../../theme";
 import DoneDay from "../achievement/DoneDay";
 
 const AchievementDay = () => {
@@ -26,6 +27,7 @@ const Wrapper = styled.SafeAreaView`
 flex: 1;
 justify-content: flex-start;
 align-items: center;
+background-color: ${theme.background};
 `;
 
 const AchievementView = styled.View`

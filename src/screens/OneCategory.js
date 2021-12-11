@@ -1,54 +1,49 @@
-import React from "react";
-import { Dimensions, View, Modal } from "react-native";
+import React, { useState } from "react";
+import { Dimensions, View } from "react-native";
 
 import styled from "styled-components/native";
 import DropButton from "../components/common/DropButton";
-import IconButton from "../components/common/IconButton";
 import ShowTaskOne from "../components/category/ShowTaskOne";
-import { images } from "../images";
 import { theme } from "../theme";
+import BackButton from "../components/common/BackButton";
 
-const OneCategory = ({
-  item,
-  doRefresh,
-  visible,
-  setVisible,
-  setSorting,
-  sortTasks,
-}) => {
+const OneCategory = ({ route, navigation }) => {
+
+  const { item, sortTasks, doRefresh, setSorting } = route.params;
+  const [refresh, setRefresh] = useState(true);
   const width = Dimensions.get("window").width;
+
+  const screenRefresh = () => {
+    setRefresh((current) => setRefresh(!current));
+};
 
   return (
     <Wrapper>
-      <Modal transparent={true} visible={visible}>
-        <ModalView>
           <StyledBar barStyle="default" />
-          <StyledView width={width - 20}>
-            <IconButton
-              type={images.back}
+          <StyledView width={width}>
+            <BackButton
               onPressOut={() => {
-                setVisible(false);
+                doRefresh();
+                navigation.navigate("AllCategory");
               }}
             />
             <StyledText style={{ color: item.color }}>{item.title}</StyledText>
             <View width={25} />
           </StyledView>
-          <StyledView>
+          <StyledView width={width}>
             <StyledText style={{ marginLeft: 10 }}>Tasks</StyledText>
             <DropButton
               setSorting={setSorting}
               category={item}
-              doRefresh={doRefresh}
+              doRefresh={screenRefresh}
             />
           </StyledView>
           <StyledScroll>
             {item.tasks[0] != null &&
               sortTasks(item).map((item) => (
-                <ShowTaskOne key={item.id} item={item} doRefresh={doRefresh} />
+                <ShowTaskOne key={item.id} item={item} doRefresh={screenRefresh} />
               ))}
           </StyledScroll>
-        </ModalView>
-      </Modal>
     </Wrapper>
   );
 };
@@ -57,11 +52,7 @@ const Wrapper = styled.SafeAreaView`
   flex: 1;
   justify-content: flex-start;
   align-items: center;
-`;
-
-const ModalView = styled.View`
   background-color: ${theme.background};
-  flex: 1;
 `;
 
 const StyledBar = styled.StatusBar`
