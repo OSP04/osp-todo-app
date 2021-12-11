@@ -40,7 +40,8 @@ export const db = {
           date: new Date("2021-11-24T03:00:00.000Z"),
           due: new Date("2022-01-05T03:00:00.000Z"),
           category: "Food",
-          image: null,
+          image:
+            "https://images.unsplash.com/photo-1582201942988-13e60e4556ee?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=402&q=80",
           complete: true,
           selected: false,
           created: Date.now(),
@@ -216,7 +217,8 @@ export const db = {
       date: new Date("2021-11-24T03:00:00.000Z"),
       due: new Date("2022-01-05T03:00:00.000Z"),
       category: "Food",
-      image: null,
+      image:
+        "https://images.unsplash.com/photo-1582201942988-13e60e4556ee?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=402&q=80",
       complete: true,
       selected: false,
       created: Date.now(),

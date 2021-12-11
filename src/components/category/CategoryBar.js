@@ -39,14 +39,14 @@ const CategoryBar = ({ selectedDate, category, setRefresh, navigation }) => {
     <StyledView>
       <Category>
         <Title category={category}>{category.title}</Title>
-        <IconButton onPressOut={() => moveToEditScreen()} type={images.add} />
+        <IconButton onPressOut={moveToEditScreen} type={images.add} />
       </Category>
       <Dropdown category={category} setRefresh={setRefresh} />
     </StyledView>
   );
 };
 
-const StyledView = styled.View`
+const StyledView = styled.SafeAreaView`
   flex-direction: row;
   align-items: center;
   justify-content: space-between;

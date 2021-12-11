@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components/native";
 import Animated from "react-native-reanimated";
 import { StyleSheet } from "react-native";
@@ -7,8 +7,17 @@ import { useOnCellActiveAnimation } from "react-native-draggable-flatlist";
 import { theme } from "../../theme";
 import { images } from "../../images";
 import IconButton from "../common/IconButton";
+import TaskImage from "./TaskImage";
 
-const TaskItem = ({ item, drag, isSelecting, setSelectedCategory }) => {
+const TaskItem = ({
+  item,
+  drag,
+  isSelecting,
+  navigation,
+  modalVisible,
+  setModalVisible,
+  setImagePath,
+}) => {
   const [isCompleted, setIsCompleted] = useState(item.complete);
   const [refresh, setRefresh] = useState(false);
 
@@ -22,9 +31,7 @@ const TaskItem = ({ item, drag, isSelecting, setSelectedCategory }) => {
   };
 
   const selectItem = () => {
-    // home에서 isSelecting 이 계속 false
     if (isSelecting) {
-      setSelectedCategory && setSelectedCategory(item.category);
       item.selected = !item.selected;
       setRefresh((current) => !current);
     }
@@ -52,8 +59,17 @@ const TaskItem = ({ item, drag, isSelecting, setSelectedCategory }) => {
           </StyledText>
         </LeftItems>
         <RightItems>
-          <TaskImage source={{ uri: item.image }} />
-          <IconButton type={images.edit} />
+          {item.image && (
+            <TaskImage
+              path={item.image}
+              setModalVisible={setModalVisible}
+              setImagePath={setImagePath}
+            />
+          )}
+          <IconButton
+            type={images.edit}
+            onPressOut={() => navigation.navigate("EditScreen", { item })}
+          />
         </RightItems>
       </Animated.View>
     </Touchable>
@@ -88,12 +104,6 @@ const TaskText = styled.Text``;
 const DueDate = styled.Text`
   color: ${theme.secondary};
   font-size: 12px;
-`;
-
-const TaskImage = styled.Image`
-  width: 25px;
-  height: 25px;
-  margin-right: 15px;
 `;
 
 const LeftItems = styled.View`

@@ -6,29 +6,26 @@ import DraggableFlatList, {
   OpacityDecorator,
 } from "react-native-draggable-flatlist";
 
-import { getData } from "../db";
 import { images } from "../images";
 import { theme } from "../theme";
 import TopBar from "../components/common/TopBar";
 import Dropdown from "../components/common/Dropdown";
 import TaskItem from "../components/task/TaskItem";
 import Footer from "../components/common/Footer";
+import useGetData from "../hooks/useGetData";
+import ImageDialog from "../components/task/ImageDialog";
 
 const AllTasks = ({ navigation }) => {
+  const { categories, tasks, setCategories, setTasks, getDataFirst } =
+    useGetData();
+  useEffect(getDataFirst, []);
+
   const ref = useRef(null);
-  const [tasks, setTasks] = useState(null);
   const [refresh, setRefresh] = useState(false);
   const [sorting, setSorting] = useState("added");
   const [isSelecting, setIsSelecting] = useState(false);
-
-  useEffect(async () => {
-    try {
-      const taskObjs = await getData("tasks");
-      setTasks(taskObjs);
-    } catch (error) {
-      console.log(error);
-    }
-  }, []);
+  const [modalVisible, setModalVisible] = useState(false);
+  const [imagePath, setImagePath] = useState(null);
 
   const sortTasks = () => {
     const _tasks = tasks;
@@ -78,6 +75,9 @@ const AllTasks = ({ navigation }) => {
               drag={drag}
               sorting={sorting}
               isSelecting={isSelecting}
+              modalVisible={modalVisible}
+              setModalVisible={setModalVisible}
+              setImagePath={setImagePath}
             />
           </ShadowDecorator>
         </OpacityDecorator>
@@ -114,6 +114,11 @@ const AllTasks = ({ navigation }) => {
           setSorting={setSorting}
         />
       </StyledView>
+      <ImageDialog
+        modalVisible={modalVisible}
+        imagePath={imagePath}
+        setModalVisible={setModalVisible}
+      />
       {tasks && (
         <Tasks>
           <DraggableFlatList
@@ -136,7 +141,9 @@ const AllTasks = ({ navigation }) => {
         tasks={tasks}
         setTasks={setTasks}
         setRefresh={setRefresh}
-        selectedCategory={null}
+        categories={categories}
+        setCategories={setCategories}
+        where="all"
       />
     </Wrapper>
   );

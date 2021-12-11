@@ -5,34 +5,16 @@ import Footer from "../components/common/Footer";
 import WeekStrip from "../components/WeekStrip";
 import TopBar from "../components/common/TopBar";
 import { theme } from "../theme";
-import { db, getData, storeData } from "../db";
 import { images } from "../images";
+import useGetData from "../hooks/useGetData";
 
 const Home = ({ navigation, route }) => {
-  const [categories, setCategories] = useState(null);
-  const [tasks, setTasks] = useState(null);
+  const { categories, tasks, setCategories, setTasks, getDataFirst } =
+    useGetData();
+  useEffect(getDataFirst, []);
+
   const [isSelecting, setIsSelecting] = useState(false);
-  const [selectedCategory, setSelectedCategory] = useState(null);
-
-  useEffect(async () => {
-    try {
-      storeData("tasks", db.tasks);
-      storeData("categories", db.categories);
-    } catch (error) {
-      console.log(error);
-    }
-  }, []);
-
-  useEffect(async () => {
-    try {
-      const categoryObjs = await getData("categories");
-      const taskObjs = await getData("tasks");
-      setCategories(categoryObjs);
-      setTasks(taskObjs);
-    } catch (error) {
-      console.log(error);
-    }
-  }, []);
+  const [refresh, setRefresh] = useState(false);
 
   return (
     <Wrapper>
@@ -49,21 +31,27 @@ const Home = ({ navigation, route }) => {
             tasks={tasks}
             setTasks={setTasks}
             categories={categories}
-            setSelectedCategory={setSelectedCategory}
             navigation={navigation}
+            isSelecting={isSelecting}
+            route={route}
           />
         )}
       </Body>
-      <Footer
-        navigation={navigation}
-        type={images.comment}
-        screens={["Comments", null]}
-        isSelecting={isSelecting}
-        setIsSelecting={setIsSelecting}
-        tasks={tasks}
-        setTasks={setTasks}
-        selectedCategory={selectedCategory}
-      />
+      {tasks && categories && (
+        <Footer
+          navigation={navigation}
+          type={images.comment}
+          screens={["Comments", null]}
+          isSelecting={isSelecting}
+          setIsSelecting={setIsSelecting}
+          tasks={tasks}
+          setTasks={setTasks}
+          categories={categories}
+          setCategories={setCategories}
+          setRefresh={setRefresh}
+          where="home"
+        />
+      )}
     </Wrapper>
   );
 };

@@ -5,36 +5,35 @@ import CalendarStrip from "react-native-calendar-strip";
 
 import { theme } from "../theme";
 import HomeTasks from "./task/HomeTasks";
+import useSetDate from "../hooks/useSetDate";
 
 const WeekStrip = ({
   tasks,
   setTasks,
   categories,
-  setSelectedCategory,
   navigation,
+  isSelecting,
+  route,
 }) => {
-  const [markedDates, setMarkedDates] = useState(null);
-  const [year, setYear] = useState(new Date().getFullYear());
-  const [selectedDate, setSelectedDate] = useState(new Date());
+  const {
+    markedDates,
+    year,
+    setYear,
+    selectedDate,
+    setSelectedDate,
+    passDate,
+    markDate,
+  } = useSetDate();
+  const [refresh, setRefresh] = useState(true);
 
-  useEffect(() => markDate(), [tasks, categories]);
+  // Get date from CalendarScreen
+  useEffect(() => {
+    passDate(route);
+    setRefresh((current) => !current); // Refresh screen
+  }, [route.params]);
 
-  const markDate = () => {
-    let marked = [];
-    for (let i = 0; i < categories.length; i++) {
-      for (let j = 0; j < categories[i].tasks.length; j++) {
-        marked.push({
-          date: categories[i].tasks[j].date,
-          dots: [
-            {
-              color: categories[i].color,
-            },
-          ],
-        });
-      }
-    }
-    setMarkedDates(marked);
-  };
+  // Mark date having tasks of categories
+  useEffect(() => markDate(categories), [tasks, categories]);
 
   const getYear = (date) => {
     const selectedYear = date.getFullYear();
@@ -79,9 +78,10 @@ const WeekStrip = ({
         tasks={tasks}
         setTasks={setTasks}
         categories={categories}
+        tasks={tasks}
         selectedDate={selectedDate}
-        setSelectedCategory={setSelectedCategory}
         navigation={navigation}
+        isSelecting={isSelecting}
       />
     </StyledView>
   );

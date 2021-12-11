@@ -1,5 +1,4 @@
 import React, { useState, useRef } from "react";
-import { Text } from "react-native";
 import styled from "styled-components/native";
 import DraggableFlatList, {
   ScaleDecorator,
@@ -9,20 +8,13 @@ import DraggableFlatList, {
 
 import TaskItem from "./TaskItem";
 import CategoryBar from "../category/CategoryBar";
-import { storeData } from "../../db";
+import ImageDialog from "./ImageDialog";
 
-const HomeTasks = ({
-  navigation,
-  tasks,
-  setTasks,
-  categories,
-  selectedDate,
-  setSelectedCategory,
-}) => {
+const HomeTasks = ({ navigation, categories, selectedDate, isSelecting }) => {
   const ref = useRef(null);
   const [refresh, setRefresh] = useState(true);
-  const [newTask, setNewTask] = useState("");
-  const [isSelecting, setIsSelecting] = useState(false);
+  const [modalVisible, setModalVisible] = useState(false);
+  const [imagePath, setImagePath] = useState(null);
 
   const sortTasks = (category) => {
     const sorting = category.sorting;
@@ -96,7 +88,10 @@ const HomeTasks = ({
                 item={item}
                 sorting={null}
                 isSelecting={isSelecting}
-                setSelectedCategory={setSelectedCategory}
+                navigation={navigation}
+                modalVisible={modalVisible}
+                setModalVisible={setModalVisible}
+                setImagePath={setImagePath}
               />
             )}
           </ShadowDecorator>
@@ -107,6 +102,11 @@ const HomeTasks = ({
 
   return categories.map((category) => (
     <StyledView key={Date.now() + category.id}>
+      <ImageDialog
+        modalVisible={modalVisible}
+        imagePath={imagePath}
+        setModalVisible={setModalVisible}
+      />
       <DraggableFlatList
         ListHeaderComponent={
           <CategoryBar

@@ -48,7 +48,6 @@ const CalendarScreen = ({ route, navigation }) => {
         onDayPress={(day) => {
           navigation.navigate("Home", { day });
           //해당 날짜의 메인으로 이동
-          console.log("selected day", day);
         }}
         markedDates={mark}
       />
