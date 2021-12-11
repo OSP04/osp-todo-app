@@ -31,7 +31,8 @@
         "googleMaps": {
           "apiKey": "dotenv cross-var foobar %REACT_APP_GOOGLE_API_KEY%"
         }
-      }
+      },
+      "softwareKeyboardLayoutMode": "pan"
     },
 
     "web": {
