@@ -101,12 +101,6 @@ const AllTasks = ({ navigation }) => {
 
   return (
     <Wrapper>
-      <TopBar
-        types={[images.back, images.search]}
-        title="All Tasks"
-        screens={["Home", "SearchScreen"]}
-        navigation={navigation}
-      />
       <StyledView>
         <Dropdown
           category={false}
