@@ -29,11 +29,11 @@ export const updateCategories = (
   id,
   isAddpressed
 ) => {
-  const [categoryTasks, setCategoryTasks] = useState([]);
+  let categoryTasks = [];
   if (isAddpressed) {
-    setCategoryTasks([...taskOfCategory, task]); //편집하고 있던 카테고리 객체 tasks: 배열에 오브젝트 추가
+    categoryTasks = [...taskOfCategory, task]; //편집하고 있던 카테고리 객체 tasks: 배열에 오브젝트 추가
   } else {
-    setCategoryTasks(taskOfCategory.map((e) => (e.id === task.id ? task : e)));
+    categoryTasks = taskOfCategory.map((e) => (e.id === task.id ? task : e));
   }
   const categoryObj = { ...editingCategory, tasks: categoryTasks }; //편집하고 있던 카테고리 객체 tasks: 배열 업테이트
 
