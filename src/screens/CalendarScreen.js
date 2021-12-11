@@ -31,7 +31,7 @@ const CalendarScreen = ({ route, navigation }) => {
   });
 
   return (
-    <View style={{ paddingtop: 50, flex: 1 }}>
+    <View style={{ marginTop: 50, flex: 1 }}>
       <BackButton onPressOut={() => navigation.goBack()} />
       <CalendarList
         current={formatDateObj(selectedDate)}
