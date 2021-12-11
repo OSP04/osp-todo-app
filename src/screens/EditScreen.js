@@ -57,8 +57,8 @@ const EditScreen = ({ route, navigation }) => {
           text: "OK",
           onPress: () => navigation.goBack(),
         },
-        { cancelable: true },
-      ]
+      ],
+      { cancelable: true }
     );
   };
 
