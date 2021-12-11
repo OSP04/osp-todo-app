@@ -1,17 +1,13 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { theme } from "./theme";
 
-const latitudeDelta = 0.004;
-const longitudeDelta = 0.004;
-
 export const db = {
-  // memo 추가해주세요
   categories: [
     {
       id: "5",
       title: "Food",
       color: theme.category.red,
-      isAdding: false, // 삭제
+      isAdding: false,
       sorting: "added",
       tasks: [
         {
@@ -27,11 +23,14 @@ export const db = {
           selected: false,
           created: Date.now(),
           location: {
-            latitude: 37.559285765296,
-            longitude: 126.94568079431,
-            latitudeDelta,
-            longitudeDelta,
+            text: "",
+            region: {},
+            locationData: {
+              mainText: "",
+              address: "",
+            },
           },
+          memo: "",
         },
         {
           id: "3",
@@ -46,11 +45,14 @@ export const db = {
           selected: false,
           created: Date.now(),
           location: {
-            latitude: 37.559285765296,
-            longitude: 126.94568079431,
-            latitudeDelta: 0.004,
-            longitudeDelta: 0.004,
+            text: "",
+            region: {},
+            locationData: {
+              mainText: "",
+              address: "",
+            },
           },
+          memo: "",
         },
         {
           id: "5",
@@ -64,11 +66,14 @@ export const db = {
           selected: false,
           created: Date.now(),
           location: {
-            latitude: 37.559285765296,
-            longitude: 126.94568079431,
-            latitudeDelta: 0.004,
-            longitudeDelta: 0.004,
+            text: "",
+            region: {},
+            locationData: {
+              mainText: "",
+              address: "",
+            },
           },
+          memo: "",
         },
         {
           id: "7",
@@ -82,11 +87,14 @@ export const db = {
           selected: false,
           created: Date.now(),
           location: {
-            latitude: 37.559285765296,
-            longitude: 126.94568079431,
-            latitudeDelta,
-            longitudeDelta,
+            text: "",
+            region: {},
+            locationData: {
+              mainText: "",
+              address: "",
+            },
           },
+          memo: "",
         },
         {
           id: "8",
@@ -100,11 +108,14 @@ export const db = {
           selected: false,
           created: Date.now(),
           location: {
-            latitude: 37.559285765296,
-            longitude: 126.94568079431,
-            latitudeDelta,
-            longitudeDelta,
+            text: "",
+            region: {},
+            locationData: {
+              mainText: "",
+              address: "",
+            },
           },
+          memo: "",
         },
       ],
     },
@@ -128,11 +139,14 @@ export const db = {
           selected: false,
           created: Date.now(),
           location: {
-            latitude: 37.559285765296,
-            longitude: 126.94568079431,
-            latitudeDelta,
-            longitudeDelta,
+            text: "",
+            region: {},
+            locationData: {
+              mainText: "",
+              address: "",
+            },
           },
+          memo: "",
         },
         {
           id: "4",
@@ -146,11 +160,14 @@ export const db = {
           selected: false,
           created: Date.now(),
           location: {
-            latitude: 37.559285765296,
-            longitude: 126.94568079431,
-            latitudeDelta,
-            longitudeDelta,
+            text: "",
+            region: {},
+            locationData: {
+              mainText: "",
+              address: "",
+            },
           },
+          memo: "",
         },
         {
           id: "6",
@@ -164,11 +181,14 @@ export const db = {
           selected: false,
           created: Date.now(),
           location: {
-            latitude: 37.559285765296,
-            longitude: 126.94568079431,
-            latitudeDelta,
-            longitudeDelta,
+            text: "",
+            region: {},
+            locationData: {
+              mainText: "",
+              address: "",
+            },
           },
+          memo: "",
         },
       ],
     },
@@ -188,11 +208,14 @@ export const db = {
       selected: false,
       created: Date.now(),
       location: {
-        latitude: 37.559285765296,
-        longitude: 126.94568079431,
-        latitudeDelta,
-        longitudeDelta,
+        text: "",
+        region: {},
+        locationData: {
+          mainText: "",
+          address: "",
+        },
       },
+      memo: "",
     },
     {
       id: "2",
@@ -205,11 +228,14 @@ export const db = {
       selected: false,
       created: Date.now(),
       location: {
-        latitude: 37.559285765296,
-        longitude: 126.94568079431,
-        latitudeDelta: 0.004,
-        longitudeDelta: 0.004,
+        text: "",
+        region: {},
+        locationData: {
+          mainText: "",
+          address: "",
+        },
       },
+      memo: "",
     },
     {
       id: "3",
@@ -223,11 +249,14 @@ export const db = {
       selected: false,
       created: Date.now(),
       location: {
-        latitude: 37.559285765296,
-        longitude: 126.94568079431,
-        latitudeDelta: 0.004,
-        longitudeDelta: 0.004,
+        text: "",
+        region: {},
+        locationData: {
+          mainText: "",
+          address: "",
+        },
       },
+      memo: "",
     },
     {
       id: "4",
@@ -240,11 +269,14 @@ export const db = {
       selected: false,
       created: Date.now(),
       location: {
-        latitude: 37.559285765296,
-        longitude: 126.94568079431,
-        latitudeDelta: 0.004,
-        longitudeDelta: 0.004,
+        text: "",
+        region: {},
+        locationData: {
+          mainText: "",
+          address: "",
+        },
       },
+      memo: "",
     },
     {
       id: "5",
@@ -257,11 +289,14 @@ export const db = {
       selected: false,
       created: Date.now(),
       location: {
-        latitude: 37.559285765296,
-        longitude: 126.94568079431,
-        latitudeDelta: 0.004,
-        longitudeDelta: 0.004,
+        text: "",
+        region: {},
+        locationData: {
+          mainText: "",
+          address: "",
+        },
       },
+      memo: "",
     },
     {
       id: "6",
@@ -274,11 +309,14 @@ export const db = {
       selected: false,
       created: Date.now(),
       location: {
-        latitude: 37.559285765296,
-        longitude: 126.94568079431,
-        latitudeDelta: 0.004,
-        longitudeDelta: 0.004,
+        text: "",
+        region: {},
+        locationData: {
+          mainText: "",
+          address: "",
+        },
       },
+      memo: "",
     },
     {
       id: "7",
@@ -291,11 +329,14 @@ export const db = {
       selected: false,
       created: Date.now(),
       location: {
-        latitude: 37.559285765296,
-        longitude: 126.94568079431,
-        latitudeDelta,
-        longitudeDelta,
+        text: "",
+        region: {},
+        locationData: {
+          mainText: "",
+          address: "",
+        },
       },
+      memo: "",
     },
     {
       id: "8",
@@ -309,11 +350,14 @@ export const db = {
       selected: false,
       created: Date.now(),
       location: {
-        latitude: 37.559285765296,
-        longitude: 126.94568079431,
-        latitudeDelta,
-        longitudeDelta,
+        text: "",
+        region: {},
+        locationData: {
+          mainText: "",
+          address: "",
+        },
       },
+      memo: "",
     },
   ],
 

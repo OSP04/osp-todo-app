@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import styled from "styled-components/native";
 
 import { theme } from "../../theme";
@@ -11,7 +11,7 @@ const CategoryBar = ({ selectedDate, category, setRefresh, navigation }) => {
     navigation.navigate("EditScreen", {
       selectedTask: {
         id: Math.random().toString(36),
-        title: "",
+        text: "",
         date: selectedDate,
         due: null,
         category: category.title,

@@ -115,7 +115,7 @@ const EditDueDate = () => {
       </View>
       <Pressable
         onPress={() => {
-          setDueDate("Please set your Due Date");
+          setDueDate("Due Date");
           updateDue(null);
         }}
       >
