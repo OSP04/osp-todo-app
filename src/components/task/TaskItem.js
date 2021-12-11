@@ -51,7 +51,10 @@ const TaskItem = ({ item, drag, isSelecting, navigation }) => {
         </LeftItems>
         <RightItems>
           <TaskImage source={{ uri: item.image }} />
-          <IconButton type={images.edit} onPressOut={() => navigation.navigate("EditScreen", {item})} />
+          <IconButton
+            type={images.edit}
+            onPressOut={() => navigation.navigate("EditScreen", { item })}
+          />
         </RightItems>
       </Animated.View>
     </Touchable>

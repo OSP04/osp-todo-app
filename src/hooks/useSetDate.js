@@ -5,6 +5,7 @@ const useSetDate = () => {
   const [year, setYear] = useState(new Date().getFullYear());
   const [selectedDate, setSelectedDate] = useState(new Date());
 
+  // Get date from CalendarScreen by route
   const passDate = (route) => {
     if (route.params) {
       const { day } = route.params;
@@ -14,6 +15,7 @@ const useSetDate = () => {
     }
   };
 
+  // Mark date having tasks of categories
   const markDate = (categories) => {
     let marked = [];
     for (let i = 0; i < categories.length; i++) {

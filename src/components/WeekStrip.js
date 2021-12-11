@@ -26,11 +26,13 @@ const WeekStrip = ({
   } = useSetDate();
   const [refresh, setRefresh] = useState(true);
 
+  // Get date from CalendarScreen
   useEffect(() => {
     passDate(route);
-    setRefresh((current) => !current);
+    setRefresh((current) => !current); // Refresh screen
   }, [route.params]);
 
+  // Mark date having tasks of categories
   useEffect(() => markDate(categories), [tasks, categories]);
 
   const getYear = (date) => {
