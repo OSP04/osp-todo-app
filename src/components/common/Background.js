@@ -4,6 +4,7 @@ import {
   KeyboardAvoidingView,
   TouchableWithoutFeedback,
   Keyboard,
+  View,
 } from "react-native";
 import { theme } from "../../theme";
 
