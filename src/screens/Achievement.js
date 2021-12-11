@@ -1,27 +1,34 @@
-import React from "react";
+import React, { useState } from "react";
 import { Dimensions, View } from "react-native";
 
 import styled from "styled-components/native";
 import IconButton from "../components/common/IconButton";
-import MenuBar from "../components/MenuBar";
 import { images } from "../../src/images";
 import { theme } from "../../src/theme";
+import AchievementCategory from "../components/achievement/AchievementCategory";
+import MenuBar from "../MenuBar";
+import AchievementDay from "../components/achievement/AchievementDay";
 
 const Achievement = ({ navigation }) => {
 
     const width = Dimensions.get('window').width;
+    const [stateCategory, setStateCategory] = useState(true);
+    const [stateDay, setStateDay] = useState(false);
 
     return (
         <Wrapper>
             <StyledBar barStyle="default" />
             <StyledView width={width - 20}>
-                <IconButton type={images.back} onPressout={() => navigation.navigate("Home")} />
+                <IconButton type={images.back} onPress={() => navigation.navigate("Home")} />
                 <StyledText>Achievement</StyledText>
                 <View width={25} />
-            </StyledView >
+            </StyledView>
 
-            <MenuBar />
+            <MenuBar stateCategory={stateCategory} setStateCategory={setStateCategory}
+                stateDay={stateDay} setStateDay={setStateDay} />
 
+            {stateCategory == true ? (<AchievementCategory stateCategory={stateCategory} />)
+                : <AchievementDay stateDay={stateDay} />}
         </Wrapper>
     );
 };

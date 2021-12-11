@@ -71,7 +71,7 @@ const WeekStrip = ({
         iconContainer={{ flex: 0.1 }}
         calendarHeaderFormat={`MMMM`}
         onHeaderSelected={() => {
-          navigation.navigate("CalendarScreen", { selectedDate });
+          navigation.navigate("CalendarScreen", { selectedDate, tasks });
         }}
         onDateSelected={(date) => selectDate(date)}
       />
