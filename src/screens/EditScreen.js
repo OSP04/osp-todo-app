@@ -32,7 +32,7 @@ const EditScreen = ({ route, navigation }) => {
 
   const [editingTask, setEditingTask] = useState(selectedTask);
   const [editingCategory, setEditingCategory] = useState(category);
-  const [editingTitle, setEditingTitle] = useState(selectedTask.title);
+  const [editingText, setEditingText] = useState(selectedTask.text);
   const [editingImage, setEditingImage] = useState(selectedTask.image);
   const [editingDate, setEditingDate] = useState(selectedTask.date);
   const [editingDue, setEditingDue] = useState(selectedTask.due);
@@ -78,7 +78,7 @@ const EditScreen = ({ route, navigation }) => {
     <EditTaskContext.Provider
       value={{
         editingTask: editingTask,
-        editingTitle: editingTitle,
+        editingText: editingText,
         editingImage: editingImage,
         editingDate: editingDate,
         editingDue: editingDue,
@@ -88,7 +88,7 @@ const EditScreen = ({ route, navigation }) => {
         editingId: selectedId,
         editingCategory: editingCategory,
         updateTask: setEditingTask,
-        updateTitle: setEditingTitle,
+        updateText: setEditingText,
         updateImage: setEditingImage,
         updateDate: setEditingDate,
         updateDue: setEditingDue,

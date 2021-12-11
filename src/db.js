@@ -2,13 +2,12 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { theme } from "./theme";
 
 export const db = {
-  // memo 추가해주세요
   categories: [
     {
       id: "5",
       title: "Food",
       color: theme.category.red,
-      isAdding: false, // 삭제
+      isAdding: false,
       sorting: "added",
       tasks: [
         {
