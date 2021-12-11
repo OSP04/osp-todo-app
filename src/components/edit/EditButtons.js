@@ -38,21 +38,25 @@ const EditButtons = ({ selectedTask, goHome }) => {
   }, []);
 
   const onDeletePressed = () => {
-    Alert.alert("Delete", "Do you really want to delete this todo?", [
-      {
-        text: "Cancel",
-        onPress: () => null,
-        style: "cancel",
-      },
-      {
-        text: "OK",
-        onPress: () => {
-          removeTodo(tasks, editingId);
-          goHome();
+    Alert.alert(
+      "Delete",
+      "Do you really want to delete this todo?",
+      [
+        {
+          text: "Cancel",
+          onPress: () => null,
+          style: "cancel",
         },
-      },
-      { cancelable: true },
-    ]);
+        {
+          text: "OK",
+          onPress: () => {
+            removeTodo(tasks, editingId);
+            goHome();
+          },
+        },
+      ],
+      { cancelable: true }
+    );
   };
 
   const onConfirmPressed = () => {
@@ -65,8 +69,8 @@ const EditButtons = ({ selectedTask, goHome }) => {
             text: "OK",
             onPress: () => null,
           },
-          { cancelable: false },
-        ]
+        ],
+        { cancelable: false }
       );
     } else {
       const task = {
