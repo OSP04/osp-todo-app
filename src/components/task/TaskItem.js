@@ -14,13 +14,12 @@ const TaskItem = ({
   drag,
   isSelecting,
   navigation,
+  modalVisible,
   setModalVisible,
   setImagePath,
 }) => {
   const [isCompleted, setIsCompleted] = useState(item.complete);
   const [refresh, setRefresh] = useState(false);
-
-  useEffect(() => setImagePath(item.image), [item.image]);
 
   const toggleItem = () => {
     item.complete = !item.complete;
@@ -61,7 +60,11 @@ const TaskItem = ({
         </LeftItems>
         <RightItems>
           {item.image && (
-            <TaskImage path={item.image} setModalVisible={setModalVisible} />
+            <TaskImage
+              path={item.image}
+              setModalVisible={setModalVisible}
+              setImagePath={setImagePath}
+            />
           )}
           <IconButton
             type={images.edit}

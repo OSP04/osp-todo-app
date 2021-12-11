@@ -1,33 +1,48 @@
 import React from "react";
 import styled from "styled-components/native";
-import { Modal, Image } from "react-native";
+import { Modal } from "react-native";
 import { theme } from "../../theme";
 
 const ImageDialog = ({ modalVisible, imagePath, setModalVisible }) => {
+  //   console.log(imagePath);
   return (
-    <Modal visible={modalVisible}>
+    <Modal transparent={true} visible={modalVisible} animationType="fade">
       <StyledView>
-        <TaskImage source={{ uri: imagePath }} />
-        <CloseButton
-          onPressOut={() => {
-            console.log(modalVisible);
-            setModalVisible(false);
-          }}
-        >
-          <ButtonText>Close</ButtonText>
-        </CloseButton>
+        <ModalView>
+          <TaskImage
+            source={{
+              uri: imagePath,
+            }}
+          />
+          <CloseButton
+            onPressOut={() => {
+              setModalVisible(false);
+            }}
+          >
+            <ButtonText>Close</ButtonText>
+          </CloseButton>
+        </ModalView>
       </StyledView>
     </Modal>
   );
 };
 
 const StyledView = styled.View`
+  flex: 1;
   justify-content: center;
-  background-color: tomato;
+  background-color: rgba(0, 0, 0, 0.5);
   align-items: center;
 `;
 
+const ModalView = styled.View`
+  background-color: white;
+  align-items: center;
+  padding: 4%;
+  border-radius: 10px;
+`;
+
 const CloseButton = styled.Pressable`
+  width: 40%;
   background-color: ${theme.primary};
   padding-vertical: 2%;
   padding-horizontal: 5%;
@@ -39,7 +54,9 @@ const ButtonText = styled.Text`
 `;
 
 const TaskImage = styled.Image`
-  background-color: white;
+  width: 200px;
+  height: 200px;
+  margin-bottom: 4%;
 `;
 
 export default ImageDialog;

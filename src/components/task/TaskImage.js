@@ -1,9 +1,14 @@
 import React from "react";
 import styled from "styled-components/native";
 
-const TaskImage = ({ path, setModalVisible }) => {
+const TaskImage = ({ path, setModalVisible, setImagePath }) => {
   return (
-    <Touchable onPress={() => setModalVisible(true)}>
+    <Touchable
+      onPress={() => {
+        setModalVisible(true);
+        setImagePath(path);
+      }}
+    >
       <StyledImage source={{ uri: path }} />
     </Touchable>
   );
