@@ -15,7 +15,6 @@ const SearchedTask = ({
     <TouchableOpacity
       style={{ marginRight: 10, marginTop: 17 }}
       onPress={() => navigation.navigate("EditScreen", { task })}
-      //나중에 onpress 화면이동설정
     >
       <Card>
         <Card.Content>
