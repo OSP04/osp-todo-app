@@ -10,7 +10,15 @@ import TaskItem from "./TaskItem";
 import CategoryBar from "../category/CategoryBar";
 import ImageDialog from "./ImageDialog";
 
-const HomeTasks = ({ navigation, categories, selectedDate, isSelecting }) => {
+const HomeTasks = ({
+  navigation,
+  categories,
+  setCategories,
+  setTasks,
+  selectedDate,
+  isSelecting,
+  tasks,
+}) => {
   const ref = useRef(null);
   const [refresh, setRefresh] = useState(true);
   const [modalVisible, setModalVisible] = useState(false);
@@ -86,7 +94,10 @@ const HomeTasks = ({ navigation, categories, selectedDate, isSelecting }) => {
               <TaskItem
                 drag={drag}
                 item={item}
+                tasks={tasks}
                 categories={categories}
+                setCategories={setCategories}
+                setTasks={setTasks}
                 sorting={null}
                 isSelecting={isSelecting}
                 navigation={navigation}

@@ -6,11 +6,13 @@ import CalendarStrip from "react-native-calendar-strip";
 import { theme } from "../theme";
 import HomeTasks from "./task/HomeTasks";
 import useSetDate from "../hooks/useSetDate";
+import useGetData from "../hooks/useGetData";
 
 const WeekStrip = ({
   tasks,
   setTasks,
   categories,
+  setCategories,
   navigation,
   isSelecting,
   route,
@@ -24,6 +26,7 @@ const WeekStrip = ({
     passDate,
     markDate,
   } = useSetDate();
+
   const [refresh, setRefresh] = useState(true);
 
   // Get date from CalendarScreen
@@ -78,6 +81,7 @@ const WeekStrip = ({
         tasks={tasks}
         setTasks={setTasks}
         categories={categories}
+        setCategories={setCategories}
         tasks={tasks}
         selectedDate={selectedDate}
         navigation={navigation}

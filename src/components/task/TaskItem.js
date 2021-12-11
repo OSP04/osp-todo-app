@@ -8,10 +8,14 @@ import { theme } from "../../theme";
 import { images } from "../../images";
 import IconButton from "../common/IconButton";
 import TaskImage from "./TaskImage";
+import { storeData } from "../../db";
 
 const TaskItem = ({
   item,
   categories,
+  tasks,
+  setCategories,
+  setTasks,
   drag,
   isSelecting,
   navigation,
@@ -24,7 +28,27 @@ const TaskItem = ({
   const toggleItem = () => {
     item.complete = !item.complete;
     setIsCompleted(item.complete);
-    // Store completed task
+
+    // Store completed task to tasks data
+    let _tasks = tasks;
+    let index = _tasks.findIndex((element) => element.id === item.id);
+    _tasks.splice(index, 1, item);
+    setTasks(_tasks);
+    storeData("tasks", _tasks);
+
+    // Store completed task to categories data
+    const _categories = categories;
+    for (let i = 0; i < _categories.length; i++) {
+      index = _categories[i].tasks.findIndex(
+        (element) => element.id === item.id
+      );
+      if (index >= 0) {
+        _categories[i].tasks.splice(index, 1, item);
+        break;
+      }
+    }
+    setCategories(_categories);
+    storeData("categories", _categories);
   };
 
   const returnIcon = () => {
@@ -43,7 +67,6 @@ const TaskItem = ({
     const category = categories.find(
       (element) => element.title === categoryTitle
     );
-    console.log(category);
     return category;
   };
 

@@ -71,6 +71,9 @@ const AllTasks = ({ navigation }) => {
             <TaskItem
               item={item}
               categories={categories}
+              setCategories={setCategories}
+              setTasks={setTasks}
+              tasks={tasks}
               drag={drag}
               sorting={sorting}
               isSelecting={isSelecting}

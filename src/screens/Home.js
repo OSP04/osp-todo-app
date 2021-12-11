@@ -23,6 +23,7 @@ const Home = ({ navigation, route }) => {
           <WeekStrip
             tasks={tasks}
             setTasks={setTasks}
+            setCategories={setCategories}
             categories={categories}
             navigation={navigation}
             isSelecting={isSelecting}
