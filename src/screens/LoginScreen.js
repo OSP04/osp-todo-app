@@ -1,33 +1,42 @@
 import React, { useState } from "react";
-import { TouchableOpacity, StyleSheet, View } from "react-native";
+import { TouchableOpacity, StyleSheet, View, Dimensions } from "react-native";
 import { Text } from "react-native-paper";
-import Logo from "../components/Logo";
-import Header from "../components/Header";
-import Button from "../components/Button";
-import TextInput from "../components/TextInput";
-import BackButton from "../components/BackButton";
+import Logo from "../components/pre/Logo";
+import PreText from "../components/pre/PreText";
+import PreButton from "../components/pre/PreButton";
+import PreTextInput from "../components/pre/PreTextInput";
+import BackButton from "../components/common/BackButton";
+import Background from "../components/common/Background";
 import * as Validator from "../Validator";
+import { theme } from "../theme";
 
 export default function LoginScreen({ navigation }) {
   const [id, setId] = useState({ value: "", error: "" });
   const [password, setPassword] = useState({ value: "", error: "" });
 
   const onLoginPressed = () => {
-    const idError = Validator.idValidator(id.value);
-    const passwordError = Validator.passwordValidator(password.value);
+    const idError = Validator.idValidator("login", id.value);
+    const passwordError = Validator.passwordValidator("login", password.value);
     if (idError || passwordError) {
       setId({ ...id, error: idError });
       setPassword({ ...password, error: passwordError });
       return;
     }
+    const loginError = Validator.loginValidator(id.value, password.value);
+    if (loginError) {
+      setId({ ...id, error: loginError });
+      setPassword({ ...password, error: loginError });
+      return;
+    }
+    navigation.navigate("Home");
   };
 
   return (
-    <View>
-      <BackButton goBack={navigation.goBack} />
+    <Background type="pre">
+      {/* <BackButton type="pre" onPressOut={() => navigation.goBack()} /> */}
       <Logo />
-      <Header>Todo App</Header>
-      <TextInput
+      <PreText>Todo App</PreText>
+      <PreTextInput
         label="ID"
         returnKeyType="next"
         value={id.value}
@@ -35,7 +44,7 @@ export default function LoginScreen({ navigation }) {
         error={!!id.error}
         errorText={id.error}
       />
-      <TextInput
+      <PreTextInput
         label="Password"
         returnKeyType="done"
         value={password.value}
@@ -44,20 +53,20 @@ export default function LoginScreen({ navigation }) {
         errorText={password.error}
         secureTextEntry
       />
-      <Button mode="contained" onPress={onLoginPressed}>
+      <PreButton mode="contained" onPress={onLoginPressed}>
         Log in
-      </Button>
+      </PreButton>
       <View style={styles.row}>
         <Text>Don’t have an account? </Text>
-        <TouchableOpacity onPress={() => navigation.replace("SignUpScreen")}>
+        <TouchableOpacity onPress={() => navigation.navigate("SignUpScreen")}>
           <Text style={styles.link}>Sign up</Text>
         </TouchableOpacity>
       </View>
-      {/* 추후 메인화면으로 연결 */}
-      <TouchableOpacity onPress={() => navigation.replace("SignUpScreen")}>
-        <Text style={styles.link}>Skip for Now</Text>
+      <TouchableOpacity onPress={() => navigation.navigate("Home")}>
+        <Text style={styles.skip}>Skip for Now</Text>
       </TouchableOpacity>
-    </View>
+      <Text style={styles.footer}>© 2021 EWHA OSP04</Text>
+    </Background>
   );
 }
 
@@ -68,5 +77,18 @@ const styles = StyleSheet.create({
   },
   link: {
     fontWeight: "bold",
+  },
+  skip: {
+    fontSize: 20,
+    color: theme.colors.primary,
+    fontWeight: "bold",
+    margin: 20,
+    marginTop: 40,
+  },
+  footer: {
+    fontSize: 10,
+    color: theme.colors.secondary,
+    position: "absolute",
+    bottom: Dimensions.get("window").height * 0.06,
   },
 });
