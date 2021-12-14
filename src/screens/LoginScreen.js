@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { TouchableOpacity, StyleSheet, View, Dimensions } from "react-native";
 import { Text } from "react-native-paper";
 import Logo from "../components/pre/Logo";
@@ -9,25 +9,36 @@ import BackButton from "../components/common/BackButton";
 import Background from "../components/common/Background";
 import * as Validator from "../Validator";
 import { theme } from "../theme";
+import useGetUser from "../hooks/useGetUser";
 
 export default function LoginScreen({ navigation }) {
   const [id, setId] = useState({ value: "", error: "" });
   const [password, setPassword] = useState({ value: "", error: "" });
 
+  const { users, setUsers, getUserFirst } = useGetUser();
+  useEffect(getUserFirst, []);
+
   const onLoginPressed = () => {
-    const idError = Validator.idValidator("login", id.value);
-    const passwordError = Validator.passwordValidator("login", password.value);
+    const idError = Validator.idValidator(users, "login", id.value);
+    const passwordError = Validator.passwordValidator(password.value);
     if (idError || passwordError) {
       setId({ ...id, error: idError });
       setPassword({ ...password, error: passwordError });
       return;
     }
-    const loginError = Validator.loginValidator(id.value, password.value);
+
+    const loginError = Validator.loginValidator(
+      users,
+      id.value,
+      password.value
+    );
+
     if (loginError) {
       setId({ ...id, error: loginError });
       setPassword({ ...password, error: loginError });
       return;
     }
+
     navigation.navigate("Home");
   };
 
