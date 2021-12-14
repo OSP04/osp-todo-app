@@ -131,8 +131,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     width: "100%",
     height: 50,
-    borderBottomWidth: 1,
-    borderBottomColor: "#E5E5E5",
     justifyContent: "flex-start",
     padding: 10,
   },
