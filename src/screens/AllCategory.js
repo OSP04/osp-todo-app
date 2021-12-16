@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Dimensions } from "react-native";
+import { Dimensions, Text } from "react-native";
 import styled from "styled-components/native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import Categories from "../components/category/Categories";
@@ -8,9 +8,8 @@ import { images } from "../../src/images";
 import { theme } from "../../src/theme";
 import AddCategory from "../screens/AddCategory";
 import { storeData } from "../../src/db";
-import BackButton from "../components/common/BackButton";
 import AppLoading from "expo-app-loading";
-import { FlatList } from "react-native-gesture-handler";
+import { FlatList, TouchableOpacity } from "react-native-gesture-handler";
 
 const AllCategory = ({ navigation }) => {
   const width = Dimensions.get("window").width;
@@ -59,9 +58,7 @@ const AllCategory = ({ navigation }) => {
     storeData("categories", [...categories]);
     setState(false);
   };
-
-  console.log(categories);
-
+  
   const _onPressCancel = () => {
     setNewCategory("");
     setState(false);
@@ -86,31 +83,27 @@ const AllCategory = ({ navigation }) => {
       )
   }
   return isReady ? (
-    <FlatList style={{backgroundColor: theme.background}}
-    ListHeaderComponent={
     <Wrapper>
-    <StyledBar barStyle="default" />
+      <FlatList style={{backgroundColor: theme.background}}
+      data={categories}
+      renderItem={renderItem}
+      />
       <StyledView width={width - 20}>
-        <IconButton
-          type={images.add}
-          onPressOut={() => {
-            setState(true);
-          }}
-        />
-        <AddCategory
-            state={state}
-            value={newCategory}
-            onCancel={_onPressCancel}
-            setColor={setColor}
-            onChangeText={_handleTextChange}
-            onConfirm={addCategory}
-        />
-    </StyledView>
-</Wrapper>
-    }
-    data={categories}
-    renderItem={renderItem}
-    />
+        <TouchableOpacity onPress={() => setState(true)}>
+          <Text style={{fontSize: 16, margin: 10, fontWeight: "bold"}}>+ Add Category</Text>
+        </TouchableOpacity>
+          <AddCategory
+              state={state}
+              value={newCategory}
+              onCancel={_onPressCancel}
+              setColor={setColor}
+              onChangeText={_handleTextChange}
+              onConfirm={addCategory}
+          />
+      </StyledView>
+    </Wrapper>
+    
+      
   ) : (
     <AppLoading
       startAsync={_loadCategories}
@@ -122,28 +115,13 @@ const AllCategory = ({ navigation }) => {
 
 const Wrapper = styled.SafeAreaView`
   flex: 1;
-  justify-content: flex-start;
-  align-items: center;
   background_color: ${theme.background};
-`;
-
-const StyledBar = styled.StatusBar`
-  background-color: ${theme.background};
 `;
 
 const StyledView = styled.View`
   margin-top: 10px;
   margin-bottom: 10px;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
+  align-items: flex-end;
 `;
-
-const StyledText = styled.Text`
-  font-weight: bold;
-  font-size: 26px;
-`;
-
-const StyledScroll = styled.ScrollView``;
 
 export default AllCategory;
