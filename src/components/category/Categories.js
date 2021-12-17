@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Dimensions, Text, View } from "react-native";
+import { Alert, Dimensions, Text, View } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import styled from "styled-components/native";
 import { storeData } from "../../db";
@@ -58,13 +58,14 @@ const Categories = ({ item, doRefresh, navigation, categories, setCategories, ta
     doRefresh();
     setIsReady(false);
   };
+  
 
   return (
     <Wrapper>
       <StyledView width={width}>
         <View style={{flexDirection: "row", alignItems: "center", width: 200, justifyContent: "space-between"}}>
         <StyledText style={{ color: item.color }}>{item.title}</StyledText>
-        <TouchableOpacity onPress={() => _deleteCate(item)}>
+        <TouchableOpacity onPress={() => {alert("Category deleted"), _deleteCate(item)}}>
           <Text style={{color: item.color, fontWeight: "bold", fontSize: 18}}>X</Text>
         </TouchableOpacity>
         </View>
