@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import { Dimensions, Text, View } from "react-native";
-
+import { TouchableOpacity } from "react-native-gesture-handler";
 import styled from "styled-components/native";
+import { storeData } from "../../db";
 import { theme } from "../../theme";
 import DropButton from "../common/DropButton";
 import ShowCateTask from "./ShowCateTask";
 
-const Categories = ({ item, doRefresh, navigation }) => {
+const Categories = ({ item, doRefresh, navigation, categories, setCategories, setRefresh }) => {
   const width = Dimensions.get("window").width;
   const [sorting, setSorting] = useState("added");
 
@@ -43,10 +44,29 @@ const Categories = ({ item, doRefresh, navigation }) => {
     }
   };
 
+  const _deleteCate = () => {
+    let _categories = categories;
+    console.log(_categories[0].id);
+    for(let i=0; i<_categories.length; i++) {
+      if(_categories[i].id === item.id) {
+        const index = i;
+        _categories.splice(index, 1);
+      }
+    }
+    setCategories(_categories);
+    storeData("categories", _categories);
+    setRefresh();
+  }
+
   return (
     <Wrapper>
       <StyledView width={width}>
+        <View style={{flexDirection: "row", alignItems: "center", width: 200, justifyContent: "space-between"}}>
         <StyledText style={{ color: item.color }}>{item.title}</StyledText>
+        <TouchableOpacity onPress={() => _deleteCate(item)}>
+          <Text style={{color: item.color, fontWeight: "bold", fontSize: 18}}>X</Text>
+        </TouchableOpacity>
+        </View>
         <DropButton
           setSorting={setSorting}
           category={item}

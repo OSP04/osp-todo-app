@@ -45,7 +45,7 @@ flex: 1;
 const ModalInnerView = styled.View`
 background-color: #ffffff;
 margin: 40px;
-marginTop: 120px;
+marginTop: 140px;
 padding: 20px;
 `;
 

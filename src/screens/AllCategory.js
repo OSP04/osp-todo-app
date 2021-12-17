@@ -3,8 +3,6 @@ import { Dimensions, Text } from "react-native";
 import styled from "styled-components/native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import Categories from "../components/category/Categories";
-import IconButton from "../components/common/IconButton";
-import { images } from "../../src/images";
 import { theme } from "../../src/theme";
 import AddCategory from "../screens/AddCategory";
 import { storeData } from "../../src/db";
@@ -20,6 +18,7 @@ const AllCategory = ({ navigation }) => {
 
   const [newCategory, setNewCategory] = useState("");
   const [categories, setCategories] = useState([]);
+
   const _loadCategories = async () => {
     const loadedCategories = await AsyncStorage.getItem("categories");
     setCategories(JSON.parse(loadedCategories || "{}"));
@@ -45,11 +44,14 @@ const AllCategory = ({ navigation }) => {
         selected: false,
         created: "",
         location: {
-          latitude: null,
-          longitude: null,
-          latitudeDelta: 0.004,
-          longitudeDelta: 0.004,
-        },
+            text: "",
+            region: {},
+            locationData: {
+              mainText: "",
+              address: "",
+            },
+          },
+        memo: "",
       },
     };
     setNewCategory("");
@@ -79,9 +81,13 @@ const AllCategory = ({ navigation }) => {
         item={item}
         doRefresh={doRefresh}
         navigation={navigation}
+        categories={categories}
+        setCategories={setCategories}
+        setRefresh={doRefresh}
       />
       )
   }
+  
   return isReady ? (
     <Wrapper>
       <FlatList style={{backgroundColor: theme.background}}
@@ -102,8 +108,6 @@ const AllCategory = ({ navigation }) => {
           />
       </StyledView>
     </Wrapper>
-    
-      
   ) : (
     <AppLoading
       startAsync={_loadCategories}

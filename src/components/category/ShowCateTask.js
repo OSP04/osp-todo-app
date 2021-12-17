@@ -10,47 +10,11 @@ import IconButton from "../common/IconButton";
 const ShowCateTask = ({ item, doRefresh }) => {
   const width = Dimensions.get("window").width;
 
-  const [tasks, setTasks] = useState({});
-  const _loadTasks = async () => {
-    const loadedTasks = await AsyncStorage.getItem("tasks");
-    setTasks(JSON.parse(loadedTasks || "{}"));
-  };
-
-  const [categories, setCategories] = useState([]);
-  const _loadCategories = async () => {
-    const loadedCategories = await AsyncStorage.getItem("categories");
-    setCategories(JSON.parse(loadedCategories || "{}"));
-  };
-
-  const _saveTasks = async tasks => {
-    try {
-      await AsyncStorage.setItem("tasks", JSON.stringify(tasks));
-      await AsyncStorage.setItem("categories", JSON.stringify(categories));
-      setTasks(tasks);
-    }
-    catch (e) {
-      console.error(e);
-    }
-  };
-
-  const _saveCategory = async categories => {
-    try {
-      await AsyncStorage.setItem("categories", JSON.stringify(categories));
-      setTasks(tasks);
-    }
-    catch (e) {
-      console.error(e);
-    }
-  };
-
   const toggleItem = () => {
-    const currentTasks = Object.assign({}, tasks);
-    const currentCate = Object.assign({}, categories);
     item.complete = !item.complete;
-    _saveTasks(currentTasks);
-    _saveCategory(currentCate);
     doRefresh();
   };
+
 
   const returnIcon = (item) => {
     return item.complete ? images.complete : images.uncomplete;
