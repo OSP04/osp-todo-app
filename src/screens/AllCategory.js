@@ -18,12 +18,15 @@ const AllCategory = ({ navigation }) => {
 
   const [newCategory, setNewCategory] = useState("");
   const [categories, setCategories] = useState([]);
+  const [tasks, setTasks] = useState([]);
 
-  const _loadCategories = async () => {
+  const _loadData = async () => {
     const loadedCategories = await AsyncStorage.getItem("categories");
+    const loadedTasks = await AsyncStorage.getItem("tasks");
     setCategories(JSON.parse(loadedCategories || "{}"));
+    setTasks(JSON.parse(loadedTasks || "{}"));
   };
-
+  
   const addCategory = () => {
     const ID = Date.now().toString();
     const newCategoryObj = {
@@ -58,6 +61,7 @@ const AllCategory = ({ navigation }) => {
     setColor(theme.category.red);
     categories.push(newCategoryObj);
     storeData("categories", [...categories]);
+    doRefresh();
     setState(false);
   };
   
@@ -83,7 +87,8 @@ const AllCategory = ({ navigation }) => {
         navigation={navigation}
         categories={categories}
         setCategories={setCategories}
-        setRefresh={doRefresh}
+        tasks={tasks}
+        setTasks={setTasks}
       />
       )
   }
@@ -110,7 +115,7 @@ const AllCategory = ({ navigation }) => {
     </Wrapper>
   ) : (
     <AppLoading
-      startAsync={_loadCategories}
+      startAsync={_loadData}
       onFinish={() => setIsReady(true)}
       onError={console.error}
     />

@@ -7,9 +7,11 @@ import { theme } from "../../theme";
 import DropButton from "../common/DropButton";
 import ShowCateTask from "./ShowCateTask";
 
-const Categories = ({ item, doRefresh, navigation, categories, setCategories, setRefresh }) => {
+const Categories = ({ item, doRefresh, navigation, categories, setCategories, tasks, setTasks }) => {
   const width = Dimensions.get("window").width;
   const [sorting, setSorting] = useState("added");
+
+  console.log(tasks);
 
   const sortTasks = (category) => {
     const sorting = category.sorting;
@@ -46,17 +48,17 @@ const Categories = ({ item, doRefresh, navigation, categories, setCategories, se
 
   const _deleteCate = () => {
     let _categories = categories;
-    console.log(_categories[0].id);
     for(let i=0; i<_categories.length; i++) {
       if(_categories[i].id === item.id) {
         const index = i;
         _categories.splice(index, 1);
+        break;
       }
     }
     setCategories(_categories);
     storeData("categories", _categories);
-    setRefresh();
-  }
+    doRefresh();
+  };
 
   return (
     <Wrapper>
@@ -77,7 +79,8 @@ const Categories = ({ item, doRefresh, navigation, categories, setCategories, se
       <View>
         {item.tasks[0] != null ? (
           sortTasks(item).map((item) => (
-            <ShowCateTask key={item.id} item={item} doRefresh={doRefresh} />
+            <ShowCateTask key={item.id} item={item} doRefresh={doRefresh}
+            tasks={tasks} setTasks={setTasks} categories={categories} setCategories={setCategories}/>
           ))
         ) : (
           <View style={{ height: 50 }} />
@@ -92,6 +95,10 @@ const Categories = ({ item, doRefresh, navigation, categories, setCategories, se
               sortTasks: sortTasks,
               setSorting: setSorting,
               doRefresh: doRefresh,
+              tasks: tasks,
+              setTasks: setTasks,
+              categories: categories,
+              setCategories: setCategories,
             })
           }}
         >
