@@ -1,15 +1,12 @@
 import React, { useState } from "react";
-import { Dimensions, View } from "react-native";
 
 import styled from "styled-components/native";
 import { theme } from "../../src/theme";
 import AchievementCategory from "../components/achievement/AchievementCategory";
 import MenuBar from "../MenuBar";
 import AchievementDay from "../components/achievement/AchievementDay";
-import BackButton from "../components/common/BackButton";
 
-const Achievement = ({ navigation }) => {
-  const width = Dimensions.get("window").width;
+const Achievement = () => {
   const [stateCategory, setStateCategory] = useState(true);
   const [stateDay, setStateDay] = useState(false);
   const [refresh, setRefresh] = useState(true);
@@ -50,19 +47,6 @@ const Wrapper = styled.SafeAreaView`
 
 const StyledBar = styled.StatusBar`
   background-color: ${theme.background};
-`;
-
-const StyledView = styled.View`
-  margin-top: 10px;
-  margin-bottom: 10px;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-`;
-
-const StyledText = styled.Text`
-  font-weight: bold;
-  font-size: 24px;
 `;
 
 export default Achievement;
