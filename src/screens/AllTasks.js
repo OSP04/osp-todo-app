@@ -18,19 +18,19 @@ const AllTasks = ({ navigation }) => {
   const { categories, tasks, setCategories, setTasks, getDataFirst } =
     useGetData();
 
-  useFocusEffect(
-    React.useCallback(() => {
-      getDataFirst();
-      return () => {};
-    }, [])
-  );
-
   const ref = useRef(null);
   const [refresh, setRefresh] = useState(false);
   const [sorting, setSorting] = useState("added");
   const [isSelecting, setIsSelecting] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
   const [imagePath, setImagePath] = useState(null);
+
+  useFocusEffect(
+    React.useCallback(() => {
+      getDataFirst();
+      return () => {};
+    }, [])
+  );
 
   const sortTasks = () => {
     const _tasks = tasks;

@@ -52,7 +52,7 @@ const TaskItem = ({
   };
 
   const returnIcon = () => {
-    return isCompleted ? images.complete : images.uncomplete;
+    return item.complete ? images.complete : images.uncomplete;
   };
 
   const selectItem = () => {
