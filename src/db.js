@@ -1,4 +1,5 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
+
 import { theme } from "./theme";
 
 export const db = {
@@ -7,8 +8,8 @@ export const db = {
       id: "5",
       title: "Food",
       color: theme.category.red,
-      isAdding: false,
-      sorting: "added",
+      sorting: "added", // added, done, not, due  used to sorting/filtering
+
       tasks: [
         {
           id: "1",
@@ -124,8 +125,7 @@ export const db = {
       title: "School",
       color: theme.category.yellow,
       owner: null,
-      isAdding: false,
-      sorting: "added",
+      sorting: "added", // added, done, not, due  used to sorting/filtering
       tasks: [
         {
           id: "2",
@@ -194,7 +194,6 @@ export const db = {
     },
   ],
 
-  // memo 추가해주세요
   tasks: [
     {
       id: "1",
