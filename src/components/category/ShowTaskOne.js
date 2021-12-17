@@ -5,16 +5,37 @@ import styled from "styled-components/native";
 import { images } from "../../images";
 import { theme } from "../../theme";
 import IconButton from "../common/IconButton";
+import { storeData } from "../../db";
 
 
-const ShowTaskOne = ({ item, doRefresh }) => {
+const ShowTaskOne = ({ item, doRefresh, tasks, setTasks, categories, setCategories }) => {
 
     const width = Dimensions.get('window').width;
 
     const toggleItem = () => {
         item.complete = !item.complete;
+    
+        const _tasks = tasks;
+        const _categories = categories;
+    
+        const index = _tasks.findIndex((element) => element.id === item.id);
+        _tasks.splice(index, 1, item);
+        setTasks(_tasks);
+        storeData("tasks", _tasks);
+    
+        for(let i=0; i<_categories.length; i++) {
+          for(let j=0; j<_categories[i].tasks.length; j++) {
+            if(_categories[i].tasks[j].id === item.id) {   
+              const index = j;
+              _categories[i].tasks.splice(index, 1, item);
+              break;
+          }
+          }
+        }
+        setCategories(_categories);
+        storeData("categories", _categories);
         doRefresh();
-    };
+      };
 
     const returnIcon = (item) => {
         return item.complete ? images.complete : images.uncomplete;

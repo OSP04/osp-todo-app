@@ -9,7 +9,7 @@ import BackButton from "../components/common/BackButton";
 
 const OneCategory = ({ route, navigation }) => {
 
-  const { item, sortTasks, doRefresh, setSorting } = route.params;
+  const { item, sortTasks, doRefresh, setSorting, tasks, setTasks, categories, setCategories } = route.params;
   const [refresh, setRefresh] = useState(true);
   const width = Dimensions.get("window").width;
 
@@ -41,7 +41,8 @@ const OneCategory = ({ route, navigation }) => {
           <StyledScroll>
             {item.tasks[0] != null &&
               sortTasks(item).map((item) => (
-                <ShowTaskOne key={item.id} item={item} doRefresh={screenRefresh} />
+                <ShowTaskOne key={item.id} item={item} doRefresh={screenRefresh}
+                tasks={tasks} setTasks={setTasks} categories={categories} setCategories={setCategories}/>
               ))}
           </StyledScroll>
     </Wrapper>

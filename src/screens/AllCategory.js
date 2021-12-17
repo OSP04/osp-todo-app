@@ -1,16 +1,13 @@
-import React, { useEffect, useState } from "react";
-import { Dimensions } from "react-native";
+import React, { useState } from "react";
+import { Dimensions, Text } from "react-native";
 import styled from "styled-components/native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import Categories from "../components/category/Categories";
-import IconButton from "../components/common/IconButton";
-import { images } from "../../src/images";
 import { theme } from "../../src/theme";
 import AddCategory from "../screens/AddCategory";
 import { storeData } from "../../src/db";
-import BackButton from "../components/common/BackButton";
 import AppLoading from "expo-app-loading";
-import { FlatList } from "react-native-gesture-handler";
+import { FlatList, TouchableOpacity } from "react-native-gesture-handler";
 
 const AllCategory = ({ navigation }) => {
   const width = Dimensions.get("window").width;
@@ -21,9 +18,13 @@ const AllCategory = ({ navigation }) => {
 
   const [newCategory, setNewCategory] = useState("");
   const [categories, setCategories] = useState([]);
-  const _loadCategories = async () => {
+  const [tasks, setTasks] = useState([]);
+
+  const _loadData = async () => {
     const loadedCategories = await AsyncStorage.getItem("categories");
+    const loadedTasks = await AsyncStorage.getItem("tasks");
     setCategories(JSON.parse(loadedCategories || "{}"));
+    setTasks(JSON.parse(loadedTasks || "{}"));
   };
 
   const addCategory = () => {
@@ -46,22 +47,25 @@ const AllCategory = ({ navigation }) => {
         selected: false,
         created: "",
         location: {
-          latitude: null,
-          longitude: null,
-          latitudeDelta: 0.004,
-          longitudeDelta: 0.004,
-        },
+            text: "",
+            region: {},
+            locationData: {
+              mainText: "",
+              address: "",
+            },
+          },
+        memo: "",
       },
     };
     setNewCategory("");
     setColor(theme.category.red);
     categories.push(newCategoryObj);
     storeData("categories", [...categories]);
+    doRefresh();
+    setIsReady(false);
     setState(false);
   };
-
-  console.log(categories);
-
+  
   const _onPressCancel = () => {
     setNewCategory("");
     setState(false);
@@ -82,38 +86,38 @@ const AllCategory = ({ navigation }) => {
         item={item}
         doRefresh={doRefresh}
         navigation={navigation}
+        categories={categories}
+        setCategories={setCategories}
+        tasks={tasks}
+        setTasks={setTasks}
+        setIsReady={setIsReady}
       />
       )
   }
+  
   return isReady ? (
-    <FlatList style={{backgroundColor: theme.background}}
-    ListHeaderComponent={
     <Wrapper>
-    <StyledBar barStyle="default" />
+      <FlatList style={{backgroundColor: theme.background}}
+      data={categories}
+      renderItem={renderItem}
+      />
       <StyledView width={width - 20}>
-        <IconButton
-          type={images.add}
-          onPressOut={() => {
-            setState(true);
-          }}
-        />
-        <AddCategory
-            state={state}
-            value={newCategory}
-            onCancel={_onPressCancel}
-            setColor={setColor}
-            onChangeText={_handleTextChange}
-            onConfirm={addCategory}
-        />
-    </StyledView>
-</Wrapper>
-    }
-    data={categories}
-    renderItem={renderItem}
-    />
+        <TouchableOpacity onPress={() => setState(true)}>
+          <Text style={{fontSize: 16, margin: 10, fontWeight: "bold"}}>+ Add Category</Text>
+        </TouchableOpacity>
+          <AddCategory
+              state={state}
+              value={newCategory}
+              onCancel={_onPressCancel}
+              setColor={setColor}
+              onChangeText={_handleTextChange}
+              onConfirm={addCategory}
+          />
+      </StyledView>
+    </Wrapper>
   ) : (
     <AppLoading
-      startAsync={_loadCategories}
+      startAsync={_loadData}
       onFinish={() => setIsReady(true)}
       onError={console.error}
     />
@@ -122,28 +126,13 @@ const AllCategory = ({ navigation }) => {
 
 const Wrapper = styled.SafeAreaView`
   flex: 1;
-  justify-content: flex-start;
-  align-items: center;
   background_color: ${theme.background};
-`;
-
-const StyledBar = styled.StatusBar`
-  background-color: ${theme.background};
 `;
 
 const StyledView = styled.View`
   margin-top: 10px;
   margin-bottom: 10px;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
+  align-items: flex-end;
 `;
-
-const StyledText = styled.Text`
-  font-weight: bold;
-  font-size: 26px;
-`;
-
-const StyledScroll = styled.ScrollView``;
 
 export default AllCategory;

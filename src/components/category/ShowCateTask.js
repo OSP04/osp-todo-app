@@ -1,17 +1,40 @@
 import React from "react";
 import { Dimensions } from "react-native";
-
 import styled from "styled-components/native";
+import { storeData } from "../../db";
 import { images } from "../../images";
 import { theme } from "../../theme";
 import IconButton from "../common/IconButton";
 
-const ShowCateTask = ({ item, doRefresh }) => {
+const ShowCateTask = ({ item, doRefresh, tasks, setTasks, categories, setCategories }) => {
   const width = Dimensions.get("window").width;
 
   const toggleItem = () => {
-    const currentTasks = Object.assign({}, item);
     item.complete = !item.complete;
+    const _tasks = tasks;
+    const _categories = categories;
+    
+    for(let i=0; i<_tasks.length; i++) {
+      if(_tasks[i].id === item.id) {
+        const index = i;
+        _tasks.splice(index, 1, item);
+        break;
+      }
+    }
+    setTasks(_tasks);
+    storeData("tasks", _tasks);
+
+    for(let i=0; i<_categories.length; i++) {
+      for(let j=0; j<_categories[i].tasks.length; j++) {
+        if(_categories[i].tasks[j].id === item.id) {   
+          const index = j;
+          _categories[i].tasks.splice(index, 1, item);
+          break;
+      }
+      }
+    }
+    setCategories(_categories);
+    storeData("categories", _categories);
     doRefresh();
   };
 

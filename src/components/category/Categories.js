@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import { Dimensions, Text, View } from "react-native";
-
+import { TouchableOpacity } from "react-native-gesture-handler";
 import styled from "styled-components/native";
+import { storeData } from "../../db";
 import { theme } from "../../theme";
 import DropButton from "../common/DropButton";
 import ShowCateTask from "./ShowCateTask";
 
-const Categories = ({ item, doRefresh, navigation }) => {
+const Categories = ({ item, doRefresh, navigation, categories, setCategories, tasks, setTasks, setIsReady }) => {
   const width = Dimensions.get("window").width;
   const [sorting, setSorting] = useState("added");
 
@@ -43,10 +44,30 @@ const Categories = ({ item, doRefresh, navigation }) => {
     }
   };
 
+  const _deleteCate = () => {
+    let _categories = categories;
+    for(let i=0; i<_categories.length; i++) {
+      if(_categories[i].id === item.id) {
+        const index = i;
+        _categories.splice(index, 1);
+        break;
+      }
+    }
+    setCategories(_categories);
+    storeData("categories", _categories);
+    doRefresh();
+    setIsReady(false);
+  };
+
   return (
     <Wrapper>
       <StyledView width={width}>
+        <View style={{flexDirection: "row", alignItems: "center", width: 200, justifyContent: "space-between"}}>
         <StyledText style={{ color: item.color }}>{item.title}</StyledText>
+        <TouchableOpacity onPress={() => _deleteCate(item)}>
+          <Text style={{color: item.color, fontWeight: "bold", fontSize: 18}}>X</Text>
+        </TouchableOpacity>
+        </View>
         <DropButton
           setSorting={setSorting}
           category={item}
@@ -57,7 +78,8 @@ const Categories = ({ item, doRefresh, navigation }) => {
       <View>
         {item.tasks[0] != null ? (
           sortTasks(item).map((item) => (
-            <ShowCateTask key={item.id} item={item} doRefresh={doRefresh} />
+            <ShowCateTask key={item.id} item={item} doRefresh={doRefresh}
+            tasks={tasks} setTasks={setTasks} categories={categories} setCategories={setCategories}/>
           ))
         ) : (
           <View style={{ height: 50 }} />
@@ -72,6 +94,10 @@ const Categories = ({ item, doRefresh, navigation }) => {
               sortTasks: sortTasks,
               setSorting: setSorting,
               doRefresh: doRefresh,
+              tasks: tasks,
+              setTasks: setTasks,
+              categories: categories,
+              setCategories: setCategories,
             })
           }}
         >
