@@ -7,7 +7,7 @@ import { Provider } from "react-native-paper";
 import DrawerNavigator from "./DrawerNavigator";
 import CalendarScreen from "./src/screens/CalendarScreen";
 import OneCategory from "./src/screens/OneCategory";
-import Comments from "./src/screens/OneCategory";
+import Comments from "./src/screens/Comments";
 import EditScreen from "./src/screens/EditScreen";
 const Stack = createStackNavigator();
 const StackNavigator = () => {
