@@ -7,11 +7,9 @@ import { theme } from "../../theme";
 import DropButton from "../common/DropButton";
 import ShowCateTask from "./ShowCateTask";
 
-const Categories = ({ item, doRefresh, navigation, categories, setCategories, tasks, setTasks }) => {
+const Categories = ({ item, doRefresh, navigation, categories, setCategories, tasks, setTasks, setIsReady }) => {
   const width = Dimensions.get("window").width;
   const [sorting, setSorting] = useState("added");
-
-  console.log(tasks);
 
   const sortTasks = (category) => {
     const sorting = category.sorting;
@@ -58,6 +56,7 @@ const Categories = ({ item, doRefresh, navigation, categories, setCategories, ta
     setCategories(_categories);
     storeData("categories", _categories);
     doRefresh();
+    setIsReady(false);
   };
 
   return (

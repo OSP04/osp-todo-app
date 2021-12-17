@@ -26,7 +26,7 @@ const AllCategory = ({ navigation }) => {
     setCategories(JSON.parse(loadedCategories || "{}"));
     setTasks(JSON.parse(loadedTasks || "{}"));
   };
-  
+
   const addCategory = () => {
     const ID = Date.now().toString();
     const newCategoryObj = {
@@ -62,6 +62,7 @@ const AllCategory = ({ navigation }) => {
     categories.push(newCategoryObj);
     storeData("categories", [...categories]);
     doRefresh();
+    setIsReady(false);
     setState(false);
   };
   
@@ -89,6 +90,7 @@ const AllCategory = ({ navigation }) => {
         setCategories={setCategories}
         tasks={tasks}
         setTasks={setTasks}
+        setIsReady={setIsReady}
       />
       )
   }
