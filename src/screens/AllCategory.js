@@ -60,7 +60,7 @@ const AllCategory = ({ navigation }) => {
     setState(false);
   };
 
-  console.log(categories);
+  // console.log(categories);
 
   const _onPressCancel = () => {
     setNewCategory("");
@@ -75,41 +75,42 @@ const AllCategory = ({ navigation }) => {
     setRefresh((current) => setRefresh(!current));
   };
 
-  const renderItem = ({item, index}) => {
-      return (
-        <Categories
+  const renderItem = ({ item, index }) => {
+    return (
+      <Categories
         key={index}
         item={item}
         doRefresh={doRefresh}
         navigation={navigation}
       />
-      )
-  }
+    );
+  };
   return isReady ? (
-    <FlatList style={{backgroundColor: theme.background}}
-    ListHeaderComponent={
-    <Wrapper>
-    <StyledBar barStyle="default" />
-      <StyledView width={width - 20}>
-        <IconButton
-          type={images.add}
-          onPressOut={() => {
-            setState(true);
-          }}
-        />
-        <AddCategory
-            state={state}
-            value={newCategory}
-            onCancel={_onPressCancel}
-            setColor={setColor}
-            onChangeText={_handleTextChange}
-            onConfirm={addCategory}
-        />
-    </StyledView>
-</Wrapper>
-    }
-    data={categories}
-    renderItem={renderItem}
+    <FlatList
+      style={{ backgroundColor: theme.background }}
+      ListHeaderComponent={
+        <Wrapper>
+          <StyledBar barStyle="default" />
+          <StyledView width={width - 20}>
+            <IconButton
+              type={images.add}
+              onPressOut={() => {
+                setState(true);
+              }}
+            />
+            <AddCategory
+              state={state}
+              value={newCategory}
+              onCancel={_onPressCancel}
+              setColor={setColor}
+              onChangeText={_handleTextChange}
+              onConfirm={addCategory}
+            />
+          </StyledView>
+        </Wrapper>
+      }
+      data={categories}
+      renderItem={renderItem}
     />
   ) : (
     <AppLoading

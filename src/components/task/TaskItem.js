@@ -84,12 +84,12 @@ const TaskItem = ({
       <Animated.View style={styles.animatedView}>
         <LeftItems>
           <IconButton type={returnIcon(item)} onPressOut={toggleItem} />
-          <StyledText>
+          <StyledView>
             <TaskText>{item.text}</TaskText>
             {item.due && (
               <DueDate>{new Date(item.due).toLocaleDateString()}</DueDate>
             )}
-          </StyledText>
+          </StyledView>
         </LeftItems>
         <RightItems>
           {item.image && (
@@ -101,12 +101,11 @@ const TaskItem = ({
           )}
           <IconButton
             type={images.edit}
-            // selectedTask(선택한 task), category(선택한 task가 속한 카테고리 객체), isAddPressed(추가인지 편집인지 구분, 새로 추가면 true 편집이면 false)
             onPressOut={() =>
               navigation.navigate("EditScreen", {
-                selectedTask: item,
-                category: findCategory(item),
-                isAddPressed: false,
+                selectedTask: item, // 선택한 task
+                category: findCategory(item), // 선택한 task가 속한 카테고리 객체
+                isAddPressed: false, // 추가인지 편집인지 구분, 새로 추가면 true 편집이면 false
               })
             }
           />
@@ -134,7 +133,7 @@ const Touchable = styled.TouchableOpacity`
     props.isActive || props.selected ? theme.light : theme.background};
 `;
 
-const StyledText = styled.View`
+const StyledView = styled.View`
   flex-direction: column;
   margin-left: 5px;
 `;
