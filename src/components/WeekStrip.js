@@ -51,31 +51,34 @@ const WeekStrip = ({
   return (
     <StyledView>
       <Year>{year}</Year>
-      <CalendarStrip
-        scrollable
-        selectedDate={selectedDate}
-        style={styles.container}
-        calendarHeaderStyle={styles.header}
-        dateNumberStyle={styles.dateNumber}
-        dateNameStyle={styles.dateName}
-        daySelectionAnimation={{
-          type: "border",
-          duration: 200,
-          borderWidth: 1,
-          borderHighlightColor: "black",
-        }}
-        // weekendDateNameStyle={styles.weekend}
-        // weekendDateNumberStyle={styles.weekend}
-        highlightDateNumberStyle={styles.dateNumber}
-        highlightDateNameStyle={styles.dateName}
-        markedDates={markedDates || {}}
-        iconContainer={{ flex: 0.1 }}
-        calendarHeaderFormat={`MMMM`}
-        onHeaderSelected={() => {
-          navigation.navigate("CalendarScreen", { selectedDate, tasks });
-        }}
-        onDateSelected={(date) => selectDate(date)}
-      />
+      {categories && tasks && (
+        <CalendarStrip
+          scrollable
+          selectedDate={selectedDate}
+          style={styles.container}
+          calendarHeaderStyle={styles.header}
+          dateNumberStyle={styles.dateNumber}
+          dateNameStyle={styles.dateName}
+          daySelectionAnimation={{
+            type: "border",
+            duration: 200,
+            borderWidth: 1,
+            borderHighlightColor: "black",
+          }}
+          // weekendDateNameStyle={styles.weekend}
+          // weekendDateNumberStyle={styles.weekend}
+          highlightDateNumberStyle={styles.dateNumber}
+          highlightDateNameStyle={styles.dateName}
+          markedDates={markedDates || {}}
+          iconContainer={{ flex: 0.1 }}
+          calendarHeaderFormat={`MMMM`}
+          onHeaderSelected={() => {
+            navigation.navigate("CalendarScreen", { selectedDate, tasks });
+          }}
+          onDateSelected={(date) => selectDate(date)}
+        />
+      )}
+
       {categories && tasks ? (
         <HomeTasks
           tasks={tasks}
