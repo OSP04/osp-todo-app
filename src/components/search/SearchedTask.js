@@ -1,7 +1,11 @@
 import styled from "styled-components/native";
 import * as React from "react";
+import { Text, View } from "react-native";
+import { useState } from "react";
 import { Card } from "react-native-paper";
 import { TouchableOpacity } from "react-native";
+import DetailModal from "./DetailModal";
+
 const SearchedTask = ({
   task,
   index,
@@ -12,22 +16,26 @@ const SearchedTask = ({
   due,
   navigation,
 }) => {
+  const [showModal, setShowModal] = useState(false);
+  const openModal = () => {
+    setShowModal((prev) => !prev);
+  };
   return (
-    <TouchableOpacity
-      style={{ marginBottom: 3 }}
-      onPress={() =>
-        navigation.navigate("EditScreen", {
-          selectedTask: task,
-          category: categoryObj,
-          isAddPressed: true,
-        })
-      }
-    >
+    <TouchableOpacity style={{ marginBottom: 3 }} onPress={openModal}>
+      <DetailModal
+        showModal={showModal}
+        setShowModal={setShowModal}
+        headerText="Detail"
+        onCancelPressed={() => setShowModal(false)}
+        text={text}
+        pickedImagePath={task.image}
+        category={category}
+        due={due}
+        date={date}
+        task={task}
+      ></DetailModal>
       <Card>
-        <Card.Title
-          title={index + 1 + ". " + text}
-          titleStyle={{ fontSize: 15, fontWeight: "bold" }}
-        />
+        <Card.Title title={text} titleStyle={{ fontSize: 15 }} />
         <Card.Content>
           <StyledView>
             <Category>
