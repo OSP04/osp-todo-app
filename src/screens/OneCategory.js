@@ -41,7 +41,7 @@ const OneCategory = ({ route, navigation }) => {
           <StyledScroll>
             {item.tasks[0] != null &&
               sortTasks(item).map((item) => (
-                <ShowTaskOne key={item.id} item={item} doRefresh={screenRefresh}
+                <ShowTaskOne key={item.id} item={item} doRefresh={screenRefresh} navigation={navigation}
                 tasks={tasks} setTasks={setTasks} categories={categories} setCategories={setCategories}/>
               ))}
           </StyledScroll>
