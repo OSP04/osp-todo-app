@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { View, StyleSheet, TouchableOpacity, Dimensions } from "react-native";
 import { Text } from "react-native-paper";
 import Logo from "../components/pre/Logo";
@@ -9,17 +9,21 @@ import BackButton from "../components/common/BackButton";
 import Background from "../components/common/Background";
 import * as Validator from "../Validator";
 import { theme } from "../theme";
-import { getUserData, storeUserData } from "../Authentication";
+import { addUser } from "../addUserFunc";
+import useGetUser from "../hooks/useGetUser";
 
 export default function RegisterScreen({ navigation }) {
   const [id, setId] = useState({ value: "", error: "" });
   const [password, setPassword] = useState({ value: "", error: "" });
   const [email, setEmail] = useState({ value: "", error: "" });
 
+  const { users, setUsers, getUserFirst } = useGetUser();
+  useEffect(getUserFirst, []);
+
   const onSignUpPressed = () => {
-    const idError = Validator.idValidator("signup", id.value);
-    const passwordError = Validator.passwordValidator("signup", password.value);
-    const emailError = Validator.emailValidator("signup", email.value);
+    const idError = Validator.idValidator(users, "signup", id.value);
+    const passwordError = Validator.passwordValidator(password.value);
+    const emailError = Validator.emailValidator(email.value);
 
     if (emailError || passwordError || idError) {
       setId({ ...id, error: idError });
@@ -27,11 +31,19 @@ export default function RegisterScreen({ navigation }) {
       setPassword({ ...password, error: passwordError });
       return;
     }
+
+    addUser(users, {
+      id: id,
+      password: password,
+      email: email,
+      isLogedIn: true,
+    });
+
     navigation.reset({
       index: 0,
       routes: [{ name: "LoginScreen" }],
     });
-    storeUserData({ id: id, password: password, email: email });
+
     navigation.navigate("Home");
   };
 
