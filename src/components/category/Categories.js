@@ -68,8 +68,6 @@ const Categories = ({ item, doRefresh, navigation, categories, setCategories, ta
     doRefresh();
   };
 
-  console.log(tasks);
-
   return (
     <Wrapper>
       <StyledView width={width}>

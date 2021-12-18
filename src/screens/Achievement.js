@@ -30,10 +30,6 @@ const Achievement = () => {
     }, [])
   );
 
-  const doRefresh = () => {
-    setRefresh((current) => setRefresh(!current));
-  };
-
   return (
     <Wrapper>
       <StyledBar barStyle="default" />
