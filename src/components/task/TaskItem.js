@@ -92,7 +92,7 @@ const TaskItem = ({
           </StyledView>
         </LeftItems>
         <RightItems>
-          {item.image && (
+          {item.image !== "" && (
             <TaskImage
               path={item.image}
               setModalVisible={setModalVisible}
