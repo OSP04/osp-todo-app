@@ -1,10 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import { Modal, View } from "react-native";
 
 import styled from "styled-components/native";
 import { theme } from "../../src/theme";
 
 const AddCategory = ({ state, value, onChangeText, setColor, onConfirm, onCancel }) => {
+
+    const [red, setRed] = useState(theme.category.red);
+    const [yellow, setYellow] = useState(theme.category.yellow);
+    const [blue, setBlue] = useState(theme.category.blue);
 
     return (
         <Modal
@@ -21,9 +25,21 @@ const AddCategory = ({ state, value, onChangeText, setColor, onConfirm, onCancel
                         onChangeText={onChangeText}>
                     </StyledInput>
                     <ColorView>
-                        <ColorBox style={{ backgroundColor: theme.category.red }} onPress={() => { setColor(theme.category.red) }} />
-                        <ColorBox style={{ backgroundColor: theme.category.yellow }} onPress={() => { setColor(theme.category.yellow) }} />
-                        <ColorBox style={{ backgroundColor: theme.category.blue }} onPress={() => { setColor(theme.category.blue) }} />
+                        <ColorBox style={{ backgroundColor: red }} onPress={() => {
+                            setColor(theme.category.red);
+                            setRed("#FFE6E6");
+                            setYellow(theme.category.yellow);
+                            setBlue(theme.category.blue); }} />
+                        <ColorBox style={{ backgroundColor: yellow }} onPress={() => { 
+                            setColor(theme.category.yellow)
+                            setRed(theme.category.red);
+                            setYellow("#FFF8EA");
+                            setBlue(theme.category.blue); }} />
+                        <ColorBox style={{ backgroundColor: blue }} onPress={() => {
+                            setColor(theme.category.blue);
+                            setRed(theme.category.red);
+                            setYellow(theme.category.yellow);
+                            setBlue("#EBFBFF"); }} />
                     </ColorView>
                     <ButtonView>
                         <ButtonText style={{ color: theme.light }} onPress={onCancel}>Cancel</ButtonText>
