@@ -10,6 +10,7 @@ function App() {
     storeData("users", db.users);
     storeData("comments", db.comments);
   }, []);
+
   return (
     <NavigationContainer>
       <StackNavigator />

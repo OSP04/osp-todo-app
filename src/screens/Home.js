@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import styled from "styled-components/native";
+import { useFocusEffect } from "@react-navigation/native";
 
 import Footer from "../components/common/Footer";
 import WeekStrip from "../components/WeekStrip";
@@ -10,7 +11,13 @@ import useGetData from "../hooks/useGetData";
 const Home = ({ navigation, route }) => {
   const { categories, tasks, setCategories, setTasks, getDataFirst } =
     useGetData();
-  useEffect(getDataFirst, []);
+
+  useFocusEffect(
+    React.useCallback(() => {
+      getDataFirst();
+      return () => {};
+    }, [])
+  );
 
   const [isSelecting, setIsSelecting] = useState(false);
   const [refresh, setRefresh] = useState(false);
