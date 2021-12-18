@@ -30,7 +30,7 @@ const ShowCateTask = ({ item, doRefresh, tasks, setTasks, categories, setCategor
           const index = j;
           _categories[i].tasks.splice(index, 1, item);
           break;
-      }
+        }
       }
     }
     setCategories(_categories);
@@ -116,7 +116,7 @@ const TaskView = styled.View`
 `;
 
 const TaskText = styled.Text`
-  font-size: 14px;
+  font-size: 16px;
   color: ${theme.primary};
 `;
 

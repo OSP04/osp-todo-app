@@ -110,7 +110,7 @@ align-items: center;
 `;
 
 const TaskText = styled.Text`
-  font-size: 14px;
+  font-size: 16px;
   color: ${theme.primary};
 `;
 
