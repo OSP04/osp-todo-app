@@ -21,7 +21,7 @@ const DropButton = ({ category, doRefresh, setSorting }) => {
                 items={items}
                 setOpen={setOpen}
                 setValue={setValue}
-                zIndex={1000}
+                zIndex={3000}
                 dropDownContainerStyle={{ width: 90 }}
                 onChangeValue={(value) => {
                     if (category) {
@@ -40,7 +40,7 @@ const DropButton = ({ category, doRefresh, setSorting }) => {
 
 const styles = StyleSheet.create({
     label: { fontSize: 12 },
-    container: { height: 30, width: 90, marginRight: 20 },
+    container: { height: 30, width: 90, marginRight: 20, elevation: 1 },
     text: {
         fontSize: 12,
     },

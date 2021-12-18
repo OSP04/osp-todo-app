@@ -70,8 +70,9 @@ const Categories = ({ item, doRefresh, navigation, categories, setCategories, ta
 
   return (
     <Wrapper>
-      <StyledView width={width} style={{backgroundColor: theme.background}}>
-        <View style={{flexDirection: "row", alignItems: "center", width: 200, justifyContent: "space-between"}}>
+        <View
+        style={{flexDirection: "row", alignItems: "center", width: width,
+        justifyContent: "space-between", marginLeft: 10}}>
         <StyledText style={{ color: item.color }}
         onPress={() => {
           navigation.navigate("OneCategory", {
@@ -89,13 +90,12 @@ const Categories = ({ item, doRefresh, navigation, categories, setCategories, ta
         <TouchableOpacity onPress={() => {alert("Category deleted"), _deleteCate(item)}}>
           <Text style={{color: item.color, fontWeight: "bold", fontSize: 18}}>X</Text>
         </TouchableOpacity>
-        </View>
         <DropButton
           setSorting={setSorting}
           category={item}
           doRefresh={doRefresh}
         />
-      </StyledView>
+        </View>        
       <Underline style={{ backgroundColor: item.color }} />
       <View style={{height: 6, backgroundColor: theme.background}}/>
       <View style={{height: 150, backgroundColor: theme.background}}>
@@ -117,12 +117,6 @@ const Wrapper = styled.SafeAreaView`
   justify-content: flex-start;
 `;
 
-const StyledView = styled.View`
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-  margin-left: 10px;
-`;
 const StyledText = styled.Text`
   font-weight: bold;
   font-size: 24px;

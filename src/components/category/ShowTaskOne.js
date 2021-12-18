@@ -57,7 +57,8 @@ const ShowTaskOne = ({ item, doRefresh, tasks, setTasks, categories, setCategori
                     <IconButton type={returnIcon(item)} onPressOut={toggleItem} />
                     <View style={{marginLeft: 4}}>
                     <TaskText style={
-                    { textDecorationLine: (item.complete ? "line-through" : "none") }
+                    { textDecorationLine: (item.complete ? "line-through" : "none"),
+                    width: width - 100 }
                     }>{item.text}</TaskText>
                     {item.due && <DueDate>{new Date(item.due).toLocaleDateString()}</DueDate>}
                     </View>
