@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components/native";
+import { BackHandler } from "react-native";
 import { useFocusEffect } from "@react-navigation/native";
 
 import Footer from "../components/common/Footer";
@@ -14,6 +15,19 @@ const Home = ({ navigation }) => {
 
   const [isSelecting, setIsSelecting] = useState(false);
   const [refresh, setRefresh] = useState(false);
+
+  useFocusEffect(
+    React.useCallback(() => {
+      const onBackPress = () => {
+        return true;
+      };
+
+      BackHandler.addEventListener("hardwareBackPress", onBackPress);
+
+      return () =>
+        BackHandler.removeEventListener("hardwareBackPress", onBackPress);
+    }, [])
+  );
 
   useFocusEffect(
     React.useCallback(() => {
