@@ -8,7 +8,6 @@ import DraggableFlatList, {
 
 import TaskItem from "./TaskItem";
 import CategoryBar from "../category/CategoryBar";
-import ImageDialog from "./ImageDialog";
 
 const HomeTasks = ({
   navigation,
@@ -18,11 +17,12 @@ const HomeTasks = ({
   selectedDate,
   isSelecting,
   tasks,
+  modalVisible,
+  setModalVisible,
+  setImagePath,
 }) => {
   const ref = useRef(null);
   const [refresh, setRefresh] = useState(true);
-  const [modalVisible, setModalVisible] = useState(false);
-  const [imagePath, setImagePath] = useState(null);
 
   const sortTasks = (category) => {
     const sorting = category.sorting;
@@ -114,11 +114,6 @@ const HomeTasks = ({
 
   return categories.map((category) => (
     <StyledView key={Date.now() + category.id}>
-      <ImageDialog
-        modalVisible={modalVisible}
-        imagePath={imagePath}
-        setModalVisible={setModalVisible}
-      />
       <CategoryBar
         key={category.id}
         category={category}

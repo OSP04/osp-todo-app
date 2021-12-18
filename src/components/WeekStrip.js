@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { StyleSheet } from "react-native";
+import { StyleSheet, ScrollView } from "react-native";
 import styled from "styled-components/native";
 import CalendarStrip from "react-native-calendar-strip";
 
 import { theme } from "../theme";
 import HomeTasks from "./task/HomeTasks";
 import useSetDate from "../hooks/useSetDate";
+import ImageDialog from "./task/ImageDialog";
 import { useResultContext } from "../components/context";
 
 const WeekStrip = ({
@@ -28,6 +29,9 @@ const WeekStrip = ({
 
   const [refresh, setRefresh] = useState(true);
   const { selectedDay } = useResultContext();
+  const [modalVisible, setModalVisible] = useState(false);
+  const [imagePath, setImagePath] = useState(null);
+
   // Get date from CalendarScreen
   useEffect(() => {
     passDate(selectedDay);
@@ -76,17 +80,26 @@ const WeekStrip = ({
         }}
         onDateSelected={(date) => selectDate(date)}
       />
-
-      <HomeTasks
-        tasks={tasks}
-        setTasks={setTasks}
-        categories={categories}
-        setCategories={setCategories}
-        tasks={tasks}
-        selectedDate={selectedDate}
-        navigation={navigation}
-        isSelecting={isSelecting}
+      <ImageDialog
+        modalVisible={modalVisible}
+        imagePath={imagePath}
+        setModalVisible={setModalVisible}
       />
+      <ScrollView>
+        <HomeTasks
+          tasks={tasks}
+          setTasks={setTasks}
+          categories={categories}
+          setCategories={setCategories}
+          tasks={tasks}
+          selectedDate={selectedDate}
+          navigation={navigation}
+          isSelecting={isSelecting}
+          modalVisible={modalVisible}
+          setModalVisible={setModalVisible}
+          setImagePath={setImagePath}
+        />
+      </ScrollView>
     </StyledView>
   );
 };
@@ -101,8 +114,6 @@ const Year = styled.Text`
   text-align: center;
   margin-top: 10px;
 `;
-
-const EmptyTask = styled.View``;
 
 const styles = StyleSheet.create({
   container: {
