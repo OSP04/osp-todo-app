@@ -17,39 +17,42 @@ const Home = ({ navigation }) => {
 
   useFocusEffect(
     React.useCallback(() => {
-      setIsSelecting(false);
       getDataFirst();
-      return;
+      return () => {
+        setIsSelecting(false);
+      };
     }, [])
   );
+
   return (
     <Wrapper>
       <StyledBar barStyle="auto" />
       <Body>
-        <WeekStrip
-          tasks={tasks}
-          setTasks={setTasks}
-          setCategories={setCategories}
-          categories={categories}
-          navigation={navigation}
-          isSelecting={isSelecting}
-        />
+        {tasks && categories && (
+          <WeekStrip
+            tasks={tasks}
+            setTasks={setTasks}
+            setCategories={setCategories}
+            categories={categories}
+            navigation={navigation}
+            isSelecting={isSelecting}
+          />
+        )}
       </Body>
-      {categories && tasks && (
-        <Footer
-          navigation={navigation}
-          type={images.comment}
-          screens={["Comments", null]}
-          isSelecting={isSelecting}
-          setIsSelecting={setIsSelecting}
-          tasks={tasks}
-          setTasks={setTasks}
-          categories={categories}
-          setCategories={setCategories}
-          setRefresh={setRefresh}
-          where="home"
-        />
-      )}
+
+      <Footer
+        navigation={navigation}
+        type={images.comment}
+        screens={["Comments", null]}
+        isSelecting={isSelecting}
+        setIsSelecting={setIsSelecting}
+        tasks={tasks}
+        setTasks={setTasks}
+        categories={categories}
+        setCategories={setCategories}
+        setRefresh={setRefresh}
+        where="home"
+      />
     </Wrapper>
   );
 };

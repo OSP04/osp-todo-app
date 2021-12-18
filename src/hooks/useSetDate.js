@@ -7,10 +7,8 @@ const useSetDate = () => {
 
   // Get date from CalendarScreen by route
   const passDate = (selectedDay) => {
-    if (selectedDay) {
+    if (selectedDay !== []) {
       const date = new Date(selectedDay.timestamp);
-      setSelectedDate(date);
-      setYear(selectedDay.year);
     }
   };
 

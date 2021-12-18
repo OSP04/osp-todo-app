@@ -70,10 +70,26 @@ const Categories = ({ item, doRefresh, navigation, categories, setCategories, ta
 
   return (
     <Wrapper>
-      <StyledView width={width}>
-        <View style={{flexDirection: "row", alignItems: "center", width: 200, justifyContent: "space-between"}}>
-        <StyledText style={{ color: item.color }}>{item.title}</StyledText>
-        <TouchableOpacity onPress={() => {alert("Category deleted"), _deleteCate(item)}}>
+      <StyledView width={width} >
+      <View width={width - 110}
+        style={{flexDirection: "row", alignItems: "center",
+        justifyContent: "space-between", marginLeft: 10, backgroundColor: theme.background}}>
+        <StyledText style={{ color: item.color }}
+        onPress={() => {
+          navigation.navigate("OneCategory", {
+            key: item.id,
+            item: item,
+            sortTasks: sortTasks,
+            setSorting: setSorting,
+            doRefresh: doRefresh,
+            tasks: tasks,
+            setTasks: setTasks,
+            categories: categories,
+            setCategories: setCategories,
+          })
+        }}>{item.title}</StyledText>
+        <TouchableOpacity style={{marginRight: 90}}
+        onPress={() => {alert("Category deleted"), _deleteCate(item)}}>
           <Text style={{color: item.color, fontWeight: "bold", fontSize: 18}}>X</Text>
         </TouchableOpacity>
         </View>
@@ -82,9 +98,10 @@ const Categories = ({ item, doRefresh, navigation, categories, setCategories, ta
           category={item}
           doRefresh={doRefresh}
         />
-      </StyledView>
+      </StyledView>      
       <Underline style={{ backgroundColor: item.color }} />
-      <View>
+      <View style={{height: 6, backgroundColor: theme.background}}/>
+      <View style={{height: 150, backgroundColor: theme.background}}>
         {item.tasks[0] != null ? (
           sortTasks(item).map((item) => (
             <ShowCateTask key={item.id} item={item} doRefresh={doRefresh} navigation={navigation}
@@ -94,25 +111,6 @@ const Categories = ({ item, doRefresh, navigation, categories, setCategories, ta
           <View style={{ height: 50 }} />
         )}
       </View>
-      <MoreView width={width}>
-        <MoreButton
-          onPress={() => {
-            navigation.navigate("OneCategory", {
-              key: item.id,
-              item: item,
-              sortTasks: sortTasks,
-              setSorting: setSorting,
-              doRefresh: doRefresh,
-              tasks: tasks,
-              setTasks: setTasks,
-              categories: categories,
-              setCategories: setCategories,
-            })
-          }}
-        >
-          <Text style={{color: theme.light}}>+ See more tasks...</Text>
-        </MoreButton>
-      </MoreView>
     </Wrapper>
   );
 };
@@ -123,11 +121,11 @@ const Wrapper = styled.SafeAreaView`
 `;
 
 const StyledView = styled.View`
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-  margin-left: 10px;
+flex-direction: row;
+align-items: center;
+justify-content: space-between;
 `;
+
 const StyledText = styled.Text`
   font-weight: bold;
   font-size: 24px;
@@ -139,18 +137,6 @@ const Underline = styled.View`
   width: 200px;
   height: 2px;
   margin-left: 10px;
-  margin-bottom: 6px;
-`;
-
-const MoreView = styled.View`
-  align-items: flex-end;
-  padding-right: 20px;
-  padding-top: 10px;
-  padding-bottom: 10px;
-`;
-
-const MoreButton = styled.TouchableOpacity`
-  color: ${theme.light};
 `;
 
 export default Categories;

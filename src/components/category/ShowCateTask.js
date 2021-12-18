@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Dimensions, View } from "react-native";
 import styled from "styled-components/native";
 import { storeData } from "../../db";
@@ -30,7 +30,7 @@ const ShowCateTask = ({ item, doRefresh, tasks, setTasks, categories, setCategor
           const index = j;
           _categories[i].tasks.splice(index, 1, item);
           break;
-      }
+        }
       }
     }
     setCategories(_categories);
@@ -52,11 +52,11 @@ const ShowCateTask = ({ item, doRefresh, tasks, setTasks, categories, setCategor
 
   return (
     <StyledView>
-      {item.id != null && item.count < 5 && (
-        <TaskView width={width}>
+      {item.id != null && (
+        <TaskView style={{height: 38, width: width, backgroundColor: theme.background}}>
           <LeftView>
             <IconButton type={returnIcon(item)} onPressOut={toggleItem} />
-            <View style={{marginLeft: 4}}>
+            <View style={{marginLeft: 4, backgroundColor: theme.background}}>
             <TaskText
               style={{
                 textDecorationLine: item.complete ? "line-through" : "none",
@@ -116,8 +116,7 @@ const TaskView = styled.View`
 `;
 
 const TaskText = styled.Text`
-  font-size: 14px;
-  color: ${theme.primary};
+  font-size: 16px;
 `;
 
 export default ShowCateTask;

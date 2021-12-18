@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components/native";
 import Animated from "react-native-reanimated";
-import { StyleSheet, View } from "react-native";
+import { StyleSheet } from "react-native";
 import { useOnCellActiveAnimation } from "react-native-draggable-flatlist";
 
 import { theme } from "../../theme";
@@ -153,12 +153,12 @@ const LeftItems = styled.View`
   flex: 1;
   flex-direction: row;
   align-items: center;
-  margin-left: 5px;
 `;
 
 const RightItems = styled.View`
   flex-direction: row;
   align-items: center;
+  margin-left: 5px;
 `;
 
 export default TaskItem;
