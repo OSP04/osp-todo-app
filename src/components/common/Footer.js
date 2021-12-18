@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components/native";
+import { View } from "react-native";
 
 import { images } from "../../images";
 import { theme } from "../../theme";
@@ -78,7 +79,7 @@ const Footer = ({
           (item) => item.selected === false
         );
         // Delete tasks of all tasks
-          _tasks.push(...unSelectedTasks);
+        _tasks.push(...unSelectedTasks);
         // Delete tasks of categories
         _categories[i].tasks = unSelectedTasks;
       }
@@ -89,7 +90,7 @@ const Footer = ({
     storeData("categories", _categories);
     setIsSelecting(false);
     setAll(false);
-    setRefresh(current => !current);
+    setRefresh((current) => !current);
   };
 
   return (
@@ -99,12 +100,14 @@ const Footer = ({
           type={type}
           onPressOut={() => screens[0] && navigation.navigate(screens[0])}
         />
-      ) : (
+      ) : where === "all" ? (
         <AllButton all={all} onPress={selectAll} isSelecting={isSelecting}>
           <AllText all={all} isSelecting={isSelecting}>
             All
           </AllText>
         </AllButton>
+      ) : (
+        <View />
       )}
 
       <RightButtons>

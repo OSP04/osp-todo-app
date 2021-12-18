@@ -47,13 +47,13 @@ const AllCategory = ({ navigation }) => {
         selected: false,
         created: "",
         location: {
-            text: "",
-            region: {},
-            locationData: {
-              mainText: "",
-              address: "",
-            },
+          text: "",
+          region: {},
+          locationData: {
+            mainText: "",
+            address: "",
           },
+        },
         memo: "",
       },
     };
@@ -65,7 +65,7 @@ const AllCategory = ({ navigation }) => {
     setIsReady(false);
     setState(false);
   };
-  
+
   const _onPressCancel = () => {
     setNewCategory("");
     setState(false);
@@ -79,9 +79,9 @@ const AllCategory = ({ navigation }) => {
     setRefresh((current) => setRefresh(!current));
   };
 
-  const renderItem = ({item, index}) => {
-      return (
-        <Categories
+  const renderItem = ({ item, index }) => {
+    return (
+      <Categories
         key={index}
         item={item}
         doRefresh={doRefresh}
@@ -92,27 +92,30 @@ const AllCategory = ({ navigation }) => {
         setTasks={setTasks}
         setIsReady={setIsReady}
       />
-      )
-  }
-  
+    );
+  };
+
   return isReady ? (
     <Wrapper>
-      <FlatList style={{backgroundColor: theme.background}}
-      data={categories}
-      renderItem={renderItem}
+      <FlatList
+        style={{ backgroundColor: theme.background }}
+        data={categories}
+        renderItem={renderItem}
       />
       <StyledView width={width - 20}>
         <TouchableOpacity onPress={() => setState(true)}>
-          <Text style={{fontSize: 16, margin: 10, fontWeight: "bold"}}>+ Add Category</Text>
+          <Text style={{ fontSize: 16, margin: 10, fontWeight: "bold" }}>
+            + Add Category
+          </Text>
         </TouchableOpacity>
-          <AddCategory
-              state={state}
-              value={newCategory}
-              onCancel={_onPressCancel}
-              setColor={setColor}
-              onChangeText={_handleTextChange}
-              onConfirm={addCategory}
-          />
+        <AddCategory
+          state={state}
+          value={newCategory}
+          onCancel={_onPressCancel}
+          setColor={setColor}
+          onChangeText={_handleTextChange}
+          onConfirm={addCategory}
+        />
       </StyledView>
     </Wrapper>
   ) : (

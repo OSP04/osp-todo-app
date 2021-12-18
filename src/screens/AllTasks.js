@@ -1,10 +1,11 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef } from "react";
 import styled from "styled-components/native";
 import DraggableFlatList, {
   ScaleDecorator,
   ShadowDecorator,
   OpacityDecorator,
 } from "react-native-draggable-flatlist";
+import { useFocusEffect } from "@react-navigation/native";
 
 import { theme } from "../theme";
 import Dropdown from "../components/common/Dropdown";
@@ -16,7 +17,6 @@ import ImageDialog from "../components/task/ImageDialog";
 const AllTasks = ({ navigation }) => {
   const { categories, tasks, setCategories, setTasks, getDataFirst } =
     useGetData();
-  useEffect(getDataFirst, []);
 
   const ref = useRef(null);
   const [refresh, setRefresh] = useState(false);
@@ -24,6 +24,13 @@ const AllTasks = ({ navigation }) => {
   const [isSelecting, setIsSelecting] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
   const [imagePath, setImagePath] = useState(null);
+
+  useFocusEffect(
+    React.useCallback(() => {
+      getDataFirst();
+      return () => {};
+    }, [])
+  );
 
   const sortTasks = () => {
     const _tasks = tasks;
