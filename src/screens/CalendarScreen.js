@@ -4,6 +4,7 @@ import { CalendarList } from "react-native-calendars";
 import BackButton from "../components/common/BackButton";
 import { useResultContext } from "../components/context";
 import { theme } from "../theme";
+import TopHeader from "../components/common/TopHeader";
 const formatDateObj = (newDate) => {
   const year = newDate.getFullYear();
   const month = newDate.getMonth() + 1;
@@ -38,8 +39,10 @@ const CalendarScreen = ({ route, navigation }) => {
   });
 
   return (
-    <View style={{ marginTop: 50, flex: 1 }}>
-      <BackButton onPressOut={() => navigation.goBack()} />
+    <View style={{}}>
+      <TopHeader>
+        <BackButton onPressOut={() => navigation.goBack()} />
+      </TopHeader>
       <CalendarList
         current={formatDateObj(selectedDate)}
         // Callback which gets executed when visible months change in scroll view. Default = undefined
