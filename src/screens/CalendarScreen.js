@@ -3,7 +3,7 @@ import React from "react";
 import { CalendarList } from "react-native-calendars";
 import BackButton from "../components/common/BackButton";
 import { useResultContext } from "../components/context";
-
+import { theme } from "../theme";
 const formatDateObj = (newDate) => {
   const year = newDate.getFullYear();
   const month = newDate.getMonth() + 1;
@@ -17,9 +17,6 @@ const formatDateObj = (newDate) => {
 const CalendarScreen = ({ route, navigation }) => {
   const { selectedDate, tasks } = route.params;
   const { setSelectedDay } = useResultContext();
-  //console.log("Chekc", tasks);
-  //console.log(selectedDate);
-  //console.log(typeof tasks);
 
   const markingDates = tasks.map((task) => task.date.split("T")[0]);
   //task.date는 스트링
@@ -54,6 +51,28 @@ const CalendarScreen = ({ route, navigation }) => {
           //해당 날짜의 메인으로 이동
         }}
         markedDates={mark}
+        theme={{
+          todayTextColor: theme.colors.primary,
+          dayTextColor: "#222222",
+          textDisabledColor: "#d9e1e8",
+          monthTextColor: "#222222",
+          textDayFontWeight: "300",
+          textMonthFontWeight: "bold",
+          textDayHeaderFontWeight: "400",
+          textDayFontSize: 16,
+          textMonthFontSize: 18,
+          selectedDayBackgroundColor: theme.colors.primary,
+          selectedDayTextColor: "white",
+          textDayHeaderFontSize: 8,
+          "stylesheet.calendar.header": {
+            dayTextAtIndex0: {
+              color: "red",
+            },
+            dayTextAtIndex6: {
+              color: "blue",
+            },
+          },
+        }}
       />
     </View>
   );
