@@ -1,6 +1,13 @@
 import { theme } from "../../theme";
 import React, { useState, useEffect, useContext } from "react";
-import { StyleSheet, View, Alert, Pressable, Text } from "react-native";
+import {
+  StyleSheet,
+  View,
+  Alert,
+  Pressable,
+  Text,
+  Keyboard,
+} from "react-native";
 import EditTaskContext from "../../context/EditTask";
 import {
   addTodo,
@@ -39,6 +46,7 @@ const EditButtons = ({ selectedTask, goHome }) => {
   }, []);
 
   const onDeletePressed = () => {
+    Keyboard.dismiss();
     Alert.alert(
       "Delete",
       "Do you really want to delete this todo?",
@@ -68,6 +76,7 @@ const EditButtons = ({ selectedTask, goHome }) => {
   };
 
   const onConfirmPressed = () => {
+    Keyboard.dismiss();
     if (editingText === "") {
       Alert.alert(
         "Error",
