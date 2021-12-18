@@ -85,7 +85,7 @@ const TaskItem = ({
         <LeftItems>
           <IconButton type={returnIcon(item)} onPressOut={toggleItem} />
           <StyledView>
-            <TaskText>{item.text}</TaskText>
+            <TaskText completed={item.complete}>{item.text}</TaskText>
             {item.due && (
               <DueDate>{new Date(item.due).toLocaleDateString()}</DueDate>
             )}
@@ -138,7 +138,10 @@ const StyledView = styled.View`
   margin-left: 5px;
 `;
 
-const TaskText = styled.Text``;
+const TaskText = styled.Text`
+  text-decoration-line: ${(props) =>
+    props.completed ? "line-through" : "none"};
+`;
 
 const DueDate = styled.Text`
   color: ${theme.secondary};
