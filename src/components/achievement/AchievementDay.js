@@ -1,34 +1,18 @@
-import { useFocusEffect } from "@react-navigation/native";
-import React, { useState } from "react";
+import React from "react";
 import { Dimensions } from "react-native";
 import styled from "styled-components/native";
 import { theme } from "../../theme";
 import DoneDay from "../achievement/DoneDay";
 
-const AchievementDay = () => {
+const AchievementDay = ({ tasks }) => {
 
     const width = Dimensions.get('window').width;
-    
-    const [achieveDay, setAchieveDay] = useState({});
-
-    const _loadAchieveDay = async () => {
-    const loadedAchieveDay = await AsyncStorage.getItem("tasks");
-    setAchieveDay(JSON.parse(loadedAchieveDay || "{}"));
-    };
-
-    const item =
-    useFocusEffect(
-        React.useCallback(() => {
-        _loadAchieveDay();
-        return () => {};
-        }, [])
-    );
 
     return (
         <Wrapper>
             <StyledScroll>
                 <AchievementView width={width}>
-                    <DoneDay key={achieveDay.id} item={achieveDay} />
+                    <DoneDay key={tasks.id} item={tasks} />
                 </AchievementView>
             </StyledScroll>
         </Wrapper>

@@ -9,13 +9,13 @@ const DoneDay = ({ item }) => {
     const today = new Date();
 
     const countTodayTask = (tasks) => { // count tasks for today
-        const todayTasks = tasks.filter((task) => task.date.toDateString() === today.toDateString());
+        const todayTasks = tasks.filter((task) => task.date === today);
 
         return todayTasks.length;
     };
 
     const countTodayDoneTask = (tasks) => { // count tasks that are completed for today
-        const todayTasks = tasks.filter((task) => task.date.toDateString() === today.toDateString());
+        const todayTasks = tasks.filter((task) => task.date === today);
         const todayDoneTasks = todayTasks.filter((task) => task.complete === true);
 
         return todayDoneTasks.length;
