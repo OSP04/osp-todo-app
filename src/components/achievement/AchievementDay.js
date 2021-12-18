@@ -1,8 +1,8 @@
+import AppLoading from "expo-app-loading";
 import React, { useState } from "react";
 import { Dimensions } from "react-native";
 
 import styled from "styled-components/native";
-import { db } from "../../db";
 import { theme } from "../../theme";
 import DoneDay from "../achievement/DoneDay";
 
@@ -10,16 +10,30 @@ const AchievementDay = () => {
 
     const width = Dimensions.get('window').width;
 
-    const [tasks, setTasks] = useState(db.tasks);
+    const [isReady, setIsReady] = useState(false);
 
-    return (
-        <Wrapper>
+    const [achieveDay, setAchieveDay] = useState({});
+    const _loadAchieveDay = async () => {
+    const loadedAchieveDay = await AsyncStorage.getItem("tasks");
+    setAchieveDay(JSON.parse(loadedAchieveDay || "{}"));
+    };
+
+    console.log(achieveDay);
+
+    return ( isReady ?
+        (<Wrapper>
             <StyledScroll>
                 <AchievementView width={width}>
-                    <DoneDay key={tasks.id} item={tasks} />
+                    <DoneDay key={achieveDay.id} item={achieveDay} />
                 </AchievementView>
             </StyledScroll>
-        </Wrapper>
+        </Wrapper>)
+        : (
+            <AppLoading
+            startAsync={_loadAchieveDay}
+            onFinish={() => setIsReady(true)}
+            onError={console.error}/>
+        )
     );
 };
 
