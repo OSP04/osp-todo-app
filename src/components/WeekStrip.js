@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { StyleSheet } from "react-native";
+import { StyleSheet, Text } from "react-native";
 import styled from "styled-components/native";
 import CalendarStrip from "react-native-calendar-strip";
 
@@ -30,7 +30,6 @@ const WeekStrip = ({
 
   // Get date from CalendarScreen
   useEffect(() => {
-    console.log(route.params);
     passDate(route);
     setRefresh((current) => !current); // Refresh screen
   }, [route.params]);
@@ -69,7 +68,7 @@ const WeekStrip = ({
         // weekendDateNumberStyle={styles.weekend}
         highlightDateNumberStyle={styles.dateNumber}
         highlightDateNameStyle={styles.dateName}
-        markedDates={markedDates}
+        markedDates={markedDates || {}}
         iconContainer={{ flex: 0.1 }}
         calendarHeaderFormat={`MMMM`}
         onHeaderSelected={() => {
@@ -77,16 +76,22 @@ const WeekStrip = ({
         }}
         onDateSelected={(date) => selectDate(date)}
       />
-      <HomeTasks
-        tasks={tasks}
-        setTasks={setTasks}
-        categories={categories}
-        setCategories={setCategories}
-        tasks={tasks}
-        selectedDate={selectedDate}
-        navigation={navigation}
-        isSelecting={isSelecting}
-      />
+      {categories && tasks ? (
+        <HomeTasks
+          tasks={tasks}
+          setTasks={setTasks}
+          categories={categories}
+          setCategories={setCategories}
+          tasks={tasks}
+          selectedDate={selectedDate}
+          navigation={navigation}
+          isSelecting={isSelecting}
+        />
+      ) : (
+        <EmptyTask>
+          <Text>Add a category in Category menu</Text>
+        </EmptyTask>
+      )}
     </StyledView>
   );
 };
@@ -100,6 +105,8 @@ const Year = styled.Text`
   color: ${theme.secondary};
   text-align: center;
 `;
+
+const EmptyTask = styled.View``;
 
 const styles = StyleSheet.create({
   container: {
