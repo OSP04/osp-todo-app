@@ -107,6 +107,7 @@ const StyledView = styled.View`
 const Year = styled.Text`
   color: ${theme.secondary};
   text-align: center;
+  margin-top: 10px;
 `;
 
 const EmptyTask = styled.View``;
