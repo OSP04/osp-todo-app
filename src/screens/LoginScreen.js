@@ -44,8 +44,7 @@ export default function LoginScreen({ navigation }) {
 
   return (
     <Background type="pre">
-      <Logo />
-      <PreText>4TODO</PreText>
+      <Logo type="name" />
       <PreTextInput
         label="ID"
         returnKeyType="next"
