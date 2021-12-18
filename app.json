@@ -34,9 +34,10 @@
       },
       "softwareKeyboardLayoutMode": "pan"
     },
-
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "description": "오픈 SW 플랫폼 프로젝트 -- To-do app 개발하기",
+    "githubUrl": "https://github.com/OSP04/osp-todo-app"
   }
 }

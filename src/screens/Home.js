@@ -53,7 +53,6 @@ const Home = ({ navigation }) => {
           />
         )}
       </Body>
-
       <Footer
         navigation={navigation}
         type={images.comment}
