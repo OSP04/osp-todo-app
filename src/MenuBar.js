@@ -47,6 +47,7 @@ const Wrapper = styled.SafeAreaView`
 flex-direction: row;
 justify-content: flex-start;
 align-items: center;
+padding-horizontal: 15px;
 `;
 
 const MenuView = styled.View`
@@ -68,7 +69,7 @@ background-color: ${theme.primary};
 width: 100px;
 height: 4px;
 margin-top: 4px;
-margin-left: 14px;
+margin-left: 16px;
 `;
 
 export default MenuBar;
