@@ -141,7 +141,6 @@ const HomeTasks = ({
 };
 
 const StyledView = styled.View`
-  width: 98%;
   flex: 1;
   margin-bottom: 5%;
   min-height: 200px;
