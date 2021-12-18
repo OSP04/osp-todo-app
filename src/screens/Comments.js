@@ -4,13 +4,11 @@ import { Keyboard } from "react-native";
 import styled from "styled-components/native";
 
 import { db } from "../db";
-import { images } from "../images";
 import { theme } from "../theme";
 import CommentItem from "../components/comment/CommentItem";
-import TopBar from "../components/common/TopBar";
 import CommentInput from "../components/comment/CommentInput";
 
-const Comments = ({ navigation }) => {
+const Comments = () => {
   const [user, setUser] = useState(db.users[0]); // 임의로 지정한 사용자 (추후 로그인 정보랑 비교)
   const [comments, setComments] = useState(user.comments);
   const [newComment, setNewComment] = useState("");
@@ -36,12 +34,6 @@ const Comments = ({ navigation }) => {
 
   return (
     <Wrapper>
-      <TopBar
-        types={[images.back, null]}
-        screens={["Home", null]}
-        title="Comments"
-        navigation={navigation}
-      />
       <StyledScroll>
         {comments.map((item) => (
           <CommentItem key={item.id} comment={item} />

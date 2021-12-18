@@ -153,7 +153,7 @@ const AllButton = styled(Button)`
 
 const SelectButton = styled(AllButton)`
   margin-left: 15px;
-  border: ${(props) => (props.isSelecting ? theme.light : theme.text)};
+  border: ${(props) => (props.isSelecting ? theme.light : theme.primary)};
 `;
 
 const AllText = styled.Text`
