@@ -63,7 +63,7 @@ const EditDueDate = () => {
 
   const onConfirmPressed = () => {
     setDueDate(selectedDate);
-    updateDue(Date(selectedDate));
+    updateDue(new Date(selectedDate));
     setShowModal(false);
   };
 
