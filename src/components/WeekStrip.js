@@ -119,13 +119,13 @@ const styles = StyleSheet.create({
   },
 
   header: {
-    color: theme.primary,
+    color: theme.text,
     fontSize: 20,
     fontWeight: "bold",
   },
 
   dateNumber: {
-    color: theme.primary,
+    color: theme.text,
     fontWeight: "bold",
     fontSize: 12,
   },

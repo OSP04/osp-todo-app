@@ -13,7 +13,6 @@ const CommentInput = ({ newComment, onChangeText, onSubmitEditing }) => {
         value={newComment}
         multiline={true}
         onChangeText={onChangeText}
-        onSubmitEditing={onSubmitEditing}
       />
       <IconButton type={images.send} onPressOut={onSubmitEditing} />
     </StyledView>

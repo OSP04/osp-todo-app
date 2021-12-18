@@ -14,6 +14,7 @@ const Home = ({ navigation, route }) => {
 
   useFocusEffect(
     React.useCallback(() => {
+      console.log(route.params);
       getDataFirst();
       return;
     }, [])
