@@ -13,6 +13,7 @@ import TaskItem from "../components/task/TaskItem";
 import Footer from "../components/common/Footer";
 import useGetData from "../hooks/useGetData";
 import ImageDialog from "../components/task/ImageDialog";
+import { storeData } from "../db";
 
 const AllTasks = ({ navigation }) => {
   const { categories, tasks, setCategories, setTasks, getDataFirst } =
@@ -99,6 +100,7 @@ const AllTasks = ({ navigation }) => {
   const dragAndSave = (data) => {
     if (sorting === "added") {
       setTasks(data);
+      storeData("tasks", data);
     } else if (sorting === "due") {
       console.log("Prevent");
     } else {
@@ -107,6 +109,7 @@ const AllTasks = ({ navigation }) => {
         filteredTasks = filteredTasks.filter((item) => item.id !== data[i].id);
       }
       setTasks([...data, ...filteredTasks]);
+      storeData("tasks", [...data, ...filteredTasks]);
     }
   };
 

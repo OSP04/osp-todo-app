@@ -87,7 +87,7 @@ const EditStartDate = () => {
             }}
             onPress={() => {
               setStartDate(selectedDate);
-              updateDate(Date(selectedDate));
+              updateDate(new Date(selectedDate));
               setShowModal(false);
             }}
           >
