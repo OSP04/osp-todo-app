@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Dimensions, View } from "react-native";
 import styled from "styled-components/native";
 import { storeData } from "../../db";
@@ -89,19 +89,19 @@ const StyledView = styled.View`
   flex-direction: column;
   align-items: flex-start;
   justify-content: flex-start;
-  margin-left: 10px;
 `;
 
 const LeftView = styled.View`
   flex-direction: row;
   padding-top: 2px;
   align-items: center;
+  margin-left: 15px;
 `;
 
 const RightView = styled.View`
   flex-direction: row;
   padding-top: 2px;
-  padding-right: 24px;
+  margin-right: 15px;
 `;
 
 const DueDate = styled.Text`

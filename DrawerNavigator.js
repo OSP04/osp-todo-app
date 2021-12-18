@@ -46,9 +46,10 @@ const DrawerNavigator = ({ navigation }) => {
         component={Home}
         options={{
           drawerLabel: "Home",
-          headerTitle: () => (
+          headerLeft: () => (
             <Image source={require("./assets/logo.png")} style={styles.image} />
           ),
+          headerTitle: () => null,
           headerRight: () => (
             <RightContainer>
               <TouchableOpacity
@@ -94,6 +95,7 @@ const DrawerNavigator = ({ navigation }) => {
           headerLeft: () => (
             <TouchableOpacity
               onPress={() => navigation.dispatch(DrawerActions.jumpTo("Home"))}
+              style={{ margin: 15 }}
             >
               <IconButton
                 type={images.back}
@@ -114,6 +116,7 @@ const DrawerNavigator = ({ navigation }) => {
           headerLeft: () => (
             <TouchableOpacity
               onPress={() => navigation.dispatch(DrawerActions.jumpTo("Home"))}
+              style={{ margin: 15 }}
             >
               <IconButton
                 type={images.back}
@@ -134,6 +137,7 @@ const DrawerNavigator = ({ navigation }) => {
           headerLeft: () => (
             <TouchableOpacity
               onPress={() => navigation.dispatch(DrawerActions.jumpTo("Home"))}
+              style={{ margin: 15 }}
             >
               <RightContainer>
                 <MenuButton>
@@ -192,6 +196,7 @@ const DrawerNavigator = ({ navigation }) => {
           headerLeft: () => (
             <TouchableOpacity
               onPress={() => navigation.dispatch(DrawerActions.jumpTo("Home"))}
+              style={{ margin: 15 }}
             >
               <IconButton
                 type={images.back}
@@ -241,9 +246,9 @@ const DrawerNavigator = ({ navigation }) => {
 };
 const styles = StyleSheet.create({
   image: {
-    width: 40,
-    height: 40,
-    marginBottom: 8,
+    width: 35,
+    height: 35,
+    margin: 10,
   },
   menu: { width: 40, height: 40 },
   search: { width: 40, height: 40 },

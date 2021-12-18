@@ -68,7 +68,7 @@ background-color: ${theme.primary};
 width: 100px;
 height: 4px;
 margin-top: 4px;
-margin-left: 14px;
+margin-left: 16px;
 `;
 
 export default MenuBar;

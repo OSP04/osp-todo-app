@@ -29,12 +29,11 @@ const EditLocation = () => {
   const [isMapSelected, setIsMapSelected] = useState(false);
   const [addressPicker, setAddressPicker] = useState({
     region: {
-      latitude: 35.91395373474155,
-      longitude: 127.73829440215488,
+      latitude: 0.0,
+      longitude: 0.0,
       latitudeDelta,
       longitudeDelta,
     },
-    listViewDisplayed: false,
   });
 
   useEffect(() => {
@@ -70,12 +69,11 @@ const EditLocation = () => {
     setLocation("");
     setAddressPicker({
       region: {
-        latitude: 35.91395373474155,
-        longitude: 127.73829440215488,
+        latitude: 0.0,
+        longitude: 0.0,
         latitudeDelta,
         longitudeDelta,
       },
-      listViewDisplayed: false,
     });
     updateLocation({
       text: "",
@@ -97,7 +95,6 @@ const EditLocation = () => {
 
   const onMapContainerPressed = (data, details) => {
     setAddressPicker({
-      listViewDisplayed: false,
       region: {
         latitude: details.geometry.location.lat,
         longitude: details.geometry.location.lng,
@@ -203,6 +200,11 @@ const EditLocation = () => {
           onEndEditing={() => {
             updateLocation({
               text: location,
+              region: {},
+              locationData: {
+                mainText: "",
+                address: "",
+              },
             });
           }}
         />
