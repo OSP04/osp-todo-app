@@ -14,7 +14,7 @@ const SearchedTask = ({
 }) => {
   return (
     <TouchableOpacity
-      style={{ marginRight: 10, marginTop: 17 }}
+      style={{ marginBottom: 3 }}
       onPress={() =>
         navigation.navigate("EditScreen", {
           selectedTask: task,
@@ -24,13 +24,15 @@ const SearchedTask = ({
       }
     >
       <Card>
+        <Card.Title
+          title={index + 1 + ". " + text}
+          titleStyle={{ fontSize: 15 }}
+        />
         <Card.Content>
           <StyledView>
-            <FirstElements>
-              <Index>{index + 1}. </Index>
-              <TaskText>{text}</TaskText>
-            </FirstElements>
-            <Category> {category} </Category>
+            <Category>
+              {category} {"  "}
+            </Category>
             <Date>
               {date && <StartDate>{date}</StartDate>}
               {due && <DueDate>~{due}</DueDate>}
@@ -45,7 +47,7 @@ export default SearchedTask;
 const StyledView = styled.Text`
   display: flex;
   flex-direction: column;
-  margin-left: 5px;
+  margin-horizontal: 10px;
 `;
 const FirstElements = styled.Text``;
 const TaskText = styled.Text``;
@@ -57,6 +59,7 @@ const StartDate = styled.Text`
   font-size: 12px;
 `;
 const Category = styled.Text`
-  font-size: 12px;
+  font-size: 13px;
+  font-weight: bold;
 `;
 const Index = styled.Text``;

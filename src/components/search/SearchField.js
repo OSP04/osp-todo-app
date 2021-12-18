@@ -1,7 +1,7 @@
 import { SearchBar } from "react-native-elements";
 import React, { useState } from "react";
 import { getStatusBarHeight } from "react-native-status-bar-height";
-import { StyleSheet, View } from "react-native";
+import { StyleSheet, View, ScrollView } from "react-native";
 import styled from "styled-components/native";
 import useSearchTask from "./useSearchTask";
 
@@ -13,7 +13,7 @@ function SearchField() {
   };
 
   return (
-    <View>
+    <ScrollView>
       <SearchBar
         placeholder="Type Here..."
         onChangeText={updateSearch}
@@ -25,8 +25,8 @@ function SearchField() {
         inputStyle={{ backgroundColor: "#ece6ff" }}
         leftIconContainerStyle={{ backgroundColor: "#ece6ff" }}
       />
-      <TasksContainer style={styles.container}>{searchedTask}</TasksContainer>
-    </View>
+      {searchedTask}
+    </ScrollView>
   );
 }
 export default SearchField;

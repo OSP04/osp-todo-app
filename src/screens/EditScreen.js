@@ -1,13 +1,5 @@
 import React, { useState, useEffect } from "react";
-import {
-  StyleSheet,
-  View,
-  Alert,
-  Pressable,
-  Text,
-  ScrollView,
-  SafeAreaView,
-} from "react-native";
+import { StyleSheet, View, Alert, Keyboard } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
 import { theme } from "../theme";
@@ -52,6 +44,7 @@ const EditScreen = ({ route, navigation }) => {
   }, []);
 
   const onBackPressed = () => {
+    Keyboard.dismiss();
     Alert.alert(
       "Discard Changes",
       "You have unsaved changes. Are you sure to discard them and leave the screen?",
