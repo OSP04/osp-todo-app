@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Alert, Dimensions, Text, View } from "react-native";
+import { Dimensions, Text, View } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import styled from "styled-components/native";
 import { storeData } from "../../db";
@@ -55,10 +55,9 @@ const Categories = ({ item, doRefresh, navigation, categories, setCategories, ta
     }
     setCategories(_categories);
     storeData("categories", _categories);
-    doRefresh();
     setIsReady(false);
+    doRefresh();
   };
-  
 
   return (
     <Wrapper>

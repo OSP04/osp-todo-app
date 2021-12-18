@@ -6,8 +6,9 @@ import Categories from "../components/category/Categories";
 import { theme } from "../../src/theme";
 import AddCategory from "../screens/AddCategory";
 import { storeData } from "../../src/db";
-import AppLoading from "expo-app-loading";
 import { FlatList, TouchableOpacity } from "react-native-gesture-handler";
+import { useFocusEffect } from "@react-navigation/native";
+import AppLoading from "expo-app-loading";
 
 const AllCategory = ({ navigation }) => {
   const width = Dimensions.get("window").width;
@@ -26,6 +27,14 @@ const AllCategory = ({ navigation }) => {
     setCategories(JSON.parse(loadedCategories || "{}"));
     setTasks(JSON.parse(loadedTasks || "{}"));
   };
+
+  const item =
+  useFocusEffect(
+    React.useCallback(() => {
+      _loadData();
+      return () => {};
+    }, [])
+  );
 
   const addCategory = () => {
     const ID = Date.now().toString();
@@ -120,9 +129,9 @@ const AllCategory = ({ navigation }) => {
     </Wrapper>
   ) : (
     <AppLoading
-      startAsync={_loadData}
-      onFinish={() => setIsReady(true)}
-      onError={console.error}
+    startAsync={_loadData}
+    onFinish={() => setIsReady(true)}
+    onError={console.error}
     />
   );
 };
