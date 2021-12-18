@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
-import { StyleSheet, View, Text, TextInput, Pressable } from "react-native";
+import { StyleSheet, View, Text, TextInput, Dimensions } from "react-native";
 import { theme } from "../../theme";
 import EditPicture from "./EditPicture";
 import { addTodo, removeTodo, updateTodo } from "../../editTasksFunc";
@@ -9,35 +9,33 @@ const EditTodoTitle = () => {
   const { editingTask, updateText } = useContext(EditTaskContext);
 
   const [text, setText] = useState("");
-  const [edit, setEdit] = useState(false);
 
   useEffect(() => {
     if (editingTask.text !== null || editingTask.text !== "") {
       setText(editingTask.text);
-      setEdit(true);
     }
   }, []);
 
   return (
     <View style={styles.listItem}>
-      <Pressable onPress={() => setEdit(true)}>
-        {edit ? (
-          <TextInput
-            style={styles.input}
-            placeholder="Title"
-            value={text}
-            onChangeText={(text) => {
-              setText(text);
-              updateText(text);
-            }}
-            onEndEditing={() => {
-              updateText(text);
-            }}
-          />
-        ) : (
-          <Text style={styles.title}>{text}</Text>
-        )}
-      </Pressable>
+      <View
+        style={{
+          flex: 1,
+        }}
+      >
+        <TextInput
+          style={styles.input}
+          placeholder="Title"
+          value={text}
+          onChangeText={(text) => {
+            setText(text);
+            updateText(text);
+          }}
+          onEndEditing={() => {
+            updateText(text);
+          }}
+        />
+      </View>
       <EditPicture></EditPicture>
     </View>
   );
