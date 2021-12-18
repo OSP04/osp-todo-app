@@ -73,7 +73,7 @@ const Categories = ({ item, doRefresh, navigation, categories, setCategories, ta
       <StyledView>
       <View width={width - 120}
         style={{flexDirection: "row", alignItems: "center",
-        justifyContent: "space-between", marginLeft: 10, backgroundColor: theme.background}}>
+        justifyContent: "space-between", marginLeft: 10}}>
         <StyledText style={{ color: item.color, width: 160 }}
         onPress={() => {
           navigation.navigate("OneCategory", {
@@ -100,10 +100,10 @@ const Categories = ({ item, doRefresh, navigation, categories, setCategories, ta
         />
       </StyledView>      
       <Underline style={{ backgroundColor: item.color }} />
-      <View style={{height: 6, backgroundColor: theme.background}}/>
-      <View style={{height: 150, backgroundColor: theme.background}}>
+      <View style={{height: 6}}/>
+      <View style={{height: 150}}>
         {item.tasks[0] != null ? (
-          sortTasks(item).map((item) => (
+          sortTasks(item).slice(0,4).map((item) => (
             <ShowCateTask key={item.id} item={item} doRefresh={doRefresh} navigation={navigation}
             tasks={tasks} setTasks={setTasks} categories={categories} setCategories={setCategories}/>
           ))
