@@ -10,10 +10,11 @@ import {
   StatusBar,
   Dimensions,
   Image,
+  TextInput,
 } from "react-native";
 import { useState } from "react";
 import CommonModal from "../common/CommonModal";
-import MapView, { Marker, PROVIDER_GOOGLE } from "react-native-maps";
+import MapView, { Marker } from "react-native-maps";
 import {
   FontAwesome5,
   FontAwesome,
@@ -65,10 +66,13 @@ const DetailModal = ({
                       <Entypo name="cross" size={24} color="black" />
                     </Pressable>
                   </View>
-                  <View style={styles.listItem}>
+                  <View
+                    style={{
+                      ...styles.listItem,
+                      justifyContent: "space-between",
+                    }}
+                  >
                     <Text style={styles.title}>{text}</Text>
-                  </View>
-                  <View>
                     <CommonModal
                       showModal={showPicture}
                       setShowModal={setShowPicture}
@@ -98,21 +102,25 @@ const DetailModal = ({
                       )}
                     </Pressable>
                   </View>
-                  <FontAwesome5
-                    name="hashtag"
-                    style={styles.icon}
-                    size={22}
-                    color="black"
-                  />
-                  <Text style={styles.category}>{category}</Text>
-                  <MaterialCommunityIcons
-                    name="calendar-today"
-                    style={styles.icon}
-                    size={24}
-                    color="black"
-                  />
-                  <Text style={styles.startDate}>{date}</Text>
-                  <View>
+                  <View style={styles.listItem}>
+                    <FontAwesome5
+                      name="hashtag"
+                      style={styles.icon}
+                      size={22}
+                      color="black"
+                    />
+                    <Text style={styles.category}>{category}</Text>
+                  </View>
+                  <View style={styles.listItem}>
+                    <MaterialCommunityIcons
+                      name="calendar-today"
+                      style={styles.icon}
+                      size={24}
+                      color="black"
+                    />
+                    <Text style={styles.startDate}>{date}</Text>
+                  </View>
+                  <View style={styles.listItem}>
                     <MaterialCommunityIcons
                       name="clock-end"
                       style={styles.icon}
@@ -120,6 +128,19 @@ const DetailModal = ({
                       color="black"
                     />
                     <Text style={styles.dueDate}>{due}</Text>
+                  </View>
+                  <View style={{ ...styles.listItem, borderBottomWidth: 0 }}>
+                    <Entypo
+                      name="location-pin"
+                      style={styles.icon}
+                      size={24}
+                      color="black"
+                    />
+                    <Text style={styles.input}>
+                      {task.location.locationData.mainText}
+                    </Text>
+                  </View>
+                  <View style={styles.mapContainer}>
                     <MapView
                       style={styles.map}
                       region={task.location.region}
@@ -139,6 +160,15 @@ const DetailModal = ({
                     <Text style={styles.address}>
                       {task.location.locationData.address}
                     </Text>
+                  </View>
+                  <View style={styles.listItem}>
+                    <Entypo
+                      name="text"
+                      style={styles.icon}
+                      size={24}
+                      color="black"
+                    />
+                    <Text style={styles.input}>{task.memo}</Text>
                   </View>
                   <View style={{ alignItems: "center" }}>{children}</View>
                 </View>
@@ -163,6 +193,12 @@ const styles = StyleSheet.create({
     height: 90,
     marginBottom: 10,
     marginHorizontal: 10,
+  },
+  mapContainer: {
+    flexDirection: "row",
+    padding: 5,
+    borderBottomWidth: 1,
+    borderBottomColor: "#E5E5E5",
   },
   address: {
     marginBottom: 10,
@@ -233,8 +269,17 @@ const styles = StyleSheet.create({
     height: 60,
     borderBottomWidth: 1,
     borderBottomColor: "#E5E5E5",
-    justifyContent: "space-between",
+    justifyContent: "flex-start",
     marginTop: 5,
+  },
+  input: {
+    flex: 1,
+    padding: 10,
+    backgroundColor: theme.colors.surface,
+    color: "#424242",
+  },
+  icon: {
+    padding: 10,
   },
   fullImage: {
     width: Dimensions.get("window").width * 0.8,
