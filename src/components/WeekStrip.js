@@ -63,13 +63,13 @@ const WeekStrip = ({
             type: "border",
             duration: 200,
             borderWidth: 1,
-            borderHighlightColor: "black",
+            borderHighlightColor: "#560CCE",
           }}
-          // weekendDateNameStyle={styles.weekend}
-          // weekendDateNumberStyle={styles.weekend}
+          weekendDateNameStyle={styles.weekend}
+          weekendDateNumberStyle={styles.weekend}
           highlightDateNumberStyle={styles.dateNumber}
           highlightDateNameStyle={styles.dateName}
-          markedDates={markedDates || {}}
+          markedDates={markedDates}
           iconContainer={{ flex: 0.1 }}
           calendarHeaderFormat={`MMMM`}
           onHeaderSelected={() => {
