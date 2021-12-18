@@ -47,11 +47,14 @@ const AllCategory = ({ navigation }) => {
       tasks: [],
     };
     setNewCategory("");
-    setColor(theme.category.red);
-    categories.push(newCategoryObj);
-    storeData("categories", [...categories]);
-    doRefresh();
-    setIsReady(false);
+    console.log(newCategoryObj);
+    if(newCategoryObj.title != "") {
+      setColor(theme.category.red);
+      categories.push(newCategoryObj);
+      storeData("categories", [...categories]);
+      doRefresh();
+      setIsReady(false);
+    }
     setState(false);
   };
   

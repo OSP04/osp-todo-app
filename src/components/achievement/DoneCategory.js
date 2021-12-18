@@ -16,7 +16,7 @@ const DoneCategory = ({ item }) => {
     // show the percentage of completed tasks
     const box =
         <BoxView style={{ borderColor: item.color }}>
-            {item.tasks.length != null ?
+            {item.tasks.length != 0 ?
                 (<Text style={{ padding: 20, fontSize: 32, fontWeight: "bold", color: item.color }}>
                     {Math.round((countDone(item) / item.tasks.length).toFixed(2) * 100)}%
                 </Text>)
