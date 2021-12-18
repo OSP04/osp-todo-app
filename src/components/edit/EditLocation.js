@@ -46,6 +46,7 @@ const EditLocation = () => {
           region: editingTask.location.region,
         });
         setLocation(editingTask.location.text);
+        setIsMapSelected(true);
       } else if (
         editingTask.location.text !== null ||
         editingTask.location.text !== ""
@@ -54,8 +55,6 @@ const EditLocation = () => {
       }
     }
   }, []);
-
-  const [todo, setTodo] = useState(editingTask);
 
   const [showModal, setShowModal] = useState(false);
   const openModal = () => {
