@@ -8,12 +8,14 @@ import AddCategory from "../screens/AddCategory";
 import { storeData } from "../../src/db";
 import { FlatList, TouchableOpacity } from "react-native-gesture-handler";
 import { useFocusEffect } from "@react-navigation/native";
+import AppLoading from "expo-app-loading";
 
 const AllCategory = ({ navigation }) => {
   const width = Dimensions.get("window").width;
   const [state, setState] = useState(false);
   const [color, setColor] = useState(theme.category.red);
   const [refresh, setRefresh] = useState(true);
+  const [isReady, setIsReady] = useState(false);
 
   const [newCategory, setNewCategory] = useState("");
   const [categories, setCategories] = useState([]);
@@ -69,6 +71,7 @@ const AllCategory = ({ navigation }) => {
     categories.push(newCategoryObj);
     storeData("categories", [...categories]);
     doRefresh();
+    setIsReady(false);
     setState(false);
   };
 
@@ -96,11 +99,12 @@ const AllCategory = ({ navigation }) => {
         setCategories={setCategories}
         tasks={tasks}
         setTasks={setTasks}
+        setIsReady={setIsReady}
       />
     );
   };
 
-  return (
+  return isReady ? (
     <Wrapper>
       <FlatList
         style={{ backgroundColor: theme.background }}
@@ -123,6 +127,12 @@ const AllCategory = ({ navigation }) => {
         />
       </StyledView>
     </Wrapper>
+  ) : (
+    <AppLoading
+    startAsync={_loadData}
+    onFinish={() => setIsReady(true)}
+    onError={console.error}
+    />
   );
 };
 
