@@ -6,7 +6,6 @@ import CalendarStrip from "react-native-calendar-strip";
 import { theme } from "../theme";
 import HomeTasks from "./task/HomeTasks";
 import useSetDate from "../hooks/useSetDate";
-
 import { useResultContext } from "../components/context";
 
 const WeekStrip = ({

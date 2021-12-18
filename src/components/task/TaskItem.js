@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components/native";
 import Animated from "react-native-reanimated";
-import { StyleSheet } from "react-native";
+import { StyleSheet, View } from "react-native";
 import { useOnCellActiveAnimation } from "react-native-draggable-flatlist";
 
 import { theme } from "../../theme";
@@ -121,6 +121,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "space-between",
     alignItems: "center",
+    backgroundColor: "tomato",
   },
 });
 
@@ -133,8 +134,9 @@ const Touchable = styled.TouchableOpacity`
     props.isActive || props.selected ? theme.light : theme.background};
 `;
 
+// Prevent overflow of text --> flex: 1
 const StyledView = styled.View`
-  flex-direction: column;
+  flex: 1;
   margin-left: 5px;
 `;
 
@@ -149,8 +151,10 @@ const DueDate = styled.Text`
 `;
 
 const LeftItems = styled.View`
+  flex: 1;
   flex-direction: row;
   align-items: center;
+  margin-left: 5px;
 `;
 
 const RightItems = styled.View`
