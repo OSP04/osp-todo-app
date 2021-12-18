@@ -87,7 +87,7 @@ const Categories = ({ item, doRefresh, navigation, categories, setCategories, ta
       <View>
         {item.tasks[0] != null ? (
           sortTasks(item).map((item) => (
-            <ShowCateTask key={item.id} item={item} doRefresh={doRefresh}
+            <ShowCateTask key={item.id} item={item} doRefresh={doRefresh} navigation={navigation}
             tasks={tasks} setTasks={setTasks} categories={categories} setCategories={setCategories}/>
           ))
         ) : (
