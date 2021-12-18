@@ -136,15 +136,4 @@ const Underline = styled.View`
   margin-bottom: 6px;
 `;
 
-const MoreView = styled.View`
-  align-items: flex-end;
-  padding-right: 20px;
-  padding-top: 10px;
-  padding-bottom: 10px;
-`;
-
-const MoreButton = styled.TouchableOpacity`
-  color: ${theme.light};
-`;
-
 export default Categories;
