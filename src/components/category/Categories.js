@@ -70,8 +70,9 @@ const Categories = ({ item, doRefresh, navigation, categories, setCategories, ta
 
   return (
     <Wrapper>
-        <View
-        style={{flexDirection: "row", alignItems: "center", width: width,
+      <StyledView width={width} >
+      <View width={width - 110}
+        style={{flexDirection: "row", alignItems: "center",
         justifyContent: "space-between", marginLeft: 10, backgroundColor: theme.background}}>
         <StyledText style={{ color: item.color }}
         onPress={() => {
@@ -87,15 +88,17 @@ const Categories = ({ item, doRefresh, navigation, categories, setCategories, ta
             setCategories: setCategories,
           })
         }}>{item.title}</StyledText>
-        <TouchableOpacity onPress={() => {alert("Category deleted"), _deleteCate(item)}}>
+        <TouchableOpacity style={{marginRight: 90}}
+        onPress={() => {alert("Category deleted"), _deleteCate(item)}}>
           <Text style={{color: item.color, fontWeight: "bold", fontSize: 18}}>X</Text>
         </TouchableOpacity>
+        </View>
         <DropButton
           setSorting={setSorting}
           category={item}
           doRefresh={doRefresh}
         />
-        </View>        
+      </StyledView>      
       <Underline style={{ backgroundColor: item.color }} />
       <View style={{height: 6, backgroundColor: theme.background}}/>
       <View style={{height: 150, backgroundColor: theme.background}}>
@@ -115,6 +118,12 @@ const Categories = ({ item, doRefresh, navigation, categories, setCategories, ta
 const Wrapper = styled.SafeAreaView`
   flex: 1;
   justify-content: flex-start;
+`;
+
+const StyledView = styled.View`
+flex-direction: row;
+align-items: center;
+justify-content: space-between;
 `;
 
 const StyledText = styled.Text`
