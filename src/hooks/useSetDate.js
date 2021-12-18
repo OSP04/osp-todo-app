@@ -9,6 +9,7 @@ const useSetDate = () => {
   const passDate = (selectedDay) => {
     if (selectedDay !== []) {
       const date = new Date(selectedDay.timestamp);
+      setSelectedDate(date);
     }
   };
 
