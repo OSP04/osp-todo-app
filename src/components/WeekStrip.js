@@ -7,6 +7,8 @@ import { theme } from "../theme";
 import HomeTasks from "./task/HomeTasks";
 import useSetDate from "../hooks/useSetDate";
 
+import { useResultContext } from "../components/context";
+
 const WeekStrip = ({
   tasks,
   setTasks,
@@ -14,7 +16,6 @@ const WeekStrip = ({
   setCategories,
   navigation,
   isSelecting,
-  route,
 }) => {
   const {
     markedDates,
@@ -27,12 +28,12 @@ const WeekStrip = ({
   } = useSetDate();
 
   const [refresh, setRefresh] = useState(true);
-
+  const { selectedDay } = useResultContext();
   // Get date from CalendarScreen
   useEffect(() => {
-    passDate(route);
+    passDate(selectedDay);
     setRefresh((current) => !current); // Refresh screen
-  }, [route.params]);
+  }, [selectedDay]);
 
   // Mark date having tasks of categories
   useEffect(() => markDate(categories), [tasks, categories]);
@@ -63,13 +64,13 @@ const WeekStrip = ({
             type: "border",
             duration: 200,
             borderWidth: 1,
-            borderHighlightColor: "black",
+            borderHighlightColor: "#560CCE",
           }}
-          // weekendDateNameStyle={styles.weekend}
-          // weekendDateNumberStyle={styles.weekend}
+          weekendDateNameStyle={styles.weekend}
+          weekendDateNumberStyle={styles.weekend}
           highlightDateNumberStyle={styles.dateNumber}
           highlightDateNameStyle={styles.dateName}
-          markedDates={markedDates || {}}
+          markedDates={markedDates}
           iconContainer={{ flex: 0.1 }}
           calendarHeaderFormat={`MMMM`}
           onHeaderSelected={() => {

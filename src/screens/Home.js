@@ -8,21 +8,20 @@ import { theme } from "../theme";
 import { images } from "../images";
 import useGetData from "../hooks/useGetData";
 
-const Home = ({ navigation, route }) => {
+const Home = ({ navigation }) => {
   const { categories, tasks, setCategories, setTasks, getDataFirst } =
     useGetData();
-
-  useFocusEffect(
-    React.useCallback(() => {
-      console.log(route.params);
-      getDataFirst();
-      return;
-    }, [])
-  );
 
   const [isSelecting, setIsSelecting] = useState(false);
   const [refresh, setRefresh] = useState(false);
 
+  useFocusEffect(
+    React.useCallback(() => {
+      setIsSelecting(false);
+      getDataFirst();
+      return;
+    }, [])
+  );
   return (
     <Wrapper>
       <StyledBar barStyle="auto" />
@@ -34,7 +33,6 @@ const Home = ({ navigation, route }) => {
           categories={categories}
           navigation={navigation}
           isSelecting={isSelecting}
-          route={route}
         />
       </Body>
       {categories && tasks && (

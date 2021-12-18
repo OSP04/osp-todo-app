@@ -157,11 +157,11 @@ const SelectButton = styled(AllButton)`
 `;
 
 const AllText = styled.Text`
-  color: ${(props) => (props.all ? "white" : theme.text)};
+  color: ${(props) => (props.all ? "white" : theme.primary)};
 `;
 
 const SelectText = styled.Text`
-  color: ${(props) => (props.isSelecting ? theme.light : theme.text)};
+  color: ${(props) => (props.isSelecting ? theme.light : theme.primary)};
 `;
 
 export default Footer;
