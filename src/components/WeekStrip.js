@@ -16,7 +16,6 @@ const WeekStrip = ({
   setCategories,
   navigation,
   isSelecting,
-  route,
 }) => {
   const {
     markedDates,
@@ -32,10 +31,9 @@ const WeekStrip = ({
   const { selectedDay } = useResultContext();
   // Get date from CalendarScreen
   useEffect(() => {
-    console.log("4day: ", selectedDay);
-    passDate(route);
+    passDate(selectedDay);
     setRefresh((current) => !current); // Refresh screen
-  }, [route.params]);
+  }, [selectedDay]);
 
   // Mark date having tasks of categories
   useEffect(() => markDate(categories), [tasks, categories]);

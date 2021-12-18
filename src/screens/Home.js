@@ -8,7 +8,7 @@ import { theme } from "../theme";
 import { images } from "../images";
 import useGetData from "../hooks/useGetData";
 
-const Home = ({ navigation, route }) => {
+const Home = ({ navigation }) => {
   const { categories, tasks, setCategories, setTasks, getDataFirst } =
     useGetData();
 
@@ -33,7 +33,6 @@ const Home = ({ navigation, route }) => {
           categories={categories}
           navigation={navigation}
           isSelecting={isSelecting}
-          route={route}
         />
       </Body>
       {categories && tasks && (

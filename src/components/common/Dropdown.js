@@ -39,11 +39,10 @@ const Dropdown = ({ category, setRefresh, setSorting }) => {
 };
 
 const styles = StyleSheet.create({
-  label: { fontSize: 12, color: "#560CCE" },
+  label: { fontSize: 12 },
   container: { height: 30, width: 88, elevation: 1 },
   text: {
     fontSize: 12,
-    color: "#560CCE",
   },
 });
 
