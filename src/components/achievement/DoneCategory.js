@@ -27,8 +27,8 @@ const DoneCategory = ({ item }) => {
 
     return (
         <Wrapper width={width}>
-            <Text style={{ fontSize: 24, fontWeight: "bold", color: item.color, paddingBottom: 10 }}
-            onPress={console.log(item)}>{item.title}</Text>
+            <Text style={{ fontSize: 24, fontWeight: "bold", color: item.color, paddingBottom: 10 }}>
+                {item.title}</Text>
             <AchievementView width={width - 80}>
                 <View>{box}</View>
                 <DoneView>
