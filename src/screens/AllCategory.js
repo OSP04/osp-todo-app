@@ -93,7 +93,7 @@ const AllCategory = ({ navigation }) => {
       />
       <StyledView width={width - 20}>
         <TouchableOpacity onPress={() => setState(true)}>
-          <Text style={{ fontSize: 16, margin: 10, fontWeight: "bold" }}>
+          <Text style={{ fontSize: 16, margin: 10, fontWeight: "bold", color: theme.primary }}>
             + Add Category
           </Text>
         </TouchableOpacity>
