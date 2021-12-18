@@ -22,7 +22,6 @@ const AchievementCategory = ({ categories }) => {
 
 const Wrapper = styled.SafeAreaView`
   flex: 1;
-  padding: 15px;
   justify-content: flex-start;
   align-items: center;
   background_color: ${theme.background};

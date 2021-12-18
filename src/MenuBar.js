@@ -47,7 +47,6 @@ const Wrapper = styled.SafeAreaView`
 flex-direction: row;
 justify-content: flex-start;
 align-items: center;
-padding-horizontal: 15px;
 `;
 
 const MenuView = styled.View`

@@ -23,7 +23,6 @@ const Wrapper = styled.SafeAreaView`
 flex: 1;
 justify-content: flex-start;
 align-items: center;
-padding: 15px;
 background-color: ${theme.background};
 `;
 
