@@ -222,7 +222,7 @@ const EditLocation = () => {
           </Pressable>
         )}
       </View>
-      {isMapSelected && (
+      {isMapSelected === true && (
         <Pressable style={styles.mapContainer} onPress={openFullMap}>
           <MapView
             style={styles.map}

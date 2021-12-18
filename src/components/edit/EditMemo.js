@@ -50,7 +50,7 @@ const EditMemo = () => {
         }
       />
       <Pressable onPress={onSubmitPressed} disabled={!show}>
-        {show && (
+        {show === true && (
           <Entypo name="check" style={styles.icon} size={20} color="black" />
         )}
       </Pressable>
