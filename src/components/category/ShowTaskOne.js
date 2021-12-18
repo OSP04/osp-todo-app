@@ -52,12 +52,13 @@ const ShowTaskOne = ({ item, doRefresh, tasks, setTasks, categories, setCategori
 
     return (
         <StyledView>
-            {item.id != null && <TaskView width={width}>
+            {item.id != null && <TaskView style={{width: width, height: 38}}>
                 <LeftView>
                     <IconButton type={returnIcon(item)} onPressOut={toggleItem} />
                     <View style={{marginLeft: 4}}>
                     <TaskText style={
-                    { textDecorationLine: (item.complete ? "line-through" : "none") }
+                    { textDecorationLine: (item.complete ? "line-through" : "none"),
+                    width: width - 100 }
                     }>{item.text}</TaskText>
                     {item.due && <DueDate>{new Date(item.due).toLocaleDateString()}</DueDate>}
                     </View>
@@ -110,8 +111,7 @@ align-items: center;
 `;
 
 const TaskText = styled.Text`
-  font-size: 14px;
-  color: ${theme.primary};
+  font-size: 16px;
 `;
 
 export default ShowTaskOne;
