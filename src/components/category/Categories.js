@@ -74,20 +74,7 @@ const Categories = ({ item, doRefresh, navigation, categories, setCategories, ta
       <View width={width - 120}
         style={{flexDirection: "row", alignItems: "center",
         justifyContent: "space-between", marginLeft: 10}}>
-        <StyledText style={{ color: item.color, width: 160 }}
-        onPress={() => {
-          navigation.navigate("OneCategory", {
-            key: item.id,
-            item: item,
-            sortTasks: sortTasks,
-            setSorting: setSorting,
-            doRefresh: doRefresh,
-            tasks: tasks,
-            setTasks: setTasks,
-            categories: categories,
-            setCategories: setCategories,
-          })
-        }}>{item.title}</StyledText>
+        <StyledText style={{ color: item.color, width: 160 }}>{item.title}</StyledText>
         <TouchableOpacity style={{marginRight: 90}}
         onPress={() => {alert("Category deleted"), _deleteCate(item)}}>
           <Text style={{color: item.color, fontWeight: "bold", fontSize: 18}}>X</Text>
@@ -100,17 +87,33 @@ const Categories = ({ item, doRefresh, navigation, categories, setCategories, ta
         />
       </StyledView>      
       <Underline style={{ backgroundColor: item.color }} />
-      <View style={{height: 6}}/>
-      <View style={{height: 150}}>
+      <View style={{marginVertical: 4}}>
         {item.tasks[0] != null ? (
           sortTasks(item).slice(0,4).map((item) => (
             <ShowCateTask key={item.id} item={item} doRefresh={doRefresh} navigation={navigation}
             tasks={tasks} setTasks={setTasks} categories={categories} setCategories={setCategories}/>
           ))
         ) : (
-          <View style={{ height: 50 }} />
+          <View style={{ height: 60 }} />
         )}
       </View>
+      <TouchableOpacity
+      style={{alignItems: "flex-end", width: width, paddingRight: 15, marginBottom: 8, marginTop: 2}}
+      onPress={() => {
+        navigation.navigate("OneCategory", {
+          key: item.id,
+          item: item,
+          sortTasks: sortTasks,
+          setSorting: setSorting,
+          doRefresh: doRefresh,
+          tasks: tasks,
+          setTasks: setTasks,
+          categories: categories,
+          setCategories: setCategories,
+        })
+      }} >
+        <Text style={{color: theme.light}}>+ See more tasks...</Text>
+      </TouchableOpacity>
     </Wrapper>
   );
 };
