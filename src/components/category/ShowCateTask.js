@@ -53,10 +53,10 @@ const ShowCateTask = ({ item, doRefresh, tasks, setTasks, categories, setCategor
   return (
     <StyledView>
       {item.id != null && (
-        <TaskView style={{height: 38, width: width, backgroundColor: theme.background}}>
+        <TaskView style={{height: 38, width: width}}>
           <LeftView>
             <IconButton type={returnIcon(item)} onPressOut={toggleItem} />
-            <View style={{marginLeft: 4, backgroundColor: theme.background}}>
+            <View style={{marginLeft: 4}}>
             <TaskText
               style={{
                 textDecorationLine: item.complete ? "line-through" : "none",

@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import { Dimensions, View } from "react-native";
-
+import { images } from "../images";
 import styled from "styled-components/native";
 import DropButton from "../components/common/DropButton";
 import ShowTaskOne from "../components/category/ShowTaskOne";
 import { theme } from "../theme";
-import BackButton from "../components/common/BackButton";
+import IconButton from "../components/common/IconButton";
 
 const OneCategory = ({ route, navigation }) => {
 
@@ -19,14 +19,17 @@ const OneCategory = ({ route, navigation }) => {
 
   return (
     <Wrapper>
-          <StyledBar barStyle="default" />
-          <StyledView width={width}>
-            <BackButton
-              onPressOut={() => {
-                doRefresh();
-                navigation.navigate("AllCategory");
-              }}
-            />
+          <StyledView width={width} style={{marginLeft: 26}}>
+          <IconButton
+                type={images.back}
+                size={32}
+                color="black"
+                style={{ width: 40, height: 40}}
+                onPressOut={() => {
+                  doRefresh();
+                  navigation.navigate("AllCategory");
+                }}
+              />
             <StyledText style={{ color: item.color }}>{item.title}</StyledText>
             <View width={25} />
           </StyledView>
