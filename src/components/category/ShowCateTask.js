@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Dimensions, View } from "react-native";
 import styled from "styled-components/native";
 import { storeData } from "../../db";
@@ -52,8 +52,8 @@ const ShowCateTask = ({ item, doRefresh, tasks, setTasks, categories, setCategor
 
   return (
     <StyledView>
-      {item.id != null && item.count < 5 && (
-        <TaskView width={width}>
+      {item.id != null && (
+        <TaskView style={{height: 38, width: width, backgroundColor: theme.background}}>
           <LeftView>
             <IconButton type={returnIcon(item)} onPressOut={toggleItem} />
             <View style={{marginLeft: 4}}>
@@ -117,7 +117,6 @@ const TaskView = styled.View`
 
 const TaskText = styled.Text`
   font-size: 16px;
-  color: ${theme.primary};
 `;
 
 export default ShowCateTask;

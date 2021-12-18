@@ -70,9 +70,22 @@ const Categories = ({ item, doRefresh, navigation, categories, setCategories, ta
 
   return (
     <Wrapper>
-      <StyledView width={width}>
+      <StyledView width={width} style={{backgroundColor: theme.background}}>
         <View style={{flexDirection: "row", alignItems: "center", width: 200, justifyContent: "space-between"}}>
-        <StyledText style={{ color: item.color }}>{item.title}</StyledText>
+        <StyledText style={{ color: item.color }}
+        onPress={() => {
+          navigation.navigate("OneCategory", {
+            key: item.id,
+            item: item,
+            sortTasks: sortTasks,
+            setSorting: setSorting,
+            doRefresh: doRefresh,
+            tasks: tasks,
+            setTasks: setTasks,
+            categories: categories,
+            setCategories: setCategories,
+          })
+        }}>{item.title}</StyledText>
         <TouchableOpacity onPress={() => {alert("Category deleted"), _deleteCate(item)}}>
           <Text style={{color: item.color, fontWeight: "bold", fontSize: 18}}>X</Text>
         </TouchableOpacity>
@@ -84,7 +97,7 @@ const Categories = ({ item, doRefresh, navigation, categories, setCategories, ta
         />
       </StyledView>
       <Underline style={{ backgroundColor: item.color }} />
-      <View>
+      <View style={{height: 150}}>
         {item.tasks[0] != null ? (
           sortTasks(item).map((item) => (
             <ShowCateTask key={item.id} item={item} doRefresh={doRefresh} navigation={navigation}
@@ -94,25 +107,6 @@ const Categories = ({ item, doRefresh, navigation, categories, setCategories, ta
           <View style={{ height: 50 }} />
         )}
       </View>
-      <MoreView width={width}>
-        <MoreButton
-          onPress={() => {
-            navigation.navigate("OneCategory", {
-              key: item.id,
-              item: item,
-              sortTasks: sortTasks,
-              setSorting: setSorting,
-              doRefresh: doRefresh,
-              tasks: tasks,
-              setTasks: setTasks,
-              categories: categories,
-              setCategories: setCategories,
-            })
-          }}
-        >
-          <Text style={{color: theme.light}}>+ See more tasks...</Text>
-        </MoreButton>
-      </MoreView>
     </Wrapper>
   );
 };

@@ -52,7 +52,7 @@ const ShowTaskOne = ({ item, doRefresh, tasks, setTasks, categories, setCategori
 
     return (
         <StyledView>
-            {item.id != null && <TaskView width={width}>
+            {item.id != null && <TaskView style={{width: width, height: 38}}>
                 <LeftView>
                     <IconButton type={returnIcon(item)} onPressOut={toggleItem} />
                     <View style={{marginLeft: 4}}>
@@ -111,7 +111,6 @@ align-items: center;
 
 const TaskText = styled.Text`
   font-size: 16px;
-  color: ${theme.primary};
 `;
 
 export default ShowTaskOne;
