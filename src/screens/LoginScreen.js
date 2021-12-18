@@ -44,9 +44,8 @@ export default function LoginScreen({ navigation }) {
 
   return (
     <Background type="pre">
-      {/* <BackButton type="pre" onPressOut={() => navigation.goBack()} /> */}
       <Logo />
-      <PreText>Todo App</PreText>
+      <PreText>4TODO</PreText>
       <PreTextInput
         label="ID"
         returnKeyType="next"
