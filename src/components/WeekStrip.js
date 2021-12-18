@@ -6,7 +6,6 @@ import CalendarStrip from "react-native-calendar-strip";
 import { theme } from "../theme";
 import HomeTasks from "./task/HomeTasks";
 import useSetDate from "../hooks/useSetDate";
-import useGetData from "../hooks/useGetData";
 
 const WeekStrip = ({
   tasks,
@@ -31,6 +30,7 @@ const WeekStrip = ({
 
   // Get date from CalendarScreen
   useEffect(() => {
+    console.log(route.params);
     passDate(route);
     setRefresh((current) => !current); // Refresh screen
   }, [route.params]);

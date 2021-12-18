@@ -17,6 +17,7 @@ const useGetData = () => {
       console.log(error);
     }
   };
+
   return { categories, tasks, setCategories, setTasks, getDataFirst };
 };
 
