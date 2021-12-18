@@ -12,17 +12,16 @@ const Home = ({ navigation, route }) => {
   const { categories, tasks, setCategories, setTasks, getDataFirst } =
     useGetData();
 
+  const [isSelecting, setIsSelecting] = useState(false);
+  const [refresh, setRefresh] = useState(false);
+
   useFocusEffect(
     React.useCallback(() => {
-      console.log(route.params);
+      setIsSelecting(false);
       getDataFirst();
       return;
     }, [])
   );
-
-  const [isSelecting, setIsSelecting] = useState(false);
-  const [refresh, setRefresh] = useState(false);
-
   return (
     <Wrapper>
       <StyledBar barStyle="auto" />
