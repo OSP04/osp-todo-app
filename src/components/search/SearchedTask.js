@@ -26,7 +26,7 @@ const SearchedTask = ({
       <Card>
         <Card.Title
           title={index + 1 + ". " + text}
-          titleStyle={{ fontSize: 15 }}
+          titleStyle={{ fontSize: 15, fontWeight: "bold" }}
         />
         <Card.Content>
           <StyledView>
@@ -35,7 +35,12 @@ const SearchedTask = ({
             </Category>
             <Date>
               {date && <StartDate>{date}</StartDate>}
-              {due && <DueDate>~{due}</DueDate>}
+              {due && (
+                <DueDate>
+                  {" ~ "}
+                  {due}
+                </DueDate>
+              )}
             </Date>
           </StyledView>
         </Card.Content>
