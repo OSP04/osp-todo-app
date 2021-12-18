@@ -3,6 +3,8 @@ import { db, storeData } from "./src/db";
 
 import { NavigationContainer } from "@react-navigation/native";
 import { StackNavigator } from "./StackNavigator";
+import { ResultContextProvider } from "./src/components/context";
+
 function App() {
   useEffect(() => {
     storeData("tasks", db.tasks);
@@ -12,9 +14,11 @@ function App() {
   }, []);
 
   return (
-    <NavigationContainer>
-      <StackNavigator />
-    </NavigationContainer>
+    <ResultContextProvider>
+      <NavigationContainer>
+        <StackNavigator />
+      </NavigationContainer>
+    </ResultContextProvider>
   );
 }
 export default App;
