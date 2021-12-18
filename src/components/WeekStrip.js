@@ -35,7 +35,6 @@ const WeekStrip = ({
   // Get date from CalendarScreen
   useEffect(() => {
     passDate(selectedDay);
-    setRefresh((current) => !current); // Refresh screen
   }, [selectedDay]);
 
   // Mark date having tasks of categories
