@@ -1,12 +1,12 @@
 import React from "react";
-import { Dimensions } from "react-native";
+import { Dimensions, View } from "react-native";
 import styled from "styled-components/native";
 import { storeData } from "../../db";
 import { images } from "../../images";
 import { theme } from "../../theme";
 import IconButton from "../common/IconButton";
 
-const ShowCateTask = ({ item, doRefresh, tasks, setTasks, categories, setCategories }) => {
+const ShowCateTask = ({ item, doRefresh, tasks, setTasks, categories, setCategories, navigation }) => {
   const width = Dimensions.get("window").width;
 
   const toggleItem = () => {
@@ -42,12 +42,21 @@ const ShowCateTask = ({ item, doRefresh, tasks, setTasks, categories, setCategor
     return item.complete ? images.complete : images.uncomplete;
   };
 
+  const findCategory = (item) => {
+    const categoryTitle = item.category;
+    const category = categories.find(
+      (element) => element.title === categoryTitle
+    );
+    return category;
+  };
+
   return (
     <StyledView>
       {item.id != null && item.count < 5 && (
         <TaskView width={width}>
           <LeftView>
             <IconButton type={returnIcon(item)} onPressOut={toggleItem} />
+            <View style={{marginLeft: 4}}>
             <TaskText
               style={{
                 textDecorationLine: item.complete ? "line-through" : "none",
@@ -55,9 +64,20 @@ const ShowCateTask = ({ item, doRefresh, tasks, setTasks, categories, setCategor
             >
               {item.text}
             </TaskText>
+            {item.due && <DueDate>{new Date(item.due).toLocaleDateString()}</DueDate>}
+            </View>
           </LeftView>
           <RightView>
-            {item.due && <DueDate>{new Date(item.due).toLocaleDateString()}</DueDate>}
+            <IconButton
+            type={images.edit}
+            onPressOut={() =>
+              navigation.navigate("EditScreen", {
+                selectedTask: item, // 선택한 task
+                category: findCategory(item), // 선택한 task가 속한 카테고리 객체
+                isAddPressed: false, // 추가인지 편집인지 구분, 새로 추가면 true 편집이면 false
+              })
+            }
+          />
           </RightView>
         </TaskView>
       )}
@@ -75,7 +95,7 @@ const StyledView = styled.View`
 const LeftView = styled.View`
   flex-direction: row;
   padding-top: 2px;
-  align-items: flex-end;
+  align-items: center;
 `;
 
 const RightView = styled.View`
@@ -85,7 +105,7 @@ const RightView = styled.View`
 `;
 
 const DueDate = styled.Text`
-  font-size: 18px;
+  font-size: 12px;
   color: ${theme.light};
 `;
 
@@ -96,8 +116,7 @@ const TaskView = styled.View`
 `;
 
 const TaskText = styled.Text`
-  font-size: 18px;
-  padding: 2px;
+  font-size: 14px;
   color: ${theme.primary};
 `;
 
