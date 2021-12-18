@@ -7,6 +7,8 @@ import { theme } from "../theme";
 import HomeTasks from "./task/HomeTasks";
 import useSetDate from "../hooks/useSetDate";
 
+import { useResultContext } from "../components/context";
+
 const WeekStrip = ({
   tasks,
   setTasks,
@@ -27,9 +29,10 @@ const WeekStrip = ({
   } = useSetDate();
 
   const [refresh, setRefresh] = useState(true);
-
+  const { selectedDay } = useResultContext();
   // Get date from CalendarScreen
   useEffect(() => {
+    console.log("4day: ", selectedDay);
     passDate(route);
     setRefresh((current) => !current); // Refresh screen
   }, [route.params]);

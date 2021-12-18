@@ -2,6 +2,7 @@ import { View } from "react-native";
 import React from "react";
 import { CalendarList } from "react-native-calendars";
 import BackButton from "../components/common/BackButton";
+import { useResultContext } from "../components/context";
 
 const formatDateObj = (newDate) => {
   const year = newDate.getFullYear();
@@ -15,6 +16,7 @@ const formatDateObj = (newDate) => {
 
 const CalendarScreen = ({ route, navigation }) => {
   const { selectedDate, tasks } = route.params;
+  const { setSelectedDay } = useResultContext();
   //console.log("Chekc", tasks);
   //console.log(selectedDate);
   //console.log(typeof tasks);
@@ -46,7 +48,9 @@ const CalendarScreen = ({ route, navigation }) => {
         // Enable or disable vertical scroll indicator. Default = false
         showScrollIndicator={true}
         onDayPress={(day) => {
-          navigation.navigate("Drawer", { day });
+          navigation.navigate("Drawer");
+          setSelectedDay(day);
+
           //해당 날짜의 메인으로 이동
         }}
         markedDates={mark}
