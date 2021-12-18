@@ -44,27 +44,7 @@ const AllCategory = ({ navigation }) => {
       color: color,
       isAdding: false,
       sorting: "added",
-      tasks: {
-        id: "",
-        count: "0",
-        text: "",
-        date: null,
-        due: null,
-        category: newCategory,
-        image: "",
-        complete: false,
-        selected: false,
-        created: "",
-        location: {
-          text: "",
-          region: {},
-          locationData: {
-            mainText: "",
-            address: "",
-          },
-        },
-        memo: "",
-      },
+      tasks: [],
     };
     setNewCategory("");
     setColor(theme.category.red);
@@ -74,7 +54,7 @@ const AllCategory = ({ navigation }) => {
     setIsReady(false);
     setState(false);
   };
-
+  
   const _onPressCancel = () => {
     setNewCategory("");
     setState(false);
@@ -113,7 +93,7 @@ const AllCategory = ({ navigation }) => {
       />
       <StyledView width={width - 20}>
         <TouchableOpacity onPress={() => setState(true)}>
-          <Text style={{ fontSize: 16, margin: 10, fontWeight: "bold" }}>
+          <Text style={{ fontSize: 16, margin: 10, fontWeight: "bold", color: theme.primary }}>
             + Add Category
           </Text>
         </TouchableOpacity>
