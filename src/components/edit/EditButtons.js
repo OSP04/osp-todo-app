@@ -7,6 +7,7 @@ import {
   removeTodo,
   updateTodo,
   updateCategories,
+  updateDeleteTaskCategories,
 } from "../../editTasksFunc";
 import { storeData, getData } from "../../db";
 
@@ -51,6 +52,13 @@ const EditButtons = ({ selectedTask, goHome }) => {
           text: "OK",
           onPress: () => {
             removeTodo(tasks, editingId);
+            updateDeleteTaskCategories(
+              categories,
+              editingCategory,
+              editingCategory.tasks,
+              editingCategory.id,
+              editingId
+            );
             goHome();
           },
         },

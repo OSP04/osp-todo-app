@@ -3,7 +3,6 @@ import { storeData, getData } from "./db";
 
 export const addTodo = (tasks, selectedTask) => {
   const todos = [...tasks, selectedTask];
-
   storeData("tasks", todos);
 };
 
@@ -39,6 +38,25 @@ export const updateCategories = (
 
   const updatedCategories = categories.map((category) =>
     category.id === id ? categoryObj : category
+  );
+  storeData("categories", updatedCategories);
+};
+
+export const updateDeleteTaskCategories = (
+  categories,
+  editingCategory,
+  taskOfCategory,
+  categoryId,
+  taskId
+) => {
+  let categoryTasks = [...taskOfCategory];
+  const index = taskOfCategory.findIndex((e) => e.id === taskId);
+  categoryTasks.splice(index, 1);
+
+  const categoryObj = { ...editingCategory, tasks: categoryTasks }; //편집하고 있던 카테고리 객체 tasks: 배열 업테이트
+
+  const updatedCategories = categories.map((category) =>
+    category.id === categoryId ? categoryObj : category
   );
   storeData("categories", updatedCategories);
 };
