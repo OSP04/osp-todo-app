@@ -6,7 +6,14 @@ const EditTaskContext = createContext({
   editingImage: "",
   editingDate: null,
   editingDue: null,
-  editingLocation: {},
+  editingLocation: {
+    text: "",
+    region: {},
+    locationData: {
+      mainText: "",
+      address: "",
+    },
+  },
   editingMemo: "",
   isAddPressed: false,
   editingId: "",
