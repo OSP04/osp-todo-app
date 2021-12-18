@@ -18,8 +18,6 @@ const EditMemo = () => {
     }
   }, []);
 
-  const [todo, setTodo] = useState(editingTask);
-
   const updateSize = (height) => {
     setHeight(height);
   };
