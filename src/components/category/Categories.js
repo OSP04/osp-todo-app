@@ -46,6 +46,7 @@ const Categories = ({ item, doRefresh, navigation, categories, setCategories, ta
 
   const _deleteCate = () => {
     let _categories = categories;
+    let _tasks = tasks;
     for(let i=0; i<_categories.length; i++) {
       if(_categories[i].id === item.id) {
         const index = i;
@@ -53,11 +54,21 @@ const Categories = ({ item, doRefresh, navigation, categories, setCategories, ta
         break;
       }
     }
+    for(let j=0; j<_tasks.length; j++) {
+      if(_tasks[j].category === item.title) {
+        const index = j;
+        _tasks.splice(index, 1);
+      }
+    }
     setCategories(_categories);
+    setTasks(_tasks);
     storeData("categories", _categories);
+    storeData("tasks", _tasks);
     setIsReady(false);
     doRefresh();
   };
+
+  console.log(tasks);
 
   return (
     <Wrapper>
