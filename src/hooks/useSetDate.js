@@ -17,20 +17,22 @@ const useSetDate = () => {
 
   // Mark date having tasks of categories
   const markDate = (categories) => {
-    let marked = [];
-    for (let i = 0; i < categories.length; i++) {
-      for (let j = 0; j < categories[i].tasks.length; j++) {
-        marked.push({
-          date: categories[i].tasks[j].date,
-          dots: [
-            {
-              color: categories[i].color,
-            },
-          ],
-        });
+    if (categories) {
+      let marked = [];
+      for (let i = 0; i < categories.length; i++) {
+        for (let j = 0; j < categories[i].tasks.length; j++) {
+          marked.push({
+            date: categories[i].tasks[j].date,
+            dots: [
+              {
+                color: categories[i].color,
+              },
+            ],
+          });
+        }
       }
+      setMarkedDates(marked);
     }
-    setMarkedDates(marked);
   };
 
   return {

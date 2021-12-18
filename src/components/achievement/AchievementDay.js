@@ -1,16 +1,12 @@
-import React, { useState } from "react";
+import React from "react";
 import { Dimensions } from "react-native";
-
 import styled from "styled-components/native";
-import { db } from "../../db";
 import { theme } from "../../theme";
 import DoneDay from "../achievement/DoneDay";
 
-const AchievementDay = () => {
+const AchievementDay = ({ tasks }) => {
 
     const width = Dimensions.get('window').width;
-
-    const [tasks, setTasks] = useState(db.tasks);
 
     return (
         <Wrapper>
