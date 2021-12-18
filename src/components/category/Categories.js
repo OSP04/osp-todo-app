@@ -97,7 +97,8 @@ const Categories = ({ item, doRefresh, navigation, categories, setCategories, ta
         />
       </StyledView>
       <Underline style={{ backgroundColor: item.color }} />
-      <View style={{height: 150}}>
+      <View style={{height: 6, backgroundColor: theme.background}}/>
+      <View style={{height: 150, backgroundColor: theme.background}}>
         {item.tasks[0] != null ? (
           sortTasks(item).map((item) => (
             <ShowCateTask key={item.id} item={item} doRefresh={doRefresh} navigation={navigation}
@@ -133,7 +134,6 @@ const Underline = styled.View`
   width: 200px;
   height: 2px;
   margin-left: 10px;
-  margin-bottom: 6px;
 `;
 
 export default Categories;
