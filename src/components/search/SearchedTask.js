@@ -35,10 +35,7 @@ const SearchedTask = ({
         task={task}
       ></DetailModal>
       <Card>
-        <Card.Title
-          title={index + 1 + ". " + text}
-          titleStyle={{ fontSize: 15 }}
-        />
+        <Card.Title title={text} titleStyle={{ fontSize: 15 }} />
         <Card.Content>
           <StyledView>
             <Category>
