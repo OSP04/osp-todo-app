@@ -23,10 +23,18 @@ const CalendarScreen = ({ route, navigation }) => {
 
   const mark = { [formatDateObj(selectedDate)]: { selected: true } };
   markingDates.forEach((day) => {
-    mark[day] = {
-      marked: true,
-      dotColor: "red",
-    };
+    if (day !== formatDateObj(selectedDate)) {
+      mark[day] = {
+        marked: true,
+        dotColor: "#560CCE",
+      };
+    } else {
+      mark[day] = {
+        marked: true,
+        dotColor: "#FFFFFF",
+        selected: true,
+      };
+    }
   });
 
   return (
@@ -54,7 +62,6 @@ const CalendarScreen = ({ route, navigation }) => {
         theme={{
           todayTextColor: theme.colors.primary,
           dayTextColor: "#222222",
-          textDisabledColor: "#d9e1e8",
           monthTextColor: "#222222",
           textDayFontWeight: "300",
           textMonthFontWeight: "bold",
