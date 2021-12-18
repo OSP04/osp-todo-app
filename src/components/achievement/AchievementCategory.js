@@ -4,34 +4,21 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import styled from "styled-components/native";
 import { theme } from "../../theme";
 import DoneCategory from "../achievement/DoneCategory";
-import AppLoading from "expo-app-loading";
+import { useFocusEffect } from "@react-navigation/native";
 
-const AchievementCategory = () => {
+const AchievementCategory = ({ categories }) => {
   const width = Dimensions.get("window").width;
-  const [isReady, setIsReady] = useState(false);
 
-  const [achieveCate, setAchieveCate] = useState({});
-  const _loadAchieveCate = async () => {
-    const loadedAchieveCate = await AsyncStorage.getItem("categories");
-    setAchieveCate(JSON.parse(loadedAchieveCate || "{}"));
-  };
-
-  return ( isReady ? 
-    (<Wrapper>
+  return (
+    <Wrapper>
       <StyledScroll>
         <AchievementView width={width}>
-          {Object.values(achieveCate).map((item) => (
+          {Object.values(categories).map((item) => (
             <DoneCategory key={item.id} item={item} />
           ))}
         </AchievementView>
       </StyledScroll>
-    </Wrapper>)
-    : (
-      <AppLoading
-      startAsync={_loadAchieveCate}
-      onFinish={() => setIsReady(true)}
-      onError={console.error}/>
-    )
+    </Wrapper>
   );
 };
 
