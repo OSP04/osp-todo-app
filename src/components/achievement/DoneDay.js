@@ -58,7 +58,7 @@ const Wrapper = styled.SafeAreaView`
 flex: 1;
 flex-direction: column;
 align-items: flex-start;
-padding-left: 14px;
+padding-horizontal: 15px;
 `;
 
 const BoxView = styled.View`

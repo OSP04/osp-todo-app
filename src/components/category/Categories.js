@@ -70,8 +70,8 @@ const Categories = ({ item, doRefresh, navigation, categories, setCategories, ta
 
   return (
     <Wrapper>
-      <StyledView width={width} >
-      <View width={width - 110}
+      <StyledView>
+      <View width={width - 120}
         style={{flexDirection: "row", alignItems: "center",
         justifyContent: "space-between", marginLeft: 10, backgroundColor: theme.background}}>
         <StyledText style={{ color: item.color }}
@@ -123,7 +123,7 @@ const Wrapper = styled.SafeAreaView`
 const StyledView = styled.View`
 flex-direction: row;
 align-items: center;
-justify-content: space-between;
+margin-left: 6px;
 `;
 
 const StyledText = styled.Text`
@@ -136,7 +136,7 @@ const StyledText = styled.Text`
 const Underline = styled.View`
   width: 200px;
   height: 2px;
-  margin-left: 10px;
+  margin-left: 15px;
 `;
 
 export default Categories;

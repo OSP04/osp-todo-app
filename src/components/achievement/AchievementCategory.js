@@ -1,10 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
 import { Dimensions } from "react-native";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import styled from "styled-components/native";
 import { theme } from "../../theme";
 import DoneCategory from "../achievement/DoneCategory";
-import { useFocusEffect } from "@react-navigation/native";
 
 const AchievementCategory = ({ categories }) => {
   const width = Dimensions.get("window").width;
