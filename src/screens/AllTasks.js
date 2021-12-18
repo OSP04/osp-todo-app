@@ -28,7 +28,7 @@ const AllTasks = ({ navigation }) => {
   useFocusEffect(
     React.useCallback(() => {
       getDataFirst();
-      return () => {};
+      return;
     }, [])
   );
 

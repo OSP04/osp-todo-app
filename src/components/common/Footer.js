@@ -153,15 +153,15 @@ const AllButton = styled(Button)`
 
 const SelectButton = styled(AllButton)`
   margin-left: 15px;
-  border: ${(props) => (props.isSelecting ? theme.light : theme.text)};
+  border: ${(props) => (props.isSelecting ? theme.light : theme.primary)};
 `;
 
 const AllText = styled.Text`
-  color: ${(props) => (props.all ? "white" : theme.text)};
+  color: ${(props) => (props.all ? "white" : theme.primary)};
 `;
 
 const SelectText = styled.Text`
-  color: ${(props) => (props.isSelecting ? theme.light : theme.text)};
+  color: ${(props) => (props.isSelecting ? theme.light : theme.primary)};
 `;
 
 export default Footer;

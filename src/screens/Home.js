@@ -14,8 +14,9 @@ const Home = ({ navigation, route }) => {
 
   useFocusEffect(
     React.useCallback(() => {
+      console.log(route.params);
       getDataFirst();
-      return () => {};
+      return;
     }, [])
   );
 
@@ -26,19 +27,17 @@ const Home = ({ navigation, route }) => {
     <Wrapper>
       <StyledBar barStyle="auto" />
       <Body>
-        {tasks && categories && (
-          <WeekStrip
-            tasks={tasks}
-            setTasks={setTasks}
-            setCategories={setCategories}
-            categories={categories}
-            navigation={navigation}
-            isSelecting={isSelecting}
-            route={route}
-          />
-        )}
+        <WeekStrip
+          tasks={tasks}
+          setTasks={setTasks}
+          setCategories={setCategories}
+          categories={categories}
+          navigation={navigation}
+          isSelecting={isSelecting}
+          route={route}
+        />
       </Body>
-      {tasks && categories && (
+      {categories && tasks && (
         <Footer
           navigation={navigation}
           type={images.comment}

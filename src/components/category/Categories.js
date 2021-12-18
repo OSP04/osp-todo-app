@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Alert, Dimensions, Text, View } from "react-native";
+import { Dimensions, Text, View } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import styled from "styled-components/native";
 import { storeData } from "../../db";
@@ -46,6 +46,7 @@ const Categories = ({ item, doRefresh, navigation, categories, setCategories, ta
 
   const _deleteCate = () => {
     let _categories = categories;
+    let _tasks = tasks;
     for(let i=0; i<_categories.length; i++) {
       if(_categories[i].id === item.id) {
         const index = i;
@@ -53,12 +54,19 @@ const Categories = ({ item, doRefresh, navigation, categories, setCategories, ta
         break;
       }
     }
+    for(let j=0; j<_tasks.length; j++) {
+      if(_tasks[j].category === item.title) {
+        const index = j;
+        _tasks.splice(index, 1);
+      }
+    }
     setCategories(_categories);
+    setTasks(_tasks);
     storeData("categories", _categories);
-    doRefresh();
+    storeData("tasks", _tasks);
     setIsReady(false);
+    doRefresh();
   };
-  
 
   return (
     <Wrapper>
@@ -79,7 +87,7 @@ const Categories = ({ item, doRefresh, navigation, categories, setCategories, ta
       <View>
         {item.tasks[0] != null ? (
           sortTasks(item).map((item) => (
-            <ShowCateTask key={item.id} item={item} doRefresh={doRefresh}
+            <ShowCateTask key={item.id} item={item} doRefresh={doRefresh} navigation={navigation}
             tasks={tasks} setTasks={setTasks} categories={categories} setCategories={setCategories}/>
           ))
         ) : (

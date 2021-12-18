@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { StyleSheet } from "react-native";
+import { StyleSheet, Text } from "react-native";
 import styled from "styled-components/native";
 import CalendarStrip from "react-native-calendar-strip";
 
@@ -54,41 +54,50 @@ const WeekStrip = ({
   return (
     <StyledView>
       <Year>{year}</Year>
-      <CalendarStrip
-        scrollable
-        selectedDate={selectedDate}
-        style={styles.container}
-        calendarHeaderStyle={styles.header}
-        dateNumberStyle={styles.dateNumber}
-        dateNameStyle={styles.dateName}
-        daySelectionAnimation={{
-          type: "border",
-          duration: 200,
-          borderWidth: 1,
-          borderHighlightColor: "black",
-        }}
-        // weekendDateNameStyle={styles.weekend}
-        // weekendDateNumberStyle={styles.weekend}
-        highlightDateNumberStyle={styles.dateNumber}
-        highlightDateNameStyle={styles.dateName}
-        markedDates={markedDates}
-        iconContainer={{ flex: 0.1 }}
-        calendarHeaderFormat={`MMMM`}
-        onHeaderSelected={() => {
-          navigation.navigate("CalendarScreen", { selectedDate, tasks });
-        }}
-        onDateSelected={(date) => selectDate(date)}
-      />
-      <HomeTasks
-        tasks={tasks}
-        setTasks={setTasks}
-        categories={categories}
-        setCategories={setCategories}
-        tasks={tasks}
-        selectedDate={selectedDate}
-        navigation={navigation}
-        isSelecting={isSelecting}
-      />
+      {categories && tasks && (
+        <CalendarStrip
+          scrollable
+          selectedDate={selectedDate}
+          style={styles.container}
+          calendarHeaderStyle={styles.header}
+          dateNumberStyle={styles.dateNumber}
+          dateNameStyle={styles.dateName}
+          daySelectionAnimation={{
+            type: "border",
+            duration: 200,
+            borderWidth: 1,
+            borderHighlightColor: "#560CCE",
+          }}
+          weekendDateNameStyle={styles.weekend}
+          weekendDateNumberStyle={styles.weekend}
+          highlightDateNumberStyle={styles.dateNumber}
+          highlightDateNameStyle={styles.dateName}
+          markedDates={markedDates}
+          iconContainer={{ flex: 0.1 }}
+          calendarHeaderFormat={`MMMM`}
+          onHeaderSelected={() => {
+            navigation.navigate("CalendarScreen", { selectedDate, tasks });
+          }}
+          onDateSelected={(date) => selectDate(date)}
+        />
+      )}
+
+      {categories && tasks ? (
+        <HomeTasks
+          tasks={tasks}
+          setTasks={setTasks}
+          categories={categories}
+          setCategories={setCategories}
+          tasks={tasks}
+          selectedDate={selectedDate}
+          navigation={navigation}
+          isSelecting={isSelecting}
+        />
+      ) : (
+        <EmptyTask>
+          <Text>Add a category in Category menu</Text>
+        </EmptyTask>
+      )}
     </StyledView>
   );
 };
@@ -103,6 +112,8 @@ const Year = styled.Text`
   text-align: center;
 `;
 
+const EmptyTask = styled.View``;
+
 const styles = StyleSheet.create({
   container: {
     height: 100,
@@ -111,13 +122,13 @@ const styles = StyleSheet.create({
   },
 
   header: {
-    color: theme.primary,
+    color: theme.text,
     fontSize: 20,
     fontWeight: "bold",
   },
 
   dateNumber: {
-    color: theme.primary,
+    color: theme.text,
     fontWeight: "bold",
     fontSize: 12,
   },

@@ -13,7 +13,7 @@ export const theme = {
 
   background: "#FFFFFF",
   text: "#24292F",
-  primary: "#24292F",
+  primary: "#560CCE",
   secondary: "#818181",
   light: "#BDBDBD",
   error: "#f13a59",
