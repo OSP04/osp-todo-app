@@ -60,6 +60,7 @@ const ShowCateTask = ({ item, doRefresh, tasks, setTasks, categories, setCategor
             <TaskText
               style={{
                 textDecorationLine: item.complete ? "line-through" : "none",
+                width: width - 100,
               }}
             >
               {item.text}

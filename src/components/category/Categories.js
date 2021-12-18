@@ -74,7 +74,7 @@ const Categories = ({ item, doRefresh, navigation, categories, setCategories, ta
       <View width={width - 120}
         style={{flexDirection: "row", alignItems: "center",
         justifyContent: "space-between", marginLeft: 10, backgroundColor: theme.background}}>
-        <StyledText style={{ color: item.color }}
+        <StyledText style={{ color: item.color, width: 160 }}
         onPress={() => {
           navigation.navigate("OneCategory", {
             key: item.id,
