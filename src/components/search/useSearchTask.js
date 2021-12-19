@@ -21,6 +21,7 @@ function useSearchTask(query) {
   );
 
   useEffect(() => {
+    // Separate the task which is including a search word as text with the filter function
     const filterTasks = async () => {
       setFilteredTasks(
         tasks.filter(
