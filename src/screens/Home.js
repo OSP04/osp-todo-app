@@ -64,7 +64,7 @@ const Home = ({ navigation }) => {
           />
         ) : (
           <EmptyView>
-            <Title>No category 🤷‍♀️</Title>
+            <Title>No category 🤷‍♂️</Title>
             <Text>Add your first category in Category menu</Text>
           </EmptyView>
         )}
