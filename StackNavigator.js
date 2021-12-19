@@ -38,7 +38,6 @@ const StackNavigator2 = () => {
         <Stack.Screen name="CalendarScreen" component={CalendarScreen} />
         <Stack.Screen name="EditScreen" component={EditScreen} />
         <Stack.Screen name="Drawer" component={DrawerNavigator} />
-        <Stack.Screen name="Comments" component={Comments} />
         <Stack.Screen name="OneCategory" component={OneCategory} />
       </Stack.Navigator>
     </Provider>
