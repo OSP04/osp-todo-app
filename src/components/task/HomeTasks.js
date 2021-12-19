@@ -8,6 +8,7 @@ import DraggableFlatList, {
 
 import TaskItem from "./TaskItem";
 import CategoryBar from "../category/CategoryBar";
+import { storeData } from "../../db";
 
 const HomeTasks = ({
   navigation,
@@ -68,11 +69,18 @@ const HomeTasks = ({
     return date1.toDateString() === date2.toDateString();
   };
 
+  const storeCategory = (category) => {
+    const index = categories.findIndex((item) => item.id === category.id);
+    categories.splice(index, 1, category);
+    storeData("categories", categories);
+  };
+
   const dragAndSave = (data, category) => {
     const sorting = category.sorting;
 
     if (sorting === "added") {
       category.tasks = data;
+      storeCategory(category);
     } else if (sorting === "due") {
       console.log("Prevent");
     } else {
@@ -81,6 +89,7 @@ const HomeTasks = ({
         filteredTasks = filteredTasks.filter((item) => item.id !== data[i].id);
       }
       category.tasks = [...data, ...filteredTasks];
+      storeCategory(category);
     }
     setRefresh((current) => !current);
   };
