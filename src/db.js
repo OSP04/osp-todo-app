@@ -371,7 +371,7 @@ export const db = {
         {
           id: "1",
           text: "Awesome! you are very deligent.",
-          created: new Date().setDate(23),
+          created: new Date().setDate(8),
           owner: {
             id: "10",
             email: "byron.fields@reqres.in",
@@ -384,7 +384,7 @@ export const db = {
         {
           id: "2",
           text: "Thanks :)",
-          created: new Date().setDate(23),
+          created: new Date().setDate(8),
           owner: {
             id: "7",
             email: "michael.lawson@reqres.in",
@@ -397,7 +397,7 @@ export const db = {
         {
           id: "3",
           text: "How was your day today?",
-          created: new Date().setDate(25),
+          created: new Date().setDate(15),
           owner: {
             id: "9",
             email: "tobias.funke@reqres.in",
@@ -452,7 +452,7 @@ export const db = {
     {
       id: "1",
       text: "Awesome! you are very deligent.",
-      created: new Date().setDate(23),
+      created: new Date().setDate(8),
       owner: {
         id: "10",
         email: "byron.fields@reqres.in",
@@ -465,7 +465,7 @@ export const db = {
     {
       id: "2",
       text: "Thanks :)",
-      created: new Date().setDate(23),
+      created: new Date().setDate(8),
       owner: {
         id: "7",
         email: "michael.lawson@reqres.in",
@@ -478,7 +478,7 @@ export const db = {
     {
       id: "3",
       text: "How was your day today?",
-      created: new Date().setDate(25),
+      created: new Date().setDate(15),
       owner: {
         id: "9",
         email: "tobias.funke@reqres.in",

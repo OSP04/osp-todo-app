@@ -1,17 +1,24 @@
 import React, { useState } from "react";
 import { Keyboard } from "react-native";
-
 import styled from "styled-components/native";
+import { useFocusEffect } from "@react-navigation/native";
 
-import { db } from "../db";
 import { theme } from "../theme";
 import CommentItem from "../components/comment/CommentItem";
 import CommentInput from "../components/comment/CommentInput";
+import useGetData from "../hooks/useGetData";
+import { storeData } from "../db";
 
 const Comments = () => {
-  const [user, setUser] = useState(db.users[0]); // 임의로 지정한 사용자 (추후 로그인 정보랑 비교)
-  const [comments, setComments] = useState(user.comments);
+  const { comments, setComments, users, setUsers, getComments } = useGetData();
   const [newComment, setNewComment] = useState("");
+
+  useFocusEffect(
+    React.useCallback(() => {
+      getComments();
+      return () => {};
+    }, [])
+  );
 
   const onSubmitEditing = () => {
     Keyboard.dismiss();
@@ -21,23 +28,29 @@ const Comments = () => {
         id: new Date().toString(),
         text: newComment,
         created: Date.now(),
-        owner: user,
-        recipient: user,
+        owner: users[0],
+        recipient: users[0],
       };
+      // Update comments
       const updatedComments = [...comments, newCommentObj];
       setComments(updatedComments);
-      const currentUser = user;
+      storeData("comments", updatedComments);
+
+      // Update users
+      const currentUser = users[0];
       currentUser.comments = updatedComments;
-      setUser(currentUser);
+      const index = users.findIndex((item) => item.id === currentUser.id);
+      users.splice(index, 0, currentUser);
+      setUsers(users);
+      storeData("users", users);
     }
   };
 
   return (
     <Wrapper>
       <StyledScroll>
-        {comments.map((item) => (
-          <CommentItem key={item.id} comment={item} />
-        ))}
+        {comments &&
+          comments.map((item) => <CommentItem key={item.id} comment={item} />)}
       </StyledScroll>
       <CommentInput
         newComment={newComment}
