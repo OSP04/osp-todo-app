@@ -32,6 +32,7 @@ const AllCategory = ({ navigation }) => {
   useFocusEffect(
     React.useCallback(() => {
       _loadData();
+      setIsReady(false);
       return () => {};
     }, [])
   );

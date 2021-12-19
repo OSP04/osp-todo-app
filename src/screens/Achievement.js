@@ -10,7 +10,6 @@ import { useFocusEffect } from "@react-navigation/native";
 const Achievement = () => {
   const [stateCategory, setStateCategory] = useState(true);
   const [stateDay, setStateDay] = useState(false);
-  const [refresh, setRefresh] = useState(true);
 
   const [categories, setCategories] = useState([]);
   const [tasks, setTasks] = useState([]);
