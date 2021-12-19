@@ -128,8 +128,8 @@ const AllTasks = ({ navigation }) => {
         imagePath={imagePath}
         setModalVisible={setModalVisible}
       />
-      {tasks && (
-        <Tasks>
+      <Tasks>
+        {tasks.length !== 0 && (
           <DraggableFlatList
             ref={ref}
             data={sortTasks(tasks)}
@@ -139,8 +139,8 @@ const AllTasks = ({ navigation }) => {
             keyExtractor={(item) => item.id}
             renderItem={renderItem}
           />
-        </Tasks>
-      )}
+        )}
+      </Tasks>
       <Footer
         navigation={navigation}
         type={null}

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { StyleSheet, ScrollView } from "react-native";
+import { StyleSheet, ScrollView, Text } from "react-native";
 import styled from "styled-components/native";
 import CalendarStrip from "react-native-calendar-strip";
 
@@ -83,21 +83,28 @@ const WeekStrip = ({
         imagePath={imagePath}
         setModalVisible={setModalVisible}
       />
-      <ScrollView>
-        <HomeTasks
-          tasks={tasks}
-          setTasks={setTasks}
-          categories={categories}
-          setCategories={setCategories}
-          tasks={tasks}
-          selectedDate={selectedDate}
-          navigation={navigation}
-          isSelecting={isSelecting}
-          modalVisible={modalVisible}
-          setModalVisible={setModalVisible}
-          setImagePath={setImagePath}
-        />
-      </ScrollView>
+      {categories.length !== 0 ? (
+        <ScrollView>
+          <HomeTasks
+            tasks={tasks}
+            setTasks={setTasks}
+            categories={categories}
+            setCategories={setCategories}
+            tasks={tasks}
+            selectedDate={selectedDate}
+            navigation={navigation}
+            isSelecting={isSelecting}
+            modalVisible={modalVisible}
+            setModalVisible={setModalVisible}
+            setImagePath={setImagePath}
+          />
+        </ScrollView>
+      ) : (
+        <EmptyView>
+          <Welcome>Welcome to 4TODO 🎉</Welcome>
+          <Text>Add your first category in Category menu</Text>
+        </EmptyView>
+      )}
     </StyledView>
   );
 };
@@ -111,6 +118,18 @@ const Year = styled.Text`
   color: ${theme.secondary};
   text-align: center;
   margin-top: 10px;
+`;
+
+const EmptyView = styled.View`
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+`;
+
+const Welcome = styled.Text`
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 10px;
 `;
 
 const styles = StyleSheet.create({

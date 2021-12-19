@@ -3,8 +3,8 @@ import React, { useState } from "react";
 import { getData } from "../db";
 
 const useGetData = () => {
-  const [categories, setCategories] = useState(null);
-  const [tasks, setTasks] = useState(null);
+  const [categories, setCategories] = useState([]);
+  const [tasks, setTasks] = useState([]);
   const [comments, setComments] = useState(null);
   const [users, setUsers] = useState(null);
 

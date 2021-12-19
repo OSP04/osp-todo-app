@@ -28,8 +28,7 @@ const AllCategory = ({ navigation }) => {
     setTasks(JSON.parse(loadedTasks || "{}"));
   };
 
-  const item =
-  useFocusEffect(
+  const item = useFocusEffect(
     React.useCallback(() => {
       _loadData();
       setIsReady(false);
@@ -49,16 +48,20 @@ const AllCategory = ({ navigation }) => {
     };
     setNewCategory("");
     console.log(newCategoryObj);
-    if(newCategoryObj.title != "") {
+    if (newCategoryObj.title != "") {
       setColor(theme.category.red);
-      categories.push(newCategoryObj);
-      storeData("categories", [...categories]);
+      if (categories) {
+        categories.push(newCategoryObj);
+        storeData("categories", [...categories]);
+      } else {
+        storeData("categories", [newCategoryObj]);
+      }
       doRefresh();
       setIsReady(false);
     }
     setState(false);
   };
-  
+
   const _onPressCancel = () => {
     setNewCategory("");
     setState(false);
@@ -97,7 +100,14 @@ const AllCategory = ({ navigation }) => {
       />
       <StyledView width={width - 20}>
         <TouchableOpacity onPress={() => setState(true)}>
-          <Text style={{ fontSize: 18, margin: 10, fontWeight: "bold", color: theme.primary }}>
+          <Text
+            style={{
+              fontSize: 18,
+              margin: 10,
+              fontWeight: "bold",
+              color: theme.primary,
+            }}
+          >
             + Add Category
           </Text>
         </TouchableOpacity>
@@ -113,9 +123,9 @@ const AllCategory = ({ navigation }) => {
     </Wrapper>
   ) : (
     <AppLoading
-    startAsync={_loadData}
-    onFinish={() => setIsReady(true)}
-    onError={console.error}
+      startAsync={_loadData}
+      onFinish={() => setIsReady(true)}
+      onError={console.error}
     />
   );
 };

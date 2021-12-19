@@ -131,15 +131,17 @@ const HomeTasks = ({
         navigation={navigation}
         selectedDate={selectedDate}
       />
-      <DraggableFlatList
-        ref={ref}
-        data={sortTasks(category)}
-        onDragEnd={({ data }) => {
-          dragAndSave(data, category);
-        }}
-        keyExtractor={(item) => item.id}
-        renderItem={renderItem}
-      />
+      {tasks.length !== 0 && (
+        <DraggableFlatList
+          ref={ref}
+          data={sortTasks(category)}
+          onDragEnd={({ data }) => {
+            dragAndSave(data, category);
+          }}
+          keyExtractor={(item) => item.id}
+          renderItem={renderItem}
+        />
+      )}
     </StyledView>
   ));
 };
