@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components/native";
-import { BackHandler } from "react-native";
+import { BackHandler, Alert } from "react-native";
 import { useFocusEffect } from "@react-navigation/native";
 
 import Footer from "../components/common/Footer";
@@ -18,14 +18,23 @@ const Home = ({ navigation }) => {
 
   useFocusEffect(
     React.useCallback(() => {
-      const onBackPress = () => {
+      const backAction = () => {
+        Alert.alert("Hold on!", "Are you sure you want to go back?", [
+          {
+            text: "Canel",
+            onPress: () => null,
+          },
+          { text: "OK", onPress: () => BackHandler.exitApp() },
+        ]);
         return true;
       };
 
-      BackHandler.addEventListener("hardwareBackPress", onBackPress);
+      const backHandler = BackHandler.addEventListener(
+        "hardwareBackPress",
+        backAction
+      );
 
-      return () =>
-        BackHandler.removeEventListener("hardwareBackPress", onBackPress);
+      return () => backHandler.remove();
     }, [])
   );
 
