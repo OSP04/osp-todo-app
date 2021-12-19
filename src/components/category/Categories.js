@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Dimensions, Text, View } from "react-native";
+import { Dimensions, Text, View, Alert } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import styled from "styled-components/native";
 import { storeData } from "../../db";
@@ -7,7 +7,16 @@ import { theme } from "../../theme";
 import DropButton from "../common/DropButton";
 import ShowCateTask from "./ShowCateTask";
 
-const Categories = ({ item, doRefresh, navigation, categories, setCategories, tasks, setTasks, setIsReady }) => {
+const Categories = ({
+  item,
+  doRefresh,
+  navigation,
+  categories,
+  setCategories,
+  tasks,
+  setTasks,
+  setIsReady,
+}) => {
   const width = Dimensions.get("window").width;
   const [sorting, setSorting] = useState("added");
 
@@ -47,15 +56,15 @@ const Categories = ({ item, doRefresh, navigation, categories, setCategories, ta
   const _deleteCate = () => {
     let _categories = categories;
     let _tasks = tasks;
-    for(let i=0; i<_categories.length; i++) {
-      if(_categories[i].id === item.id) {
+    for (let i = 0; i < _categories.length; i++) {
+      if (_categories[i].id === item.id) {
         const index = i;
         _categories.splice(index, 1);
         break;
       }
     }
-    for(let j=0; j<_tasks.length; j++) {
-      if(_tasks[j].category === item.title) {
+    for (let j = 0; j < _tasks.length; j++) {
+      if (_tasks[j].category === item.title) {
         const index = j;
         _tasks.splice(index, 1);
       }
@@ -71,48 +80,98 @@ const Categories = ({ item, doRefresh, navigation, categories, setCategories, ta
   return (
     <Wrapper>
       <StyledView>
-      <View width={width - 120}
-        style={{flexDirection: "row", alignItems: "center",
-        justifyContent: "space-between", marginLeft: 10}}>
-        <StyledText style={{ color: item.color, width: 160 }}>{item.title}</StyledText>
-        <TouchableOpacity style={{marginRight: 90}}
-        onPress={() => {alert("Category deleted"), _deleteCate(item)}}>
-          <Text style={{color: item.color, fontWeight: "bold", fontSize: 18}}>X</Text>
-        </TouchableOpacity>
+        <View
+          width={width - 120}
+          style={{
+            flexDirection: "row",
+            alignItems: "center",
+            justifyContent: "space-between",
+            marginLeft: 10,
+          }}
+        >
+          <StyledText style={{ color: item.color, width: 160 }}>
+            {item.title}
+          </StyledText>
+          <TouchableOpacity
+            style={{ marginRight: 90 }}
+            onPress={() => {
+              Alert.alert(
+                "Delete Category",
+                "Do you really want to delete this category? All todo tasks under the category will be deleted",
+                [
+                  {
+                    text: "Cancel",
+                    onPress: () => null,
+                    style: "cancel",
+                  },
+                  {
+                    text: "OK",
+                    onPress: () => {
+                      _deleteCate(item);
+                    },
+                  },
+                ],
+                { cancelable: true }
+              );
+            }}
+          >
+            <Text
+              style={{ color: item.color, fontWeight: "bold", fontSize: 18 }}
+            >
+              X
+            </Text>
+          </TouchableOpacity>
         </View>
         <DropButton
           setSorting={setSorting}
           category={item}
           doRefresh={doRefresh}
         />
-      </StyledView>      
+      </StyledView>
       <Underline style={{ backgroundColor: item.color }} />
-      <View style={{marginVertical: 4}}>
+      <View style={{ marginVertical: 4 }}>
         {item.tasks[0] != null ? (
-          sortTasks(item).slice(0,4).map((item) => (
-            <ShowCateTask key={item.id} item={item} doRefresh={doRefresh} navigation={navigation}
-            tasks={tasks} setTasks={setTasks} categories={categories} setCategories={setCategories}/>
-          ))
+          sortTasks(item)
+            .slice(0, 4)
+            .map((item) => (
+              <ShowCateTask
+                key={item.id}
+                item={item}
+                doRefresh={doRefresh}
+                navigation={navigation}
+                tasks={tasks}
+                setTasks={setTasks}
+                categories={categories}
+                setCategories={setCategories}
+              />
+            ))
         ) : (
           <View style={{ height: 60 }} />
         )}
       </View>
       <TouchableOpacity
-      style={{alignItems: "flex-end", width: width, paddingRight: 15, marginBottom: 8, marginTop: 2}}
-      onPress={() => {
-        navigation.navigate("OneCategory", {
-          key: item.id,
-          item: item,
-          sortTasks: sortTasks,
-          setSorting: setSorting,
-          doRefresh: doRefresh,
-          tasks: tasks,
-          setTasks: setTasks,
-          categories: categories,
-          setCategories: setCategories,
-        })
-      }} >
-        <Text style={{color: theme.light}}>+ See more tasks...</Text>
+        style={{
+          alignItems: "flex-end",
+          width: width,
+          paddingRight: 15,
+          marginBottom: 8,
+          marginTop: 2,
+        }}
+        onPress={() => {
+          navigation.navigate("OneCategory", {
+            key: item.id,
+            item: item,
+            sortTasks: sortTasks,
+            setSorting: setSorting,
+            doRefresh: doRefresh,
+            tasks: tasks,
+            setTasks: setTasks,
+            categories: categories,
+            setCategories: setCategories,
+          });
+        }}
+      >
+        <Text style={{ color: theme.light }}>+ See more tasks...</Text>
       </TouchableOpacity>
     </Wrapper>
   );
@@ -124,9 +183,9 @@ const Wrapper = styled.SafeAreaView`
 `;
 
 const StyledView = styled.View`
-flex-direction: row;
-align-items: center;
-margin-left: 6px;
+  flex-direction: row;
+  align-items: center;
+  margin-left: 6px;
 `;
 
 const StyledText = styled.Text`
