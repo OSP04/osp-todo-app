@@ -129,7 +129,18 @@ const DetailModal = ({
                     />
                     <Text style={styles.dueDate}>{due}</Text>
                   </View>
-                  <View style={{ ...styles.listItem, borderBottomWidth: 0 }}>
+                  <View
+                    style={
+                      (task.location.region.longitude &&
+                        task.location.region.latitude && {
+                          ...styles.listItem,
+                          borderBottomWidth: 0,
+                        }) || {
+                        ...styles.listItem,
+                        borderBottomWidth: 1,
+                      }
+                    }
+                  >
                     <Entypo
                       name="location-pin"
                       style={styles.icon}
