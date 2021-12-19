@@ -13,7 +13,7 @@ import EditDueDate from "../components/edit/EditDueDate";
 import EditLocation from "../components/edit/EditLocation";
 import EditTodoTitle from "../components/edit/EditTodoTitle";
 import ShowCategory from "../components/edit/ShowCategory";
-import { getData } from "../db";
+import { db, getData, storeData } from "../db";
 import EditTaskContext from "../context/EditTask";
 
 const EditScreen = ({ route, navigation }) => {

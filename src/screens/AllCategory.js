@@ -49,12 +49,8 @@ const AllCategory = ({ navigation }) => {
     setNewCategory("");
     if (newCategoryObj.title != "") {
       setColor(theme.category.red);
-      if (categories) {
-        categories.push(newCategoryObj);
-        storeData("categories", [...categories]);
-      } else {
-        storeData("categories", [newCategoryObj]);
-      }
+      categories.push(newCategoryObj);
+      storeData("categories", [...categories]);
       doRefresh();
       setIsReady(false);
     }

@@ -53,58 +53,59 @@ const WeekStrip = ({
   return (
     <StyledView>
       <Year>{year}</Year>
-      <CalendarStrip
-        scrollable
-        selectedDate={selectedDate}
-        style={styles.container}
-        calendarHeaderStyle={styles.header}
-        dateNumberStyle={styles.dateNumber}
-        dateNameStyle={styles.dateName}
-        daySelectionAnimation={{
-          type: "border",
-          duration: 200,
-          borderWidth: 1,
-          borderHighlightColor: "#560CCE",
-        }}
-        weekendDateNameStyle={styles.weekend}
-        weekendDateNumberStyle={styles.weekend}
-        highlightDateNumberStyle={styles.dateNumber}
-        highlightDateNameStyle={styles.dateName}
-        markedDates={markedDates}
-        iconContainer={{ flex: 0.1 }}
-        calendarHeaderFormat={`MMMM`}
-        onHeaderSelected={() => {
-          navigation.navigate("CalendarScreen", { selectedDate, tasks });
-        }}
-        onDateSelected={(date) => selectDate(date)}
-      />
+      {tasks.length !== 0 ? (
+        <CalendarStrip
+          scrollable
+          selectedDate={selectedDate}
+          style={styles.container}
+          calendarHeaderStyle={styles.header}
+          dateNumberStyle={styles.dateNumber}
+          dateNameStyle={styles.dateName}
+          daySelectionAnimation={{
+            type: "border",
+            duration: 200,
+            borderWidth: 1,
+            borderHighlightColor: "#560CCE",
+          }}
+          weekendDateNameStyle={styles.weekend}
+          weekendDateNumberStyle={styles.weekend}
+          highlightDateNumberStyle={styles.dateNumber}
+          highlightDateNameStyle={styles.dateName}
+          markedDates={markedDates}
+          iconContainer={{ flex: 0.1 }}
+          calendarHeaderFormat={`MMMM`}
+          onHeaderSelected={() => {
+            navigation.navigate("CalendarScreen", { selectedDate, tasks });
+          }}
+          onDateSelected={(date) => selectDate(date)}
+        />
+      ) : (
+        <EmptyView>
+          <Title>No tasks 🤷‍♀️</Title>
+          <Text>Add your tasks then can see calendar</Text>
+        </EmptyView>
+      )}
+
       <ImageDialog
         modalVisible={modalVisible}
         imagePath={imagePath}
         setModalVisible={setModalVisible}
       />
-      {categories.length !== 0 ? (
-        <ScrollView>
-          <HomeTasks
-            tasks={tasks}
-            setTasks={setTasks}
-            categories={categories}
-            setCategories={setCategories}
-            tasks={tasks}
-            selectedDate={selectedDate}
-            navigation={navigation}
-            isSelecting={isSelecting}
-            modalVisible={modalVisible}
-            setModalVisible={setModalVisible}
-            setImagePath={setImagePath}
-          />
-        </ScrollView>
-      ) : (
-        <EmptyView>
-          <Welcome>Welcome to 4TODO 🎉</Welcome>
-          <Text>Add your first category in Category menu</Text>
-        </EmptyView>
-      )}
+      <ScrollView>
+        <HomeTasks
+          tasks={tasks}
+          setTasks={setTasks}
+          categories={categories}
+          setCategories={setCategories}
+          tasks={tasks}
+          selectedDate={selectedDate}
+          navigation={navigation}
+          isSelecting={isSelecting}
+          modalVisible={modalVisible}
+          setModalVisible={setModalVisible}
+          setImagePath={setImagePath}
+        />
+      </ScrollView>
     </StyledView>
   );
 };
@@ -121,12 +122,12 @@ const Year = styled.Text`
 `;
 
 const EmptyView = styled.View`
-  flex: 1;
+  padding-vertical: 25px;
   align-items: center;
   justify-content: center;
 `;
 
-const Welcome = styled.Text`
+const Title = styled.Text`
   font-size: 20px;
   font-weight: bold;
   margin-bottom: 10px;

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components/native";
-import { BackHandler, Alert } from "react-native";
+import { BackHandler, Alert, Text } from "react-native";
 import { useFocusEffect } from "@react-navigation/native";
 
 import Footer from "../components/common/Footer";
@@ -42,7 +42,6 @@ const Home = ({ navigation }) => {
   // Get data when Home focused
   useFocusEffect(
     React.useCallback(() => {
-      console.log(categories);
       getDataFirst();
       return () => {
         setIsSelecting(false);
@@ -54,14 +53,21 @@ const Home = ({ navigation }) => {
     <Wrapper>
       <StyledBar barStyle="auto" />
       <Body>
-        <WeekStrip
-          tasks={tasks}
-          setTasks={setTasks}
-          setCategories={setCategories}
-          categories={categories}
-          navigation={navigation}
-          isSelecting={isSelecting}
-        />
+        {categories.length !== 0 ? (
+          <WeekStrip
+            tasks={tasks}
+            setTasks={setTasks}
+            setCategories={setCategories}
+            categories={categories}
+            navigation={navigation}
+            isSelecting={isSelecting}
+          />
+        ) : (
+          <EmptyView>
+            <Title>No category 🤷‍♀️</Title>
+            <Text>Add your first category in Category menu</Text>
+          </EmptyView>
+        )}
       </Body>
       <Footer
         navigation={navigation}
@@ -95,6 +101,18 @@ const Body = styled.SafeAreaView`
 
 const StyledBar = styled.StatusBar`
   background-color: ${theme.background};
+`;
+
+const EmptyView = styled.View`
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+`;
+
+const Title = styled.Text`
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 10px;
 `;
 
 export default Home;

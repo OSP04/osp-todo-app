@@ -8,6 +8,8 @@ import { ResultContextProvider } from "./src/components/context";
 function App() {
   // Store fake users and comments data when app starts
   useEffect(() => {
+    storeData("tasks", db.tasks);
+    storeData("categories", db.categories);
     storeData("users", db.users);
     storeData("comments", db.comments);
   }, []);
