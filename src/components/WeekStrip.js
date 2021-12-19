@@ -27,7 +27,6 @@ const WeekStrip = ({
     markDate,
   } = useSetDate();
 
-  const [refresh, setRefresh] = useState(true);
   const { selectedDay } = useResultContext();
   const [modalVisible, setModalVisible] = useState(false);
   const [imagePath, setImagePath] = useState(null);
