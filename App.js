@@ -6,10 +6,11 @@ import { StackNavigator } from "./StackNavigator";
 import { ResultContextProvider } from "./src/components/context";
 
 function App() {
-  // Store fake users and comments data when app starts
   useEffect(() => {
+    // Set example of tasks and category
     storeData("tasks", db.tasks);
     storeData("categories", db.categories);
+    // Store fake users and comments data when app starts
     storeData("users", db.users);
     storeData("comments", db.comments);
   }, []);
