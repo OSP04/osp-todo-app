@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import SearchedTask from "./SearchedTask";
+
 import { getData } from "../../db";
 import { useFocusEffect } from "@react-navigation/native";
 
@@ -13,7 +13,6 @@ function useSearchTask(query) {
       try {
         const taskObjs = await getData("tasks");
         setTasks(taskObjs);
-        searchedTask();
       } catch (error) {
         console.log(error);
       }
@@ -36,20 +35,6 @@ function useSearchTask(query) {
     filterTasks();
   }, [searchQuery]);
 
-  const searchedTask =
-    filteredTasks &&
-    filteredTasks.map((task, index) => (
-      <SearchedTask
-        task={task}
-        key={task.created}
-        index={index}
-        text={task.text}
-        category={task.category}
-        date={task.date.split("T")[0]}
-        due={task.due && task.due.split("T")[0]}
-      />
-    ));
-
-  return { searchQuery, setSearchQuery, searchedTask };
+  return { searchQuery, setSearchQuery, filteredTasks };
 }
 export default useSearchTask;
