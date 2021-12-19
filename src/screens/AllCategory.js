@@ -24,11 +24,11 @@ const AllCategory = ({ navigation }) => {
   const _loadData = async () => {
     const loadedCategories = await AsyncStorage.getItem("categories");
     const loadedTasks = await AsyncStorage.getItem("tasks");
-    setCategories(JSON.parse(loadedCategories || "{}"));
-    setTasks(JSON.parse(loadedTasks || "{}"));
+    setCategories(JSON.parse(loadedCategories || []));
+    setTasks(JSON.parse(loadedTasks || []));
   };
 
-  const item = useFocusEffect(
+  useFocusEffect(
     React.useCallback(() => {
       _loadData();
       setIsReady(false);

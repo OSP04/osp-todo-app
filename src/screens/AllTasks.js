@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useCallback } from "react";
 import styled from "styled-components/native";
 import DraggableFlatList, {
   ScaleDecorator,
@@ -103,7 +103,7 @@ const AllTasks = ({ navigation }) => {
       setTasks(data);
       storeData("tasks", data);
     } else if (sorting === "due") {
-      console.log("Prevent");
+      console.log("Prevented");
     } else {
       let filteredTasks = tasks; // Tasks not included in data
       for (let i = 0; i < data.length; i++) {

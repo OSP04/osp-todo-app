@@ -65,14 +65,16 @@ const Categories = ({
     }
     for (let j = 0; j < _tasks.length; j++) {
       if (_tasks[j].category === item.title) {
-        const index = j;
-        _tasks.splice(index, 1);
+        _tasks.splice(j, 1);
       }
     }
     setCategories(_categories);
     setTasks(_tasks);
     storeData("categories", _categories);
     storeData("tasks", _tasks);
+    if (_categories.length === 0) {
+      storeData("tasks", []);
+    }
     setIsReady(false);
     doRefresh();
   };
