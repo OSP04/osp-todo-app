@@ -140,27 +140,30 @@ const DetailModal = ({
                       {task.location.locationData.mainText}
                     </Text>
                   </View>
-                  <View style={styles.mapContainer}>
-                    <MapView
-                      style={styles.map}
-                      region={task.location.region}
-                      pitchEnabled={false}
-                      rotateEnabled={false}
-                      scrollEnabled={false}
-                      zoomEnabled={false}
-                      zoomTapEnabled={false}
-                    >
-                      <Marker
-                        coordinate={{
-                          latitude: task.location.region.latitude,
-                          longitude: task.location.region.longitude,
-                        }}
-                      />
-                    </MapView>
-                    <Text style={styles.address}>
-                      {task.location.locationData.address}
-                    </Text>
-                  </View>
+                  {task.location.region.longitude &&
+                    task.location.region.latitude && (
+                      <View style={styles.mapContainer}>
+                        <MapView
+                          style={styles.map}
+                          region={task.location.region}
+                          pitchEnabled={false}
+                          rotateEnabled={false}
+                          scrollEnabled={false}
+                          zoomEnabled={false}
+                          zoomTapEnabled={false}
+                        >
+                          <Marker
+                            coordinate={{
+                              latitude: task.location.region.latitude,
+                              longitude: task.location.region.longitude,
+                            }}
+                          />
+                        </MapView>
+                        <Text style={styles.address}>
+                          {task.location.locationData.address}
+                        </Text>
+                      </View>
+                    )}
                   <View style={styles.listItem}>
                     <Entypo
                       name="text"
