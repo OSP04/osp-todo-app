@@ -13,7 +13,7 @@ import EditDueDate from "../components/edit/EditDueDate";
 import EditLocation from "../components/edit/EditLocation";
 import EditTodoTitle from "../components/edit/EditTodoTitle";
 import ShowCategory from "../components/edit/ShowCategory";
-import { db, getData, storeData } from "../db";
+import { getData } from "../db";
 import EditTaskContext from "../context/EditTask";
 
 const EditScreen = ({ route, navigation }) => {
@@ -36,8 +36,6 @@ const EditScreen = ({ route, navigation }) => {
       const categoryObjs = await getData("categories");
       setCategoryArr(categoryObjs);
       const taskObjs = await getData("tasks");
-      // console.log(taskObjs);
-      // console.log(categoryObjs);
     } catch (error) {
       console.log(error);
     }

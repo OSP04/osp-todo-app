@@ -20,6 +20,7 @@ const useGetData = () => {
     }
   };
 
+  // Get users and comments data when start app
   const getComments = async () => {
     try {
       const commentObjs = await getData("comments");

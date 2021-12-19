@@ -47,7 +47,6 @@ const AllCategory = ({ navigation }) => {
       tasks: [],
     };
     setNewCategory("");
-    console.log(newCategoryObj);
     if (newCategoryObj.title != "") {
       setColor(theme.category.red);
       if (categories) {

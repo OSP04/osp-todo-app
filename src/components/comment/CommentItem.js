@@ -13,7 +13,6 @@ const CommentItem = ({ comment }) => {
   const YEAR = 31556952006.783;
 
   const getTime = (created) => {
-    console.log(created);
     const difference = Date.now() - created;
 
     if (difference >= YEAR) {

@@ -6,6 +6,7 @@ import { StackNavigator } from "./StackNavigator";
 import { ResultContextProvider } from "./src/components/context";
 
 function App() {
+  // Store fake users and comments data when app starts
   useEffect(() => {
     storeData("users", db.users);
     storeData("comments", db.comments);

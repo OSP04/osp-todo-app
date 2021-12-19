@@ -16,6 +16,7 @@ const Home = ({ navigation }) => {
   const [isSelecting, setIsSelecting] = useState(false);
   const [refresh, setRefresh] = useState(false);
 
+  // Alert when user go back at Home screen
   useFocusEffect(
     React.useCallback(() => {
       const backAction = () => {
@@ -38,6 +39,7 @@ const Home = ({ navigation }) => {
     }, [])
   );
 
+  // Get data when Home focused
   useFocusEffect(
     React.useCallback(() => {
       console.log(categories);

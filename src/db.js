@@ -2,6 +2,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 
 import { theme } from "./theme";
 
+// Structure of fake data
 export const db = {
   categories: [
     {

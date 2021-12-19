@@ -82,7 +82,7 @@ const HomeTasks = ({
       category.tasks = data;
       storeCategory(category);
     } else if (sorting === "due") {
-      console.log("Prevent");
+      console.log("Prevented");
     } else {
       let filteredTasks = category.tasks; // Tasks not included in data
       for (let i = 0; i < data.length; i++) {
