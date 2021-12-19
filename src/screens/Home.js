@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components/native";
-import { BackHandler, Alert } from "react-native";
+import { BackHandler, Alert, View, Text } from "react-native";
 import { useFocusEffect } from "@react-navigation/native";
 
 import Footer from "../components/common/Footer";
@@ -50,31 +50,39 @@ const Home = ({ navigation }) => {
   return (
     <Wrapper>
       <StyledBar barStyle="auto" />
-      <Body>
-        {tasks && categories && (
-          <WeekStrip
+      {tasks && categories ? (
+        <>
+          <Body>
+            <WeekStrip
+              tasks={tasks}
+              setTasks={setTasks}
+              setCategories={setCategories}
+              categories={categories}
+              navigation={navigation}
+              isSelecting={isSelecting}
+            />
+          </Body>
+
+          <Footer
+            navigation={navigation}
+            type={images.comment}
+            screens={["Comments", null]}
+            isSelecting={isSelecting}
+            setIsSelecting={setIsSelecting}
             tasks={tasks}
             setTasks={setTasks}
-            setCategories={setCategories}
             categories={categories}
-            navigation={navigation}
-            isSelecting={isSelecting}
+            setCategories={setCategories}
+            setRefresh={setRefresh}
+            where="home"
           />
-        )}
-      </Body>
-      <Footer
-        navigation={navigation}
-        type={images.comment}
-        screens={["Comments", null]}
-        isSelecting={isSelecting}
-        setIsSelecting={setIsSelecting}
-        tasks={tasks}
-        setTasks={setTasks}
-        categories={categories}
-        setCategories={setCategories}
-        setRefresh={setRefresh}
-        where="home"
-      />
+        </>
+      ) : (
+        <EmptyView>
+          <Welcome>Welcome to 4TODO 🎉</Welcome>
+          <Text>Add your first category in Category menu</Text>
+        </EmptyView>
+      )}
     </Wrapper>
   );
 };
@@ -94,6 +102,18 @@ const Body = styled.SafeAreaView`
 
 const StyledBar = styled.StatusBar`
   background-color: ${theme.background};
+`;
+
+const EmptyView = styled.View`
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+`;
+
+const Welcome = styled.Text`
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 10px;
 `;
 
 export default Home;

@@ -7,8 +7,6 @@ import { ResultContextProvider } from "./src/components/context";
 
 function App() {
   useEffect(() => {
-    storeData("tasks", db.tasks);
-    storeData("categories", db.categories);
     storeData("users", db.users);
     storeData("comments", db.comments);
   }, []);
