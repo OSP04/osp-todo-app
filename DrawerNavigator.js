@@ -14,7 +14,7 @@ import { DrawerActions } from "@react-navigation/native";
 import styled from "styled-components/native";
 import AddCategory from "./src/screens/AddCategory";
 import { CommonActions } from "@react-navigation/native";
-
+import Comments from "./src/screens/Comments";
 const Drawer = createDrawerNavigator();
 
 const DrawerNavigator = ({ navigation }) => {
@@ -186,7 +186,27 @@ const DrawerNavigator = ({ navigation }) => {
           ),
         }}
       />
-
+      <Drawer.Screen
+        name="Comments"
+        component={Comments}
+        options={{
+          drawerLabel: "Comments",
+          headerTitle: () => <StyledText>Comments</StyledText>,
+          headerLeft: () => (
+            <TouchableOpacity
+              onPress={() => navigation.dispatch(DrawerActions.jumpTo("Home"))}
+              style={{ margin: 15 }}
+            >
+              <IconButton
+                type={images.back}
+                size={32}
+                color="black"
+                style={styles.back}
+              />
+            </TouchableOpacity>
+          ),
+        }}
+      />
       <Drawer.Screen
         name="AllCategory"
         component={AllCategory}
