@@ -6,16 +6,7 @@ import { Card } from "react-native-paper";
 import { TouchableOpacity } from "react-native";
 import DetailModal from "./DetailModal";
 
-const SearchedTask = ({
-  task,
-  index,
-  text,
-  category,
-  categoryObj,
-  date,
-  due,
-  navigation,
-}) => {
+const SearchedTask = ({ task, index, text, category, date, due }) => {
   const [showModal, setShowModal] = useState(false);
   const openModal = () => {
     setShowModal((prev) => !prev);
