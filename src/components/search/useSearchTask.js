@@ -12,9 +12,7 @@ function useSearchTask(query) {
     React.useCallback(async () => {
       try {
         const taskObjs = await getData("tasks");
-
         setTasks(taskObjs);
-
         searchedTask();
       } catch (error) {
         console.log(error);
